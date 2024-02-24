@@ -1,4 +1,4 @@
-#Eèxecrise presented and solved during the lesson of 21/02/2024 with analytical solution
+#Execrise presented and solved during the lesson of 21/02/2024 with analytical solution
 
 #Evaluation of the quantity of a radionuclide in a loop where it gets activated only in a portion of the loop 
 #(for instace inside the reactor core)
