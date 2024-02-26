@@ -40,7 +40,7 @@ print(f"Ratio between the two: {decay_int/interaction_int:.2e}")
 
 #technically...
 teo = decay_const/(tot_cross_sec*1e-2*vel)
-print(f"The ration from the analitical solution got by hand (see notes):  {teo}")
+print(f"The ratio from the analitical solution got by hand (see notes):  {teo}")
 
 
 
