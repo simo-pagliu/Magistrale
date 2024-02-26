@@ -1,5 +1,7 @@
+#exercise 2.6 "due to home" last slide on Lecture 3
+
+#import modules
 import sympy
-import numpy as np
 
 x = sympy.symbols('x')
 
@@ -18,9 +20,9 @@ solution = sympy.solve(attenuation_law - objective, x)
 #take only the real solutions
 #solution = [i.evalf() for i in solution if i.is_real]
 
-for i in solution:
-    if i.is_real:
-        solution = i.evalf()
+for ii in solution:
+    if ii.is_real:
+        solution = ii.evalf()
 print(str(solution) + " cm")
 
 #plot the function
