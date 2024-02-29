@@ -43,6 +43,3 @@ teo = decay_const/(tot_cross_sec*1e-2*vel)
 print(f"The ratio from the analitical solution got by hand (see notes):  {teo}")
 
 
-
-
-

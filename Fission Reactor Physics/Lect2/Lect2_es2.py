@@ -12,19 +12,28 @@ from scipy.integrate import odeint
 from scipy.interpolate import interp1d
 
 #Constants
+Tau_Iodine = 6.57 #hours
+lambda_I = np.log(2)/(Tau_Iodine*3600)
 
-lambda_I = math.log(2)/(6.73*3600)  # Decay constant of Iodine135
-print(lambda_I)
+Tau_Xenon = 9.14 #hours
+lambda_Xe = np.log(2)/(Tau_Xenon*3600) 
+
+
 src_Iodine = 5e-12  # Source term of Iodine135
-lambda_Xe = math.log(2)/(9.14*3600)  # Decay constant of Xenon135
-print(lambda_Xe)
+
+Yield_Iodine = 0.0639
+Yield_Xenon = 0.00237
+
+Rate_Fission = 9.34e19
+Rate_Capture = 8.1e-5
+
 #initial conditions
 y0_Iodine = 0 #initial condition for Iodine
 y0_Xenon = 0 #initial condition for Xenon
 
 #time point for the solutions
 t_i = 0 #initial time
-t_f = 3600*48 #final time
+t_f = 3600*24*3 #final time
 t_array = np.linspace(t_i, t_f, 480) #time points
 t_array = np.array(t_array).flatten()
 t_stop = 24*3600 #time at which the source term stops
@@ -36,10 +45,10 @@ def Iodine_Eq(y, t):
     if t>t_stop:
         src = 0
     else:
-        src = src_Iodine
+        src = 1
 
     # Differential equations
-    dIodine_dt = -lambda_I * y + src
+    dIodine_dt = -lambda_I * y + src*(Rate_Fission*Yield_Iodine - Rate_Capture*Yield_Xenon)
 
     return dIodine_dt
 
@@ -57,11 +66,14 @@ print(type(Iodine_Sol_Array))
 
 #define differential equation for Xenon
 def Xenon_Eq(y, t):
-    # Variables
-    Xenon = y  # Concentration of Iodine135
+    
+    if t>t_stop:
+        src = 0
+    else:
+        src = 1
 
     # Differential equations
-    dXenon_dt = -lambda_Xe * Xenon + lambda_I * Iodine_Sol_Array(t)
+    dXenon_dt = -lambda_Xe * y + lambda_I * Iodine_Sol_Array(t)
 
     return dXenon_dt
 
