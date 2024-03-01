@@ -1,27 +1,9 @@
-# Project Title
+# Lecture 2 - 21/02/2024
 
-A brief description of what this project is about.
+Nuclear reactions, decay law, Decay+source differential equation with analytical solution to the problem
 
-## Table of Contents
+## Exercise 1
+Explained during lecture 
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Installation
-
-Instructions on how to install and set up the project.
-
-## Usage
-
-Instructions on how to use the project or examples of usage.
-
-## Contributing
-
-Guidelines on how to contribute to the project.
-
-## License
-
-Information about the project's license.
-
+## Exercise 2
+For Home

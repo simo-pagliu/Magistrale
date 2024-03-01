@@ -20,21 +20,8 @@ def database_call(target, reaction, quantity):
 
 ## DATABASE INFO
 def database_info(target, reaction, quantity):
-
-    #check if the reaction is a number (MT code) or a string (explicit reaction name)
-    if type(reaction) == int:
-        reaction = "&MT=" + str(reaction)
-    else:
-        reaction = "&Reaction=" + reaction
-
-    #check if the quantity is a number (MF code) or a string (explicit quantity name)
-    if type(quantity) == int:
-        quantity = "&MF=" + str(quantity)
-    else:
-        quantity = "&Quantity=" + quantity
-
     #produce the url for the call to the database
-    url = "https://nds.iaea.org/exfor/e4list?Target="+target + reaction + quantity + "&json"
+    url = database_call(target, reaction, quantity)
     #call the database
     response = requests.get(url)
     data = response.json()

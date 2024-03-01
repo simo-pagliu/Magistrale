@@ -1,27 +1,11 @@
-# Project Title
+# Lecture 4 - 27/02/2024
+Fission, fissile vs fissionable, neutron "journey" inside thermal and fast reactors, prompt and delayed neutrons, average number of neutrons produced, energy spectra of fission neutrons.
+### Exercise session
+Laplace transform
 
-A brief description of what this project is about.
-
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Installation
-
-Instructions on how to install and set up the project.
-
-## Usage
-
-Instructions on how to use the project or examples of usage.
-
-## Contributing
-
-Guidelines on how to contribute to the project.
-
-## License
-
-Information about the project's license.
-
+## Exercise 1
+Solved during lecture (Carolina) 
+### ESE_1
+This is as they presented the exercise, by using alredy solved equations into python
+### ESE_1var
+My way, starting from differential equations and solving it with python

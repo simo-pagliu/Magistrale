@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import ENDF_requests as ENDF
-
+from scipy import interpolate
 ## Example of use of the ENDF module
 
 ## The user has to provide the target, reaction and quantity of interest
@@ -19,7 +19,7 @@ target = "U-235"
 #MT 18 = n,f = total fission
 #MT 102 = n,g = radiative capture
 #more at https://www-nds.iaea.org/exfor/helpe/help_reaction.htm
-reaction = 2
+reaction = 1
 # THESE WON'T WORK:
 #MT 452 = N,nu = Average number of TOT neutrons released per fission event
 #MT 455 = N,nu_d = Average number of delayed neutrons released per fission event.
@@ -45,7 +45,7 @@ dataID = input("Please select a PenSectID from the list above: ")
 # 1 = print all the raw data
 # 2 = print the columns (DATA and Units of Meas.) and the number of points
 # if no optional arguments are set the function runs silently
-E_values, Sig_values = ENDF.data_get(dataID, 1)
+E_values, Sig_values = ENDF.data_get(dataID, 2)
 
 # Plot E vs Sig
 plt.plot(E_values, Sig_values)
@@ -55,6 +55,18 @@ plt.yscale('log')
 plt.xscale('log')
 plt.grid()
 plt.show()
+
+#determine the value at a given energy
+#interpolate the data
+E_interp = interpolate.interp1d(E_values, Sig_values, kind='linear')
+
+#ask the user for the energy
+energy = float(input("Please select an energy to evaluate the cross section at: "))
+#add an exeption in case the input is smaller or bigger then the range of the data
+if energy < E_values[0] or energy > E_values[-1]:
+    print("The energy is out of the data range, the minimum energy is ", E_values[0], "and the maximum energy is ", E_values[-1])
+
+print(E_interp(energy))
 
 
 #https://www-nds.iaea.org/exfor/servlet/E4sGetIntSection?SectID=19172580&req=44419&e4up=0&PenSectID=24020191&pen=0

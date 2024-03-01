@@ -15,17 +15,15 @@ Yield_Xenon = 0.00237
 
 #Time 
 t_i = 0
-t_stop = 3*24*3600
-t_f = 4*24*3600
-t_vect = np.linspace(t_i,t_f,7*24)
-print(t_vect)
-print(t_stop)
+t_stop = 24*3600*4 #4 days, then scrammed
+t_1 = np.linspace(t_i,t_stop,1000) #from startup to scram
+t_scrammed = t_stop + 24*3600*2 #2 days off
+t_2 = np.linspace(t_stop, t_scrammed, 1000) #from scram to criticality
+t_f = t_scrammed + 24*3600*10 #10 days of criticality
+t_3 = np.linspace(t_scrammed, t_f, 1000) #from scrammed to full power
+
 
 #OMISSIS: the actual solution, just plot it, because why not...
-
-#Vectors of concentrations values
-Iodine_vect = []
-Xenon_vect = []
 
 #Concentration of Iodine
 def Iodine(t, Rate_Fission, Rate_Capture, Iodine_0, Xenon_0):
@@ -51,24 +49,26 @@ Rate_Capture = 8.1e-5
 Iodine_0 = 1
 Xenon_0 = 0
 
-scram = np.where(t_vect > t_stop)
-scram = scram[0][1]
-#plot Xeonon and Iodine
-for ii in range(0,len(t_vect)):
+#Vectors of concentrations values
+Iodine_vect = []
+Xenon_vect = []
 
-    if ii == scram:
-        Iodine_0 = Iodine_vect[-1]
-        Xenon_0 = Xenon_vect[-1]
-        
-        Rate_Fission=0
-        Rate_Capture=0
+#solution during time interval t_1
+Iodine_t1 = Iodine(t_1, Rate_Fission, Rate_Capture, Iodine_0, Xenon_0)
+Xenon_t1 = Xenon(t_1, Rate_Fission, Rate_Capture, Iodine_0, Xenon_0)
+#solution during time interval t_2
+Iodine_t2 = Iodine(t_1, 0, 0, Iodine_t1[-1], Xenon_t1[-1])
+Xenon_t2 = Xenon(t_1, 0, 0, Iodine_t1[-1], Xenon_t1[-1])
+#solution during time interval t_3
+Iodine_t3 = Iodine(t_1, Rate_Fission, Rate_Capture, Iodine_t2[-1], Xenon_t2[-1])
+Xenon_t3 = Xenon(t_1, Rate_Fission, Rate_Capture, Iodine_t2[-1], Xenon_t2[-1])
 
-    print(Xenon_0)
-    print(Iodine_0)
+#Concatenation of the vectors
+Iodine_vect = np.concatenate((Iodine_t1, Iodine_t2, Iodine_t3))
+Xenon_vect = np.concatenate((Xenon_t1, Xenon_t2, Xenon_t3))
+t_vect = np.concatenate((t_1, t_2, t_3))
 
-    Iodine_vect.append(Iodine(t_vect[ii], Rate_Fission, Rate_Capture, Iodine_0, Xenon_0))
-    Xenon_vect.append(Xenon(t_vect[ii], Rate_Fission, Rate_Capture, Iodine_0, Xenon_0))
-
+#Plot
 plt.plot(t_vect/3600, Iodine_vect, label='Iodine Concentration')
 plt.plot(t_vect/3600, Xenon_vect, label='Xenon Concentration')
 plt.legend()
