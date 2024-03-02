@@ -1,6 +1,7 @@
 #import numpy and plot
 import numpy as np
 import matplotlib.pyplot as plt
+import sympy as sp
 
 #Data given 
 
@@ -13,6 +14,16 @@ lambda_Xenon = np.log(2)/(Tau_Xenon*3600)
 Yield_Iodine = 0.0639
 Yield_Xenon = 0.00237
 
+#Initial conditions, normalized to Iodine concentration
+Rate_Fission = 9.34e19
+Rate_Capture = 8.1e-5
+Iodine_0 = 1
+Xenon_0 = 0
+
+#cross sections
+Iodine_fission_cross_sec = 1 #TEMP
+
+
 #Time 
 t_i = 0
 t_stop = 24*3600*4 #4 days, then scrammed
@@ -24,7 +35,17 @@ t_3 = np.linspace(t_scrammed, t_f, 1000) #from scrammed to full power
 
 
 #OMISSIS: the actual solution, just plot it, because why not...
+t = sp.symbols('t')
+Iodine = sp.Function('Iodine')(t)
+Xenon = sp.Function('Xenon')(t)
+Cesium = sp.Function('Cesium')(t)
+eq1 = sp.Eq(Iodine.diff(t), -lambda_Iodine*Iodine + Rate_Fission*Yield_Iodine*Iodine_fission_cross_sec) 
+eq2 = sp.Eq(Xenon.diff(t), -lambda_Xenon*Xenon + lambda_Iodine*Iodine)
+eq3 = sp.Eq(Cesium.diff(t), lambda_Xenon*Xenon)
 
+#solve the sistem of differential equations with the initial conditions
+initial_conditions={Iodine.subs(t, 0): Iodine_0, Xenon.subs(t, 0): Xenon_0, Cesium.subs(t, 0): Cesium_0}
+sol = sp.dsolve((eq1, eq2, eq3), ics=initial_conditions)
 #Concentration of Iodine
 def Iodine(t, Rate_Fission, Rate_Capture, Iodine_0, Xenon_0):
     coeffA = Yield_Iodine * Rate_Fission / lambda_Iodine
@@ -42,12 +63,6 @@ def Xenon(t, Rate_Fission, Rate_Capture, Iodine_0, Xenon_0):
     Xenon = Xenon_0*paramXe + coeffA*(paramXe - paramI) + coeffB*(1 - paramXe)
 
     return Xenon
-
-#Initial conditions, normalized to Iodine concentration
-Rate_Fission = 9.34e19
-Rate_Capture = 8.1e-5
-Iodine_0 = 1
-Xenon_0 = 0
 
 #Vectors of concentrations values
 Iodine_vect = []
