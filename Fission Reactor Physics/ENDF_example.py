@@ -11,7 +11,7 @@ from scipy import interpolate
 #as a string
 #ELEMENT-MASSNUMBER
 #e.g. "U-235", "Pu-239", "Th-232"
-target = "U-235"
+target = "Be"
 
 #it accepts both INTEGERS of the MT code and STRINGS of the reaction name
 #MT 1 = n,tot = total cross section
@@ -19,7 +19,7 @@ target = "U-235"
 #MT 18 = n,f = total fission
 #MT 102 = n,g = radiative capture
 #more at https://www-nds.iaea.org/exfor/helpe/help_reaction.htm
-reaction = 1
+reaction = 102
 # THESE WON'T WORK:
 #MT 452 = N,nu = Average number of TOT neutrons released per fission event
 #MT 455 = N,nu_d = Average number of delayed neutrons released per fission event.
