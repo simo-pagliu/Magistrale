@@ -17,7 +17,15 @@ See Notes
 Computation of $K_\infty$ for an infite homogenus mixture of U-235 and moderator. 
 See Notes 
 Python script is an attempt to generalize the approach
-
+A possible improvement would follow *Lecture 6 (29/02/2024) Slide 17*
 ## Exercise 3.9
 Re-evaluation of *Reactor Time*, by modifing the initial formulation with the addition of a **Indipendent Source Term**
-See Notes
+Python script of a simple resolution with symbolic module.
+
+The solution is the following:
+
+
+$$N_{t}{\left(t \right)} = \frac{S_{o} l e^{\frac{t \left(k - 1\right)}{l}}}{k - 1} - \frac{S_{o} l}{k - 1}$$
+
+For the analytical approach,
+*see notes*
