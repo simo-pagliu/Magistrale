@@ -10,13 +10,14 @@ Tutorati
 ### Random 
 Random Python scripts produced for fun/learning
 
-## Lectures
+### Lecture Readme Template
 
-### Lecture 2
+```
+# Lecture NUM - DAY/MONTH/2024
+Following **Chapter NUM** of the book (Duderstand - Hamilton): 
 
-### Lecture 3
+- TOPICS
 
-### Lecture 4
-
-### Lecture 5
-
+## Ex. NUM
+TEXT
+```

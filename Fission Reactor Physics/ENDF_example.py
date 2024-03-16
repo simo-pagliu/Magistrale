@@ -11,7 +11,7 @@ from scipy import interpolate
 #as a string
 #ELEMENT-MASSNUMBER
 #e.g. "U-235", "Pu-239", "Th-232"
-target = "Be"
+target = "U-235"
 
 #it accepts both INTEGERS of the MT code and STRINGS of the reaction name
 #MT 1 = n,tot = total cross section
