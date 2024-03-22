@@ -7,9 +7,9 @@ Topics: Introduction to basic quantities useful for the neutron transport model
  - Neutron flux (Not a mathematical flux, is a scalar)
  - Current Density (Mathematically correct Flux, is a vector)
 
-All quantities as "normal", in respect to Energy $(E)$, in respect to the solid angle $(\Omega)$ and both $(E, \Omega)$
+All quantities as "normal", in respect to Energy $(E)$, in respect to the solid angle $(\Omega)$ and both $(E, \Omega)$  
+At last, Riva proceed with a really in-depth mathematical proof regarding Scattering cross-sections, differential $\sigma _s$, double differential $\sigma _s$
 
-At last, 
 
 ## Ex. 4.2
 Really simple example to understand how the quantities behave (vector and scalar quantities)
