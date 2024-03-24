@@ -1,0 +1,1 @@
+It is NOT reasonable to neglect the cross section of air, since it stands for 15.0 % of the total.

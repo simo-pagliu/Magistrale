@@ -8,7 +8,7 @@ We are required to use python, only with the numpy library (no sympy allowed)
 ## Exercise 2
 
 ## Exercise 3
-
+Are we sure 100% sure that we need to convert the percentages from weight to molar?
 ## Exercise 4
 
 ## Exercise 5

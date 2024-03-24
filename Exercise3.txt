@@ -1,0 +1,2 @@
+Case 1, all boron in B-10: 58.17 ppm
+Case 2, boron is a mix of B-10 and B-11: 271.06 ppm

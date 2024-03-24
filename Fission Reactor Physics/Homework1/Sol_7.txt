@@ -1,0 +1,2 @@
+The multiplication factor is 4.38
+The mass of the core is 61.58 % fuel.
