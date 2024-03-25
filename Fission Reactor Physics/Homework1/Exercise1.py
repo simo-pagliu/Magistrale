@@ -44,10 +44,10 @@ Macro_sigma_water_atm = nf.macro(sigma_H, rho_water_atm, 18)
 # Save the results to a file
 ############################################################################################################
 str0 = "Solution to Exercise 1:\n"
-str1 = "Macroscopic total cross section of water: " + str(Macro_sigma_water) + " cm-1\n"
-str2 = "Macroscopic total cross section of steam: " + str(Macro_sigma_steam) + " cm-1\n"
-str3 = "Macroscopic total cross section of the steam-water mixture: " + str(Macro_sigma_mixture) + " cm-1\n"
-str4 = "Macroscopic total cross section of water under atmospheric conditions and room temperature: " + str(Macro_sigma_water_atm) + " cm-1\n"
+str1 = f"Macroscopic total cross section of water: {Macro_sigma_water:.3f} 1/cm\n"
+str2 = f"Macroscopic total cross section of steam: {Macro_sigma_steam:.3f} 1/cm\n"
+str3 = f"Macroscopic total cross section of the steam-water mixture: {Macro_sigma_mixture:.3f} 1/cm\n"
+str4 = f"Macroscopic total cross section of water under atmospheric conditions and room temperature:{Macro_sigma_water_atm:.2e} 1/cm\n"
 text = str0 + str1 + str2 + str3 + str4
 #write the text to a file
 with open(".\Fission Reactor Physics\Homework1\Sol_1.txt", "w") as f:

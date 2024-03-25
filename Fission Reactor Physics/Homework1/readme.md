@@ -3,20 +3,14 @@ Assigned the 12/03/2024
 Due to a week before the first written exam  
 We are required to use python, only with the numpy library (no sympy allowed)
 
-## Exercise 1
-
-## Exercise 2
+## General
+Check data
 
 ## Exercise 3
 Are we sure 100% sure that we need to convert the percentages from weight to molar?
-## Exercise 4
-
-## Exercise 5
 
 ## Exercise 6
+Still to Do
 
-## Exercise 7
-
-## Exercise 8
-
-## Exercise 9
+## Opt.
+Cross-sec function

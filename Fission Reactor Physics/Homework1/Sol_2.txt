@@ -1,2 +1,3 @@
-Case 1, all boron in B-10: 58.17 ppm
-Case 2, boron is a mix of B-10 and B-11: 271.06 ppm
+Solution to Exercise 2:
+Fraction of neutrons born with energy higher than 10 MeV: 0.11% 
+Fraction of neutrons born with energy lower than 0.1 MeV: 1.35% 

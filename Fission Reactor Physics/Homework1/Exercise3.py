@@ -38,7 +38,7 @@ sigma_water = nf.mixture([sigma_H, sigma_O], [2, 1],'normalize')
 ############################################################################################################
 Sol_1 = sigma_water/(sigma_B10 - sigma_water)
 Sol_1 *= 1e6 # convert to ppm
-print(Sol_1) 
+print(f"In case it's all B-10: {Sol_1} PPM") 
 
 ############################################################################################################
 # Case in which Boron is a mixture of B10 and B11
@@ -46,11 +46,11 @@ print(Sol_1)
 sigma_B = nf.mixture([sigma_B10, sigma_B11], [x_mix, 1-x_mix])
 Sol_2 = sigma_water/(sigma_B - sigma_water)
 Sol_2 *= 1e6 # convert to ppm
-print(Sol_2)
+print(f"In case is a mix of B-10 and B-11: {Sol_2} PPM")
 
 ############################################################################################################
 # Save solution to a file
 ############################################################################################################
 with open(".\Fission Reactor Physics\Homework1\Sol_3.txt", "w") as f:
-    f.write(f"Case 1, all boron in B-10: {Sol_1:.2f} ppm\n")
-    f.write(f"Case 2, boron is a mix of B-10 and B-11: {Sol_2:.2f} ppm\n")
+    f.write(f"Case 1, all boron in B-10: {Sol_1:.2f} PPM\n")
+    f.write(f"Case 2, boron is a mix of B-10 and B-11: {Sol_2:.2f} PPM\n")
