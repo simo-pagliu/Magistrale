@@ -26,42 +26,22 @@ materials = [
 ]
 
 ############################################################################################################
-# Macroscopic cross section of the mixture and Nu*Sigma_fiss
+# Quantities of interest
 ############################################################################################################
-Macro_abs = []
-Macro_Fiss = []
-Nu_Sigma_fiss = []
-
-for ii in materials:
-    Macro_abs.append(nf.macro(ii['sigma_a'], ii['density'], ii['molar_mass']))
-
-    temp = nf.macro(ii['sigma_f'], ii['density'], ii['molar_mass'])
-    Macro_Fiss.append(temp)
-
-    Nu_Sigma_fiss.append(ii['nu'] * temp)
-
-############################################################################################################
-# Qualities (volume fractions)
-############################################################################################################
-quals = []
-quals_fuel =[]
-fuel_fraction = 0.3
-
-for ii in materials:
-    val = ii['vol_fraction']
-    if ii['fuel']:
-        quals.append(val*fuel_fraction)
-        quals_fuel.append(val)
-    else:
-        quals.append(val)
-        quals_fuel.append(0)
+densities = [ii['density'] for ii in materials]
+volume_fractions = [ii['vol_fraction']*(0.3*ii['fuel'] + 1*(not ii['fuel'])) for ii in materials]
+weight_fractions = nf.vol2w(volume_fractions, densities)
+weight_fractions_fuel = [weight_fractions[ii]*(materials[ii]['fuel']) for ii in np.arange(len(materials))]
+Macro_abs = [nf.macro(ii['sigma_a'], ii['density'], ii['molar_mass']) for ii in materials]
+Macro_Fiss = [nf.macro(ii['sigma_f'], ii['density'], ii['molar_mass']) for ii in materials]
+Nu_Sigma_fiss = [materials[ii]['nu'] * Macro_Fiss[ii] for ii in np.arange(len(materials))]
 
 ############################################################################################################
 # Multiplication factor K_inf
 ############################################################################################################
-eta = nf.mixture(Nu_Sigma_fiss, quals) / nf.mixture(Macro_abs, quals)     
-f = nf.mixture(Macro_abs, quals_fuel) / nf.mixture(Macro_abs, quals)
-p = 1
+eta = nf.mixture(Nu_Sigma_fiss, weight_fractions,'normalize') / nf.mixture(Macro_abs, weight_fractions,'normalize')     
+f = nf.mixture(Macro_abs, weight_fractions_fuel,'normalize') / nf.mixture(Macro_abs, weight_fractions,'normalize')
+p = 1 #non-leakage probability
 epsilon = 1
 
 K_inf = eta * epsilon * p * f
@@ -71,14 +51,8 @@ print(str1)
 ############################################################################################################
 # Weight fraction of the core
 ############################################################################################################
-weight_fractions = nf.vol2w(quals, [ii['density'] for ii in materials])
-
-fuel_tot = 0
-for ii in materials: 
-    if ii['fuel']:
-        index = materials.index(ii)
-        fuel_tot += weight_fractions[index]
-str2 = f"The mass of the core is {round(fuel_tot, 4)*100} % fuel."
+fuel_tot = weight_fractions_fuel[0]
+str2 = f"The mass of the core is {round(fuel_tot, 4)*100}% PuO2."
 print(str2)
 
 ############################################################################################################

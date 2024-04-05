@@ -1,1 +1,1 @@
-It is NOT reasonable to neglect the cross section of air, since it changes the cross-section by 15.0 %.
+It is reasonable to neglect the cross section of air, since it changes the cross-section by 0.0 %.

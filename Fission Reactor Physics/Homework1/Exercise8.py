@@ -13,7 +13,7 @@ materials = [
     {'name': "Fe-56", 'sigma_f': 0, 'sigma_a': 0.0018, 'nu': 0, 'density': 7.87, 'molar_mass': 56},
     {'name': "Na-23", 'sigma_f': 0, 'sigma_a': 0.0087, 'nu': 0, 'density': 0.97, 'molar_mass': 23},
 ]
-
+densities = [ii['density'] for ii in materials]
 ############################################################################################################
 # Macroscopic cross section of the mixture and Nu*Sigma_fiss
 ############################################################################################################
@@ -37,7 +37,7 @@ fuel_fraction = 0.3
 
 #here I set the range of values to loop over
 min = 0
-max = 0.1
+max = 0.3
 steps = 10000
 pu_frac = np.linspace(min,max,steps)
 
@@ -46,7 +46,9 @@ for jj in pu_frac:
 
     #compute fractions
     quals_fuel = [jj, 1-jj, 0, 0]
+    quals_fuel = nf.vol2w(quals_fuel, densities)
     quals = [jj*fuel_fraction, (1-jj)*fuel_fraction, 0.2, 0.5]
+    quals = nf.vol2w(quals, densities)
 
     #calculate the multiplication factor
     eta = nf.mixture(Nu_Sigma_fiss, quals, 'normalize') / nf.mixture(Macro_abs, quals, 'normalize')     
