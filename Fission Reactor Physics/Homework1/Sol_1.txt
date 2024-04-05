@@ -1,5 +1,5 @@
 Solution to Exercise 1:
-Macroscopic total cross section of water: 0.941 1/cm
-Macroscopic total cross section of steam: 0.046 1/cm
-Macroscopic total cross section of the steam-water mixture: 0.583 1/cm
-Macroscopic total cross section of water under atmospheric conditions and room temperature:1.27e-03 1/cm
+Macroscopic total cross section of water: 0.662 1/cm
+Macroscopic total cross section of steam: 0.032 1/cm
+Macroscopic total cross section of the steam-water mixture: 0.410 1/cm
+Macroscopic total cross section of water under atmospheric conditions and room temperature: 0.892 1/cm

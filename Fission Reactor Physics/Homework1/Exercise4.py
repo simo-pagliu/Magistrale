@@ -31,9 +31,9 @@ molar_mass = [nf.mixture([molar_mass_U235, molar_mass_U238, molar_mass_O16], qua
 ############################################################################################################
 # Microscopic cross section of the oxide, varying with the enrichment
 ############################################################################################################
-micro_sigma_U238 = 11.1 # barn
-micro_sigma_U235 = 680 # barn
-micro_sigma_O16 = 4 # barn
+micro_sigma_U238 = 11.94 # barn
+micro_sigma_U235 = 704.31 # barn
+micro_sigma_O16 = 3.92 # barn
 
 cross_section = [nf.mixture([micro_sigma_U235, micro_sigma_U238, micro_sigma_O16], qualities, 'normalize') for qualities in molar_fractions]
 
@@ -42,7 +42,7 @@ cross_section = [nf.mixture([micro_sigma_U235, micro_sigma_U238, micro_sigma_O16
 ############################################################################################################
 density_U235 = 19.1 # g/cm3
 density_U238 = 19.1 # g/cm3
-density_O16 = 5.24 # g/cm3
+density_O16 = 1.429 # g/cm3
 
 # Calculate the weight fraction of the mixture, not normalized
 weight_fractions = []

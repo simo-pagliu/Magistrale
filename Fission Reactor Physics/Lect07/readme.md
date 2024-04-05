@@ -17,6 +17,7 @@ Really simple example to understand how the quantities behave (vector and scalar
 *See Notes*
 
 ## Animation
-Done by Carolina after the extremly long mathematical show of Riva regarding Scattering Cross Section
+Done by Carolina after the extremly long mathematical show of Riva regarding Scattering Cross Section,  
+I'm trying to do it with manin but i have no idea how to compute the second scattering angle and therefore I'm stuck...
 
 

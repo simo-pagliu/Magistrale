@@ -19,7 +19,7 @@ target = "O-16"
 #MT 18 = n,f = total fission
 #MT 102 = n,g = radiative capture
 #more at https://www-nds.iaea.org/exfor/helpe/help_reaction.htm
-reaction = 102
+reaction = 1
 # THESE WON'T WORK:
 #MT 452 = N,nu = Average number of TOT neutrons released per fission event
 #MT 455 = N,nu_d = Average number of delayed neutrons released per fission event.
