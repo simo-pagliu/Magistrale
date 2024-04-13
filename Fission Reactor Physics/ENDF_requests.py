@@ -59,6 +59,52 @@ def data_get(Sec_ID, *args):
     
     return (E_values, Sig_values)
 
+def xsec(target, reaction):
+    dataIDs = database_info(target, reaction, 'SIG')
+    # average over all data sets
+    E_values = []
+    Sig_values = []
+    count = []
+
+    print("Processing ", len(dataIDs[3]) ," data sets, this might take a while...")
+
+    for dataID in dataIDs[3]:
+        # Temp variables to store the E and Sig values of the current data set
+        E_values_temp = data_get(dataID)[0]
+        Sig_values_temp = data_get(dataID)[1]
+        print("Now processing data set:", dataID, " (", dataIDs[3].index(dataID)+1, "/", len(dataIDs[3]),") it has", len(E_values_temp), " data points")
+
+        for ii in range(len(E_values_temp)):
+            Ene = E_values_temp[ii]
+            if Ene not in E_values:
+                E_values.append(Ene)
+                Sig_values.append(Sig_values_temp[ii])
+                count.append(1)
+            else:
+                jj = E_values.index(Ene)
+                Sig_values[jj] += Sig_values_temp[ii]
+                count[jj] += 1
+
+
+    print("Averaging the data")
+    for jj in range(len(Sig_values)):
+        Sig_values[jj] /= count[jj]
+    print("Done!")
+
+    #order the data by energy
+    print("Ordering the data by Energy")
+    E_values, Sig_values = zip(*sorted(zip(E_values, Sig_values)))
+
+    return E_values, Sig_values
+    
+    
+
+
+
+
+
+
+
 
 
 

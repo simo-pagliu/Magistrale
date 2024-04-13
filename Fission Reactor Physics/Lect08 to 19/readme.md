@@ -2,13 +2,13 @@
 Following **Chapter 4** of the book (Duderstand - Hamilton): 
 Exercises on fundamental quantites
 
-## Ex. 4.3
+### Ex. 4.3
 Flux, Current density, Partial Current density
 
-## Ex. 4.4
+### Ex. 4.4
 Shperic reactor, *Roijen* solution is slightly different in interpretation then the one given by prof.Cammi
 
-## Ex. 4.5
+### Ex. 4.5
 Current Density, spheric coords
 *See Notes*
 
@@ -35,7 +35,7 @@ Prof. absent, Lecture by Riva and Carolina
 
 At the end of the Lecture Carolina presented the first Python Homework
 
-## Ex.
+### Ex.
 No exercises were performed  
 Carolina showed us a python script for Legendre expansion
 
@@ -47,10 +47,10 @@ Following **Chapter 4 - Section IV Subsection A** of the book (Duderstand - Hami
 
 At the end we have created 2 expressions for the boltzmann equation, one in terms of $\Phi$ and the other in terms of $J$, in both cases the equation is not solvable due to the fact that, when integrated, the spatial term gives a new unkown (1 equation, 2 unknowns = unsolvable equation). These two expressions are discretized over the solid angle, which means that they are 2 (vectorial) P1 equations (6 scalar). Next step is to approximate this system of 2 (vect.) equations in 3 unknowns (vectors), the approximated solution will be the diffusion equation.
 
-## Study Note:
+### Study Note:
 It is worth it to take a good look at section **B** since it recap quite well all the userful approximations used during this and following lecture
 
-## Ex.
+### Ex.
 No exercises were performed
 
 # Lecture 12 - 14/03/2024
@@ -62,10 +62,10 @@ Following **Chapter 4 - Section IV Subsection C and D** of the book (Duderstand 
 Basically all section **C**, presented in a different manner but the result is the same (the book's approach is a bit faster and is sufficient for the exam), section **D** was just cited (existance of the *Energy dependant diffusion equation*).  
 We then exposed the points of section **E**, without going into detail, they just explained the diffusion equation limitations: *See Notes*  
 
-## Study Note:
+### Study Note:
 It is worth it to take a good look at section **B** since it recaps quite well all the userful approximations used during this and previous lecture
 
-## Ex.
+### Ex.
 We did, once again, an exercise from an exam regarding net number of neutrons $J$ and tot number of neutrons $\Phi$.  
 *See Notes*
 
@@ -76,16 +76,16 @@ We followed the last part of the Chapter, focusing on the Boundary and Initial c
 Basically we started from the transport equation conditions which are correct and mathematical derived, and then we try to "translate" them for the diffusion equation (which is an approximation).  
 The result is that the conditions of the diffusion equation is not an exact condition but approximation of those conditions. 
 
-## Ex. ???
+### Ex. ???
 Executed in class, *See Notes*
 
-## Ex. ???
+### Ex. ???
 Executed in class, *See Notes*
 
-## Ex. 4.11
+### Ex. 4.11
 For Home
 
-## Python Code
+### Python Code
 During class Carolina showed us some plots of simple solutions of the diffusion equation
 
 # Lecture 14 - 20/03/2024
