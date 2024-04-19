@@ -1,2 +1,2 @@
-The multiplication factor is 2.22
-The mass of the core is 9.24% PuO2.
+The multiplication factor is 1.33
+The mass of the core is 9.24% PuO2 and 52.34% UO2.

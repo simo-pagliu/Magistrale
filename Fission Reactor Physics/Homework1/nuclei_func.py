@@ -6,11 +6,11 @@
 # The functions in this file are designed to perform calculations and provide useful information
 # for studying and analyzing nuclear phenomena.
 #
-# Author: [Your Name]
-# Date: [Current Date]
+# Author: [Pagliuca Simone]
+# Date: [18/04/2024]
 #
 ############################################################################################################
-
+import inspect
 
 
 
@@ -26,24 +26,19 @@ def macro(micro_sigma, density, molar_mass):
 ############################################################################################################
 # Function to calculate the cross section of a mixture
 ############################################################################################################
-def mixture(quantity, quality, normalization_cond=0):
+def mixture(quantity, quality, normalization_cond='no_normalize'):
 
     #check if the quantity and quality lists have the same length
     if len(quantity) != len(quality): 
         print("The quantity and quality lists must have the same length.")
         return None
-    
+
     #check if the sum of the quality values is equal to 1, if not, ask the user if they want to normalize them
     if sum(quality) != 1:
         if normalization_cond == 'normalize':
             quality = [q/sum(quality) for q in quality]
-        else:
-            ans = input("The sum of the quality values is not equal to 1, should i normalize them? (y/n)")
-            if ans == 'y':
-                quality = [q/sum(quality) for q in quality]
-            else:
-                print("The sum of the quality values must be equal to 1, quitting.")
-                return None      
+        elif normalization_cond == 'no_normalize':
+            print(f"\033[93mThe sum of the qualites values is not 1, at line {inspect.currentframe().f_back.f_lineno}, default behaviour is ignoring.\033[0m")  
     
     #calculate the macroscopic cross section of the mixture
     mixture_val = sum([quantity[i]*quality[i] for i in range(len(quantity))])
