@@ -11,10 +11,11 @@ import nuclei_func as nf
 #     • Macroscopic total cross section of water under atmospheric conditions and room temperature
 
 pressure = 68.95 # bar
-rho_water = 0.74 # g/cm3
+rho_water = 0.741 # g/cm3
+rho_water_atm = 0.997 # g/cm3
 rho_steam = 0.036 # g/cm3
-sigma_H = 38 # b
-sigma_O = 4.2 # b
+sigma_H = 38 #* np.sqrt(558/273) # b
+sigma_O = 4.2 #* np.sqrt(558/273)# b
 quality = 0.4 # 40% of the volume is steam
 
 ############################################################################################################
@@ -22,13 +23,14 @@ quality = 0.4 # 40% of the volume is steam
 ############################################################################################################
 
 # Microscopic total cross section of water
-sigma_water = (2*sigma_H + sigma_O)/3
+sigma_water = (2*sigma_H + sigma_O)
+print(sigma_water)
 
 # Macroscopic total cross section of water
-Macro_sigma_water = nf.macro(sigma_water, rho_water, 18)
+Macro_sigma_water = nf.macro(sigma_water, rho_water, 18.02)
 
 # Macroscopic total cross section of steam
-Macro_sigma_steam = nf.macro(sigma_water, rho_steam, 18)
+Macro_sigma_steam = nf.macro(sigma_water, rho_steam, 18.02)
 
 # Macroscopic total cross section of the steam-water mixture
 quantities = [Macro_sigma_steam, Macro_sigma_water]
@@ -37,7 +39,6 @@ qualities = [quality, 1 - quality]
 Macro_sigma_mixture = nf.mixture(quantities, qualities)
 
 # Macroscopic total cross section of water under atmospheric conditions and room temperature
-rho_water_atm = 0.997 # g/cm3
 Macro_sigma_water_atm = nf.macro(sigma_water, rho_water_atm, 18)
 
 ############################################################################################################
@@ -49,6 +50,7 @@ str2 = f"Macroscopic total cross section of steam: {Macro_sigma_steam:.3f} 1/cm\
 str3 = f"Macroscopic total cross section of the steam-water mixture: {Macro_sigma_mixture:.3f} 1/cm\n"
 str4 = f"Macroscopic total cross section of water under atmospheric conditions and room temperature: {Macro_sigma_water_atm:.3f} 1/cm\n"
 text = str0 + str1 + str2 + str3 + str4
+print(text)
 #write the text to a file
 with open(".\Fission Reactor Physics\Homework1\Sol_1.txt", "w") as f:
     f.write(text)

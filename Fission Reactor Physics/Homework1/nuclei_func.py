@@ -19,7 +19,7 @@ import inspect
 ############################################################################################################
 def macro(micro_sigma, density, molar_mass):
     N_a = 6.022e23 # Avogadro's number
-    barn = 1e-24 # cm2
+    barn = 1e-24 # b-->cm2
     macro_sigma = micro_sigma * N_a * density / molar_mass * barn
     return macro_sigma
 

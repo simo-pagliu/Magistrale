@@ -16,11 +16,11 @@ sigma_B11 = 0.005 # b
 # isotope composition
 x_mix= 0.199 # 19.9% of B-10
 # convert to molar fraction
-x_mix = nf.w2mol([x_mix, 1-x_mix], [10, 11])[0]
+#x_mix = nf.w2mol([x_mix, 1-x_mix], [10, 11])[0]
 
 sigma_O = 0.0001709 # b
 sigma_H = 0.33467 # b
-sigma_water = nf.mixture([sigma_H, sigma_O], [2, 1],'normalize')
+sigma_water = nf.mixture([sigma_H, sigma_O], [2, 1],'normalize')*3
 
 #I used this just to get the expression for x
 # import sympy as sp
@@ -30,8 +30,6 @@ sigma_water = nf.mixture([sigma_H, sigma_O], [2, 1],'normalize')
 # eq = sp.Eq((1-x)*sigma_water + x*sigma_B, 2*sigma_water)
 # sol = sp.solve(eq, x)
 # print(sol)
-
-
 
 ############################################################################################################
 # Case in which all Boron is B10
@@ -44,7 +42,7 @@ print(f"In case it's all B-10: {Sol_1:.2f} PPM")
 # Case in which Boron is a mixture of B10 and B11
 ############################################################################################################
 sigma_B = nf.mixture([sigma_B10, sigma_B11], [x_mix, 1-x_mix])
-print(sigma_B)
+#print(sigma_B)
 Sol_2 = sigma_water/(sigma_B - sigma_water)
 Sol_2 *= 1e6 # convert to ppm
 print(f"In case is a mix of B-10 and B-11: {Sol_2:.2f} PPM")
