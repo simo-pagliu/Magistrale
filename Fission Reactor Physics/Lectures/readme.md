@@ -258,5 +258,6 @@ Following **Chapter 6** of the book (Duderstand - Hamilton)
 
 
 
-
-
+## Userful stuff to take a look:
+signal library on python (userful to study stability of system and linear systems)  
+in-hour equation: https://en.wikipedia.org/wiki/Inhour_equation  
