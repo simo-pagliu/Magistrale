@@ -12,6 +12,9 @@
 # Check "USER CONFIG" and "GLOBAL VALUES" sections
 # before running the code.
 #
+# To run the second request, set COMMON_RATE = 1.5e-3 (in the GLOBAL VALUES section)
+# To run the first request, set COMMON_RATE = 0 (in the GLOBAL VALUES section)
+#
 ##################################################
 
 ##################################################
