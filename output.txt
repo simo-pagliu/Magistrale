@@ -1,4 +1,4 @@
-Monte Carlo Simulation Performed with 1 Stories
-Number of maintenance interventions: 19.0 ± 18.49324200890693
-Number of failed components: 39.0 ± 38.49675310984031
-Mean Time to failure 70.71 ± 70.21 hours
+Monte Carlo Simulation Performed with 10000 Stories
+Number of maintenance interventions: 13.9628 ± 0.0275
+Number of failed components: 29.5451 ± 0.0553
+Mean Time to failure 300.0585 ± 2.4194 hours

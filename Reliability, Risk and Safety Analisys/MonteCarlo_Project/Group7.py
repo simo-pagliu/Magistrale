@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 ##################################################
 # USER CONFING
 ##################################################
-DEBUG = True # Set to True to enable debug prints, waits for input after each step
+DEBUG = False # Set to True to enable debug prints, waits for input after each step
 SOLVE_ANALYTICAL = False # Set to True to solve the analytical solution and have it plotted
 
 ##################################################
@@ -35,7 +35,7 @@ REPAIR_RATE = 2.2e-1
 FAIL_RATE = 5.5e-3
 COMMON_RATE = 1.5e-3 # Set this value to 0 to solve the first request, otherwise set it to 1.5e-3
 COMMON_PROB = 0.4
-STORIES = 1 # Number of Monte Carlo trials to simulate
+STORIES = 10000 # Number of Monte Carlo trials to simulate
 MISSION_TIME = 1000 # Mission time in hours
 TIME_AXIS = np.linspace(0, MISSION_TIME, 1000) # Create a time axis from 0 to mission_time.
 
@@ -416,9 +416,9 @@ def main():
     ttf_indexes_vect = []
 
     # Initize log counters
-    ii_repairs = 0
-    ii_fails = 0
-    ii_common = 0
+    ii_repairs = np.zeros(STORIES)
+    ii_fails = np.zeros(STORIES)
+    ii_common = np.zeros(STORIES)
 
     print(f"\033[93mStarting Monte Carlo Simulation, {STORIES} Stories\033[0m")
     print("\n")
@@ -438,16 +438,16 @@ def main():
         ttf_indexes_vect.append(ttf_index)
 
         # Update log counters
-        ii_repairs += num_repairs
-        ii_fails += num_fails
-        ii_common += num_common_fails
+        ii_repairs[ii] = num_repairs
+        ii_fails[ii] = num_fails
+        ii_common[ii] = num_common_fails
 
         # Print progress and some logs
         if DEBUG:
             print("Story Finished\n")
-            print(f"\033[93m Components Failed:{ii_fails} Components Repaired:{ii_repairs*2} Components Failed due to Common Failure Events:{ii_common} Progress:{(ii+1)}/{STORIES}\033[0m")
+            print(f"\033[93m Components Failed:{sum(ii_fails)} Components Repaired:{sum(ii_repairs)*2} Components Failed due to Common Failure Events:{sum(ii_common)} Progress:{(ii+1)}/{STORIES}\033[0m")
         else:
-            print(f"\r\033[93m Components Failed:{ii_fails} Components Repaired:{ii_repairs*2} Components Failed due to Common Failure Events:{ii_common} Progress:{round(((ii+1)/STORIES) * 100,0)}%\033[0m", end="")
+            print(f"\r\033[93m Components Failed:{sum(ii_fails)} Components Repaired:{sum(ii_repairs*2)} Components Failed due to Common Failure Events:{sum(ii_common)} Progress:{round(((ii+1)/STORIES) * 100,0)}%\033[0m", end="")
         
     ### END OF FOR LOOP ###
 
@@ -457,23 +457,24 @@ def main():
     with open('output.txt', 'w') as f:
         f.write(f"Monte Carlo Simulation Performed with {STORIES} Stories\n")
         # Number of maintenance interventions
-        ii_repairs = ii_repairs / STORIES
-        ii_repairs_error = np.sqrt((abs(ii_repairs - ii_repairs**2)) / STORIES)
-        output = f"Number of maintenance interventions: {ii_repairs} ± {(ii_repairs_error)}"
+        ii_repairs_error = np.std(ii_repairs) / np.sqrt(STORIES)
+        ii_repairs = np.mean(ii_repairs)
+        output = f"Number of maintenance interventions: {ii_repairs:.4f} ± {ii_repairs_error:.4f}"
         print(output)
         f.write(output + "\n")
     
         # Number of failed components
-        tot_fails = (ii_fails + num_common_fails) / STORIES
-        tot_fails_err = np.sqrt((abs(tot_fails - tot_fails**2)) / STORIES)
-        output = f"Number of failed components: {tot_fails} ± {(tot_fails_err)}"
+        tot_fails = np.mean(ii_fails + ii_common)
+        tot_fails_err = np.std(ii_fails + ii_common) / np.sqrt(STORIES)
+        output = f"Number of failed components: {tot_fails:.4f} ± {tot_fails_err:.4f}"
         print(output)
         f.write(output + "\n")
     
         # MTTF: Mean Time To Failure
-        MTTF_value = np.sum(TIME_AXIS[ttf_indexes_vect]) / STORIES
-        MTTF_error = np.sqrt((abs(MTTF_value - MTTF_value**2)) / STORIES)
-        output = f"Mean Time to failure {MTTF_value:.2f} ± {MTTF_error:.2f} hours"
+        ttfs = TIME_AXIS[ttf_indexes_vect]
+        MTTF_value = np.mean(ttfs)
+        MTTF_error = np.std(ttfs)/np.sqrt(STORIES)
+        output = f"Mean Time to failure {MTTF_value:.4f} ± {MTTF_error:.4f} hours"
         print(output)
         f.write(output + "\n")
     

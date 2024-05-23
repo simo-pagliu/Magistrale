@@ -256,8 +256,87 @@ Following **Chapter 6** of the book (Duderstand - Hamilton)
 - General solution at startup (external source)
 - How to express power with the group approach
 
+### Lecture 28 - 30/04/2024
+- Lie Group Theory (mention)
+- Zero Power Condition
+- Different behaviour between Power and Precursors concentration
+Exercise on Point Kinetic Eqations (1 Group)  
+Exercise on transient due to change in neutron population  
+Exercise on stady state conditions after a transient  
+- In-hour equation (for more context see [Wikipedia](https://en.wikipedia.org/wiki/Inhour_equation))
+- **Prompt Jump approximation** for low reactivity insertions
+- **Constant Precursors Approximation** for large reactivity insertions
+- The problem of control rod calibration
 
+### Lecture 29 - 02/05/2024
+Continuation of the topics of last lecture, focus on the **Prompt Jump Approx**, an example and it's validity
+
+# Nuclear Reactor Dynamics
+Following the Professor's slides 
+
+### Lecture 30 - 06/05/2024
+- Consideration on modeling of accident scenarios  
+- Introduction to **nuclear reactor dynamics**  
+- Equations (*see slides and book*)  
+- Stability of the solution: $s_1 < 0$  
+- Reactivity as a function of feedback coefficients: $\alpha _f$ and $\alpha _c$  
+- How $\alpha _f$ and $\alpha _c$ vary  
+- Instability Map and solution process  
+
+### Lecture 31 - 08/05/2024
+More context on reactor dynamics, he then showed us some python scripts  
+Important note on the difference between prompt jusmp approx. and the observed phenomenon  
+
+### Lecture 32 - 09/05/2024
+He verifies the approximated results obtained in the previous lecure (python script) with a non-linear system, solved numerically.  
+He highlights the importance of verification and validation of new models  
+
+Excursus on Generation IV reactors, overview on the various technologies, problems and challenges in the field of neutronics.
+
+### Lecture 33 - 14/05/2024
+Continuing the Generation IV excursus: problem of modelling circulating fuel in MSR  
+Control systems:
+ - General rapresentation
+ - Feed-forwards
+ - F.F. + Feedback
+ - Only Feedback control
+ - PID control systems and variations
+ - Example of PI control system, analytical solution to find its response function
+At last an exercise on finding the Point reactor kinetics equation with temperature feedback and constant precursors.
+
+### Lecture 34 - 15/05/2024
+Some numerical examples on reactivity losses due to heat up of the reactor prior power generation and as a consequence of power up to 100%, concepts of:
+- Temperature Defect $D_T$
+- Power Defect $D_P$
+- Excess Reactivity $\rho _{ex}$
+- Shutdown Margin $\rho _{sm}$
+- Reactivity worth: $\Delta \rho = \rho _{ex} + \rho _{sm}$ 
+He then showed us a "very important" graph at slide "33" (no number on the slide)  
+Consideration on the possible ways to regulate a PWR and some data for PWRs  
+Evolution of excess reactivity in time  
+Exercises on reactor dynamics
+
+### Lecture 35 - 16/05/2024
+Exercise session with Riva about the diffusion model
+
+### Visit to TRIGA Reactor in Pavia - 21/05/2024
+First they described how the triga reactor works and its charateristics.  
+We then measured the time needed to get from a given power level to another power level adjusting the REG (regulating) control rod.  
+We are then supposed to use this data (got from multiple groups) to compute the reactor period.  
+The ultimate goal was to calibrate the REG control rod.  
+
+# Multigroup Diffusion Theory
+Following **Chapter 7** of the book (Duderstand - Hamilton)  
+
+### Lecture 36 - 22/05/2024
+We introduced the multigroup diffusion theory
+- Approach to multigroup diffusion, in and out of group scattering cross section $\Sigma _{s, g \rightarrow g'}$
+- Removal cross section $\Sigma _{r,g}$
+- Definition of energy groups $\longrightarrow$ "exact" multigroup diffusion equation
+- Approximation to simplify resolution
+- Possible ways to approximate energy group transitions
+- Equation used for criticality condition analysis (steady state and no external source)
+- Example of equation with 4 energy groups, matrix notation (Duderstat) and alternative notation (Professor's slides)
 
 ## Userful stuff to take a look:
 signal library on python (userful to study stability of system and linear systems)  
-in-hour equation: https://en.wikipedia.org/wiki/Inhour_equation  
