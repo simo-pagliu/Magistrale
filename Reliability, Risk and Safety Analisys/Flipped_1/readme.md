@@ -8,8 +8,5 @@ We ended up solving all exercises correctly.
 ### Files:
 - Uncompiled $\LaTeX$ files
 - **Group_7.pdf** Compiled Latex document
-- **3.1.py**: Python script used for exercise 4.3
-- **4.3.py**: Python script used for exercise 3.1
-
-
-
+- **3.1.py**: Python script used for exercise 3.1
+- **4.3.py**: Python script used for exercise 4.3

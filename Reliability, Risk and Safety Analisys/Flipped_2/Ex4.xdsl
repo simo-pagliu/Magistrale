@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This network was created in GeNIe Academic, which can be used for academic teaching and research purposes only -->
+<smile version="1.0" id="Network4" numsamples="10000" discsamples="10000">
+	<nodes>
+		<cpt id="Fireproof_coating">
+			<state id="Working" />
+			<state id="Failed" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Sprinkler_1">
+			<state id="Working" />
+			<state id="Failed" />
+			<probabilities>0.6932 0.3068</probabilities>
+		</cpt>
+		<cpt id="Sprinkler_2">
+			<state id="Working" />
+			<state id="Failed" />
+			<probabilities>0.6932 0.3068</probabilities>
+		</cpt>
+		<cpt id="Mitigation_system">
+			<state id="Working" />
+			<state id="Failed" />
+			<parents>Fireproof_coating Sprinkler_1 Sprinkler_2</parents>
+			<probabilities>1 0 1 0 1 0 0 1 1 0 0 1 0 1 0 1</probabilities>
+		</cpt>
+		<cpt id="Safety_valve">
+			<state id="Working" />
+			<state id="Failed" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Tank">
+			<state id="No_damage" />
+			<state id="Minor_damage" />
+			<state id="Major_damage" />
+			<parents>Safety_valve Mitigation_system</parents>
+			<probabilities>1 0 0 1 0 0 0 1 0 0 0 1</probabilities>
+		</cpt>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 4.1.4109.0 ACADEMIC" name="Network4">
+			<node id="Mitigation_system">
+				<name>Mitigation system</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>879 420 1016 499</position>
+			</node>
+			<node id="Safety_valve">
+				<name>Safety valve</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>489 413 625 499</position>
+			</node>
+			<node id="Fireproof_coating">
+				<name>Fireproof coating</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>708 281 801 339</position>
+			</node>
+			<node id="Sprinkler_1">
+				<name>Sprinkler 1</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>900 284 994 347</position>
+			</node>
+			<node id="Sprinkler_2">
+				<name>Sprinkler 2</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1073 283 1167 346</position>
+			</node>
+			<node id="Tank">
+				<name>Tank</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>689 565 860 665</position>
+			</node>
+		</genie>
+	</extensions>
+</smile>

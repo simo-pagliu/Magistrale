@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This network was created in GeNIe Academic, which can be used for academic teaching and research purposes only -->
+<smile version="1.0" id="Network3" numsamples="10000" discsamples="10000">
+	<nodes>
+		<cpt id="Earthquake">
+			<state id="True" />
+			<state id="False" />
+			<probabilities>0.0001 0.9999</probabilities>
+		</cpt>
+		<cpt id="G1">
+			<state id="Working" />
+			<state id="Failed" />
+			<parents>Earthquake</parents>
+			<probabilities>0.7 0.3 1 0</probabilities>
+		</cpt>
+		<cpt id="G2">
+			<state id="Working" />
+			<state id="Failed" />
+			<parents>Earthquake</parents>
+			<probabilities>0.7 0.3 1 0</probabilities>
+		</cpt>
+		<cpt id="T1">
+			<state id="Working" />
+			<state id="Failed" />
+			<parents>Earthquake</parents>
+			<probabilities>0.9 0.1 1 0</probabilities>
+		</cpt>
+		<cpt id="T2">
+			<state id="Working" />
+			<state id="Failed" />
+			<parents>Earthquake</parents>
+			<probabilities>0.9 0.09999999999999998 1 0</probabilities>
+		</cpt>
+		<cpt id="T3">
+			<state id="Working" />
+			<state id="Failed" />
+			<parents>Earthquake</parents>
+			<probabilities>0.9 0.09999999999999998 1 0</probabilities>
+		</cpt>
+		<cpt id="L1">
+			<state id="Connected" />
+			<state id="Disconnected" />
+			<parents>G1 T1 T2 G2</parents>
+			<probabilities>1 0 1 0 1 0 1 0 1 0 0 1 0 1 0 1 1 0 0 1 0 1 0 1 1 0 0 1 0 1 0 1</probabilities>
+		</cpt>
+		<cpt id="L2">
+			<state id="Connected" />
+			<state id="Disconnected" />
+			<parents>G2 T2 T3</parents>
+			<probabilities>1 0 1 0 1 0 0 1 0 1 0 1 0 1 0 1</probabilities>
+		</cpt>
+		<cpt id="System">
+			<state id="Working" />
+			<state id="Failed" />
+			<parents>L1 L2</parents>
+			<probabilities>1 0 0 1 0 1 0 1</probabilities>
+		</cpt>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 4.1.4109.0 ACADEMIC" name="Network3">
+			<node id="Earthquake">
+				<name>Earthquake</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>699 41 839 126</position>
+			</node>
+			<node id="G1">
+				<name>G1</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>404 186 490 253</position>
+			</node>
+			<node id="G2">
+				<name>G2</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>567 189 653 256</position>
+			</node>
+			<node id="T1">
+				<name>T1</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>716 193 802 260</position>
+			</node>
+			<node id="T2">
+				<name>T2</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>874 192 960 259</position>
+			</node>
+			<node id="T3">
+				<name>T3</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1042 199 1128 266</position>
+			</node>
+			<node id="L1">
+				<name>L1</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>567 372 653 439</position>
+			</node>
+			<node id="L2">
+				<name>L2</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>869 380 955 447</position>
+			</node>
+			<node id="System">
+				<name>System</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>694 530 844 616</position>
+			</node>
+		</genie>
+	</extensions>
+</smile>
