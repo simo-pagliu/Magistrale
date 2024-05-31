@@ -1,4 +1,7 @@
-# Introduction
+# Fission Reactor Physics
+## Prof. Cammi (a.a. 2023/2024)
+
+### Lecture 1 - 20/02/2024
 First lecture was just an introduction to the course, logistics and some data about the nuclear industry.
 
 ### Lecture 2 - 21/02/2024
@@ -337,6 +340,39 @@ We introduced the multigroup diffusion theory
 - Possible ways to approximate energy group transitions
 - Equation used for criticality condition analysis (steady state and no external source)
 - Example of equation with 4 energy groups, matrix notation (Duderstat) and alternative notation (Professor's slides)
+
+### Lecture 37 - 23/05/2024
+Worked with multigroup diffusion
+- 1 Group $\longrightarrow$ One Speed diffution equation but the coefficients are defined in a different way
+- 2 Groups, one for fast the other for thermal neutrons, governing equations
+- Comparison between 1 and 2 groups approaches to the problem of reactor with reflector (with 2 groups we can now properly see the effect of the reflector)
+- Criticality Calculation with 2 Groups
+- Group Collapsing
+- Modified 1 Group Diffusion Equation for large LWRs
+- Solved Exercise 7.10 from Duderstat
+
+### Lecture 38 - 28/05/2024
+First of all some considerations on the fact that we only have elastic scattering under 1 MeV (cross section evaluation, collision between hard spheres, differential cross section)  
+- Comparison between moderators in terms of $\xi = ln(E') - ln(E)$, $\xi \Sigma _s$ and moderator quality: $\xi \frac{\Sigma _s}{\Sigma _a}$
+- They showed us the python script *rodCalibration.ipynb* regarding the calibration of Triga control rods  
+
+Exercise on multigroup with Riva: 
+- From TdE (20/07/2022) 
+- Ex. 7.19 from Duderstat, *see Notes* & *see Rooijen*
+- From TdE (06/09/2023)
+
+### Lecture 39 - 29/05/2024
+Professor highlighted the imporance of the tables about moderator comparisons between H20, D20, C and Be  
+Then we discussed:
+- Epithermal Spectrum
+- Fermi Age Theory (there will be no exercises about this in the exam)
+- Example with a MOnoenergetic Point Source
+- Thermal Spectrum
+- Overall neutron spectrum (from thermal to fast)
+
+### Lecture 40 - 30/05/2024
+Last lecture was dedicated to present possible thesis works and recap how the exam works.
+
 
 ## Userful stuff to take a look:
 signal library on python (userful to study stability of system and linear systems)  
