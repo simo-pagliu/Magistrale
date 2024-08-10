@@ -7,64 +7,45 @@ import nuclei_func as nf
 # Suppose the non-leakage probability for a sodium cooled fast reactor specified in assignment 7 is 0.90. 
 # Using the data from assignment 7, adjust the volume fractions of PuO2 and UO2 in the fuel so that κ = 1. 
 # What is the percentage in the fuel by volume?
-materials = [
-    {'name': "Pu-239", 'sigma_f': 1.95, 'sigma_a': 2.4, 'nu': 2.98, 'density': 11, 'molar_mass': 239+32},
-    {'name': "U-238", 'sigma_f': 0.05, 'sigma_a': 0.404, 'nu': 2.47, 'density': 11, 'molar_mass': 238+32},
-    {'name': "Fe-56", 'sigma_f': 0, 'sigma_a': 0.0018, 'nu': 0, 'density': 7.87, 'molar_mass': 56},
-    {'name': "Na-23", 'sigma_f': 0, 'sigma_a': 0.0087, 'nu': 0, 'density': 0.97, 'molar_mass': 23},
-]
-densities = [ii['density'] for ii in materials]
-############################################################################################################
-# Macroscopic cross section of the mixture and Nu*Sigma_fiss
-############################################################################################################
-Macro_abs = []
-Macro_Fiss = []
-Nu_Sigma_fiss = []
-
-for ii in materials:
-    Macro_abs.append(nf.macro(ii['sigma_a'], ii['density'], ii['molar_mass']))
-
-    temp = nf.macro(ii['sigma_f'], ii['density'], ii['molar_mass'])
-    Macro_Fiss.append(temp)
-
-    Nu_Sigma_fiss.append(ii['nu'] * temp)
 
 ############################################################################################################
-# Compute an array of K values
+# Loop over an array of Pu volume fractions
 ############################################################################################################
+# Initialize the K values array
 K_vals = []
-fuel_fraction = 0.3
 
-#here I set the range of values to loop over
+# Define the range of Pu volume fractions
 min = 0
-max = 0.3
+# Limit at a reasonable value given the result of Ex.7 : 
+# K_inf=1.33 with volume fraction = 0.15, with P_NL=0.9 --> K_real = 1.197
+# We are required to get K_real = 1
+# Therefore it's reasonable to expected a volume fraction lower then 0.15
+max = 0.15
 steps = 10000
 pu_frac = np.linspace(min,max,steps)
 
-#loop over the range of values
+# Loop over the Pu volume fractions
 for jj in pu_frac:
+    materials = [
+        {'name': "Pu-239", 'sigma_f': 1.95, 'sigma_a': 2.4, 'nu': 2.98, 'density': 11, 'molar_mass': 239+32, 'vol_fraction': jj, 'fuel': True},
+        {'name': "U-238", 'sigma_f': 0.05, 'sigma_a': 0.404, 'nu': 2.47, 'density': 11, 'molar_mass': 238+32, 'vol_fraction': 1-jj, 'fuel': True},
+        {'name': "Fe-56", 'sigma_f': 0, 'sigma_a': 0.0087, 'nu': 0, 'density': 7.87, 'molar_mass': 56, 'vol_fraction': 0.2, 'fuel': False},
+        {'name': "Na-23", 'sigma_f': 0, 'sigma_a': 0.0018, 'nu': 0, 'density': 0.97, 'molar_mass': 23, 'vol_fraction': 0.5, 'fuel': False},
+    ]
+    K_inf, PuO2_mass_percent, UO2_mass_percent = nf.compute_k(materials)
+    K_real = K_inf * 0.9
+    K_vals.append(K_real)
 
-    #compute fractions
-    quals_fuel = [jj, 1-jj, 0, 0]
-    quals_fuel = nf.vol2w(quals_fuel, densities)
-    quals = [jj*fuel_fraction, (1-jj)*fuel_fraction, 0.2, 0.5]
-    quals = nf.vol2w(quals, densities)
-
-    #calculate the multiplication factor
-    eta = nf.mixture(Nu_Sigma_fiss, quals, 'normalize') / nf.mixture(Macro_abs, quals, 'normalize')     
-    f = nf.mixture(Macro_abs, quals_fuel, 'normalize') / nf.mixture(Macro_abs, quals, 'normalize')
-    p = 0.9 #non-leakage probability - difference from assignment 7
-    epsilon = 1
-
-    #add value to array
-    K_vals.append(eta * epsilon * p * f)
-
-#find the index of the K value closest to 1
+############################################################################################################
+# Find the closest to 1 and print the corresponding Pu volume fraction
+############################################################################################################
 index = np.argmin(abs(np.array(K_vals)-1))
-print(K_vals[index]) # print the K value closest to 1
-print(pu_frac[index]) # print the Pu fraction corresponding to the K value closest to 1
+str = f"The Pu volume fraction corresponding to the K value closest to 1 is: {pu_frac[index]:.4f}"
+print(str)
 
-#plot k values
+############################################################################################################
+# Plot the K values vs Pu fraction (not required)
+############################################################################################################
 plt.plot(pu_frac,K_vals)
 plt.xlabel("Pu fraction")
 plt.ylabel("K")
@@ -76,4 +57,4 @@ plt.show()
 # Save solution to a file
 ############################################################################################################
 with open(".\Fission Reactor Physics\Homework1\Sol_8.txt", "w") as f:
-    f.write("\n")
+    f.write(str)

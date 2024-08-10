@@ -45,6 +45,18 @@ str_1 = f"Reaction rate of Sm-149 (absorption): {capture_rate:.4e} "
 print(str_1)
 
 ############################################################################################################
+# Ask if you want to solve the system or if you want to use a previously solved system and just plot 
+############################################################################################################
+print("\033[93mWARNING: Solving this system of equation through sympy might take its time; \n if you have already run this script once there should be a .csv file with the solution and I can just plot the result\033[0m")
+print("Do you want to Solve (s) or try to Plot (p) (s/p)?")
+answer = input()
+if answer == "s":
+    pass
+elif answer == "p":
+    exec(open("./Fission Reactor Physics/Homework1/Exercise9b.py").read())
+    exit()
+
+############################################################################################################
 # System of differential equations
 ############################################################################################################
 # Decay constants
@@ -138,3 +150,11 @@ with open(csv_file_path, "w", newline="") as f:
 ############################################################################################################
 with open(".\Fission Reactor Physics\Homework1\Sol_9.txt", "w") as f:
     f.write(f"{str_1}\n")
+
+############################################################################################################
+# Ask if you want to exec file Exercise9b.py to plot
+############################################################################################################
+print("Do you want to plot the results? (y/n)")
+answer = input()
+if answer == "y":
+    exec(open("./Fission Reactor Physics/Homework1/Exercise9b.py").read())

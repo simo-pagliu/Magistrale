@@ -11,7 +11,7 @@
 #
 ############################################################################################################
 import inspect
-
+import numpy as np
 
 
 ############################################################################################################
@@ -39,7 +39,8 @@ def mixture(quantity, quality, normalization_cond='no_normalize'):
             quality = [q/sum(quality) for q in quality]
         elif normalization_cond == 'no_normalize':
             print(f"\033[93mThe sum of the qualites values is not 1, at line {inspect.currentframe().f_back.f_lineno}, default behaviour is ignoring.\033[0m")  
-    
+        elif normalization_cond == 'silent':
+            pass
     #calculate the macroscopic cross section of the mixture
     mixture_val = sum([quantity[i]*quality[i] for i in range(len(quantity))])
     return mixture_val
@@ -97,3 +98,104 @@ def vol2w(volume_fraction, density):
         ans.append((volume_fraction[ii]*density[ii])/denominator)
 
     return ans
+
+############################################################################################################
+# This is used for exercises 7 and 8
+############################################################################################################
+def compute_k(materials):
+    densities = [ii['density'] for ii in materials]
+    # print("densities",densities)
+    volume_fractions = [ii['vol_fraction']*(0.3*ii['fuel'] + 1*(not ii['fuel'])) for ii in materials]
+    # print("volume fract", volume_fractions)
+    weight_fractions = vol2w(volume_fractions, densities)
+    # print("weight fractions", weight_fractions)
+    weight_fractions_fuel = [weight_fractions[ii]*(materials[ii]['fuel']) for ii in np.arange(len(materials))]
+    # print("weight fraction fuel", weight_fractions_fuel)
+    Macro_abs = [macro(ii['sigma_a'], ii['density'], ii['molar_mass']) for ii in materials]
+    # print("Macro_abs", Macro_abs)
+    Macro_Fiss = [macro(ii['sigma_f'], ii['density'], ii['molar_mass']) for ii in materials]
+    # print("Macro_Fiss", Macro_Fiss)
+    Nu_Sigma_fiss = [materials[ii]['nu'] * Macro_Fiss[ii] for ii in np.arange(len(materials))]
+    # print("Nu_Sigma_fiss", Nu_Sigma_fiss)
+
+    ############################################################################################################
+    # Multiplication factor K_inf
+    ############################################################################################################
+    eta = mixture(Nu_Sigma_fiss, weight_fractions, 'silent') / mixture(Macro_abs, weight_fractions, 'silent')
+    f = mixture(Macro_abs, weight_fractions_fuel, 'silent') / mixture(Macro_abs, weight_fractions, 'silent')
+    p = 1 #non-leakage probability
+    epsilon = 1
+
+    K_inf = eta * epsilon * p * f
+    A_mass_percent = round(weight_fractions_fuel[0] * 100, 2)
+    B_mass_percent = round(weight_fractions_fuel[1] * 100, 2)
+    return K_inf,A_mass_percent, B_mass_percent
+
+############################################################################################################
+# This is used for exercise 6
+############################################################################################################
+def six_factors(compounds, densities, materials, volumes):
+    # Initialize lists
+    Macro_Fission = []
+    Macro_Absorption = []
+    Macro_Fission_Nu = []
+
+    # Work on each compound, one by one
+    for ii, compound in enumerate(compounds):
+        # Initialize lists
+        sigma_f_list = []
+        sigma_a_list = []
+        atom_fractions = []
+        molar_masses = []
+        nu_list = []
+
+        # Get data for each component in the compound from the materials list
+        for component in compound:
+            for material in materials:
+                if material['name'] == component['name']:
+                    sigma_f_list.append(material['sigma_f'])
+                    sigma_a_list.append(material['sigma_c']+material['sigma_f']) # Absorption = Capture + Fission
+                    nu_list.append(material['nu'])
+                    atom_fractions.append(component['atom_fraction'])
+                    molar_masses.append(material['molar_mass'])
+                    break
+        
+        # Macroscopic cross sections for each element in the compound, using compound density
+        macroscopic_sigma_f = [macro(sigma_f_list[jj], densities[ii], molar_masses[jj]) for jj in np.arange(len(sigma_f_list))]
+        macroscopic_sigma_a = [macro(sigma_a_list[jj], densities[ii], molar_masses[jj]) for jj in np.arange(len(sigma_a_list))]
+        nu_macro_f = [nu_list[jj] * macroscopic_sigma_f[jj] for jj in np.arange(len(nu_list))]
+        
+        # Atom to weight fractions
+        fractions = mol2w(atom_fractions, molar_masses)
+        
+        # Overall Macroscopic cross sections for the compound
+        macroscopic_sigma_f = mixture(macroscopic_sigma_f, fractions, 'silent')
+        macroscopic_sigma_a = mixture(macroscopic_sigma_a, fractions, 'silent')
+        nu_f = mixture(nu_macro_f, fractions, 'silent')
+
+        # Append the values to the lists
+        Macro_Fission.append(macroscopic_sigma_f)
+        Macro_Absorption.append(macroscopic_sigma_a)
+        Macro_Fission_Nu.append(nu_f)
+    
+    # Compute fraction of each compound in the core
+    tot_vol = sum(volumes)
+    vol_fractions = [volume / tot_vol for volume in volumes]
+
+    # Convert into weight fractions
+    fractions = vol2w(vol_fractions, densities)
+    
+    # Fractions for the fuel only
+    # This could be done in a fancier way by adding a flag to each component 
+    # but since it's only one we are going to use
+    # as a convention that the last is the moderator or coolant
+    fractions_fuel = fractions[:-1] # Remove the moderator/coolant
+    fractions_fuel.append(0) # Add a zero for moderator/coolant
+
+    ############################################################################################################
+    # Compute the parameters for the 6 factor formula
+    ############################################################################################################
+    
+    eta = mixture(Macro_Fission_Nu, fractions, 'silent') / mixture(Macro_Absorption, fractions, 'silent')
+    f = mixture(Macro_Absorption, fractions_fuel, 'silent') / mixture(Macro_Absorption, fractions, 'silent')
+    return eta, f

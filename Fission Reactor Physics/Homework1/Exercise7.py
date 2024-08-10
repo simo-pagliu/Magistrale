@@ -25,41 +25,14 @@ materials = [
     {'name': "Na-23", 'sigma_f': 0, 'sigma_a': 0.0018, 'nu': 0, 'density': 0.97, 'molar_mass': 23, 'vol_fraction': 0.5, 'fuel': False},
 ]
 
-############################################################################################################
-# Quantities of interest
-############################################################################################################
-densities = [ii['density'] for ii in materials]
-# print("densities",densities)
-volume_fractions = [ii['vol_fraction']*(0.3*ii['fuel'] + 1*(not ii['fuel'])) for ii in materials]
-# print("volume fract", volume_fractions)
-weight_fractions = nf.vol2w(volume_fractions, densities)
-# print("weight fractions", weight_fractions)
-weight_fractions_fuel = [weight_fractions[ii]*(materials[ii]['fuel']) for ii in np.arange(len(materials))]
-# print("weight fraction fuel", weight_fractions_fuel)
-Macro_abs = [nf.macro(ii['sigma_a'], ii['density'], ii['molar_mass']) for ii in materials]
-# print("Macro_abs", Macro_abs)
-Macro_Fiss = [nf.macro(ii['sigma_f'], ii['density'], ii['molar_mass']) for ii in materials]
-# print("Macro_Fiss", Macro_Fiss)
-Nu_Sigma_fiss = [materials[ii]['nu'] * Macro_Fiss[ii] for ii in np.arange(len(materials))]
-# print("Nu_Sigma_fiss", Nu_Sigma_fiss)
+# Call the function in nuclei_func since it is in common with exercise 8 and I didn't want to copy paste it in two scripts
+K_inf, PuO2_mass_percent, UO2_mass_percent = nf.compute_k(materials)
 
 ############################################################################################################
-# Multiplication factor K_inf
+# Print the results
 ############################################################################################################
-eta = nf.mixture(Nu_Sigma_fiss, weight_fractions) / nf.mixture(Macro_abs, weight_fractions)
-f = nf.mixture(Macro_abs, weight_fractions_fuel) / nf.mixture(Macro_abs, weight_fractions)
-p = 1 #non-leakage probability
-epsilon = 1
-
-K_inf = eta * epsilon * p * f
 str1 = f"The multiplication factor is {round(K_inf, 2)}"
 print(str1)
-
-############################################################################################################
-# Weight fraction of the core
-############################################################################################################
-PuO2_mass_percent = round(weight_fractions_fuel[0] * 100, 2)
-UO2_mass_percent = round(weight_fractions_fuel[1] * 100, 2)
 str2 = f"The mass of the core is {PuO2_mass_percent}% PuO2 and {UO2_mass_percent}% UO2."
 print(str2)
 

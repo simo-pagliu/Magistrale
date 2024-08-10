@@ -12,9 +12,6 @@ Are we sure 100% sure that we need to convert the percentages from weight to mol
 ## Exercise 6
 Still to Do
 
-## Opt.
-Cross-sec function  
-
 ## Expected results by Carolina
 Ex1: OOK
 water 1.98 
@@ -33,25 +30,24 @@ Ex4: OK
 Ex5: OK, write better reasoning and better plot with the error
 
 Ex6:
-nuscale
-K_inf = 1.4
-f= 0.866
-eta=1.618
+### NuScale  
+K_inf = 1.4  
+eta=1.618  
+f= 0.866  
 
-Alfred
-k_inf = 1.12
-f_th=0.0507
-eta_th=1.577
-
-p=0.0125
-eps=1124
+### Alfred 
+k_inf = 1.12  
+f_th=0.0507  
+eta_th=1.577  
+p = 0.0125  
+eps = 1124
 
 
 Ex7: OK
 
-Ex8: 10& of PuO2 to have K=1
+Ex8: 10& of PuO2 to have K=1 DONE :D
 
-Ex9: Sm has some kind of problem :/
+Ex9: Sm has some kind of problem :/... check the system of equations
 
-TODO: 6 - 8 -<> 9
+TODO: 6 - 9
 
