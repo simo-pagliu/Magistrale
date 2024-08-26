@@ -4,57 +4,73 @@ import sympy as sp
 ############################################################################################################
 # Function to apply boundary condition for outer regions
 ############################################################################################################
-def outer_boundary_conditions(flux, x, D, F, N, A, B, region, all_regions):
+def outer_boundary_conditions(flux, x, region, all_regions):
+    # Define the region-specific variables
+    i = all_regions.index(region)
+    D_i = sp.symbols(f'D_{i+1}', positive=True)
+    F_i = sp.symbols(f'F_{i+1}', positive=True)
+    A_i = sp.symbols(f'A_{i+1}', positive=True)
+    N_i = sp.symbols(f'N_{i+1}', positive=True)
+    B_i = sp.symbols(f'Bg_{i+1}', positive=True)
+    L_i = sp.symbols(f'L_{i+1}', positive=True)
     
     # Get the correct boundary
-    # Iterate over all other regions
     start_present = False
     for other_region in all_regions:
         if other_region != region:
-            # Check if the start and end of the current region are present in the other region
             if region.Start in [other_region.Start, other_region.End]:
                 start_present = True
     
-    # If the start of the current region is not present in any other region, use it as the boundary
     if not start_present:
         boundary = region.Start
-    else: # Otherwise, use the end of the current region as the boundary
+    else:
         boundary = region.End
 
-    # Extrapolation Length
-    Extrapolation_Length = abs(boundary) + 0.7/region.Diffusion  # Extrapolation length for the boundary condition
-
-    # Sign of the limit = sign of the boundary
+    Extrapolation_Length = abs(boundary) + 0.7/region.Diffusion  
     sign = np.sign(boundary)
-
-    # Determine which term goes to infinity as x -> infinity
     ans = []
-    limit = 0
+    
+    print(f"Applying boundary condition at x = {boundary}")
+
     # Identify the terms in the general solution
-    terms = flux.rhs.as_ordered_terms()  # Divide the expression into terms
-    for term in terms:
-        limit_term = sp.limit(term, x, sign * Extrapolation_Length)  # Calculate the limit of the term as x -> infinity
-        limit = limit + limit_term
-        if limit_term.has(sp.oo):  # Check if the limit is infinity (any expression that contains oo)
-            # Define the known symbols
-            known_symbols = {x, D, F, N, A, B}
-
-            # Get the symbols in the term
-            term_symbols = term.free_symbols
-
-            # Subtract the known symbols from the term symbols to get the integration constant
-            constant = term_symbols - known_symbols
-            constant = list(constant)[0]  # Extract the constant symbol
-
-            if term.subs(constant,0) == 0:  # Check if the term is zero when the constant is zero
-                # The new condition is that the constant is set to zero
+    terms = flux.rhs.as_ordered_terms()
+    
+    # Evaluate the limit
+    limit = sp.limit(flux.rhs, x, sign * Extrapolation_Length) # Evaluate the limit at the extrapolation length
+    infinity_terms = 0 # Count the number of terms that go to infinity
+    
+    # If limit goes to infinity
+    if limit.has(sp.oo) or limit.has(-sp.oo):
+        # Evaluate each term
+        for term in terms:
+            limit_term = sp.limit(term, x, sign * Extrapolation_Length)
+            # And set to 0 those that go to infinity
+            if limit_term.has(sp.oo):
+                known_symbols = {x, D_i, F_i, N_i, A_i, B_i, L_i}
+                term_symbols = term.free_symbols
+                constant = list(term_symbols - known_symbols)[0]  
+                print(f"Term {term} has infinity at x = {boundary}")
                 new_condition = sp.Eq(constant, 0, evaluate=False)
-                ans.append(new_condition)
-                
-    # If no terms go to infinity, consider solving the equation directly
-    if not ans:
-        new_condition = sp.solve(limit)
-        print("Boundary condition is non trivial as nothing goes to zero:", new_condition)
-        ans.append(new_condition)
+                ans.append(new_condition) 
+                infinity_terms += 1 # Count the number of terms that go to infinity
+            
+        # If all terms go to infinity, the constants are not constants
+        # so we express them as a function
+        if infinity_terms == len(terms):
+            C_1 = sp.symbols(f'C_{i*2+1}', positive=True, real=True)
+            C_2 = sp.symbols(f'C_{i*2+2}', positive=True, real=True)
+            print(f"All terms go to infinity at x = {boundary}")
+            # Get the argument of each term
+            argument = [term.args[1].args[0] for term in terms][0]
+            new_condition = sp.Eq(C_2, C_1*sp.tanh(argument), evaluate=False)
+            ans = [new_condition] # Set the ratio as a condition, rewriteing the previous conditions
+            print(f"New condition is {new_condition}")
+            
+    elif limit == 0: # If limit is zero by itself, :D
+        print(f"Flux goes to zero at x = {boundary} for any value of the constants")
+    else: # If limit is finite, it should be zero
+        print(f"Flux goes to {limit} at x = {boundary}")
+        new_condition = sp.Eq(limit, 0, evaluate=False)
+        ans.append(new_condition)       
 
     return ans

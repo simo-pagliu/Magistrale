@@ -1,20 +1,48 @@
 import sympy as sp
+
 ############################################################################################################
 # Function to apply interface boundary conditions
 ############################################################################################################
-def interface_boundary_conditions(flux1, flux2, x, D, F, N, A, region1, region2):
-    # Continuity of flux
-    flux_1 = flux1.rhs.subs(x, region1.End)
-    flux_1 = flux_1.subs({D: region1.Diffusion, A: region1.Absorption, F: region1.Fission, N: region1.Nu})
-    flux_2 = flux2.rhs.subs(x, region2.Start)
-    flux_2 = flux_2.subs({D: region2.Diffusion, A: region2.Absorption, F: region2.Fission, N: region2.Nu})
-    continuity_flux = sp.Eq(flux_1, flux_2)
+def interface_boundary_conditions(flux_left, flux_right, x, region_left, region_right, all_regions):
+    # Define the region-specific variables for the left region
+    i_left = all_regions.index(region_left)
+    D_left = sp.symbols(f'D_{i_left+1}', positive=True)
+    F_left = sp.symbols(f'F_{i_left+1}', positive=True)
+    A_left = sp.symbols(f'A_{i_left+1}', positive=True)
+    N_left = sp.symbols(f'N_{i_left+1}', positive=True)
+    B_left = sp.symbols(f'Bg_{i_left+1}', positive=True)
 
-    # Continuity of current
-    current_1 = -region1.Diffusion * sp.diff(flux1.rhs, x).subs(x, region1.End)
-    current_1 = current_1.subs({D: region1.Diffusion, A: region1.Absorption, F: region1.Fission, N: region1.Nu})
-    current_2 = -region2.Diffusion * sp.diff(flux2.rhs, x).subs(x, region2.Start)
-    current_2 = current_2.subs({D: region2.Diffusion, A: region2.Absorption, F: region2.Fission, N: region2.Nu})
-    continuity_curr = sp.Eq(current_1, current_2)
+    # Define the region-specific variables for the right region
+    i_right = all_regions.index(region_right)
+    D_right = sp.symbols(f'D_{i_right+1}', positive=True)
+    F_right = sp.symbols(f'F_{i_right+1}', positive=True)
+    A_right = sp.symbols(f'A_{i_right+1}', positive=True)
+    N_right = sp.symbols(f'N_{i_right+1}', positive=True)
+    B_right = sp.symbols(f'Bg_{i_right+1}', positive=True)
 
-    return [continuity_flux, continuity_curr]
+    ans = []
+    
+    # Create a new variabel to indicate the point of the interface
+    interface = sp.symbols(f'x_{i_left+1}', positive=True) # The interface is at the end of the left region
+    
+    # Continuity of flux at the interface
+    
+    flux_at_left = flux_left.rhs.subs(x, interface)
+    flux_at_right = flux_right.rhs.subs(x, interface)
+
+    continuity_flux = sp.Eq(flux_at_left, flux_at_right)
+    ans.append(continuity_flux)
+    
+    if region_left.Composition == 'r' or region_right.Composition == 'r':
+        # Continuity of current at the interface
+        current_left = -D_left * sp.diff(flux_left.rhs, x).subs(x, region_left.End)
+        current_right = -D_right * sp.diff(flux_right.rhs, x).subs(x, region_right.Start)
+        
+        # Alt: partial currents
+        # current_left = flux_left.rhs / 4 + D_left/2 * sp.diff(flux_left.rhs, x).subs(x, interface)
+        # current_right = flux_right.rhs / 4 - D_right/2 * sp.diff(flux_right.rhs, x).subs(x, interface)
+
+        continuity_curr = sp.Eq(current_left, current_right)
+        ans.append(continuity_curr)
+
+    return ans
