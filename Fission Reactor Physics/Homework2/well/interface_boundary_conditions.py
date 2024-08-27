@@ -23,7 +23,7 @@ def interface_boundary_conditions(flux_left, flux_right, x, region_left, region_
     ans = []
     
     # Create a new variabel to indicate the point of the interface
-    interface = sp.symbols(f'x_{i_left+1}', positive=True) # The interface is at the end of the left region
+    interface = sp.symbols(f'x_{i_left+1}', real=True) # The interface is at the end of the left region
     
     # Continuity of flux at the interface
     

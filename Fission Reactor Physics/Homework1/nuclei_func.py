@@ -196,6 +196,6 @@ def six_factors(compounds, densities, materials, volumes):
     # Compute the parameters for the 6 factor formula
     ############################################################################################################
     
-    eta = mixture(Macro_Fission_Nu, fractions, 'silent') / mixture(Macro_Absorption, fractions, 'silent')
+    eta = mixture(Macro_Fission_Nu, fractions, 'silent') / mixture(Macro_Absorption, fractions_fuel, 'silent')
     f = mixture(Macro_Absorption, fractions_fuel, 'silent') / mixture(Macro_Absorption, fractions, 'silent')
     return eta, f

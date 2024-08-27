@@ -4,7 +4,7 @@ import sympy as sp
 ############################################################################################################
 # Function to apply boundary condition for outer regions
 ############################################################################################################
-def outer_boundary_conditions(flux, x, region, all_regions):
+def outer_boundary_conditions(flux, x, region, all_regions, Symmetric):
     # Define the region-specific variables
     i = all_regions.index(region)
     D_i = sp.symbols(f'D_{i+1}', positive=True)
@@ -13,19 +13,37 @@ def outer_boundary_conditions(flux, x, region, all_regions):
     N_i = sp.symbols(f'N_{i+1}', positive=True)
     B_i = sp.symbols(f'Bg_{i+1}', positive=True)
     L_i = sp.symbols(f'L_{i+1}', positive=True)
+
+    ans = []
     
     # Get the correct boundary
-    start_present = False
     for other_region in all_regions:
         if other_region != region:
-            if region.Start in [other_region.Start, other_region.End]:
-                start_present = True
-    
-    if not start_present:
-        boundary = region.Start
-    else:
-        boundary = region.End
 
+            # First check the end of the region
+            if not region.End in [other_region.Start, other_region.End]:
+                boundary = region.End
+                temp = evaluate_boundary(flux, x, region, i, D_i, F_i, A_i, N_i, B_i, L_i, boundary)  
+                for condition in temp:
+                    ans.append(condition)
+
+            # Then before checking the start verify if the region is symmetric
+            if region.Start == 0 and Symmetric == True:
+                print(f"Region {i+1} is symmetric")
+                # In this case the condition on 0 is just the derivative@0 = 0
+                symmetry_conditions = sp.Eq(sp.diff(flux.rhs, x).subs(x, 0), 0, evaluate=False)
+                ans.append(symmetry_conditions)
+            
+            # If it didn't fall into the first case, check if the start of the region si a boundary
+            elif not region.Start in [other_region.Start, other_region.End]:
+                boundary = region.Start # This means that it is not an interface 
+                temp = evaluate_boundary(flux, x, region, i, D_i, F_i, A_i, N_i, B_i, L_i, boundary)  
+                for condition in temp:
+                    ans.append(condition)
+
+    return ans
+
+def evaluate_boundary(flux, x, region, i, D_i, F_i, A_i, N_i, B_i, L_i, boundary):
     Extrapolation_Length = abs(boundary) + 0.7/region.Diffusion  
     sign = np.sign(boundary)
     ans = []
@@ -71,6 +89,5 @@ def outer_boundary_conditions(flux, x, region, all_regions):
     else: # If limit is finite, it should be zero
         print(f"Flux goes to {limit} at x = {boundary}")
         new_condition = sp.Eq(limit, 0, evaluate=False)
-        ans.append(new_condition)       
-
+        ans.append(new_condition)
     return ans
