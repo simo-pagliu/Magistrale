@@ -33,8 +33,13 @@ def define_diffusion_equations(regions, x):
 
         if region.Composition == 'h':
             print(f"Region {i+1} has sinh and cosh")
-            C1, C2 = sp.symbols(f'C_{i*2+1} C_{i*2+2}', function=True)
-            flux_sol = sp.Eq(Flux, C1*sp.sinh(-x/L_i) + C2*sp.cosh(-x/L_i))
+            C1, C2 = sp.symbols(f'C_{i*2+1} C_{i*2+2}', real=True)
+            flux_sol = sp.Eq(Flux, C1*sp.sinh(x/L_i) + C2*sp.cosh(x/L_i))
+        
+        if region.Composition == 'h' and region.Fission > 0:
+            print(f"Region {i+1} has sinh and cosh and has fissions")
+            C1, C2 = sp.symbols(f'C_{i*2+1} C_{i*2+2}', real=True)
+            flux_sol = sp.Eq(Flux, C1*sp.sinh(B_i * x) + C2*sp.cosh(B_i * x))
 
         # Translate the solution to the correct position
         if region.Start == -sp.oo:

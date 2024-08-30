@@ -19,9 +19,10 @@ def outer_boundary_conditions(flux, x, region, all_regions, Symmetric):
     # Get the correct boundary
     for other_region in all_regions:
         if other_region != region:
-
+            if isinstance(region.End, sp.Symbol) or isinstance(other_region.Start, sp.Symbol): #TO FIX
+                pass
             # First check the end of the region
-            if not region.End in [other_region.Start, other_region.End]:
+            elif not region.End in [other_region.Start, other_region.End]:
                 boundary = region.End
                 temp = evaluate_boundary(flux, x, region, i, D_i, F_i, A_i, N_i, B_i, L_i, boundary)  
                 for condition in temp:
@@ -57,6 +58,11 @@ def evaluate_boundary(flux, x, region, i, D_i, F_i, A_i, N_i, B_i, L_i, boundary
     limit = sp.limit(flux.rhs, x, sign * Extrapolation_Length) # Evaluate the limit at the extrapolation length
     infinity_terms = 0 # Count the number of terms that go to infinity
     
+    known_symbols = {x, D_i, F_i, N_i, A_i, B_i, L_i}
+    for prop in vars(region).values():
+        if isinstance(prop, sp.Basic):
+            known_symbols.update(prop.free_symbols)
+
     # If limit goes to infinity
     if limit.has(sp.oo) or limit.has(-sp.oo):
         # Evaluate each term
@@ -64,7 +70,7 @@ def evaluate_boundary(flux, x, region, i, D_i, F_i, A_i, N_i, B_i, L_i, boundary
             limit_term = sp.limit(term, x, sign * Extrapolation_Length)
             # And set to 0 those that go to infinity
             if limit_term.has(sp.oo):
-                known_symbols = {x, D_i, F_i, N_i, A_i, B_i, L_i}
+                # known_symbols = {x, D_i, F_i, N_i, A_i, B_i, L_i}
                 term_symbols = term.free_symbols
                 constant = list(term_symbols - known_symbols)[0]  
                 print(f"Term {term} has infinity at x = {boundary}")

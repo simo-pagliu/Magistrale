@@ -42,7 +42,8 @@ def mixture(quantity, quality, normalization_cond='no_normalize'):
         elif normalization_cond == 'silent':
             pass
     #calculate the macroscopic cross section of the mixture
-    mixture_val = sum([quantity[i]*quality[i] for i in range(len(quantity))])
+    temp = [quantity[i]*quality[i] for i in range(len(quantity))]
+    mixture_val = sum(temp)
     return mixture_val
 
 ############################################################################################################
@@ -121,7 +122,7 @@ def compute_k(materials):
     ############################################################################################################
     # Multiplication factor K_inf
     ############################################################################################################
-    eta = mixture(Nu_Sigma_fiss, weight_fractions, 'silent') / mixture(Macro_abs, weight_fractions, 'silent')
+    eta = mixture(Nu_Sigma_fiss, weight_fractions, 'silent') / mixture(Macro_abs, weight_fractions_fuel, 'silent')
     f = mixture(Macro_abs, weight_fractions_fuel, 'silent') / mixture(Macro_abs, weight_fractions, 'silent')
     p = 1 #non-leakage probability
     epsilon = 1
@@ -159,43 +160,39 @@ def six_factors(compounds, densities, materials, volumes):
                     atom_fractions.append(component['atom_fraction'])
                     molar_masses.append(material['molar_mass'])
                     break
-        
         # Macroscopic cross sections for each element in the compound, using compound density
         macroscopic_sigma_f = [macro(sigma_f_list[jj], densities[ii], molar_masses[jj]) for jj in np.arange(len(sigma_f_list))]
         macroscopic_sigma_a = [macro(sigma_a_list[jj], densities[ii], molar_masses[jj]) for jj in np.arange(len(sigma_a_list))]
         nu_macro_f = [nu_list[jj] * macroscopic_sigma_f[jj] for jj in np.arange(len(nu_list))]
         
-        # Atom to weight fractions
-        fractions = mol2w(atom_fractions, molar_masses)
-        
         # Overall Macroscopic cross sections for the compound
-        macroscopic_sigma_f = mixture(macroscopic_sigma_f, fractions, 'silent')
-        macroscopic_sigma_a = mixture(macroscopic_sigma_a, fractions, 'silent')
-        nu_f = mixture(nu_macro_f, fractions, 'silent')
+        macroscopic_sigma_f = mixture(macroscopic_sigma_f, atom_fractions, 'silent')
+        macroscopic_sigma_a = mixture(macroscopic_sigma_a, atom_fractions, 'silent')
+        nu_f = mixture(nu_macro_f, atom_fractions, 'silent')
 
         # Append the values to the lists
         Macro_Fission.append(macroscopic_sigma_f)
         Macro_Absorption.append(macroscopic_sigma_a)
         Macro_Fission_Nu.append(nu_f)
-    
-    # Compute fraction of each compound in the core
-    tot_vol = sum(volumes)
-    vol_fractions = [volume / tot_vol for volume in volumes]
 
-    # Convert into weight fractions
-    fractions = vol2w(vol_fractions, densities)
-    
-    # Fractions for the fuel only
-    # This could be done in a fancier way by adding a flag to each component 
-    # but since it's only one we are going to use
-    # as a convention that the last is the moderator or coolant
-    fractions_fuel = fractions[:-1] # Remove the moderator/coolant
-    fractions_fuel.append(0) # Add a zero for moderator/coolant
+        print("\n")
 
     ############################################################################################################
     # Compute the parameters for the 6 factor formula
     ############################################################################################################
-    
-    eta = mixture(Macro_Fission_Nu, fractions, 'silent') / mixture(Macro_Absorption, fractions, 'silent')
-    f = mixture(Macro_Absorption, fractions_fuel, 'silent') / mixture(Macro_Absorption, fractions, 'silent')
+    # When we have to use fractions for the fuel only we get rid of the last value
+    # This could be done in a fancier way by adding a flag to each component 
+    # but since it's only one we are going to use
+    # as a convention that the last is the moderator or coolant
+
+    # Compute fraction of each compound in the core
+    tot_vol = sum(volumes)
+    vol_fractions = [volume / tot_vol for volume in volumes]
+    print("vol_fractions", vol_fractions)
+
+    # Convert into weight fractions
+    fractions = vol_fractions #vol2w(vol_fractions, densities)
+
+    eta = sum([Macro_Fission_Nu[ii]/Macro_Absorption[ii] for ii in np.arange(len(Macro_Fission_Nu)-1)])
+    f = mixture(Macro_Absorption[:-1], fractions[:-1], 'silent') / mixture(Macro_Absorption, fractions, 'silent')
     return eta, f

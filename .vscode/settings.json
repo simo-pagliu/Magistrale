@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./Fission Reactor Physics/Homework2/Finali"
+    ]
+}

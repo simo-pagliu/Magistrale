@@ -19,18 +19,17 @@ class Region:
             self.Power = power  # Power of the region
             self.Symmetry = sym # To which region is this symmetric to (0 if not symmetric)
 
-def compute(fluxes, boundaries, interfaces, powers, regions):
+def compute(simplified_equations, regions):
     import re
     ############################################################################################################
     # Substitute all known values: region.Diffusion, region.Absorption, region.Fission, region.Nu, etc
     ############################################################################################################
-    simplified_equations = fluxes + boundaries + interfaces + powers
 
     # Identify zero constants
     integration_constant_pattern = re.compile(r'C_\d+')
     zero_constants = []
-    for eq in boundaries + interfaces:
-        if eq.rhs == 0 and 'x' not in str(eq.lhs):
+    for eq in simplified_equations:
+        if eq.rhs == 0 and 'x' not in str(eq.lhs) and sp.count_ops(eq.lhs) <= 1:
             # Check if the LHS contains any integration constants
             temp = integration_constant_pattern.findall(str(eq.lhs))
             print(f"Zero constant found in {eq} is {temp}")
@@ -48,15 +47,15 @@ def compute(fluxes, boundaries, interfaces, powers, regions):
         x_i = sp.symbols(f'x_{i+1}', real=True) # The interface is at the end of the left region
 
         # Calculate the value of B_i for the region
-        B_val = sp.sqrt((region.Nu * region.Fission - region.Absorption) / region.Diffusion)
-        print(f"Region {i+1} has B = {B_val}")
-        L_val = sp.sqrt((region.Diffusion / region.Absorption))
+        # B_val = 0.05624 #sp.sqrt((region.Nu * region.Fission - region.Absorption) / region.Diffusion)
+        # print(f"Region {i+1} has B = {B_val}")
+        # L_val = sp.sqrt((region.Diffusion / region.Absorption))
         x_i_val = region.End
 
         # Define the substitution dictionary
         substitution_dict = {
-            L_i: L_val,
-            B_i: B_val,
+            #L_i: L_val,
+            #B_i: B_val,
             D_i: region.Diffusion,
             A_i: region.Absorption,
             F_i: region.Fission,

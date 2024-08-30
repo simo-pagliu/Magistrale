@@ -33,16 +33,10 @@ def interface_boundary_conditions(flux_left, flux_right, x, region_left, region_
     continuity_flux = sp.Eq(flux_at_left, flux_at_right)
     ans.append(continuity_flux)
     
-    if region_left.Composition == 'r' or region_right.Composition == 'r':
-        # Continuity of current at the interface
-        current_left = -D_left * sp.diff(flux_left.rhs, x).subs(x, region_left.End)
-        current_right = -D_right * sp.diff(flux_right.rhs, x).subs(x, region_right.Start)
-        
-        # Alt: partial currents
-        # current_left = flux_left.rhs / 4 + D_left/2 * sp.diff(flux_left.rhs, x).subs(x, interface)
-        # current_right = flux_right.rhs / 4 - D_right/2 * sp.diff(flux_right.rhs, x).subs(x, interface)
+    current_left = -D_left * sp.diff(flux_left.rhs, x).subs(x, interface)
+    current_right = -D_right * sp.diff(flux_right.rhs, x).subs(x, interface)
 
-        continuity_curr = sp.Eq(current_left, current_right)
-        ans.append(continuity_curr)
+    continuity_curr = sp.Eq(current_left, current_right)
+    ans.append(continuity_curr)
 
     return ans

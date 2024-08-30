@@ -17,7 +17,6 @@ import csv
 # for this one we an use sympy to solve the system of equations
 # Data:
 mass_U = 1e8 #t --> g
-density_U = 19.1 #g/cm^3
 molar_mass_U = 235 #g/mol
 enrichment = 0.02
 thermal_power = 3e9 #GW --> W
@@ -28,14 +27,17 @@ half_life_Nd = 1.73*3600 #h --> s
 half_life_Pm = 53.1*3600 #h --> s
 sigma_abs_Sm = 42000e-24 #b
 N_a = 6.022e23 # Avogadro's number
+density_U = mass_U*enrichment*(N_a/molar_mass_U)
 
 ############################################################################################################
-# Compute the fission rate and the flux
+# Compute the reaction rate
 ############################################################################################################
-density_U = mass_U*enrichment*(N_a/molar_mass_U)
+
+# neutron flux
 flux=thermal_power/(sigma_f*energy_fission*density_U)
 Sigma_fiss_U = sigma_f * density_U
-fission_rate=sigma_f*density_U*flux
+print("Flux", flux)
+rate_fission=sigma_f*density_U*flux
 
 ############################################################################################################
 # Ask if you want to solve the system or if you want to use a previously solved system and just plot 
@@ -60,17 +62,17 @@ decay_Pm = np.log(2)/half_life_Pm
 t = sp.symbols('t', positive=True, real=True)
 
 # Concentrations - function of time
-# Ur = sp.Function('Ur')(t)
+Ur = sp.Function('Ur')(t)
 Nd = sp.Function('Nd')(t)
 Pm = sp.Function('Pm')(t)
 Sm = sp.Function('Sm')(t)
-funs = [Nd, Pm, Sm]
+funs = [Ur, Nd, Pm, Sm]
 
 # Differential Equations
-# eq_U = sp.Eq(sp.diff(Ur,t), - sigma_f * flux * Ur)
-# eq_U_off = sp.Eq(sp.diff(Ur,t), 0)
+eq_U = sp.Eq(sp.diff(Ur,t), rate_fission)
+eq_U_off = sp.Eq(sp.diff(Ur,t), 0)
 
-eq_Nd = sp.Eq(sp.diff(Nd,t), fission_rate * branching_ratio_Nd - decay_Nd * Nd)
+eq_Nd = sp.Eq(sp.diff(Nd,t), rate_fission * branching_ratio_Nd - decay_Nd * Nd)
 eq_Nd_off = sp.Eq(sp.diff(Nd,t), - decay_Nd * Nd)
 
 eq_Pm = sp.Eq(sp.diff(Pm,t), decay_Nd * Nd - decay_Pm * Pm)
@@ -78,12 +80,12 @@ eq_Pm = sp.Eq(sp.diff(Pm,t), decay_Nd * Nd - decay_Pm * Pm)
 eq_Sm = sp.Eq(sp.diff(Sm,t), decay_Pm * Pm - flux * sigma_abs_Sm * Sm)
 eq_Sm_off = sp.Eq(sp.diff(Sm,t), decay_Pm * Pm)
 
-system = [eq_Nd, eq_Pm, eq_Sm]
-system_off = [eq_Nd_off, eq_Pm, eq_Sm_off]
+system = [eq_U, eq_Nd, eq_Pm, eq_Sm]
+system_off = [eq_U_off, eq_Nd_off, eq_Pm, eq_Sm_off]
 
 # Initialising solution vectors with initial conditions
-U_initial = mass_U* N_a / molar_mass_U
-solution = [[0], [0], [0]]
+U_initial = mass_U * enrichment * N_a / molar_mass_U
+solution = [[U_initial], [0], [0], [0]]
 time = [0]
 ############################################################################################################
 # Function to solve the system
@@ -93,7 +95,7 @@ def solving(days, system):
     step = 1000
     t_vals = np.geomspace(0.0001, days*24*3600, num=days*step)
     # initial conditions
-    init = {Nd.subs(t,0): solution[0][-1], Pm.subs(t,0): solution[1][-1], Sm.subs(t,0): solution[2][-1]}
+    init = {Ur.subs(t,0): solution[0][-1], Nd.subs(t,0): solution[1][-1], Pm.subs(t,0): solution[2][-1], Sm.subs(t,0): solution[3][-1]}
     print(init)
 
     # Solve the system
@@ -102,12 +104,13 @@ def solving(days, system):
     print("Solution", sol)
 
     # Evaluate solutions at the time interval
-    Nd_temp = [sol[0].rhs.subs(t, t_val) if sol[0].rhs.subs(t, t_val) >= 0 else 0 for t_val in t_vals]
-    Pm_temp = [sol[1].rhs.subs(t, t_val) if sol[1].rhs.subs(t, t_val) >= 0 else 0 for t_val in t_vals]
-    Sm_temp = [sol[2].rhs.subs(t, t_val) if sol[2].rhs.subs(t, t_val) >= 0 else 0 for t_val in t_vals]
+    Ur_temp = [sol[0].rhs.subs(t, t_val) if sol[0].rhs.subs(t, t_val) >= 0 else 0 for t_val in t_vals]
+    Nd_temp = [sol[1].rhs.subs(t, t_val) if sol[1].rhs.subs(t, t_val) >= 0 else 0 for t_val in t_vals]
+    Pm_temp = [sol[2].rhs.subs(t, t_val) if sol[2].rhs.subs(t, t_val) >= 0 else 0 for t_val in t_vals]
+    Sm_temp = [sol[3].rhs.subs(t, t_val) if sol[3].rhs.subs(t, t_val) >= 0 else 0 for t_val in t_vals]
 
     # Add to the list U_sol the values of U_temp
-    return solution[0].extend(Nd_temp), solution[1].extend(Pm_temp), solution[2].extend(Sm_temp), time.extend(t_vals + time[-1])
+    return solution[0].extend(Ur_temp), solution[1].extend(Nd_temp), solution[2].extend(Pm_temp), solution[3].extend(Sm_temp), time.extend(t_vals + time[-1])
 
 ############################################################################################################
 # Solve the system
@@ -124,9 +127,10 @@ csv_file_path = "./Fission Reactor Physics/Homework1/Sol_9.csv"
 
 data = {
     "Time [s]": time,
-    "Nd-140 [atoms]": solution[0],
-    "Pm-149 [atoms]": solution[1],
-    "Sm-149 [atoms]": solution[2]
+    "U-235 [atoms]": solution[0],
+    "Nd-140 [atoms]": solution[1],
+    "Pm-149 [atoms]": solution[2],
+    "Sm-149 [atoms]": solution[3]
 }
 
 # Save the data to a csv file
