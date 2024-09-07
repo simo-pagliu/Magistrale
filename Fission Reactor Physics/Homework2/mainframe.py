@@ -65,8 +65,8 @@ def compute(simplified_equations, regions):
 
         # Integration constants
         if region.Composition == 'h':
-            C_1 = sp.symbols(f'C_{i*2+1}', function=True)
-            C_2 = sp.symbols(f'C_{i*2+2}', function=True)
+            C_1 = sp.symbols(f'C_{i*2+1}', real=True)
+            C_2 = sp.symbols(f'C_{i*2+2}', real=True)
         else:
             C_1 = sp.symbols(f'C_{i*2+1}', real=True)
             C_2 = sp.symbols(f'C_{i*2+2}', real=True)
