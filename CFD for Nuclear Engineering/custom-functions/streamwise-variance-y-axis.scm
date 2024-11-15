@@ -1,0 +1,4 @@
+(custom-field-function/define
+ '(((name friction-velocity) (display "sqrt (y-wall-shear / density)") (syntax-tree ("sqrt" ("/" "y-wall-shear" "density"))) (code (field-sqrt (field-/ (field-load "y-wall-shear") (field-load "density")))))
+   ((name streamwise-var-y) (display " - (0.09 * turb-kinetic-energy ^ 2 / turb-diss-rate * 2 * dy-velocity-dy - 2 / 3 * turb-kinetic-energy)") (syntax-tree ("-" ("-" ("*" ("*" ("/" ("*" 0.09 ("**" "turb-kinetic-energy" 2)) "turb-diss-rate") 2) "dy-velocity-dy") ("*" 0.6666666666666666 "turb-kinetic-energy")))) (code (field-- (field-- (field-* (field-* (field-/ (field-* 0.09 (field-** (field-load "turb-kinetic-energy") 2)) (field-load "turb-diss-rate")) 2) (field-load "dy-velocity-dy")) (field-* 0.6666666666666666 (field-load "turb-kinetic-energy"))))))
+   ))
