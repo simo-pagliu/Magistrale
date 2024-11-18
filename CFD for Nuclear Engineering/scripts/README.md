@@ -4,6 +4,50 @@
 This project includes scripts for fluid flow calculations, mixing temperature calculations, and data conversions from ANSYS Fluent `.xy` files. Each script is documented below with usage instructions and function descriptions.
 
 ---
+## Wall_Shear_Calculator.py
+
+This script calculates the wall shear stress, friction velocity, and characteristic y-value based on user inputs for friction factor, velocity, density, and viscosity.
+Usage
+
+To run the script, use the following command:
+
+```bash
+py Wall_Shear_Calculator.py
+```
+
+The script will guide you through entering properties interactively. Default values are provided for y+, density, and viscosity, but friction factor and velocity must be specified.
+Logging
+
+Each run of the script logs the input parameters, intermediate calculations, and results to wall_shear_log.txt.
+
+#### Example
+```bash
+Enter y+ limit (default 1): 
+Enter friction factor: 0.005
+Enter velocity (m/s): 10
+Enter density (kg/m³, default air: 1.225): 
+Enter viscosity (kg/m·s, default air: 1.789e-5): 
+
+Results:
+Wall shear stress: 0.00765 Pa
+Friction velocity: 0.07802 m/s
+y: 0.00182 m
+
+Calculation log saved to 'wall_shear_log.txt'.
+```
+
+#### Function Documentation
+
+ -   **`get_input(prompt, allow_empty=False, default=None)`**
+      - **Description**: Helper function to get validated user input with optional default values.
+      - **Parameters**:
+          - `prompt` (str): Prompt message for the user.
+          - `allow_empty` (bool): Whether to allow empty input.
+          - `default` (any): Default value if the user presses Enter.
+
+    **calculate_wall_shear_y()**
+        **Description**: Main function to calculate wall shear stress, friction velocity, and y.
+
 
 ## XY_convert.py
 
