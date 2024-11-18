@@ -15,16 +15,19 @@ def get_input(prompt, allow_empty=False, default=None):
 
 def calculate_wall_shear_y():
     """
-    Calculate the wall shear stress, friction velocity, and characteristic y-value
-    based on user inputs for y+, friction factor, velocity, density, and viscosity.
+    Calculate the wall shear stress, friction velocity, and characteristic y_lower-value
+    based on user inputs for y_lower+, friction factor, velocity, density, and viscosity.
     """
     log = []  # List to accumulate log entries
     log.append(f"=== Wall Shear Stress Calculation Log ===")
     log.append(f"Date & Time: {datetime.now()}\n")
 
     # Interactive inputs
-    y_plus = get_input("Enter y+ limit (default 1): ", allow_empty=True, default=1)
-    log.append(f"y+ limit: {y_plus}")
+    y_plus_lower = get_input("Enter y+ lower limit (default 1): ", allow_empty=True, default=1)
+    log.append(f"y+ lower limit: {y_plus_lower}")
+
+    y_plus_upper = get_input("Enter y+ upper limit (default 500): ", allow_empty=True, default=1)
+    log.append(f"y+ upper limit: {y_plus_upper}")
 
     friction_factor = get_input("Enter friction factor: ")
     log.append(f"Friction factor: {friction_factor}")
@@ -41,17 +44,22 @@ def calculate_wall_shear_y():
     # Calculations
     wall_shear_stress = 1/2 * friction_factor / 4 * density * velocity**2
     friction_velocity = (wall_shear_stress / density)**0.5
-    y = ((y_plus * viscosity) / (density * friction_velocity) ) * 1000 # Convert to mm
+    y_lower = ((y_plus_lower * viscosity) / (density * friction_velocity) ) * 1000 # Convert to mm
+    y_upper = ((y_plus_upper * viscosity) / (density * friction_velocity) ) * 1000 # Convert to mm
 
     # Results
     log.append(f"Wall shear stress: {wall_shear_stress:.5f} Pa")
     log.append(f"Friction velocity: {friction_velocity:.5f} m/s")
-    log.append(f"Characteristic y: {y:.5f} mm")
+    log.append(f"Lower y limit (center of the cell): {y_lower:.5f} mm")
+    log.append(f"Upper y limit (center of the cell): {y_upper:.5f} mm")
+
 
     print("\nResults:")
     print(f"Wall shear stress: {wall_shear_stress:.5f} Pa")
     print(f"Friction velocity: {friction_velocity:.5f} m/s")
-    print(f"y: {y:.5f} mm")
+    print(f"Lower y limit (center of the cell): {y_lower:.5f} mm")
+    print(f"Upper y limit (center of the cell): {y_upper:.5f} mm")
+
 
     # Save log to file
     with open("wall_shear_log.txt", "a") as log_file:
