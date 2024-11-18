@@ -33,7 +33,7 @@ def compute_missing_values():
     log.append(f"Wetted perimeter: {Wetted_perimeter} m")
 
     # Derived geometric quantity
-    hydraulic_diameter = Area / Wetted_perimeter
+    hydraulic_diameter = 4 * Area / Wetted_perimeter
     log.append(f"Hydraulic diameter (Dh): {hydraulic_diameter} m")
 
     # Inputs for the computation
