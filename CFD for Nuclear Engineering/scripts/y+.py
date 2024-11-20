@@ -19,14 +19,14 @@ def calculate_wall_shear_y():
     based on user inputs for y_lower+, friction factor, velocity, density, and viscosity.
     """
     log = []  # List to accumulate log entries
-    log.append(f"=== Wall Shear Stress Calculation Log ===")
+    log.append(f"=== Boundary Layer Dimensions Based on y+ ===")
     log.append(f"Date & Time: {datetime.now()}\n")
 
     # Interactive inputs
     y_plus_lower = get_input("Enter y+ lower limit (default 1): ", allow_empty=True, default=1)
     log.append(f"y+ lower limit: {y_plus_lower}")
 
-    y_plus_upper = get_input("Enter y+ upper limit (default 500): ", allow_empty=True, default=1)
+    y_plus_upper = get_input("Enter y+ upper limit (default 500): ", allow_empty=True, default=500)
     log.append(f"y+ upper limit: {y_plus_upper}")
 
     friction_factor = get_input("Enter friction factor: ")
@@ -67,5 +67,5 @@ def calculate_wall_shear_y():
     print("\nCalculation log saved to 'wall_shear_log.txt'.")
 
 if __name__ == "__main__":
-    print("=== Wall Shear Calculator ===")
+    print("=== Boundary Layer Dimensions Based on y+ ===")
     calculate_wall_shear_y()
