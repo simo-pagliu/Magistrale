@@ -1,0 +1,28 @@
+=== Wall Shear Stress Calculation Log ===
+Date & Time: 2024-11-19 14:09:19.939332
+
+y+ lower limit: 1
+y+ upper limit: 1
+Friction factor: 0.013
+Velocity: 38.97 m/s
+Density: 1.225 kg/m³
+Viscosity: 1.789e-05 kg/m·s
+Wall shear stress: 3.02308 Pa
+Friction velocity: 1.57093 m/s
+Lower y limit (center of the cell): 0.00930 mm
+Upper y limit (center of the cell): 0.00930 mm
+
+=== Wall Shear Stress Calculation Log ===
+Date & Time: 2024-11-19 14:10:52.076252
+
+y+ lower limit: 1
+y+ upper limit: 500
+Friction factor: 0.013
+Velocity: 38.96 m/s
+Density: 1.225 kg/m³
+Viscosity: 1.789e-05 kg/m·s
+Wall shear stress: 3.02153 Pa
+Friction velocity: 1.57053 m/s
+Lower y limit (center of the cell): 0.00930 mm
+Upper y limit (center of the cell): 4.64942 mm
+
