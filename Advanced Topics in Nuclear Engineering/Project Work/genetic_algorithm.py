@@ -3,9 +3,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import json
 import time
+import os
 import struct
 import pandas as pd  # To store results in a DataFrame for easy comparison
 from concurrent.futures import ProcessPoolExecutor, as_completed
+
+# Set working directory to the location of this script
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 ################################################################################
 # FITNESS FUNCTION
