@@ -6,7 +6,8 @@ import numpy as np
 
 # Some general data from the CFD simulation
 v_bulk = 0.292
-half_width = 1
+width = 2
+rho = 1.225  # kg/m^3, air density at sea level
 
 # Load CSV file
 # Normalized cross-stream velocity data
@@ -22,7 +23,7 @@ x_05_fluent, y_05_fluent = load_xy_data('CFD for Nuclear Engineering/Lab_07-NLEV
 # x_05_fluent = x_05_fluent[:len(x_05_fluent)//2]
 # y_05_fluent = y_05_fluent[:len(y_05_fluent)//2]
 # Normalize
-x_05_fluent = (-np.array(x_05_fluent) + half_width) / half_width # Normalize to the half-width of the channel
+x_05_fluent = (-np.array(x_05_fluent) + width) / width # Normalize to the half-width of the channel
 y_05_fluent = np.array(y_05_fluent) / v_bulk # Normalize to the bulk velocity
 
 data = np.genfromtxt('CFD for Nuclear Engineering/Lab_07-NLEVM/plot-data_minus075.csv', delimiter=',', skip_header=1)
@@ -33,7 +34,7 @@ x_075_fluent, y_075_fluent = load_xy_data('CFD for Nuclear Engineering/Lab_07-NL
 # x_075_fluent = x_075_fluent[:len(x_075_fluent)//2]
 # y_075_fluent = y_075_fluent[:len(y_075_fluent)//2]
 # Normalize
-x_075_fluent = (-np.array(x_075_fluent) + half_width)/half_width # Normalize to the half-width of the channel
+x_075_fluent = (-np.array(x_075_fluent) + width)/width # Normalize to the half-width of the channel
 y_075_fluent = np.array(y_075_fluent) / v_bulk # Normalize to the bulk velocity
 
 # Wall shear stress normalized over density * bulk velocity ^2
@@ -42,7 +43,8 @@ data = np.genfromtxt('CFD for Nuclear Engineering/Lab_07-NLEVM/plot-data.csv', d
 x_tau, y_tau = data[:, 0], data[:, 1]
 # CFD data from Fluent
 x_tau_fluent, y_tau_fluent = load_xy_data('CFD for Nuclear Engineering/Lab_07-NLEVM/wall_shear')
-x_tau_fluent = np.array(x_tau_fluent) - half_width  
+x_tau_fluent = np.array(x_tau_fluent) - width /2
+y_tau_fluent = np.array(y_tau_fluent) / (rho * v_bulk ** 2)  # Normalize to rho * U^2 
 
 
 
