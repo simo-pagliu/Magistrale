@@ -210,7 +210,7 @@ def GA_loop(max_iterations, initial_population_size, probability_of_crossover,
               probability_of_mutation, tournament_fraction,
               selection, crossover, mutation,
               plot_enabled, load_previous, save_enabled, print_result, log):
-    
+    import time
     # Initialization
     if load_previous:
         population, avg_fitness_history = load_state()
@@ -232,6 +232,7 @@ def GA_loop(max_iterations, initial_population_size, probability_of_crossover,
             
     # Main loop
     converged = False
+    time_start = time.time()
     for iteration in range(max_iterations):
         tournament_size = max(2, int(tournament_fraction * len(population)))
         population = selection(population, tournament_size)
@@ -279,6 +280,7 @@ def GA_loop(max_iterations, initial_population_size, probability_of_crossover,
     best_solution = min(population, key=lambda x: styblinski_tang(x[0], x[1]))
     best_fitness = styblinski_tang(best_solution[0], best_solution[1])
     
+    exe_time = time.time() - time_start
     # Closing plot if enabled
     if plot_enabled:
         plt.ioff()
@@ -302,7 +304,8 @@ def GA_loop(max_iterations, initial_population_size, probability_of_crossover,
             method = f"{selections} - {crossovers} - {mutations}"
             stats = f"I: {max_iterations}, Pop: {initial_population_size}, P_CS: {probability_of_crossover}, P_M: {probability_of_mutation}, P_S: {tournament_fraction}" 
             results = f"Result: {best_fitness} @ x: {best_solution[0]} y: {best_solution[1]}"
-            f.write(f"{method}, {stats}, {results}, {convergence_string}\n")
+            time = f"Time: {exe_time}"
+            f.write(f"{method}, {stats}, {results}, {convergence_string}, {time}\n")
         print(f"Results logged in {log_file}")
 
     # Return performance metrics
@@ -317,7 +320,6 @@ def run_ga(params):
     population, max_iter, crossover_prob, mutation_prob, tournament_frac, selection, crossover, mutation = params
 
     # Start execution time tracking
-    import time
     start_time = time.time()
 
     # Run the Genetic Algorithm
@@ -348,7 +350,7 @@ def run_ga(params):
 ################################################################################
 # Main Function
 if __name__ == "__main__":
-    run_type = "parametric"  # Set to "single" for a single run or "parametric" for a parametric test or "loop" for looping the single test
+    run_type = "loop"  # Set to "single" for a single run or "parametric" for a parametric test or "loop" for looping the single test
 
     if run_type == "single":
         ################################################################################################
@@ -374,26 +376,26 @@ if __name__ == "__main__":
         # Loop over a single run
         ################################################################################################
         loop_iterations = 250
-        initial_population_size = 200  # Initialize a population
-        max_iterations = 100
-        crossover_prob = 0.7
-        mutation_prob = 0.1
-        tournament_frac = 0.3
+        initial_population_size = 400  # Initialize a population
+        max_iterations = 50
+        crossover_prob = 0.6
+        mutation_prob = 0.6
+        tournament_frac = 0.2
         selection = tournament_selection  # Replace with your selection function # Options: tournament_selection, roulette_selection
-        crossover = punnet_crossover  # Replace with your crossover function # Options: punnet_crossover, bit_crossover
-        mutation = bit_mutation  # Replace with your mutation function # Options: redefine_mutation, bit_mutation
+        crossover = bit_crossover  # Replace with your crossover function # Options: punnet_crossover, bit_crossover
+        mutation = redefine_mutation  # Replace with your mutation function # Options: redefine_mutation, bit_mutation
 
         # Run GA with or without population division
         for i in range(loop_iterations):
             final_population = GA_loop(
                 max_iterations, initial_population_size, crossover_prob, mutation_prob, tournament_frac,
                 selection, crossover, mutation,
-                plot_enabled=False, load_previous=False, save_enabled=False, print_result=True, log = True
+                plot_enabled=False, load_previous=False, save_enabled=False, print_result=False, log = True
             )  
     elif run_type == "parametric":
         # Parametric Test
-        max_iterations = 50
-        runs_per_combination = 5  # Number of repetitions for each parameter combination
+        max_iterations = 50  # Maximum number of iterations - These algorithms should converge quite quickly
+        runs_per_combination = 10  # Number of repetitions for each parameter combination
 
         param_combinations = [
             (initialize_population(initial_population_size, -limit, limit, -limit, limit), max_iterations, crossover_prob, mutation_prob, tournament_frac, selection_fun, crossover_fun, mutation_fun)
@@ -412,7 +414,7 @@ if __name__ == "__main__":
         start_time = time.time()
 
         # Run parametric tests in parallel using ProcessPoolExecutor
-        with concurrent.futures.ProcessPoolExecutor() as executor:
+        with concurrent.futures.ProcessPoolExecutor(max_workers=4) as executor:
             for param_set in param_combinations:
                 # Run each combination multiple times
                 repeated_results = list(executor.map(run_ga, [param_set] * runs_per_combination))
