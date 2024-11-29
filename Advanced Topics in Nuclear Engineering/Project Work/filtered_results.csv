@@ -1,0 +1,15 @@
+method,population_size,max_iterations,crossover_probability,mutation_probability,tournament_fraction,final_iterations,final_fitness,execution_time,precision,method_acronym
+tournament_selection - punnet_crossover - redefine_mutation,400,50,0.2,0.6,0.2,45.9,-78.33039270755157,1.7436848640441895,0.9980627075515685,TPR
+tournament_selection - punnet_crossover - redefine_mutation,400,50,0.2,0.8,0.2,50.0,-78.33216418964697,1.917019200325012,0.9998341896469753,TPR
+tournament_selection - bit_crossover - redefine_mutation,400,50,0.6,0.6,0.2,50.0,-78.33232025082208,1.9338342666625976,0.9999902508220799,TBR
+tournament_selection - bit_crossover - bit_mutation,400,50,0.6,0.6,0.2,42.2,-78.3294726074316,1.6434116601943969,0.9971426074315985,TBB
+tournament_selection - punnet_crossover - bit_mutation,400,50,0.6,0.8,0.2,47.1,-78.33086029464387,1.858066272735596,0.9985302946438708,TPB
+tournament_selection - bit_crossover - redefine_mutation,400,50,0.6,0.8,0.2,50.0,-78.33231163236107,1.9347995042800905,0.9999816323610702,TBR
+tournament_selection - bit_crossover - bit_mutation,400,50,0.6,0.8,0.2,47.5,-78.33230065094865,1.856508231163025,0.9999706509486543,TBB
+tournament_selection - punnet_crossover - redefine_mutation,400,50,0.8,0.2,0.2,50.0,-78.3322781667753,1.936300730705261,0.9999481667752974,TPR
+tournament_selection - bit_crossover - redefine_mutation,400,50,0.8,0.2,0.2,49.6,-78.3323117642615,1.9253113508224489,0.9999817642615056,TBR
+tournament_selection - punnet_crossover - redefine_mutation,400,50,0.8,0.6,0.2,50.0,-78.33228228923822,1.949936842918396,0.9999522892382231,TPR
+tournament_selection - bit_crossover - redefine_mutation,400,50,0.8,0.6,0.2,49.5,-78.33228984652511,1.9257501125335692,0.9999598465251154,TBR
+tournament_selection - punnet_crossover - bit_mutation,400,50,0.8,0.8,0.2,49.5,-78.3309113632973,1.9714921951293944,0.9985813632973048,TPB
+tournament_selection - bit_crossover - redefine_mutation,400,50,0.8,0.8,0.2,47.6,-78.33225488729427,1.8606176614761352,0.9999248872942701,TBR
+tournament_selection - bit_crossover - bit_mutation,400,50,0.8,0.8,0.2,50.0,-78.32948885785471,1.967129373550415,0.9971588578547141,TBB
