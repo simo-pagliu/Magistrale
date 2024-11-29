@@ -6,7 +6,8 @@ import time
 import os
 import struct
 import pandas as pd  # To store results in a DataFrame for easy comparison
-from concurrent.futures import ProcessPoolExecutor, as_completed
+import concurrent.futures
+import pandas as pd
 
 # Set working directory to the location of this script
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -31,10 +32,17 @@ def fitness_probability(set):
     if max(fitness_values) == min(fitness_values):
         probabilities = [1 / len(set)] * len(set)
     else:
-        max_fitness = max(fitness_values)
-        inverted_fitness = [(max_fitness - fitness) for fitness in fitness_values]
-        total_inverted_fitness = sum(inverted_fitness)
-        probabilities = [fit / total_inverted_fitness for fit in inverted_fitness]
+        # max_fitness = max(fitness_values)
+        # inverted_fitness = [(max_fitness - fitness) for fitness in fitness_values]
+        # total_inverted_fitness = sum(inverted_fitness)
+        # probabilities = [fit / total_inverted_fitness for fit in inverted_fitness]
+        fitness_values = - np.array(fitness_values)
+        # set any negative fitness to 0
+        fitness_values = np.where(fitness_values < 0, 0, fitness_values)
+        # calculate the sum of the fitness values
+        sum_fitness = sum(fitness_values)
+        # calculate the probability of each individual
+        probabilities = fitness_values / sum_fitness
     return probabilities
 ################################################################################
 
@@ -55,8 +63,7 @@ def tournament_selection(population, tournament_size):
     selected_parents = []
     for _ in range(len(population)):
         tournament = random.sample(population, tournament_size)
-        probabilities = fitness_probability(tournament)
-        selected = max(tournament, key=lambda x: probabilities[tournament.index(x)])
+        selected = min(tournament, key=lambda x: styblinski_tang(x[0], x[1]))
         selected_parents.append(selected)
     return selected_parents
 
@@ -111,8 +118,9 @@ def bit_crossover(population, probability):
                 binary2 = f"{struct.unpack('!I', struct.pack('!f', parent2[i]))[0]:032b}"
 
                 # Randomly choose crossover points
-                start = random.randint(0, 31)
-                end = random.randint(start + 1, 32)
+                # Only the first bunch of bits are used --> just change the fraction part
+                start = random.randint(0, 19)
+                end = random.randint(start + 1, 20)
 
                 # Perform crossover
                 new_binary1 = binary1[:start] + binary2[start:end] + binary1[end:]
@@ -151,28 +159,31 @@ def redefine_mutation(population, probability):
 
 def bit_mutation(population, probability):
     """
-    Randomly flips a bit in the binary representation of the gene.
-    Each bit flip is determined by the given probability.
+    Randomly flips a bit in the binary representation of the decimal part
+    of the gene. Ensures the mutation only affects decimals and numbers
+    remain as units.
     """
-    mutated = population.copy()
+    mutated = [row.copy() for row in population]  # Create a copy of the population
     for i in range(len(population)):
         if random.random() < probability:
-            # Apply mutation for each gene in the individual
             for j in range(len(population[i])):
                 value = population[i][j]
-                
-                # Convert the float to its binary representation as an integer
+
+                # Convert float to binary representation as an integer
                 packed_value = struct.unpack('!I', struct.pack('!f', value))[0]
                 
-                # Choose a random bit to flip
-                bit_index = random.randint(0, 31)
-                
-                # Flip the specified bit using XOR
-                flipped_value = packed_value ^ (1 << bit_index)
-                
+                # The mantissa occupies bits 0-22 (23 bits total)
+                # Only mutate bits within the mantissa
+                mantissa_bit_index = random.randint(0, 22)
+
+                # Flip the chosen mantissa bit
+                flipped_value = packed_value ^ (1 << mantissa_bit_index)
+
                 # Convert back to float
-                mutated[i][j] = struct.unpack('!f', struct.pack('!I', flipped_value))[0]
+                mutated_value = struct.unpack('!f', struct.pack('!I', flipped_value))[0]
+                mutated[i][j] = mutated_value
     return mutated
+
 ################################################################################
 
 ################################################################################
@@ -255,9 +266,14 @@ def GA_loop(max_iterations, initial_population_size, probability_of_crossover,
         residuals = []
         for i in range(len(avg_fitness_history)):
             residuals.append(abs(avg_fitness_history[i] - avg_fitness_history[i-1]))
-        residual = sum(residuals) / len(residuals)
+        residuals = np.array(residuals)
+        residual_threshold = 10
+        mask =  residuals < residual_threshold
+        residual = sum(residuals[mask]) / (len(mask))
         print(f"\033[93mStopped after reaching the maximum number of iterations without reaching convergence, avg residual is {residual}.\033[0m")
-        convergence_string = f"MAXED @ {residual}"
+        mask = residuals > residual_threshold
+        to_converge = sum(mask) / len(mask)
+        convergence_string = f"MAXED @ {residual} - Fraction of Iterations to converge: {to_converge}"
 
     # Get final result
     best_solution = min(population, key=lambda x: styblinski_tang(x[0], x[1]))
@@ -295,86 +311,44 @@ def GA_loop(max_iterations, initial_population_size, probability_of_crossover,
         "final_fitness": best_fitness,
         "best_solution": best_solution,
     }
-################################################################################
 
-################################################################################
-# Parallel GA_loop with Optional Population Division
-def run_ga_loop_partition(params):
-    """Wrapper function to run GA_loop on a partition of the population."""
-    partition, max_iterations, probability_of_crossover, probability_of_mutation, tournament_frac, selection, crossover, mutation = params
-    return GA_loop(
-        max_iterations=max_iterations,
-        initial_population_size=len(partition),
-        probability_of_crossover=probability_of_crossover,
-        probability_of_mutation=probability_of_mutation,
-        tournament_fraction=tournament_frac,
-        selection=selection,
-        crossover=crossover,
-        mutation=mutation,
-        plot_enabled=False,
-        log=False
+# Define a wrapper function for GA_loop
+def run_ga(params):
+    population, max_iter, crossover_prob, mutation_prob, tournament_frac, selection, crossover, mutation = params
+
+    # Start execution time tracking
+    import time
+    start_time = time.time()
+
+    # Run the Genetic Algorithm
+    results = GA_loop(
+        max_iter, len(population), crossover_prob, mutation_prob, tournament_frac,
+        selection, crossover, mutation,
+        plot_enabled=False, load_previous=False, save_enabled=False, print_result=False, log=False
     )
+    
+    # Calculate execution time
+    execution_time = time.time() - start_time
 
-def parallel_ga_loop(population, max_iterations, probability_of_crossover,
-                     probability_of_mutation, tournament_frac, selection, crossover, mutation,
-                     divide_population=False):
-    """Runs GA_loop in parallel or processes population in a single process based on a flag."""
-    if divide_population:
-        # Divide population across multiple processes
-        num_cores = os.cpu_count() or 1
-        partition_size = len(population) // num_cores
-        partitions = [
-            population[i * partition_size:(i + 1) * partition_size] for i in range(num_cores)
-        ]
-        if len(population) % num_cores != 0:
-            partitions[-1].extend(population[num_cores * partition_size:])
+    # Prepare detailed results similar to the log format
+    return {
+        "method": f"{selection.__name__} - {crossover.__name__} - {mutation.__name__}",
+        "population_size": len(population),
+        "max_iterations": max_iter,
+        "crossover_probability": crossover_prob,
+        "mutation_probability": mutation_prob,
+        "tournament_fraction": tournament_frac,
+        "final_iterations": results["iterations"],
+        "final_fitness": results["final_fitness"],
+        "execution_time": execution_time,
+    }
 
-        params_list = [
-            (partition, max_iterations, probability_of_crossover, probability_of_mutation, tournament_frac, selection, crossover, mutation)
-            for partition in partitions
-        ]
-
-        results = []
-        print("Running with population division across multiple processes...")
-        start_time = time.time()
-
-        with ProcessPoolExecutor() as executor:
-            futures = [executor.submit(run_ga_loop_partition, params) for params in params_list]
-            for future in as_completed(futures):
-                results.append(future.result())
-
-        end_time = time.time()
-        print(f"Total time taken with population division: {end_time - start_time:.2f} seconds")
-
-        # Combine results from all partitions
-        combined_population = []
-        for result in results:
-            combined_population.extend(result["best_solution"])  # Assuming best_solution is a list
-
-        return combined_population
-
-    else:
-        # Process entire population in a single process
-        print("Running on a single process without population division...")
-        return GA_loop(
-            max_iterations=max_iterations,
-            initial_population_size=len(population),
-            probability_of_crossover=probability_of_crossover,
-            probability_of_mutation=probability_of_mutation,
-            tournament_fraction=tournament_frac,
-            selection=selection,
-            crossover=crossover,
-            mutation=mutation,
-            plot_enabled=False,
-            log=True
-        )
 ################################################################################
 
 ################################################################################
 # Main Function
 if __name__ == "__main__":
-    run_type = "loop"  # Set to "single" for a single run or "parametric" for a parametric test or "loop" for looping the single test
-    divide_population = False  # Set to True to divide population into multiple processes
+    run_type = "parametric"  # Set to "single" for a single run or "parametric" for a parametric test or "loop" for looping the single test
 
     if run_type == "single":
         ################################################################################################
@@ -385,9 +359,9 @@ if __name__ == "__main__":
         crossover_prob = 0.7
         mutation_prob = 0.1
         tournament_frac = 0.3
-        selection = tournament_selection  # Replace with your selection function # Options: tournament_selection, roulette_selection
+        selection = roulette_selection  # Replace with your selection function # Options: tournament_selection, roulette_selection
         crossover = punnet_crossover  # Replace with your crossover function # Options: punnet_crossover, bit_crossover
-        mutation = redefine_mutation  # Replace with your mutation function # Options: redefine_mutation, bit_mutation
+        mutation = bit_mutation  # Replace with your mutation function # Options: redefine_mutation, bit_mutation
 
         # Run GA with or without population division
         final_population = GA_loop(
@@ -407,7 +381,7 @@ if __name__ == "__main__":
         tournament_frac = 0.3
         selection = tournament_selection  # Replace with your selection function # Options: tournament_selection, roulette_selection
         crossover = punnet_crossover  # Replace with your crossover function # Options: punnet_crossover, bit_crossover
-        mutation = redefine_mutation  # Replace with your mutation function # Options: redefine_mutation, bit_mutation
+        mutation = bit_mutation  # Replace with your mutation function # Options: redefine_mutation, bit_mutation
 
         # Run GA with or without population division
         for i in range(loop_iterations):
@@ -417,13 +391,13 @@ if __name__ == "__main__":
                 plot_enabled=False, load_previous=False, save_enabled=False, print_result=True, log = True
             )  
     elif run_type == "parametric":
-        ################################################################################################
         # Parametric Test
-        ################################################################################################
-        max_iterations = 100
+        max_iterations = 50
+        runs_per_combination = 5  # Number of repetitions for each parameter combination
 
         param_combinations = [
-            (initialize_population(200, -limit, limit, -limit, limit), max_iterations, crossover_prob, mutation_prob, tournament_frac, selection_fun, crossover_fun, mutation_fun)
+            (initialize_population(initial_population_size, -limit, limit, -limit, limit), max_iterations, crossover_prob, mutation_prob, tournament_frac, selection_fun, crossover_fun, mutation_fun)
+            for initial_population_size in [100, 200, 300, 400]
             for crossover_prob in [0.2, 0.6, 0.8]
             for mutation_prob in [0.2, 0.6, 0.8]
             for tournament_frac in [0.2, 0.6, 0.8]
@@ -432,25 +406,41 @@ if __name__ == "__main__":
             for mutation_fun in [redefine_mutation, bit_mutation]
         ]
 
-        results = []
+        aggregated_results = []
 
         print("Running parametric test in parallel for parameter combinations...")
         start_time = time.time()
 
-        # Run parametric tests in parallel
-        with ProcessPoolExecutor() as executor:
-            futures = [
-                executor.submit(parallel_ga_loop, population, max_iterations, crossover_prob, mutation_prob, tournament_frac, selection, crossover, mutation, divide_population=False)
-                for (population, max_iterations, crossover_prob, mutation_prob, tournament_frac, selection, crossover, mutation) in param_combinations
-            ]
-            for future in as_completed(futures):
-                results.append(future.result())
+        # Run parametric tests in parallel using ProcessPoolExecutor
+        with concurrent.futures.ProcessPoolExecutor() as executor:
+            for param_set in param_combinations:
+                # Run each combination multiple times
+                repeated_results = list(executor.map(run_ga, [param_set] * runs_per_combination))
+
+                # Aggregate results for the current parameter combination
+                avg_final_fitness = sum(res["final_fitness"] for res in repeated_results) / runs_per_combination
+                avg_final_iterations = sum(res["final_iterations"] for res in repeated_results) / runs_per_combination
+                avg_execution_time = sum(res["execution_time"] for res in repeated_results) / runs_per_combination
+
+                # Save averaged results with method details
+                aggregated_results.append({
+                    "method": repeated_results[0]["method"],
+                    "population_size": len(param_set[0]),
+                    "max_iterations": param_set[1],
+                    "crossover_probability": param_set[2],
+                    "mutation_probability": param_set[3],
+                    "tournament_fraction": param_set[4],
+                    "avg_final_iterations": avg_final_iterations,
+                    "avg_final_fitness": avg_final_fitness,
+                    "avg_execution_time": avg_execution_time,
+                })
 
         end_time = time.time()
         print(f"Parametric test completed in {end_time - start_time:.2f} seconds.")
 
         # Save and display results
-        results_df = pd.DataFrame(results)
+        results_df = pd.DataFrame(aggregated_results)
         results_df.to_csv("parametric_test_results.csv", index=False)
         print("Parametric test results saved to 'parametric_test_results.csv'.")
+
 ################################################################################
