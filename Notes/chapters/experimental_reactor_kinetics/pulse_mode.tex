@@ -1,0 +1,135 @@
+\section{Pulse Mode Operation}
+
+In pulse mode operation, the reactor is driven into a short, high-intensity power pulse. This mode is characterized by:
+\begin{itemize}
+    \item Short duration
+    \item High intensity
+\end{itemize}
+
+The observed parameters in pulse mode include:
+\begin{enumerate}
+    \item Power (Intensity)
+    \item Time to reach peak power (to compare pulse duration)
+    \item Full Width at Half Maximum (FWHM) of the pulse
+\end{enumerate}
+
+\begin{figure}[h]
+    \centering
+        \includegraphics[width=0.75\linewidth]{placeholder.png}
+    \caption{Graph illustrating pulse mode operation with parameters like peak power and FWHM.}
+\end{figure}
+
+\section{Functions of Pulse Mode}
+
+Pulse mode can be used for various purposes, including:
+\begin{itemize}
+    \item Activation analysis, including detector or semiconductor analysis
+    \item Safety tests, such as reactivity insertion accidents
+    \item Estimation of parameters related to reactor kinetics
+\end{itemize}
+
+\section{Physical Background}
+
+In the pulse mode, the following sequence occurs:
+\[
+\rho \uparrow \rightarrow P \uparrow \rightarrow E(T) \rightarrow T \uparrow \rightarrow \alpha_T \rightarrow \rho \downarrow \rightarrow \text{Feedback stabilizes the system.}
+\]
+
+To translate energy into temperature, we need to know the heat capacity, $C_p$. The other important parameter is the temperature reactivity coefficient, $\alpha_f$.
+
+\section{Experimental Evidence of Ljubljana Pulses}
+
+Videos of different reactivity insertions in the Ljubljana TRIGA reactor show that:
+\begin{itemize}
+    \item Higher intensity in Cherenkov radiation correlates with larger $\Delta \rho$.
+    \item Shorter pulses are achieved with larger $\Delta \rho$.
+    \item The reactor is always scrammed after each pulse for safety, even if it’s self-limited.
+\end{itemize}
+
+\section{Nordheim-Fuchs Model}
+
+The Nordheim-Fuchs model is used to understand self-limited excursions over a short timespan. It relies on several assumptions:
+\begin{enumerate}
+    \item Transient modeled with point kinetics
+    \item Delayed neutrons are neglected
+    \item $\Delta \rho$ is considered a step function
+    \item Adiabatic model for energy balance
+\end{enumerate}
+
+\begin{equation}
+    % MISSING EQUATION
+\end{equation}
+
+\begin{figure}[h]
+    \centering
+        \includegraphics[width=0.75\linewidth]{placeholder.png}
+    \caption{Power pulse prediction by Nordheim-Fuchs model showing peak power and pulse duration.}
+\end{figure}
+
+\section{Power Pulse Parameters}
+
+The key parameters of a power pulse are:
+\begin{itemize}
+    \item $\Delta \rho$: Known insertion value
+    \item $T_f$: Fuel temperature from instrumentation
+    \item $E_{\text{released}}$: Power integral for total energy release
+\end{itemize}
+
+\section{Why TRIGA Can Operate in Pulse Mode}
+
+The TRIGA reactor can safely operate in pulse mode due to:
+\begin{itemize}
+    \item Large prompt and negative temperature coefficient, $\alpha_f = -8$ to $-10$ pcm/K
+    \item High heat capacity of the fuel-moderator combination
+\end{itemize}
+
+\begin{tcolorbox}[colback=white, colframe=cherenkovblue, boxrule=0.5mm, sharp corners]
+\textbf{Note:} In the Ljubljana TRIGA reactor, fewer control rods and elements with higher uranium content allow a unique pulse operation configuration.
+\end{tcolorbox}
+
+\begin{figure}[h]
+    \centering
+        \includegraphics[width=0.75\linewidth]{placeholder.png}
+    \caption{Graph showing power pulse parameters and energy release.}
+\end{figure}
+
+\section{Physical Phenomenon of the Pulse}
+
+The physical phenomenon during a pulse involves:
+\begin{enumerate}
+    \item Large $\rho$ insertion ($>2$)
+    \item Prompt supercriticality reached
+    \item Fuel temperature increases, causing $\rho \downarrow$ until stability
+\end{enumerate}
+
+\begin{figure}[h]
+    \centering
+        \includegraphics[width=0.75\linewidth]{placeholder.png}
+    \caption{Illustration of power and energy evolution in pulse mode.}
+\end{figure}
+
+\section{Power Pulse Parameters}
+
+The parameters for a power pulse are typically:
+\begin{itemize}
+    \item $\Delta P$: Known insertion level
+    \item $T_f$: Measured from instrumentation
+    \item $E_{\text{released}}$: Calculated from power integral
+\end{itemize}
+
+\section{Examples and Limitations}
+
+Examples of the results from the Nordheim-Fuchs model indicate:
+\begin{itemize}
+    \item Increasing $\rho_0$ leads to higher peak power, reduced FWHM, increased energy in fuel, and larger $\Delta T_f$.
+\end{itemize}
+
+Limitations of this model include:
+\begin{itemize}
+    \item Valid only for short pulses (delay of neutrons is negligible)
+    \item Incomplete modeling of the temperature dependency
+\end{itemize}
+
+\begin{tcolorbox}[colback=white, colframe=cherenkovblue, boxrule=0.5mm, sharp corners]
+\textbf{Note:} The Nordheim-Fuchs model requires validation and verification against experimental data for accurate results.
+\end{tcolorbox}

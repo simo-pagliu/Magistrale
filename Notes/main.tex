@@ -1,0 +1,133 @@
+\documentclass[11pt,a4paper,twoside]{book}
+
+% Input encoding and basic packages
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel} % Replace "english" with your document language
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{wrapfig}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{subcaption}
+\usepackage{fontspec}
+\usepackage{nomencl} 
+\usepackage{multicol}
+\usepackage{etoolbox}
+\usepackage{microtype}
+
+
+% Fonts
+\setmainfont{Poppins} % Main font for body text
+\newfontfamily\titlesfont{Anonymous Pro} % Font for titles
+
+% Relax Latex rules for text layout
+\raggedbottom
+\sloppy
+\raggedright
+
+% \emergencystretch=1em % Allows LaTeX to stretch text slightly to avoid gaps
+% \tolerance=2000 % Sets the general tolerance level
+% \hbadness=1000 % Suppresses warnings for "bad" spacing
+
+% Define custom colors
+\definecolor{cherenkovblue}{RGB}{55, 139, 230}
+\definecolor{white}{RGB}{255, 255, 255}
+
+% Adjust default font sizes
+\renewcommand{\normalsize}{\fontsize{9}{11}\selectfont} % Smaller body text: 9pt font with 11pt line spacing
+\renewcommand{\small}{\fontsize{8}{10}\selectfont}
+\renewcommand{\footnotesize}{\fontsize{7}{9}\selectfont}
+
+% Title styling
+\titleformat{\title}{\color{cherenkovblue}\titlesfont\huge\bfseries}{\thetitle}{1em}{}
+\titleformat{\part}{\color{cherenkovblue}\titlesfont\huge\bfseries}{\thepart}{1em}{}
+\titleformat{\chapter}{\color{cherenkovblue}\titlesfont\Huge\bfseries}{\thechapter}{0.5em}{}[\vspace{-2ex}]
+\titleformat{\section}{\color{cherenkovblue}\titlesfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\color{cherenkovblue}\titlesfont\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\paragraph}{\bfseries}{\theparagraph}{1em}{}
+
+% Remove indentation
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt} % Add spacing between paragraphs
+
+% Customize itemize bullets
+\renewcommand\labelitemi{--} % Use dashes instead of bullets
+
+% Define box styles
+\tcbset{
+    boxstyle/.style={
+        colframe=cherenkovblue,
+        colback=white,
+        coltitle=white,
+        fonttitle=\bfseries,
+        width=0.3\textwidth,
+        boxrule=0.75mm,
+        arc=2mm,
+        toptitle=2mm,
+        bottomtitle=2mm
+    },
+    boxstyle2/.style={
+        colframe=cherenkovblue,
+        colback=white,
+        coltitle=white,
+        fonttitle=\bfseries,
+        rounded corners,
+        width=\textwidth,
+        boxrule=0.75mm,
+        arc=2mm,
+        toptitle=2mm,
+        bottomtitle=2mm,
+        sharp corners=downhill
+    }
+}
+
+% Define fancy header and footer
+\fancypagestyle{plain}{
+    \fancyhf{} % Clear all header and footer fields
+}
+
+\fancypagestyle{post-index}{
+    \fancyhf{} % Clear all header and footer fields
+    \fancyhead[LE]{\textit{Simone Pagliuca}}
+    \fancyhead[RO]{\textit{Nuclear Engineering}}
+    \fancyfoot[LE,RO]{\thepage}
+    \renewcommand{\headrulewidth}{0.5pt}
+    \renewcommand{\footrulewidth}{0.5pt}
+    \setlength{\headheight}{14pt}
+}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title Page
+% Includes the first page and the index
+\input{title.tex}
+% After this we start with the main content
+\pagestyle{fancy} % sets the correct styling for the rest of the document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Experimental Reactor Kinetics
+\part{Experimental Reactor Kinetics}
+\chapter{Control Rods}
+\graphicspath{{chapters/experimental_reactor_kinetics/images/}}
+\input{chapters/experimental_reactor_kinetics/intro_control_rods.tex}
+\input{chapters/experimental_reactor_kinetics/subcritical_calibration.tex}
+\input{chapters/experimental_reactor_kinetics/critical_calibration.tex}
+\chapter{Reactivity Coefficients}
+\input{chapters/experimental_reactor_kinetics/reactivity_coefficients}
+\chapter{Pulse Mode}
+\input{chapters/experimental_reactor_kinetics/pulse_mode}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
