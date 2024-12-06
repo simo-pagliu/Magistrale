@@ -10,3 +10,4 @@ CFD for Nuclear Engineering/Lab_09-Natural Convection/cleanup-fluent-PC246-11056
 *.aux
 *.toc
 /CFD for Nuclear Engineering/Lab_10-Buoyancy/animation
+*.bat
