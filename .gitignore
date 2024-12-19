@@ -13,3 +13,4 @@ CFD for Nuclear Engineering/Lab_09-Natural Convection/cleanup-fluent-PC246-11056
 *.bat
 *.png
 *.ppm
+Experimental Reactor Kinetics/__pycache__/framework.cpython-311.pyc
