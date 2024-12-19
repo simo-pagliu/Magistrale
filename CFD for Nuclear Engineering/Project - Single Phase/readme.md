@@ -50,6 +50,5 @@ From this first run we have determined that the mesh is too coarse from:
 Also this has been confirmed by the fact that the $Co$ is much lower then 1.
 
 ### 01 - Refined Mesh
-We tried to do a finer mesh and run another simulation. We then noticed that the temperature profile was greatly oscillating between largly different profiles, we therfore supposed that the boundary layer wasn't sufficiently deep.
 
 
