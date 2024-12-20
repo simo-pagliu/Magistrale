@@ -29,7 +29,7 @@ known_CR_w = [
 # Montecarlo simulation results
 # Obtained by Serpent simulation
 k_mc = [
-    m(0.96870, 0.00418), # all in
+    m(0.88566, 0.00658), # all in
     m(0.99169, 0.00159), # shim
     m(0.96415, 0.00491), # reg
     m(0.98287, 0.00406)  # trans
