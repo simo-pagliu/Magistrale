@@ -1,7 +1,7 @@
 # Single Phase Project
 The folder structure follows this file.
 ## 01 - Preprocessing
-TBD - Giovanni in 1 giorno, non di più se ci perdi piu  tempo ti stupro l'ano con un avvitatore pneumatico industriale :D.
+Average temperature = 322.99K
 
 ## 02 - Meshing
 ### Geometry
