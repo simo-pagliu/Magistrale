@@ -1,0 +1,55 @@
+\section{Critical Calibration Method}
+
+\subsection{Theory}
+The calibration of control rods in a reactor is crucial for understanding their reactivity worth. This can be accomplished using the in-hour and point kinetics equations to relate the time required to increase power by a factor to the reactivity.
+
+\paragraph{Reactivity and Reactor Period}
+The relationship between reactivity ($\rho$) and the reactor period ($T$) is fundamental in control rod calibration. The point kinetics equations describe this relationship:
+\begin{equation}
+    \frac{dP}{dt} = \frac{\rho - \beta}{\Lambda}P + \sum_{i=1}^6 \lambda_i C_i
+\end{equation}
+\begin{equation}
+    \frac{dC_i}{dt} = \frac{\beta_i}{\Lambda}P - \lambda_i C_i
+\end{equation}
+where:
+\begin{itemize}
+    \item $P$ is the reactor power,
+    \item $\rho$ is the reactivity,
+    \item $\beta$ is the delayed neutron fraction,
+    \item $\Lambda$ is the prompt neutron lifetime,
+    \item $\beta_i$ and $\lambda_i$ are the delayed neutron fractions and decay constants for each of the six precursor groups,
+    \item $C_i$ is the concentration of the $i$-th delayed neutron precursor group.
+\end{itemize}
+
+We can measure the reactor period $T$ by inserting a control rod and observing the time required for the reactor power to increase by a factor $e$. \\
+In practice we will use a factor $1.5$ and compute the period as $T = \frac{\Delta t}{ln(1.5)}$. \\
+We can then take advantage of the in-hour equation to correlate the reactivity to the reactor period:
+\begin{equation}
+    \rho = \frac{\Lambda}{\mathbf{T}} + \sum_{i=1}^6 \frac{\beta_i \lambda_i}{1 + \lambda_i \mathbf{T}}
+\end{equation}
+We are going to use a 6 group apprach, the values of $\beta_i$ and $\lambda_i$ are known from montecarlo simulations and therefore come with their own uncertanty.
+
+\subsection{Pros and Cons of the Critical Method} 
+    \textbf{Advantages}:
+    \begin{itemize}
+        \item Absolute method: results are independent of other factors, including the position of other control rods
+        \item High accuracy of results 
+    \end{itemize}
+    \textbf{Disadvantages}: 
+    \begin{itemize}
+        \item Time-intensive, as calibration is required for each control rod
+        \item Reactor remains in supercritical condition during measurements
+    \end{itemize}
+
+\subsection{Experimental Procedure}
+Starting with a reactor in cold  and clean conditions to avoid effects due to external poisons or thermal feedback.
+\begin{enumerate}
+    \item Bring the reactor to a critical state.
+    \item Raise the REG rod by some steps
+    \item Measure the time required for the power to increase $3W \rightarrow 4.5W$.
+    \item Measure the time required for the power to increase $6W \rightarrow 9W$.
+    \item Adjust the shim rod to get back to criticality.
+    \item Repeat until the REG rod is fully withdrawn.
+\end{enumerate}
+It is worth noting that the first measurment $3W \rightarrow 4.5W$ will take into also precursors, by the time 
+of the second measurment most of them will be decayed so the measurment should be more rapresentative of the reactiviy. \\

@@ -1,0 +1,68 @@
+\section{Subcritical Control Rod Calibration}
+
+\subsection{Introduction}
+The subcritical method provides an alternative approach to control rod calibration, particularly useful for cases where safety is a concern. 
+This method allows for calibration while keeping the reactor in a subcritical state by using an external neutron source.
+
+\subsection{Theory - TBC}
+\paragraph{Subcritical Multiplication and Reactor Period}
+In subcritical conditions, the neutron population depends on both the external source and the reactor’s multiplication factor $K_{eff}$. This dependency is described by the subcritical multiplication factor $M$:
+\begin{equation}
+    M = \frac{1}{1 - K_{eff}}
+\end{equation}
+With an external source, the neutron population evolves over generations until it reaches a steady state. 
+This evolution can be described by a geometric series with $K_{eff}$ as the ratio, where the number of generations required to reach steady state is:
+\begin{equation}
+    N_{\text{steady}} \approx \frac{4}{\ln K}
+\end{equation}
+Which means that the evolution is slower the closer we get to the steady state condition.
+
+\paragraph{Point Kinetics Equations}
+To understand the reactor's response over time, we use the point kinetics equations adapted for the subcritical state:
+\begin{equation}
+    \frac{dn}{dt} = K_{eff} \left( \frac{K_{eff} - 1}{K_{eff}} + \rho - \beta \right) \frac{n}{\Lambda} + \sum \lambda_i C_i + q
+\end{equation}
+\begin{equation}
+    \frac{dC_i}{dt} = K_{eff} \frac{\beta_i}{\Lambda} n - \lambda_i C_i
+\end{equation}
+where $\rho = \frac{\Lambda}{K}$ and $q$ is the source term. The reactor period $T$ is then given by:
+\begin{equation}
+    T = \frac{1}{\lambda_1}
+\end{equation}
+
+\subsection{Experimental Procedure}
+The following steps outline the subcritical calibration procedure:
+\begin{enumerate}
+    \item Bring the reactor in subcritical condition with all rods inserted.
+    \item Measure the neutron rate $\dot{R}$, we used a fission chamber, in pulse mode.
+    \item Insert the source and measure $\dot{R}$ again, we used $Ra\text{-}Be$,.
+    \item Extract the control rods of which we know its reactivity worth and measure $\dot{R}$ once it reached steady state.
+    \item Compute the subcritical multiplication factor of the CR from known reactivity worth: $\Delta \rho = \rho_{out} - 0 = \frac{K - 1}{K} \rightarrow M = \frac{1}{1 - K}$.
+    \item Compute the calibration parameter $\alpha \Phi_s$ from this measurment: $\frac{\dot{R}}{M} = \alpha \Phi_s$.
+    \item Reinsert the control rod.
+    \item Extract another control rod and measure $\dot{R}$.
+    \item Compare measured $\dot{R}$ to the calibration parameter: $M = \alpha \Phi_s \dot{R}$
+    \item Repeat the last two steps for all control rods.
+\end{enumerate}
+For better statistics take multiple measurements for each control rod (or long measurements).
+
+\begin{tcolorbox}[boxstyle2]
+    \textbf{Note on statistics}:
+    In poisson distributed data like radiation counts taking 20 short measurments each of time $t$ will give the same statistical error
+    as taking 1 longer measurement of time $T = 20t$.
+\end{tcolorbox}
+
+
+\subsection{Pros and Cons of the Subcritical Method}
+    \textbf{Advantages}:
+    \begin{itemize}
+        \item Safe and keeps the reactor subcritical.
+        \item Allows calibration of the shim, unlike other methods.
+    \end{itemize}
+    \textbf{Disadvantages}:
+    \begin{itemize}
+        \item Relys on the knowledge of one control rod's reactivity worth.
+        \item Lower accuracy due to reliance on source and instrumentation.
+        \item Only measures the total worth of the control rod, unable to get the full integral curve with reasonable measuring time (if we do a small step the variation in count rate change can easly hide in the noise and error).
+        \item Frequent recalibration required due to burnup of fission chamber.
+    \end{itemize}
