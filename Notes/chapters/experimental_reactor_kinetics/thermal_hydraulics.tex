@@ -1,0 +1,198 @@
+This chapter serves as a concise overview of key concepts in reactor dynamics and thermal-hydraulics that are foundational knowledge for further study and practical application. The material presented here is intended to recall principles, equations, and methodologies we are already familiar with, focusing on their relevance to reactor operation and safety analysis.
+
+\section{Dynamic Modeling}
+
+Dynamic modeling allows us to study power transients that are not feasible with Monte Carlo simulations. It plays a crucial role in:
+\begin{itemize}
+    \item Safety analysis.
+    \item Developing simulation tools for conceiving new experiments.
+\end{itemize}
+
+Dynamic modeling can be approached at different levels of complexity:
+\begin{itemize}
+    \item Zero-dimensional (lumped parameter) models.
+    \item One-dimensional (system code) models.
+    \item Three-dimensional models using Computational Fluid Dynamics (CFD) coupled with diffusion/transport equations.
+\end{itemize}
+
+Verification and validation are essential:
+\begin{itemize}
+    \item \textbf{Verification:} Ensuring the correctness of models and code implementation.
+    \item \textbf{Validation:} Comparing model predictions with experimental data.
+\end{itemize}
+
+\section{Zero-Dimensional Models}
+
+Zero-dimensional models focus on simplified interactions between core components, such as:
+\begin{itemize}
+    \item \textbf{Reactivity:} Governed by control rod positions.
+    \item \textbf{Neutronics:} Affecting power generation.
+    \item \textbf{Thermal-Hydraulics:} Influencing coolant, fuel, and cladding temperatures.
+\end{itemize}
+
+These models provide a high-level understanding of reactor behavior under transient conditions by coupling these subsystems.
+
+\section{Thermal-Hydraulics}
+
+Thermal-hydraulic analysis examines heat transfer and fluid dynamics within the reactor. Key equations include:
+\begin{itemize}
+    \item Energy conservation for the coolant.
+    \item Momentum balance for natural convection or forced flow.
+    \item Heat transfer correlations for cladding-to-coolant interfaces.
+\end{itemize}
+
+Examples and practical calculations illustrate typical parameter estimation, such as Reynolds and Nusselt numbers, and their impact on flow regimes and heat transfer efficiency.
+
+\section{Neutronics}
+
+Neutronics fundamentals are based on the point kinetics equations:
+\[
+\begin{cases}
+\frac{d\psi}{dt} = \frac{\rho - \beta}{\Lambda} \psi + \sum_i \frac{\beta_i}{\Lambda} \gamma_i, \\[10pt]
+\frac{d\gamma_i}{dt} = \lambda_i (\psi - \gamma_i), \quad \forall i \text{ (delayed neutron precursor groups)}.
+\end{cases}
+\]
+
+Here, $\psi$ represents neutron density, $\gamma_i$ are delayed neutron precursors, and $\rho$ is reactivity.
+
+Reactivity changes are expressed as:
+\[
+\rho(t) = \alpha_f \Delta T_f + \alpha_c \Delta T_c + \alpha_m \Delta T_m
+\]
+
+\section{Advanced Considerations}
+
+Further refinements to models can include:
+\begin{itemize}
+    \item Xenon, iodine, and samarium buildup.
+    \item Inlet temperature variations and their effect on heat exchanger dynamics.
+\end{itemize}
+An example equation for the coolant pool when active cooling is operational:
+\[
+m_{\text{pool}} c_p \frac{dT_{\text{pool}}}{dt} = \dot{m} c_p (T_{\text{out}} - T_{\text{pool}}) - \dot{m}_{\text{diffuser}} c_p (T_{\text{pool}} - T_{\text{diffuser}})
+\]
+
+\section{Thermal-Hydraulic Model: Overview}
+
+The thermal-hydraulic model represents the coupling between heat generation in the reactor core and the fluid flow used for cooling. It accounts for energy conservation, heat transfer, and fluid dynamics to ensure safe and efficient operation.
+
+\subsection{Energy Balance in Coolant}
+The energy conservation equation for the coolant is expressed as:
+\[
+m_{\text{pool}} c_p \frac{dT_{\text{pool}}}{dt} = \dot{m} c_p (T_{\text{in}} - T_{\text{out}}) - \dot{Q}_{\text{loss}}
+\]
+Where:
+\begin{itemize}
+    \item \( m_{\text{pool}} \): Coolant mass.
+    \item \( c_p \): Specific heat capacity of the coolant.
+    \item \( T_{\text{pool}} \): Average coolant temperature.
+    \item \( \dot{m} \): Mass flow rate.
+    \item \( T_{\text{in}}, T_{\text{out}} \): Inlet and outlet temperatures, respectively.
+    \item \( \dot{Q}_{\text{loss}} \): Heat losses due to various mechanisms like radiation and convection.
+\end{itemize}
+
+\subsection{Natural Circulation}
+Natural circulation is modeled using momentum balance equations. It occurs due to density differences driven by temperature gradients in the reactor:
+\[
+\Delta P_{\text{gravity}} = \Delta P_{\text{friction}} + \Delta P_{\text{form}}
+\]
+Where:
+\begin{itemize}
+    \item \( \Delta P_{\text{gravity}} \): Pressure difference due to gravity.
+    \item \( \Delta P_{\text{friction}} \): Pressure drop due to pipe and channel friction.
+    \item \( \Delta P_{\text{form}} \): Additional pressure drop due to form losses (e.g., bends, valves).
+\end{itemize}
+
+For a natural convection loop, the driving pressure is derived from buoyancy forces:
+\[
+\Delta P_{\text{gravity}} = \rho g \Delta h
+\]
+
+\subsection{Heat Transfer Mechanisms}
+The heat transfer rate from the fuel to the coolant is governed by:
+\[
+\dot{Q} = K(T_{\text{fuel}} - T_{\text{coolant}})
+\]
+Where:
+\begin{itemize}
+    \item \( \dot{Q} \): Heat transfer rate.
+    \item \( K \): Overall heat transfer coefficient.
+    \item \( T_{\text{fuel}} \): Temperature of the fuel.
+    \item \( T_{\text{coolant}} \): Temperature of the coolant.
+\end{itemize}
+
+For subcooled nucleate boiling or forced convection, the Nusselt number (\( Nu \)) is used to correlate the heat transfer coefficient (\( h \)):
+\[
+Nu = f(Re, Pr)
+\]
+Where:
+\begin{itemize}
+    \item \( Re \): Reynolds number, indicating flow regime.
+    \item \( Pr \): Prandtl number, relating momentum and thermal diffusivity.
+\end{itemize}
+
+\subsection{Practical Example}
+A worked example calculates key parameters for a simplified coolant system:
+\begin{itemize}
+    \item \textbf{Mass flow rate} (\( \dot{m} \)):
+    \[
+    \dot{m} = \frac{\Delta P_{\text{driving}}}{\rho g h_f}
+    \]
+    Where \( h_f \) represents frictional head losses.
+    
+    \item \textbf{Reynolds number} (\( Re \)):
+    \[
+    Re = \frac{\rho v D}{\mu}
+    \]
+    Determines the flow regime (laminar or turbulent).
+    
+    \item \textbf{Heat transfer coefficient} (\( h \)):
+    \[
+    h = \frac{Nu \cdot k}{D_h}
+    \]
+    Where \( k \) is the thermal conductivity and \( D_h \) is the hydraulic diameter.
+    
+    \item \textbf{Critical heat flux (CHF)}:
+    Critical to evaluate the boiling point and heat transfer capacity, ensuring safe operation.
+\end{itemize}
+
+\subsection{System Dynamics}
+The coupled equations for temperature, flow, and pressure describe the dynamic behavior of the thermal-hydraulic system:
+\[
+\begin{cases}
+\frac{dT_{\text{fuel}}}{dt} = \frac{1}{m c_p} \left( P_{\text{gen}} - \dot{Q} \right), \\[10pt]
+\frac{dT_{\text{coolant}}}{dt} = \frac{1}{\dot{m} c_p} \left( \dot{Q}_{\text{fuel-coolant}} - \dot{Q}_{\text{loss}} \right),
+\end{cases}
+\]
+Where:
+\begin{itemize}
+    \item \( P_{\text{gen}} \): Power generated by fission reactions.
+\end{itemize}
+
+\subsection{Natural Convection vs. Forced Circulation}
+Depending on the reactor design:
+\begin{itemize}
+    \item \textbf{Natural convection} relies on buoyancy forces and is typically used in passive safety systems.
+    \item \textbf{Forced circulation} employs pumps for higher flow rates, suitable for higher power reactors.
+\end{itemize}
+
+This section provides a concise recall of thermal-hydraulic principles, bridging fundamental equations and practical applications.
+
+\section{Focus on TRIGA Reactors}
+
+For TRIGA reactors, particular attention is given to:
+\begin{itemize}
+    \item Limiting fuel temperature to prevent hydrogen production.
+    \item Analyzing the central channel (highest power) and second channel (highest temperature).
+    \item Assessing heat transfer modes, such as natural convection and subcooled nucleate boiling.
+\end{itemize}
+
+Heat transfer coefficients ($\alpha$) are calculated using:
+\[
+\alpha = \frac{\dot{m} \cdot k_{\text{cool}}}{D_h}
+\]
+Different correlations may apply for various channels since there is no "common channel" in a triga reactor configuaration, and cross-flow effects are generally neglected.
+We should also check if we don't fall into subcooled boilin condition, the Bergles-Roshenow correlation is usually choosen.
+\section*{Conclusion}
+
+This summary provides a structured recall of thermal-hydraulics principles, bridging fundamental equations and practical applications. These insights are crucial for both academic studies and real-world reactor operations.

@@ -1,4 +1,6 @@
-\section{Pulse Mode Operation}
+\section{Pulse Operation}
+
+\subsection{Pulse Mode Operation}
 In pulse mode operation, the reactor is driven into a short, high-intensity power pulse. This mode is characterized by:
 \begin{itemize}
     \item Short duration
@@ -18,7 +20,7 @@ The observed parameters in pulse mode include:
     \label{fig:pulse_mode}
 \end{figure}
 
-\section{Functions of Pulse Mode}
+\subsection{Functions of Pulse Mode}
 Pulse mode can be used for various purposes, including:
 \begin{itemize}
     \item Activation analysis, including detector or semiconductor analysis
@@ -26,14 +28,14 @@ Pulse mode can be used for various purposes, including:
     \item Estimation of parameters related to reactor kinetics
 \end{itemize}
 
-\section{Physical Background}
+\subsection{Physical Background}
 In the pulse mode, the following sequence occurs:
 \begin{align*}
     \rho \uparrow \to P \uparrow \to E(T) \to T \uparrow \to \alpha_T \to \rho \downarrow \to \text{Feedback stabilizes the system.}
 \end{align*}
 To translate energy into temperature, we need to know the heat capacity, $C_p$. The other important parameter is the temperature reactivity coefficient, $\alpha_f$.
 
-\section{Experimental Evidence of Ljubljana Pulses}
+\subsection{Experimental Evidence of Ljubljana Pulses}
 Videos of different reactivity insertions in the Ljubljana TRIGA reactor show that:
 \begin{itemize}
     \item Higher intensity in Cherenkov radiation correlates with larger $\Delta \rho$.
@@ -49,7 +51,7 @@ The Nordheim-Fuchs model is employed to understand the self-limited excursions d
 \end{enumerate}
 The adiabatic assumption is valid only from a global perspective, as local variations in fission rates across individual fuel elements can lead to higher localized heat transfer coefficients (HTCs). This highlights the importance of understanding local phenomena in addition to the overall system behavior.
 
-\section{Nordheim-Fuchs Model}
+\subsection{Nordheim-Fuchs Model}
 The Nordheim-Fuchs model is used to understand self-limited excursions over a short timespan. It relies on several assumptions:
 \begin{enumerate}
     \item Transient modeled with point kinetics
@@ -65,7 +67,7 @@ The Nordheim-Fuchs model is used to understand self-limited excursions over a sh
     \label{fig:nordheim_fuchs}
 \end{figure}
 
-\subsection{Derivation of the Nordheim-Fuchs Model}
+\subsubsection{Derivation of the Nordheim-Fuchs Model}
 The derivation of the Nordheim-Fuchs model begins with several simplifying assumptions:
 \begin{enumerate}
     \item Point kinetics approximation is used, ignoring spatial effects.
@@ -97,7 +99,7 @@ After integration, the peak power and the Full Width at Half Maximum (FWHM) of t
 \end{align*}
 These expressions highlight the dependence of pulse characteristics on reactor parameters such as $\rho_0$, $\alpha$, and $m_f$.
 
-\section{Power Pulse Parameters}
+\subsection{Power Pulse Parameters}
 The key parameters of a power pulse are:
 \begin{itemize}
     \item $\Delta \rho$: Known insertion value
@@ -105,7 +107,7 @@ The key parameters of a power pulse are:
     \item $E_{\text{released}}$: Power integral for total energy release
 \end{itemize}
 
-\section{Why TRIGA Can Operate in Pulse Mode}
+\subsection{Why TRIGA Can Operate in Pulse Mode}
 The TRIGA reactor can safely operate in pulse mode due to:
 \begin{itemize}
     \item Large prompt and negative temperature coefficient, $\alpha_f = -8$ to $-10$~pcm/K
@@ -113,10 +115,10 @@ The TRIGA reactor can safely operate in pulse mode due to:
 \end{itemize}
 Note: In the Ljubljana TRIGA reactor, fewer control rods and elements with higher uranium content allow a unique pulse operation configuration.
 
-\section{Physical Phenomenon of the Pulse}
+\subsection{Physical Phenomenon of the Pulse}
 The physical phenomenon during a pulse involves:
 \begin{enumerate}
-    \item Large $\rho$ insertion ($> 2\$)
+    \item Large $\rho$ insertion ($> 2\$$)
     \item Prompt supercriticality reached
     \item Fuel temperature increases, causing $\rho \downarrow$ until stability
 \end{enumerate}
@@ -128,7 +130,7 @@ The physical phenomenon during a pulse involves:
     \label{fig:power_pulse}
 \end{figure}
 
-\section{Examples and Limitations}
+\subsection{Examples and Limitations}
 Examples of the results from the Nordheim-Fuchs model indicate:
 \begin{itemize}
     \item Increasing $\rho_0$ leads to higher peak power, reduced FWHM, increased energy in fuel, and larger $\Delta T_f$.
@@ -143,7 +145,7 @@ Limitations of this model include:
     \item Experimental validation shows deviations in scenarios where local thermal feedback or hydrodynamic effects dominate.
 \end{itemize}
 
-\section{Experimental Procedure}
+\subsection{Experimental Procedure}
 The following steps outline the experimental procedure for conducting pulse mode experiments:
 \begin{enumerate}
     \item Establish critical conditions with the transient rod inserted, then fully withdraw the transient rod to initiate the pulse.
