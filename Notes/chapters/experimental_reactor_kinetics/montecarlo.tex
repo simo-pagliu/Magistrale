@@ -1,0 +1,251 @@
+\section{Monte Carlo Analysis}
+
+In this chapter, we model an experiment conducted at the TRIGA reactor using the Monte Carlo code \texttt{Serpent} to compare results.
+
+\subsection{Comparison Between Deterministic and Stochastic Approaches}
+
+Deterministic methods provide exact solutions to approximated problems due to discretization. They are faster and allow for easy adjoint calculations. In contrast, stochastic methods, such as Monte Carlo, offer approximate solutions to exact problems. These methods are highly accurate but computationally expensive and make adjoint calculations difficult. Deterministic approaches are preferable for faster calculations, while Monte Carlo methods excel in accuracy for complex geometries.
+
+\subsection{Monte Carlo Method: Possible Approaches}
+
+The Monte Carlo method is particularly useful for solving problems involving complex geometries. The modeling approach depends on balancing accuracy and simplicity. The options include:
+
+\textbf{Point Kinetics:} This is the simplest approach but provides the least accuracy. It assumes that the flux shape and energy spectrum remain constant. It is effective for simple transients and control experiments.
+
+\textbf{Diffusion Theory:} Neglects angular dependence and uses a multi-group approximation. Cross-sections are averaged using:
+\begin{equation}
+\frac{1}{\phi}\int \Sigma d\Omega dE d\phi = \Sigma_{\text{group constants}}
+\end{equation}
+However, it cannot neglect angle dependence in strongly absorbing materials, as this would lead to physically inconsistent results.
+
+\textbf{Transport Theory:} The most accurate method, which requires discretizing space, energy, and angle in the integro-differential equations. It accounts for a wide range of unknowns and is essential for precise neutron tracking.
+
+\subsection{Pillars of the Monte Carlo Method}
+
+The Monte Carlo method is based on three fundamental pillars:
+
+\textbf{Transport:} Tracks a neutron's journey from birth by fission to death by absorption or leakage.
+
+\textbf{Sampling:} Accounts for potential interactions and their probabilities, ensuring accurate representation of physical processes.
+
+\textbf{Collection:} Aggregates and interprets the simulated data to extract meaningful results.
+
+\subsection{Transport Pillar in Detail}
+
+In the Monte Carlo method, the transport process involves tracking a neutron's life cycle:
+
+\textbf{Initialization:} Sample the neutron's initial energy and angle.
+
+\textbf{Free Path Sampling:} Determine the distance to the next interaction site.
+
+\textbf{Collision Handling:} Move the neutron to the collision site and sample the type of interaction:
+\begin{itemize}
+\item \textbf{Scattering:} Change the neutron's energy and angle and continue tracking.
+\item \textbf{Fission:} Record the number of neutrons produced, their positions, and continue tracking them.
+\item \textbf{Absorption:} Terminate the neutron's history.
+\end{itemize}
+
+Key questions during the transport process include:
+\begin{itemize}
+\item How to sample the free path?
+\item How to sample the interaction type?
+\item How to compute meaningful quantities from the simulation?
+\end{itemize}
+
+\subsection{Sampling Pillar in Detail}
+
+The sampling process involves generating random variables to determine interaction points and outcomes:
+
+The probability of no interaction up to a distance $x$ is given by:
+\begin{equation}
+P_0(x) = e^{-\Sigma_{\text{tot}} x}
+\end{equation}
+
+The cumulative density function (CDF) is used to sample the distance to interaction:
+\begin{equation}
+x = -\frac{1}{\Sigma_{\text{tot}}}\ln(\xi)
+\end{equation}
+where $\xi \in (0, 1)$ is a random number.
+
+Sampling methods include the \textbf{Inverse Method}, which involves the following steps:
+\begin{enumerate}
+\item Generate a random number $\xi \in (0, 1)$.
+\item Find $\tilde{x}$ such that $F(\tilde{x}) = \xi$, where $F$ is the cumulative distribution function.
+\end{enumerate}
+For example, for $f(x) = \Sigma_T e^{-\Sigma_T x}$:
+\begin{equation}
+F^{-1}(\xi) = -\frac{1}{\Sigma_T} \ln(\xi)
+\end{equation}
+
+If an interface between two materials is encountered, the following approaches can be used:
+\begin{itemize}
+\item \textbf{Adjust the Initial Sample:} Correct the initial sample to ensure conservation of probability. For example, if $x_1$ is the initial sampled position, adjust to $x_2$ based on the boundary location to maintain consistency.
+\begin{equation}
+e^{\Sigma_{tot}(x_1 - d) = e^{\Sigma_{tot}(x_2)}}
+\end{equation}
+\item \textbf{Sample Anew:} Use the information from crossing the boundary to take a new sample starting from the interface point $x_2$, ensuring accurate representation of the new region.
+\end{itemize}
+
+In both cases, the challenge lies in determining the distance to the interface and ensuring conservation of probability.
+Serpent uses \textit{delta-tracking}: all the sampling is done with the same cross section: $\Sigma_M$ called Majorant such that $\Simga_m = \Sigma_{tot, i} + \Sigma_{virtual, i}$
+We sample a virtual probability $P_{virtual} = \frac{\Sigma_{virtual}(i)}{\Sigma{tot}(i) + \Sigma_{virtual}(i)}$ from which we can get $P = 1 - \frac{\Sigma_{\text{region i}}{\Sigma_m}$ which is the probability that the sampled point is virtual and should be rejected, if not, the point is valid.
+
+Another sampling method involves \textbf{Sampling from Tables}, useful for cross-section data. This approach divides the range into $N$ intervals such that:
+\begin{equation}
+\int_{x_1}^{x_2} f(x) dx = \frac{1}{N}
+\end{equation}
+Ensuring equal probabilities across intervals allows direct sampling from cumulative tables. The sampled position can be refined using linear interpolation:
+\begin{equation}
+x = x_m + (N\xi - m)(x_{m+1} - x_m)
+\end{equation}
+
+\subsection{Collection Pillar in Detail}
+
+The collection process aggregates data from simulated neutron histories:
+
+The sample mean $\bar{x}$ is calculated as:
+\begin{equation}
+\bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i
+\end{equation}
+
+Variance is given by:
+\begin{equation}
+\text{Var}(\bar{x}) = \frac{\sigma^2}{N}
+\end{equation}
+
+Confidence intervals are used to quantify uncertainty, typically expressed as:
+\begin{equation}
+\bar{x} \pm 2\sigma
+\end{equation}
+
+Accurate results require a sufficient number of samples, as the standard deviation decreases with increasing $N$.
+
+Uncertainty analysis is crucial for interpreting results, as demonstrated in cases like $k_{\text{eff}}$ calculations:
+\begin{equation}
+k_{\text{eff}} = 1.0024 \pm 0.0002 \quad \text{(critical)}
+\end{equation}
+
+
+\section{Evaluation of \texorpdfstring{$\beta_{\text{effective}}$}{Beta-effective} with Monte Carlo Codes}
+
+The delayed neutron fraction, $\beta$, plays a pivotal role in the kinetics of a nuclear reactor. Two primary distinctions of $\beta$ are of interest: the physical delayed neutron fraction, $\beta_{\text{physical}}$, and the effective delayed neutron fraction, $\beta_{\text{effective}}$.
+
+\subsection{Physical and Effective Delayed Neutron Fractions}
+
+\begin{itemize}
+    \item \textbf{Physical Delayed Neutron Fraction} ($\beta_{\text{physical}}$): This represents the theoretical fraction of neutrons emitted by delayed neutron precursors and is determined from tabulated nuclear data. For the analyzed reactor system, $\beta_{\text{physical}} = 650 \ \text{pcm}$.
+    \item \textbf{Effective Delayed Neutron Fraction} ($\beta_{\text{effective}}$): Unlike $\beta_{\text{physical}}$, $\beta_{\text{effective}}$ accounts for the neutron energy spectrum in the reactor. For the same reactor, $\beta_{\text{effective}} = 730 \ \text{pcm}$. This adjustment arises because delayed and prompt neutrons differ in their energy distributions. Delayed neutrons are more thermalized, necessitating a greater weighting factor to balance the spectral differences.
+\end{itemize}
+
+\subsection{Mathematical Formulation of \texorpdfstring{$\beta_{\text{effective}}$}{Beta-effective}}
+
+The effective delayed neutron fraction can be evaluated using the following equation:
+
+\[
+\beta_{\text{effective}} = 
+\frac{\int_V \int_E \int_\Omega \Phi^*(\mathbf{r}, E, \Omega) \chi_d(E) \Sigma_{f}(\mathbf{r}, E) \Phi(\mathbf{r}, E, \Omega) \, d\mathbf{r} \, dE \, d\Omega}
+{\int_V \int_E \int_\Omega \Phi^*(\mathbf{r}, E, \Omega) \chi_t(E) \Sigma_{f}(\mathbf{r}, E) \Phi(\mathbf{r}, E, \Omega) \, d\mathbf{r} \, dE \, d\Omega}.
+\]
+
+Here:
+\begin{itemize}
+    \item $\Phi^*(\mathbf{r}, E, \Omega)$: Adjoint neutron flux.
+    \item $\Phi(\mathbf{r}, E, \Omega)$: Forward neutron flux.
+    \item $\chi_d(E)$: Energy spectrum of delayed neutrons.
+    \item $\chi_t(E)$: Energy spectrum of all fission neutrons (prompt and delayed).
+    \item $\Sigma_f(\mathbf{r}, E)$: Microscopic fission cross-section.
+\end{itemize}
+
+\subsection{Importance in Monte Carlo Simulations}
+
+The adjoint flux $\Phi^*$, which represents the importance of neutrons, is not directly available in standard Monte Carlo codes. To address this, the evaluation of $\beta_{\text{effective}}$ relies on alternative methods, such as:
+\begin{itemize}
+    \item Weighting delayed neutron contributions by the relative thermalization of the neutron spectrum.
+    \item Statistical sampling techniques to approximate the spectral weighting.
+\end{itemize}
+
+In Monte Carlo simulations, $\beta_{\text{effective}}$ can be approximated by:
+
+\[
+\beta_{\text{effective}} \approx 1 - \frac{k_p}{k_{\text{eff}}}
+\]
+
+where $k_p$ represents the multiplication factor considering prompt neutrons only, and $k_{\text{eff}}$ is the total effective multiplication factor including both prompt and delayed neutrons.
+
+\subsection{Physical Interpretation of the Results}
+
+The distinction between $\beta_{\text{physical}}$ and $\beta_{\text{effective}}$ arises due to the spectral differences between prompt and delayed neutrons. Delayed neutrons, being closer to thermal energies, contribute more effectively to the chain reaction. Therefore, $\beta_{\text{effective}}$ provides a more accurate representation of the delayed neutron fraction in reactor dynamics.
+
+
+\section{Notes on Serpent Usage}
+
+Serpent is a 3D Monte Carlo code widely used for neutron transport and reactor physics calculations. Its capabilities include detailed modeling of geometry, materials, and reactor behavior, making it ideal for analyzing advanced nuclear systems.
+
+\subsection{Overview of Key Features}
+
+Serpent provides two estimates for the effective multiplication factor:
+\begin{itemize}
+    \item \textbf{Analog $k_{\text{eff}}$}: Uses the direct statistical sampling of fission events.
+    \item \textbf{Implicit $k_{\text{eff}}$}: Incorporates weighted contributions from neutron transport, reducing statistical uncertainty.
+\end{itemize}
+
+Both methods are valid and provide consistent results, but their use depends on the application and required level of accuracy.
+
+\subsection{Inputs for Serpent Simulations}
+
+To perform a simulation in Serpent, the following inputs are required:
+\begin{enumerate}
+    \item \textbf{Nuclear Data Library}: Provides cross-section data for neutron interactions.
+    \item \textbf{Material Properties}: Includes isotopic compositions, densities, and temperatures of materials in the system.
+    \item \textbf{Geometry Definition}: The model must specify regions, cells, and boundaries. For instance:
+    \begin{itemize}
+        \item Each material is assigned to a specific region.
+        \item Universes are used to define the hierarchical structure of the model.
+        \item A fuel element can be defined in a universe and replicated in a lattice.
+    \end{itemize}
+    \item \textbf{Population History}: Includes parameters such as:
+    \begin{itemize}
+        \item Number of particles per cycle.
+        \item Number of active cycles (used in the final tally).
+        \item Number of inactive cycles (for initial flux convergence).
+    \end{itemize}
+    \item \textbf{Detector Setup}: Specifies the regions and reactions to monitor during the simulation. The response function $R$ is defined as:
+    \[
+    R = \int_V \int_E \int_\Omega \Phi(\mathbf{r}, E, \Omega) f(\mathbf{r}, E) \, d\mathbf{r} \, dE \, d\Omega,
+    \]
+    where $f$ is the reaction rate or flux weighting function.
+\end{enumerate}
+
+\subsection{Analog vs Implicit Estimations}
+
+Serpent employs two approaches to calculate reaction rates:
+\begin{itemize}
+    \item \textbf{Analog Estimation}: Directly counts the number of events, such as captures, fissions, and scatterings.
+    \item \textbf{Implicit Estimation}: Uses statistical weights to account for multiple potential outcomes of a neutron’s interaction. This method reduces uncertainty by including uncounted interactions through weighting.
+\end{itemize}
+
+For example, absorption can be represented as:
+\[
+W = \prod \left(1 - \frac{\Sigma_{f,i}}{\Sigma_{t,i}}\right),
+\]
+where $W$ is the weight, $\Sigma_{f,i}$ is the fission cross-section, and $\Sigma_{t,i}$ is the total cross-section.
+
+\subsection{Practical Applications and Benefits}
+
+Serpent's hybrid use of analog and implicit methods allows users to:
+\begin{itemize}
+    \item Reduce statistical uncertainty by increasing the number of points considered.
+    \item Perform detailed analyses of complex geometries and materials.
+    \item Simulate advanced reactor systems with high computational efficiency.
+\end{itemize}
+The implicit method is particularly advantageous for rare events, as it provides better statistical convergence without requiring additional computational cycles.
+
+\subsection{Considerations for Accuracy and Convergence}
+
+To ensure accurate results, users should:
+\begin{itemize}
+    \item Define sufficient active and inactive cycles for flux stabilization.
+    \item Verify that the detector response function is normalized correctly.
+    \item Check that all material and geometry definitions align with physical system characteristics.
+\end{itemize}
+With these practices, Serpent can be a powerful tool for reactor physics research and design.
