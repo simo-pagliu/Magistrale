@@ -29,10 +29,26 @@ known_CR_w = [
 # Montecarlo simulation results
 # Obtained by Serpent simulation
 k_mc = [
+<<<<<<< Updated upstream
     m(0.88566, 0.00658), # all in
+<<<<<<< Updated upstream
+    m(0.91903, 0.00632), # shim
+    m(0.89631, 0.00711), # reg
+    m(0.89353, 0.00699)  # trans
+=======
     m(0.99169, 0.00159), # shim
     m(0.96415, 0.00491), # reg
     m(0.98287, 0.00406)  # trans
+=======
+    m(0.88316, 0.00691), # all in -
+    m(0.92266, 0.00622), # shim -
+    m(0.88988, 0.00741), # reg -
+    m(0.89402, 0.00704)  # trans -
+>>>>>>> Stashed changes
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     ]
 
 # Beta values from the simulation
