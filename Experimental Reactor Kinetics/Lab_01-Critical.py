@@ -1,5 +1,5 @@
 from framework import Measurement as m
-
+from framework import rss
 # Define the estimated error for time measurements
 estimated_error = 0.5  # Replace with actual estimated error if known
 
@@ -50,14 +50,28 @@ beta_values = np.array([3.07E-04, 8.40E-04, 2.88E-03, 1.43E-03, 1.60E-03, 2.41E-
 w = 0.5 # weight factor
 time = w * np.array(measurement.time_6_9W) + (1-w) * np.array(measurement.time_3_4_5W)
 rho = []
-print("Time:")
 for i in range(0, len(time)):
     estimated_T = time[i].value / np.log(1.5)
     rho.append( ( lambda_big/estimated_T + sum(beta_values / (1 + estimated_T * lambda_values)) )*100000 )
-print(f"Differential reactivity (ρ) in pcm: {rho}")
 
 # Integral reactivity
 # Into dollars
 beta_pcm_tot = 730
 dollar_rho = sum(rho) / beta_pcm_tot
 print(f"Total CR worth: {dollar_rho:.2f} $")
+
+
+# MC simulation with serpent
+# Full core critical REG in: 1.06548 +/- 0.00128  [1.06299  1.06798]
+# Full core critical REG out: 1.07656 +/- 0.00105  [1.07451  1.07861]
+
+reg_in = m(1.06548, 0.00128)
+reg_out = m(1.07656, 0.00105)
+
+rho_in = rss(lambda k: (k-1)/k, reg_in)
+rho_out = rss(lambda k: (k-1)/k, reg_out)
+
+# Compute Control Rod Worth, in dollars
+beta = 0.0073
+CR_worth = (rho_out - rho_in) / beta
+print(f"CR worth from SERPENT Simulation: {CR_worth}$ Interval: ({(CR_worth.value - CR_worth.uncertainty):.2f}$, {(CR_worth.value + CR_worth.uncertainty):.2f}$)")
