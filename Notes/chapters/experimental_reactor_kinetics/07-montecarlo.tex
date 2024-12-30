@@ -87,8 +87,8 @@ e^{\Sigma_{tot}(x_1 - d) = e^{\Sigma_{tot}(x_2)}}
 \end{itemize}
 
 In both cases, the challenge lies in determining the distance to the interface and ensuring conservation of probability.
-Serpent uses \textit{delta-tracking}: all the sampling is done with the same cross section: $\Sigma_M$ called Majorant such that $\Simga_m = \Sigma_{tot, i} + \Sigma_{virtual, i}$
-We sample a virtual probability $P_{virtual} = \frac{\Sigma_{virtual}(i)}{\Sigma{tot}(i) + \Sigma_{virtual}(i)}$ from which we can get $P = 1 - \frac{\Sigma_{\text{region i}}{\Sigma_m}$ which is the probability that the sampled point is virtual and should be rejected, if not, the point is valid.
+Serpent uses \textit{delta-tracking}: all the sampling is done with the same cross section: $ \Sigma_M $ called Majorant such that $\Sigma_m = \Sigma_{tot, i} + \Sigma_{virtual, i}$
+We sample a virtual probability $P_{virtual} = \frac{\Sigma_{virtual}(i)}{\Sigma{tot}(i) + \Sigma_{virtual}(i)}$ from which we can get $P = 1 - \frac{\Sigma_{\text{region i}}}{\Sigma_m}$ which is the probability that the sampled point is virtual and should be rejected, if not, the point is valid.
 
 Another sampling method involves \textbf{Sampling from Tables}, useful for cross-section data. This approach divides the range into $N$ intervals such that:
 \begin{equation}
