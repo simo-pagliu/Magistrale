@@ -26,3 +26,17 @@ Friction velocity: 0.02016 m/s
 Lower y limit (center of the cell): 0.04971 mm
 Upper y limit (center of the cell): 24.85666 mm
 
+=== Boundary Layer Dimensions Based on y+ ===
+Date & Time: 2025-01-08 15:45:51.375169
+
+y+ lower limit: 5.0
+y+ upper limit: 30.0
+Friction factor: 0.013
+Velocity: 1.0 m/s
+Density: 1000.0 kg/m³
+Viscosity: 0.001 kg/m·s
+Wall shear stress: 1.62500 Pa
+Friction velocity: 0.04031 m/s
+Lower y limit (center of the cell): 0.12403 mm
+Upper y limit (center of the cell): 0.74421 mm
+

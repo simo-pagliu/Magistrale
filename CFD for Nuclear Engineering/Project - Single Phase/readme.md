@@ -14,7 +14,12 @@ The geometry was done in Fusion, it's the model of **Bali-2**:
 Exported as a STEP file: `CAD_geometry.step`.  
 
 ### Fluent Mesh
+The system is in natural convection, the flow will be highly anisotpic, therfore we cannot use standard k-eps or k-omega nor low-Re models.  
+
 The case is in turbolent flow since $Ra >> 10^{9}$.  
+
+So we can use:
+- SST + "corner correction" = quadratic correction (y+ is not required to be <1 but the grid should be able to catch all the microstructures of the flow, so we still need it around 1)
 
 - `Waterthight Geometry`
 - No `local sizing`
