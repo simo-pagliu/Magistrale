@@ -35,6 +35,8 @@ So we can use:
 We activated gravity, energy model, transient simulation, standard initialization at 300K no velocity.  
 
 Water as fluid with given data, density was set to Boussinesq approximation since we need to simulate natural convection.  
+For the operating conditions reference temperature we use $T_0 = 273K$ which is the lowest temperature.  
+
 
 We set the front and back surfaces to periodic conditions.  
 We set the Temperature to 273.15K on the curved wall.  
