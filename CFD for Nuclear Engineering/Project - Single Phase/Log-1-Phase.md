@@ -27,8 +27,6 @@ So we can use:
 - `Only fluid with no voids`
 - Boundary layer: $20$ layers, first height: $1.25$, growth rate: $1.2$
 - Multizone meshing: `hex-pave`
--
-
 
 ## 03 - Simulation
 ### 00 - First Evaluation
@@ -50,12 +48,28 @@ For models we used the $k-\omega \, SST$ because is the best, production limiter
 Whitin this run we plan to verify:
 - y+ at the wall (countour)
 - max and avg (should be $Co \sim 1$) Courant Number (reports definitions)
-
+  
+### 01 - Refined Mesh
 From this first run we have determined that the mesh is too coarse from:
 - velocity profile --> shows large variation between cells
 - y+ @wall --> larger then 1 at curved wall
 Also this has been confirmed by the fact that the $Co$ is much lower then 1.
 
-### 01 - Refined Mesh
+This took several attempts.
+
+### 02 - Simulation
+After several attempts we settled for teh following meshing option:  
+- `Waterthight Geometry`
+- No `local sizing`
+- Surface mesh $Min = 1 mm$ and $Max = 50mm$  
+- `Only fluid with no voids`
+- Boundary layer: $20$ layers, first height: $1.25$, growth rate: $1.2$
+- Multizone meshing: `hex-pave`
+
+And the following settings:
+- Steady state simulation  
+- Coupled since it wasn't converging with SIMPLE    
+- PRESTO! for pressure  
+- All other methods as second order  
 
 
