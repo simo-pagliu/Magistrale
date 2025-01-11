@@ -52,7 +52,10 @@ Drag:
 It could be worth it to use the Ishii & Zuber model. 
 
 Lift:
-- Non ne ha indicati altri.
+- Tomiyama et al. - 2002
+- Ziegenhein et al - 2018
+- Hessenkemper et al - 2021
+Tomiyama paper is the only one hat uses a large channel for their experiment (2m by 2m squared) while the other two studies use thin rectangualr ducts. Also the last two where focused on changes due to impurites in the water.  
 
 Wall Lubrication:
 - Antal et al. - 1991

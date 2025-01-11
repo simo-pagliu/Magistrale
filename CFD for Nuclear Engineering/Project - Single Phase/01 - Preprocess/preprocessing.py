@@ -40,4 +40,16 @@ plt.show()
 
 # Compute and display average temperature
 average_temperature = temperature_data['Temperature (°C)'].mean() + 273.15
-print(f"Average Temperature: {average_temperature:.2f} K")
+print(f"Average Temperature on the vertical line: {average_temperature:.2f} K")
+
+Ra_int = 2.36e16
+H = 2
+V_pool = 3.14*H**2/4 * 0.15
+R_v = (4*V_pool/(3.14*H))**0.5
+Nu_dn = 0.116 * (H / R_v)**0.32 * Ra_int ** 0.25
+alpha = Nu_dn * 0.6 / H
+Area = 3.14 * 2 * 0.15 /4
+power = 15e3
+T_delta = power / (alpha * Area)
+T_bulk = T_delta + 273.15
+print(f"Average Bulk Temperature: {T_bulk:.2f} K, {T_bulk-273.15:.2f} °C")
