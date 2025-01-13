@@ -40,7 +40,7 @@ plt.show()
 
 # Compute and display average temperature
 average_temperature = temperature_data['Temperature (°C)'].mean() + 273.15
-print(f"Average Temperature on the vertical line: {average_temperature:.2f} K")
+print(f"Average Temperature on the vertical line: {average_temperature:.2f} K ({average_temperature-273.15:.2f} °C)")
 
 Ra_int = 2.36e16
 H = 2
