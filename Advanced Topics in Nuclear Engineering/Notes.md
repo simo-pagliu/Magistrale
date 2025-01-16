@@ -138,13 +138,13 @@ Where $Bu_1$ is the burnup of the core if it was just one big region.
 
 Peaking factors
 
-$f_q$: ???, it limits the fuel melting, is of interest for the LOCA scenario = $\frac{q'_{MAX}(Pellet)}{q'_{AVG}\%P}$  
+$f_q$: Heat flux factor, it limits the fuel melting, is of interest for the LOCA scenario = $\frac{q'_{MAX}(Pellet)}{q'_{AVG}\%P}$  
 Where $q'_{AVG}(Pellet)$ is the max heat flux among the **pellets**  
 $q'_{AVG}$ is the average heat flux in the core   
 $\% P$ is the percentage of power over the maximum power (if we operate at lower powers we can relax the limits)  
 
 
-$f_{\Delta h}$: ???, it is a limit on the CFH, used  for evaluating the DNB scenario  = $\frac{q'_{MAX}(Rod)}{q'_{AVG}\%P}$  
+$f_{\Delta h}$: Hentalpy rise factor, it is a limit on the CFH, used  for evaluating the DNB scenario  = $\frac{q'_{MAX}(Rod)}{q'_{AVG}\%P}$  
 Where $q'_{AVG}(Rod)$ is the max heat flux among the **rods**
 
 ## Toxicity Index
@@ -157,3 +157,18 @@ $$
 Where $A$ is, for radioactive substances, the activity [Ci or Bq]  
 $V$ is the **Volume needed to dilute it down to non dangerous levels**
 
+## Decay Heat
+$$
+Q_{decay}(t,T) = \frac{P_{th}}{E_f}(F(t,\infty) - F(t+T, \infty)) \\
+
+F(t,T) = \sum \alpha _1 e ^{-t \lambda _i} \quad \text{(in the US standard)}
+$$
+where:  
+$t$: time after shutdown  
+$T$: Operation time
+
+## Separation Factor
+Same as deontamination fator, is called separation when tralking about reprocessing to have an idea of the extaction eficiency:
+$$
+SF = \frac{\left(\frac{Impuirty}{Tot}\right)_{IN}}{\left(\frac{Impuirty}{Tot}\right)_{OUT}}
+$$
