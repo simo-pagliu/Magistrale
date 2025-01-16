@@ -1,0 +1,11 @@
+AnimationSequence1.0
+NAME: eps-animation
+WINID: 3
+STORAGE: 7
+PLOTANIMATION: 0
+FRAMES: 5
+Frame 0 7 eps-animation_0000.png 3
+Frame 1 7 eps-animation_0001.png 3
+Frame 2 7 eps-animation_0002.png 3
+Frame 3 7 eps-animation_0003.png 3
+Frame 4 7 eps-animation_0004.png 3

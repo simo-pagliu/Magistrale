@@ -4,10 +4,20 @@
 THere are price categories of uranium, usually:
 - < 80 $/kgU
 - < 130 $/kgU
-- < 260 $/kgU
+- < 260 $/kgU  
+  
 The first one is the most interesting as it can be extracted at low cost, most of this uranium is in Kazakistan.  
 The second cat. is less convienent but can still be a viable option in some situation (think about the greater picture)  
 The last option is most likely never, not even close, economically viable.
+
+Recovery cost:
+$$
+RecoveryCost = \frac{MiningCost}{Grade \cdot RecoveryRate}
+$$
+Where grade is a measurment of the purity of the ore
+$$
+Grade = \frac{m_{U3O8}}{m_{ORE}}
+$$
 
 ## Enrichment
 SWU: Separative work unit, indicates the energy needed to enrich and therfore the cost of the enrichment process, sometime used the SWU Factor $SF = \frac{SWU}{Prod}~[SWU/kgU]$  
@@ -17,6 +27,7 @@ SWU = \dot{P} V(x_p) + \dot{W} V(x_w) - \dot{F} V(x_f)
 $$
 
 where, $\dot{I}$ are usually mass flow rates, but can also be mass or volume  
+$V(i)$ is the  separation potential:  
 $V(i) = (2 x_i -1)ln\left(\frac{x_i}{1-x_i}\right)$
 
 P stands for Production (Enriched, Output)  
@@ -41,12 +52,17 @@ $$
 
 $N_s$: Number of stripping stages
 $$
-N_s = ln \left( \frac{R_F}{R_T} \right) \frac{1}{ln(\beta)}
+N_s = ln \left( \frac{R_F}{R_T} \right) \frac{1}{ln(\beta)} - 1
 $$
+
+**Notice that the first ratio in the first logarithm is computed in respect to the whole process: initial feed, final product and final waste values While the $\beta$ to the single stage.**
+
+  
+
 
 Total number of stages needed is $N = N_e + N_s$
 
-In an idial cascade $\alpha = \beta ^2$
+In an idial cascade $\alpha = \beta ^2$ and $\beta = \frac{1}{\gamma}$
 
 If enrichment is increased:
 - we reduce spent fuel
@@ -57,6 +73,17 @@ If we improve the enrichment process by reducing the waste enrichment:
 - we reduce depleted waste
 - we reduce mining and milling waste
 - spent fuel is costant
+
+Reflux ratio for the $n^{th}$ stage:
+$$
+rr = \frac{W_n}{F_n}
+$$
+
+For a gas centrifuge the max velocity is determined by:
+$$
+\sqrt{\frac{\sigma_s}{\rho}} = v_a = \omega a
+$$
+where a is the radius at the outer wall.
 
 ## Economics
 
@@ -73,7 +100,7 @@ Overall the tred make it such that: $CF \uparrow \rightarrow Cost \downarrow$
 ## Out of core managment
 
 T: Length of the Refuleling cycle  
-E: Energy produced in a cycle = $CF \cdot P \cdot T$ 
+E: Energy produced in a cycle = $CF \cdot P_{th} \cdot T$  
 $Bu_c$: Cycle Burnup = $\frac{E}{m_{core}}$  
 $Bu_d$: Discharge Burnup (Admissible of the fuel/technology)   
 $N_r$: Number of core regions which corresponds to the number of cycles within a refuling cycle = $\frac{Bu_d}{Bu_c}$  
@@ -112,8 +139,8 @@ Where $Bu_1$ is the burnup of the core if it was just one big region.
 Peaking factors
 
 $f_q$: ???, it limits the fuel melting, is of interest for the LOCA scenario = $\frac{q'_{MAX}(Pellet)}{q'_{AVG}\%P}$  
-Where $q'_{AVG}(Pellet)$ is the max heat flux among the **pellets** 
-$q'_{AVG}$ is the average heat flux in the core  
+Where $q'_{AVG}(Pellet)$ is the max heat flux among the **pellets**  
+$q'_{AVG}$ is the average heat flux in the core   
 $\% P$ is the percentage of power over the maximum power (if we operate at lower powers we can relax the limits)  
 
 

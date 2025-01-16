@@ -1,6 +1,74 @@
 # Single Phase Project
 The folder structure follows this file.
+
 ## 01 - Preprocessing
+We evaluated the mass flow rate of air in the column.  
+From the fiven distribution plot, once digitalized, we got the fraction of large and small bubbles as well as the average diameters of the two groups.  
+We then computed some more quantities to have an idea of the flow
+
+#### Charateristic time
+Was computed from the air velocity and avg cell size. Found to be $t = 0.049 s$   
+We will take this into account for the simulation time step.
+
+#### Presence of slugs:
+We computed $D_*$ to be 184 $>52$ which means that we cannot have formation of slugs --> We should have an heterogenus flow, so we should consider bubble interactions.  
+
+#### Flow region
+From the velocity $0.0085 m/s$ knowing the diameter to be $0.5m$ we should in the heterogenous region
+
+#### Eotnos Number
+We computed $Eo=3.13$ for small  
+$Eo = 22.6$ for large  
+Confirming it's good :D
+
+#### Models to evaluate
+Drag:
+- Ishii & Zuber - 1978:  Bubbly flow in different regimes, evaluated separatly
+- Grace et al. - 1976:  Formulated for flow past a single bubble, suitable for low volume fractions
+- Tomiyama - 1998:  For single bubble in a wide range of proprieties and diameters, focus on bubbles in stangnat liquid
+  
+(Thanks to the paper of *Yamoah et al - 2015* for the comparison between these models)
+
+It could be worth it to use the Ishii & Zuber model. 
+
+Lift:
+- Tomiyama et al. - 2002
+- Ziegenhein et al - 2018
+- Hessenkemper et al - 2021
+Tomiyama paper is the only one hat uses a large channel for their experiment (2m by 2m squared) while the other two studies use thin rectangualr ducts. Also the last two where focused on changes due to impurites in the water.  
+
+Wall Lubrication:
+- Antal et al. - 1991
+- Tomiyama et al. - 1995
+- Hosokawa et al. - 2002
+Antal was the first model, modeled with spherical bubbles in stationary water and laminar condition, independent from the pipe geometry.   
+Tomiyama expanded Antal to consider the flow field (non still water) and the pipe geometry.  
+Hosokawa modifies the Tomiyama to consider a very large lift force that can occur in some flows.
+
+Virtual Mass: None, not relevant since we get to stable regimes at steady state
+
+Turbolent Dispersion:
+- Burns et al. - 2004
+- Lopez de Berodano - 2004
+Burn is a more general "universale" model, the Lopez model can be derived from the Burns one.  
+Burns was also tested for bubbly flow in vertical pipe and showed better predictions in all cases. 
+The Lopez model was developed for Medium-Sized bubbles in the elipsoidal particle regime.  
+We might want to specify the new coeffieent for the Lopez model as found in the paper by Burns et al.
+
+After all of this we setteled on the following models:
+
+| Force                | Model for Small Phase              | Model for Large Phase                   |
+|----------------------|------------------------------------|-----------------------------------------|
+| Drag                 | Tomiyama                           | Ishii & Zuber OR Tomiyama               |
+| Lift                 | Tomiyama  OR Hessenkemper          | Tomiyama                                |
+| Wall Lubrication     | Tomiyama*                          | Hosowaka OR Tomiyama*                   |
+| Turbolent Dispersion | Burns et al.                       | Burn et al. OR Lopez de Bertodano       |
+
+$*$: this models required some coefficients, the hydraulic diameter $D_h = 0.5m$ and the Hosokawa coefficient $C_h = 0.0217$  
+Both cases used Sato for turbolent interaction, no model for virtual mass and a superficial tension $\sigma = 0.072$
+
+
+
 
 ## 02 - Meshing
 ### Geometry
@@ -41,39 +109,6 @@ Walls: No shear --> No slip for air as well
 
 We still encounter lack of convergence
 
-#### Models to evaluate
-Drag:
-- Ishii & Zuber - 1978:  Bubbly flow in different regimes, evaluated separatly
-- Grace et al. - 1976:  Formulated for flow past a single bubble, suitable for low volume fractions
-- Tomiyama - 1998:  For single bubble in a wide range of proprieties and diameters, focus on bubbles in stangnat liquid
-  
-(Thanks to the paper of *Yamoah et al - 2015* for the comparison between these models)
-
-It could be worth it to use the Ishii & Zuber model. 
-
-Lift:
-- Tomiyama et al. - 2002
-- Ziegenhein et al - 2018
-- Hessenkemper et al - 2021
-Tomiyama paper is the only one hat uses a large channel for their experiment (2m by 2m squared) while the other two studies use thin rectangualr ducts. Also the last two where focused on changes due to impurites in the water.  
-
-Wall Lubrication:
-- Antal et al. - 1991
-- Tomiyama et al. - 1995
-- Hosokawa et al. - 2002
-Antal was the first model, modeled with spherical bubbles in stationary water and laminar condition, independent from the pipe geometry.   
-Tomiyama expanded Antal to consider the flow field (non still water) and the pipe geometry.  
-Hosokawa modifies the Tomiyama to consider a very large lift force that can occur in some flows.
-
-Virtual Mass: None, not relevant since we get to stable regimes at steady state
-
-Turbolent Dispersion:
-- Burns et al. - 2004
-- Lopez de Berodano - 2004
-Burn is a more general "universale" model, the Lopez model can be derived from the Burns one.  
-Burns was also tested for bubbly flow in vertical pipe and showed better predictions in all cases. 
-The Lopez model was developed for Medium-Sized bubbles in the elipsoidal particle regime.  
-We might want to specify the new coeffieent for the Lopez model as found in the paper by Burns et al.
   
 #### Side-track: Alla ricerca della convergenza
 To understand why it is not converging we made animations of volume fracion and air velocity to try and understand what is the simulation doing.  
@@ -86,18 +121,6 @@ Back to the previous solution.
 ### 03 - Finer Mesh
 We reduced minimum cell size from 15mm to 10mm   
 We have reduced the boundary layers from 16 to 10
-
-
-#### Presence of slugs:
-We computed $D_*$ to be 184 $>52$ which means that we cannot have formation of slugs --> We should have an heterogenus flow, so we should consider bubble interactions.  
-
-#### Flow region
-From the velocity $0.0085 m/s$ knowing the diameter to be $0.5m$ we should in the heterogenous region
-
-#### Eotnos Number
-We computed $Eo=3.13$ for small  
-$Eo = 22.6$ for large  
-Confirming it's good :D
 
 #### Free slip condition
 We set specified shear to 0Pa on all walls for the water phase
