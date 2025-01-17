@@ -1,7 +1,10 @@
 # Single Phase Project
 The folder structure follows this file.
+
 ## 01 - Preprocessing
-Average temperature = 322.99K
+We analyzed given experimental data and found that the average temperature along the vertical wall to be: $T_{\text{avg, wall}} = 323K$  
+We then computed the theoerical average bulk temperature of the fluid $T_{\text{avg, bulk}} - T_{ice} = \frac{Q}{\alpha \cdot A}$, area $A$ was computed from known dimentions, generated heat $Q$ was known as well as ice temperature $273K$.  Heat transfer coefficient $\alpha$ was computed from the Nusset number correlation wit the internal Rayleigh number, also given. By these the average bulk temperature was found to be $T_{\text{avg, bulk}} = 370K$.  
+These values are used as monitors in fluent to check for convergence. We immidiatly see a problem in our case as the bulk average temperature is $98 \degree C$ which means that it wil, most likely, be greater then $100 \degree C$ in some parts of the fluid, which means that from this analysis we might expect boiling in the real case which we are not considering in our analyisis. Also fluid proprieties definitions as well as Bossinsque approx for density might not hold well at such large temperature variation. 
 
 ## 02 - Meshing
 ### Geometry
@@ -71,5 +74,9 @@ And the following settings:
 - Coupled since it wasn't converging with SIMPLE    
 - PRESTO! for pressure  
 - All other methods as second order  
+
+### 03 - Post-processing
+Comments on the solution:  
+
 
 
