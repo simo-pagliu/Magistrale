@@ -1,0 +1,320 @@
+{
+    "workflow": {
+        "version": "24.2",
+        "ROOT": {
+            "TaskObject:TaskObject1": {
+                "Arguments": {
+                    "FileName": "C:\/Users\/Simone Pagliuca\/Documents\/GitHub\/Fission-Reactor-Physics\/CFD for Nuclear Engineering\/Project - Two Phase\/02 - Meshing\/BIGGOCYLINDRO.step",
+                    "ImportCadPreferences": {
+                        "CISeparation": "face",
+                        "MaxFacetLength": "0",
+                        "ShowImportCadPreferences": "true"
+                    },
+                    "LengthUnit": "mm",
+                    "NumParts": "1"
+                },
+                "CommandName": "ImportGeometry",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskType": "Simple",
+                "Warnings": "__________None",
+                "_name_": "Import Geometry"
+            },
+            "TaskObject:TaskObject2": {
+                "Arguments": {
+                    "AddChild": "no"
+                },
+                "CommandName": "AddLocalSizingWTM",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskList": "",
+                "TaskType": "Compound",
+                "_name_": "Add Local Sizing"
+            },
+            "TaskObject:TaskObject3": {
+                "Arguments": {
+                    "CFDSurfaceMeshControls": {
+                        "MaxSize": "40",
+                        "MinSize": "10"
+                    },
+                    "ExecuteShareTopology": "No",
+                    "OriginalZones": [
+                        "freeparts-body1",
+                        "freeparts-body1.1",
+                        "freeparts-body1.2"
+                    ]
+                },
+                "CheckPoint": "default-on",
+                "CommandName": "GenerateTheSurfaceMeshWTM",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskType": "Simple",
+                "_name_": "Generate the Surface Mesh"
+            },
+            "TaskObject:TaskObject4": {
+                "Arguments": {
+                    "Multizone": "Yes",
+                    "NonConformal": "No",
+                    "SetupType": "The geometry consists of only fluid regions with no voids"
+                },
+                "CommandName": "GeometrySetup",
+                "InactiveTaskList": [
+                    "TaskObject5",
+                    "TaskObject6",
+                    "TaskObject8"
+                ],
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskList": [
+                    "TaskObject7"
+                ],
+                "TaskType": "Conditional",
+                "_name_": "Describe Geometry"
+            },
+            "TaskObject:TaskObject5": {
+                "CheckPoint": "default-on",
+                "CommandName": "ShareTopology",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskType": "Simple",
+                "_name_": "Apply Share Topology"
+            },
+            "TaskObject:TaskObject6": {
+                "CommandName": "Capping",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskType": "Compound",
+                "_name_": "Enclose Fluid Regions (Capping)"
+            },
+            "TaskObject:TaskObject7": {
+                "Arguments": {
+                    "BoundaryZoneList": [
+                        "bottom",
+                        "top",
+                        "wall"
+                    ],
+                    "BoundaryZoneTypeList": [
+                        "mass-flow-inlet",
+                        "pressure-outlet",
+                        "wall"
+                    ],
+                    "OldBoundaryZoneList": [
+                        "freeparts-body1.2",
+                        "freeparts-body1.1",
+                        "freeparts-body1:1"
+                    ],
+                    "OldBoundaryZoneTypeList": [
+                        "wall",
+                        "wall",
+                        "wall"
+                    ],
+                    "ZoneLocation": [
+                        "3",
+                        "-250",
+                        "0",
+                        "-249.75983",
+                        "249.26494",
+                        "0",
+                        "249.80432",
+                        "freeparts-body1.2",
+                        "-250",
+                        "2000",
+                        "-249.75983",
+                        "249.26494",
+                        "2000",
+                        "249.80432",
+                        "freeparts-body1.1",
+                        "-250",
+                        "0",
+                        "-249.98146",
+                        "249.99998",
+                        "2000",
+                        "249.97095",
+                        "freeparts-body1:1"
+                    ]
+                },
+                "CommandName": "UpdateBoundaries",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskType": "Simple",
+                "_name_": "Update Boundaries"
+            },
+            "TaskObject:TaskObject8": {
+                "CheckPoint": "default-on",
+                "CommandName": "CreateRegions",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskType": "Simple",
+                "_name_": "Create Regions"
+            },
+            "TaskObject:TaskObject9": {
+                "CommandName": "UpdateRegions",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskType": "Simple",
+                "_name_": "Update Regions"
+            },
+            "TaskObject:TaskObject10": {
+                "Arguments": "",
+                "CommandName": "AddBoundaryLayers",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskList": [
+                    "TaskObject17"
+                ],
+                "TaskType": "Compound",
+                "_name_": "Add Boundary Layers"
+            },
+            "TaskObject:TaskObject15": {
+                "Arguments": "",
+                "CheckPoint": "user-off",
+                "CommandName": "AddMultiZoneControls",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskList": [
+                    "TaskObject18"
+                ],
+                "TaskType": "Compound",
+                "_name_": "Add MultiZone Controls"
+            },
+            "TaskObject:TaskObject16": {
+                "Arguments": {
+                    "CellZoneList": [
+                        "freeparts-body1"
+                    ],
+                    "CompleteRegionScope": [
+                        "freeparts-body1"
+                    ],
+                    "RegionScope": [
+                        "freeparts-body1"
+                    ]
+                },
+                "CheckPoint": "default-on",
+                "CommandName": "GenerateTheMultiZoneMesh",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskType": "Simple",
+                "_name_": "Generate the MultiZone Mesh"
+            },
+            "TaskObject:TaskObject17": {
+                "Arguments": {
+                    "BLControlName": "uniform_1",
+                    "BLRegionList": [
+                        "freeparts-body1"
+                    ],
+                    "BLZoneList": [
+                        "wall",
+                        "bottom"
+                    ],
+                    "CompleteBLRegionList": [
+                        "freeparts-nozzle"
+                    ],
+                    "CompleteBLZoneList": [
+                        "bottom",
+                        "nozzle"
+                    ],
+                    "FaceScope": {
+                        "GrowOn": "selected-zones"
+                    },
+                    "FirstHeight": "5",
+                    "LocalPrismPreferences": {
+                        "Continuous": "Continuous"
+                    },
+                    "NumberOfLayers": "10",
+                    "OffsetMethodType": "uniform",
+                    "ZoneSelectionList": [
+                        "bottom",
+                        "wall"
+                    ]
+                },
+                "CommandName": "AddBoundaryLayers",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskType": "Compound Child",
+                "_name_": "uniform_1"
+            },
+            "TaskObject:TaskObject18": {
+                "Arguments": {
+                    "CompleteRegionScope": [
+                        "freeparts-body1"
+                    ],
+                    "ControlType": "Regions",
+                    "FillWith": "Hex-Pave",
+                    "Intervals": "10",
+                    "MultiZName": "mz-region_1",
+                    "ParallelSelection": "false",
+                    "RegionScope": [
+                        "freeparts-body1"
+                    ],
+                    "SourceMethod": "Zones",
+                    "UseSweepSize": "no",
+                    "ZoneLocation": [
+                        "1",
+                        "-250",
+                        "0",
+                        "-249.75983",
+                        "249.26494",
+                        "0",
+                        "249.80432",
+                        "bottom"
+                    ],
+                    "ZoneSourceList": [
+                        "bottom"
+                    ]
+                },
+                "CheckPoint": "default-on",
+                "CommandName": "AddMultiZoneControls",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskType": "Compound Child",
+                "_name_": "mz-region_1"
+            },
+            "Workflow": {
+                "CurrentTask": "TaskObject16",
+                "TaskList": [
+                    "TaskObject1",
+                    "TaskObject2",
+                    "TaskObject3",
+                    "TaskObject4",
+                    "TaskObject9",
+                    "TaskObject10",
+                    "TaskObject15",
+                    "TaskObject16"
+                ],
+                "WorkflowType": "Watertight Geometry"
+            }
+        }
+    },
+    "meshing": {
+        "version": "24.2",
+        "ROOT": {
+            "GlobalSettings": {
+                "AreaUnit": "mm^2",
+                "EnableCleanCAD": "true",
+                "EnableComplexMeshing": "false",
+                "InitialVersion": "24.2",
+                "LengthUnit": "mm",
+                "NormalMode": "false",
+                "VolumeUnit": "mm^3"
+            }
+        }
+    },
+    "PartManagement": {
+        "version": "24.2",
+        "ROOT": {
+            "Node:Node1": {
+                "Name": "Meshing Model",
+                "_name_": "Meshing Model"
+            },
+            "ObjectSettingOperations": {
+                "Children": ""
+            },
+            "RefacetingOperations": {
+                "Children": ""
+            },
+            "TransformOperations": {
+                "Children": ""
+            }
+        }
+    }
+}

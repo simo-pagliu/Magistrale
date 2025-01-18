@@ -1,0 +1,355 @@
+{
+    "workflow": {
+        "version": "24.2",
+        "ROOT": {
+            "TaskObject:TaskObject1": {
+                "Arguments": {
+                    "FileName": "C:\/Users\/Simo\/Documents\/GitHub\/Fission-Reactor-Physics\/CFD for Nuclear Engineering\/Project - Two Phase\/02 - Meshing\/CAD_Geometry.step",
+                    "ImportCadPreferences": {
+                        "CISeparation": "face",
+                        "MaxFacetLength": "0",
+                        "ShowImportCadPreferences": "true"
+                    },
+                    "LengthUnit": "mm",
+                    "NumParts": "1"
+                },
+                "CheckPoint": "default-off",
+                "CommandName": "ImportGeometry",
+                "Errors": "__________None",
+                "InactiveTaskList": "__________None",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskList": "__________None",
+                "TaskType": "Simple",
+                "Warnings": "__________None",
+                "_name_": "Import Geometry"
+            },
+            "TaskObject:TaskObject2": {
+                "Arguments": "",
+                "CheckPoint": "default-off",
+                "CommandName": "AddLocalSizingWTM",
+                "Errors": "__________None",
+                "InactiveTaskList": "__________None",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskList": "__________None",
+                "TaskType": "Compound",
+                "Warnings": "__________None",
+                "_name_": "Add Local Sizing"
+            },
+            "TaskObject:TaskObject3": {
+                "Arguments": {
+                    "CFDSurfaceMeshControls": {
+                        "GrowthRate": "1",
+                        "MaxSize": "25",
+                        "MinSize": "25"
+                    },
+                    "ExecuteShareTopology": "No",
+                    "OriginalZones": [
+                        "freeparts-nozzle",
+                        "freeparts-nozzle.1",
+                        "freeparts-nozzle.2",
+                        "freeparts-nozzle.3"
+                    ]
+                },
+                "CheckPoint": "default-on",
+                "CommandName": "GenerateTheSurfaceMeshWTM",
+                "Errors": "__________None",
+                "InactiveTaskList": "__________None",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskList": "__________None",
+                "TaskType": "Simple",
+                "Warnings": "__________None",
+                "_name_": "Generate the Surface Mesh"
+            },
+            "TaskObject:TaskObject4": {
+                "Arguments": {
+                    "Multizone": "No",
+                    "NonConformal": "No",
+                    "SetupType": "The geometry consists of only fluid regions with no voids"
+                },
+                "CheckPoint": "default-off",
+                "CommandName": "GeometrySetup",
+                "Errors": "__________None",
+                "InactiveTaskList": [
+                    "TaskObject5",
+                    "TaskObject6",
+                    "TaskObject8"
+                ],
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskList": [
+                    "TaskObject7"
+                ],
+                "TaskType": "Conditional",
+                "Warnings": "__________None",
+                "_name_": "Describe Geometry"
+            },
+            "TaskObject:TaskObject5": {
+                "Arguments": "",
+                "CheckPoint": "default-on",
+                "CommandName": "ShareTopology",
+                "Errors": "__________None",
+                "InactiveTaskList": "__________None",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskList": "__________None",
+                "TaskType": "Simple",
+                "Warnings": "__________None",
+                "_name_": "Apply Share Topology"
+            },
+            "TaskObject:TaskObject6": {
+                "Arguments": "",
+                "CheckPoint": "default-off",
+                "CommandName": "Capping",
+                "Errors": "__________None",
+                "InactiveTaskList": "__________None",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskList": "__________None",
+                "TaskType": "Compound",
+                "Warnings": "__________None",
+                "_name_": "Enclose Fluid Regions (Capping)"
+            },
+            "TaskObject:TaskObject7": {
+                "Arguments": {
+                    "BoundaryZoneList": [
+                        "nozzle",
+                        "bottom",
+                        "walls",
+                        "top"
+                    ],
+                    "BoundaryZoneTypeList": [
+                        "mass-flow-inlet",
+                        "wall",
+                        "wall",
+                        "pressure-outlet"
+                    ],
+                    "OldBoundaryZoneList": [
+                        "freeparts-nozzle.3",
+                        "freeparts-nozzle.2",
+                        "freeparts-nozzle.1",
+                        "freeparts-nozzle:1"
+                    ],
+                    "OldBoundaryZoneTypeList": [
+                        "wall",
+                        "wall",
+                        "wall",
+                        "wall"
+                    ],
+                    "ZoneLocation": [
+                        "4",
+                        "-20",
+                        "-19.431955",
+                        "0",
+                        "16.967083",
+                        "18.645596",
+                        "0",
+                        "freeparts-nozzle.3",
+                        "-250",
+                        "-249.89406",
+                        "0",
+                        "249.77963",
+                        "249.96278",
+                        "0",
+                        "freeparts-nozzle.2",
+                        "-250",
+                        "-249.99989",
+                        "0",
+                        "249.99567",
+                        "249.99989",
+                        "2110",
+                        "freeparts-nozzle.1",
+                        "-250",
+                        "-249.89406",
+                        "2110",
+                        "249.77963",
+                        "249.96278",
+                        "2110",
+                        "freeparts-nozzle:1"
+                    ]
+                },
+                "CheckPoint": "default-off",
+                "CommandName": "UpdateBoundaries",
+                "Errors": "__________None",
+                "InactiveTaskList": "__________None",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskList": "__________None",
+                "TaskType": "Simple",
+                "Warnings": "__________None",
+                "_name_": "Update Boundaries"
+            },
+            "TaskObject:TaskObject8": {
+                "Arguments": "",
+                "CheckPoint": "default-on",
+                "CommandName": "CreateRegions",
+                "Errors": "__________None",
+                "InactiveTaskList": "__________None",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskList": "__________None",
+                "TaskType": "Simple",
+                "Warnings": "__________None",
+                "_name_": "Create Regions"
+            },
+            "TaskObject:TaskObject9": {
+                "Arguments": {
+                    "OldRegionNameList": [
+                        "freeparts-nozzle"
+                    ],
+                    "OldRegionTypeList": [
+                        "fluid"
+                    ],
+                    "RegionNameList": [
+                        "fluid"
+                    ],
+                    "RegionTypeList": [
+                        "fluid"
+                    ]
+                },
+                "CheckPoint": "default-off",
+                "CommandName": "UpdateRegions",
+                "Errors": "__________None",
+                "InactiveTaskList": "__________None",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskList": "__________None",
+                "TaskType": "Simple",
+                "Warnings": "__________None",
+                "_name_": "Update Regions"
+            },
+            "TaskObject:TaskObject10": {
+                "Arguments": "",
+                "CheckPoint": "default-off",
+                "CommandName": "AddBoundaryLayers",
+                "Errors": "__________None",
+                "InactiveTaskList": "__________None",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskList": [
+                    "TaskObject14"
+                ],
+                "TaskType": "Compound",
+                "Warnings": "__________None",
+                "_name_": "Add Boundary Layers"
+            },
+            "TaskObject:TaskObject11": {
+                "Arguments": {
+                    "VolumeFill": "poly-hexcore",
+                    "VolumeFillControls": {
+                        "HexMaxSize": "25"
+                    },
+                    "VolumeMeshPreferences": {
+                        "Avoid1_8Transition": "no",
+                        "QualityWarningLimit": "0.050000000000000003",
+                        "ShowVolumeMeshPreferences": "false"
+                    }
+                },
+                "CheckPoint": "default-on",
+                "CommandName": "GenerateTheVolumeMeshWTM",
+                "Errors": "__________None",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskType": "Simple",
+                "_name_": "Generate the Volume Mesh"
+            },
+            "TaskObject:TaskObject14": {
+                "Arguments": {
+                    "BLControlName": "uniform_1",
+                    "BLRegionList": [
+                        "fluid"
+                    ],
+                    "BLZoneList": [
+                        "walls"
+                    ],
+                    "CompleteBLRegionList": [
+                        "fluid"
+                    ],
+                    "CompleteBLZoneList": [
+                        "walls"
+                    ],
+                    "FaceScope": {
+                        "GrowOn": "selected-zones"
+                    },
+                    "FirstHeight": "20",
+                    "LocalPrismPreferences": {
+                        "Continuous": "Continuous"
+                    },
+                    "NumberOfLayers": "3",
+                    "OffsetMethodType": "uniform",
+                    "ZoneSelectionList": [
+                        "walls"
+                    ]
+                },
+                "CheckPoint": "default-off",
+                "CommandName": "AddBoundaryLayers",
+                "Errors": "__________None",
+                "InactiveTaskList": "__________None",
+                "ObjectPath": "",
+                "State": "Out-of-date",
+                "TaskList": "__________None",
+                "TaskType": "Compound Child",
+                "Warnings": "__________None",
+                "_name_": "uniform_1"
+            },
+            "Workflow": {
+                "CurrentTask": "TaskObject11",
+                "TaskList": [
+                    "TaskObject1",
+                    "TaskObject2",
+                    "TaskObject3",
+                    "TaskObject4",
+                    "TaskObject9",
+                    "TaskObject10",
+                    "TaskObject11"
+                ],
+                "WorkflowType": "Watertight Geometry"
+            }
+        }
+    },
+    "meshing": {
+        "version": "24.2",
+        "ROOT": {
+            "GlobalSettings": {
+                "AreaUnit": "mm^2",
+                "EnableCleanCAD": "true",
+                "EnableComplexMeshing": "false",
+                "EnableOversetMeshing": "false",
+                "EnablePrime2dMeshing": "false",
+                "EnablePrimeMeshing": "false",
+                "InitialVersion": "24.2",
+                "LengthUnit": "mm",
+                "NormalMode": "false",
+                "UseAllowedValues": "true",
+                "VolumeUnit": "mm^3",
+                "FTMRegionData": {
+                    "AllOversetNameList": "__________None",
+                    "AllOversetSizeList": "__________None",
+                    "AllOversetTypeList": "__________None",
+                    "AllOversetVolumeFillList": "__________None",
+                    "AllRegionFilterCategories": "__________None",
+                    "AllRegionLeakageSizeList": "__________None",
+                    "AllRegionLinkedConstructionSurfaceList": "__________None",
+                    "AllRegionMeshMethodList": "__________None",
+                    "AllRegionNameList": "__________None",
+                    "AllRegionOversetComponenList": "__________None",
+                    "AllRegionSizeList": "__________None",
+                    "AllRegionSourceList": "__________None",
+                    "AllRegionTypeList": "__________None",
+                    "AllRegionVolumeFillList": "__________None"
+                }
+            }
+        }
+    },
+    "PartManagement": {
+        "version": "24.2",
+        "ROOT": {
+            "Node:Node1": {
+                "Name": "Meshing Model",
+                "_name_": "Meshing Model"
+            }
+        }
+    }
+}

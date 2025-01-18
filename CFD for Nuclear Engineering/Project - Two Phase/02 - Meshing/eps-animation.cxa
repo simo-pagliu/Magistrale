@@ -3,6 +3,5 @@ NAME: eps-animation
 WINID: 3
 STORAGE: 7
 PLOTANIMATION: 0
-FRAMES: 2
+FRAMES: 1
 Frame 0 7 eps-animation_0000.png 3
-Frame 1 7 eps-animation_0001.png 3
