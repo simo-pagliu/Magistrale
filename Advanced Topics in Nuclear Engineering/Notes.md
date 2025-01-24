@@ -161,7 +161,7 @@ $V$ is the **Volume needed to dilute it down to non dangerous levels**
 $$
 Q_{decay}(t,T) = \frac{P_{th}}{E_f}(F(t,\infty) - F(t+T, \infty)) \\
 
-F(t,T) = \sum \alpha _1 e ^{-t \lambda _i} \quad \text{(in the US standard)}
+F(t,T) = \sum \alpha _i e ^{-t \lambda _i} \quad \text{(in the US standard)}
 $$
 where:  
 $t$: time after shutdown  

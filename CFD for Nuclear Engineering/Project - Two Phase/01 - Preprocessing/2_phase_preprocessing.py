@@ -22,7 +22,8 @@ velocity = volume_flow_rate / area
 print(f"Velocity: {velocity} m/s")
 
 # Eval distance
-cell_dim = (8.707972e-09)**(1/3)
+cell_dim = 20e-3
+velocity = 0.4
 char_time = cell_dim / velocity
 print(f"Characteristic time: {char_time} s")
 print(f"1/4 Characteristic time: {char_time/4} s")
