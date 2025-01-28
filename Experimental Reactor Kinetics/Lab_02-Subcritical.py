@@ -29,29 +29,31 @@ known_CR_w = [
 # Montecarlo simulation results
 # Obtained by Serpent simulation
 k_mc = [
-    m(0.88316, 0.00691), # all in -
-    m(0.92266, 0.00622), # shim -
-    m(0.88988, 0.00741), # reg -
-    m(0.89402, 0.00704)  # trans -
+    m(0.97755, 0.00053), # all in - 9.81319E-01 0.00039 //  0.97824 +/- 0.00057  // 0.97755 +/- 0.00053
+    m(0.99268, 0.00023), # shim - 9.93149E-01 0.00016 // 0.99268 +/- 0.00023
+    m(0.98604, 0.00030), # reg - 9.87214E-01 0.00026 // 0.98604 +/- 0.00030
+    m(0.98882, 0.00034)  # trans - 9.89002E-01 0.00023 // 0.98882 +/- 0.00034
     ]
 
 # Beta values from the simulation
 beta_mc = [
-    m(0.00731845, 0.00000275), # all in
-    m(0.00726903, 0.00000279), # shim 
-    m(0.00731473, 0.00000282), # reg 
-    m(0.00732162, 0.00000271), # trans 
+    m(0.0073, 0), # all in - 6.82806E-03 0.00588
+    m(0.0073, 0), # shim - 6.89188E-03 0.00424 
+    m(0.0073, 0), # reg - 6.83157E-03 0.00571 / 2.75349E-06 0.60452
+    m(0.0073, 0), # trans - 6.85212E-03 0.00570
 ]
 
 # Calculate reactivity
 rho_mc = [rss(lambda k: (k-1)/k, k_mc_val) for k_mc_val in k_mc]
+for j in rho_mc:
+    print(j)
 
 # Compute Control Rod Worth, in dollars
 CR_worth_mc = [rss(lambda rho, beta, rho_0: (rho - rho_0) / beta, rho_mc[i], beta_mc[i], rho_mc[0]) for i in range(0, 4)]
 
 # Print results
-print("Montecarlo results:")
-for i in [1,2,3]:
+print("\033[93mMontecarlo results:\033[0m")
+for i in [0,1,2,3]:
     print(f"{cond[i]} → CR worth = {CR_worth_mc[i]} $")
 print("\n")
 ########################################################################################
@@ -65,6 +67,7 @@ counting_rates = [
     m(0.8855, 0.0210), # reg
     m(1.4920, 0.0389), # trans
 ]
+
 # We have to find the calibration factor
 calib_factors = []
 for i in [1, 2, 3]:
@@ -106,3 +109,31 @@ for j, alpha in enumerate(calib_factors):
 # unfortunately the transient needs much more accuracy
 # this is beacuse the difference in the reactivity is much smaller
 ########################################################################################
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Energy values represent the upper bounds of the bins
+energy_bounds = np.array([0.1, 0.75, 1.25, 2.7, 3.7, 5.3, 5.8, 6.7, 8.3, 8.7, 11.7])
+# Corresponding weights (normalized counts or probabilities)
+y_values = np.array([0, 0, 0.29, 0.53, 0.75, 0.94, 0.77, 0.59, 0.40, 0.26, 0.09])
+y_values *= 0.63  # Adjust weights by scaling factor
+y_values[1] = 0.37  # Update based on the paper's statement
+
+# Calculate bin widths and bin centers
+bin_widths = np.diff(energy_bounds)
+bin_centers = energy_bounds[:-1] + bin_widths / 2
+
+# Plot histogram
+plt.bar(bin_centers, y_values[:-1], width=bin_widths, align='center', edgecolor='black')
+plt.xlabel('Energy [MeV]')
+plt.ylabel('Weight (Normalized)')
+plt.title('Energy Distribution')
+plt.show()
+
+# Calculate the average energy using the weights (y_values)
+# Weighted average considers bin centers and corresponding weights
+average_energy = np.sum(bin_centers * y_values[:-1]) / np.sum(y_values[:-1])
+print(f"Average Energy: {average_energy:.2f} MeV")
+
+
