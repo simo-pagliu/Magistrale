@@ -64,9 +64,8 @@ print(f"Total CR worth: {dollar_rho:.2f} $")
 # MC simulation with serpent
 # Full core critical REG in: 1.06548 +/- 0.00128  [1.06299  1.06798]
 # Full core critical REG out: 1.07656 +/- 0.00105  [1.07451  1.07861]
-
-reg_in = m(1.06548, 0.00128)
-reg_out = m(1.07656, 0.00105)
+reg_in = m(1.06541, 0.00019) #1.06541 +/- 0.00019
+reg_out = m(1.07631, 0.00019) #1.07631 +/- 0.00019
 
 rho_in = rss(lambda k: (k-1)/k, reg_in)
 rho_out = rss(lambda k: (k-1)/k, reg_out)

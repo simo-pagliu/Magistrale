@@ -29,10 +29,10 @@ known_CR_w = [
 # Montecarlo simulation results
 # Obtained by Serpent simulation
 k_mc = [
-    m(0.97755, 0.00053), # all in - 9.81319E-01 0.00039 //  0.97824 +/- 0.00057  // 0.97755 +/- 0.00053
-    m(0.99268, 0.00023), # shim - 9.93149E-01 0.00016 // 0.99268 +/- 0.00023
-    m(0.98604, 0.00030), # reg - 9.87214E-01 0.00026 // 0.98604 +/- 0.00030
-    m(0.98882, 0.00034)  # trans - 9.89002E-01 0.00023 // 0.98882 +/- 0.00034
+    m(0.95950, 0.00148), # all in 0.95950 +/- 0.00148
+    m(0.99261, 0.00016), # shim 
+    m(0.97679, 0.00093), # reg 0.97679 +/- 0.00093 
+    m(0.97626, 0.00115)  # trans
     ]
 
 # Beta values from the simulation
@@ -45,8 +45,6 @@ beta_mc = [
 
 # Calculate reactivity
 rho_mc = [rss(lambda k: (k-1)/k, k_mc_val) for k_mc_val in k_mc]
-for j in rho_mc:
-    print(j)
 
 # Compute Control Rod Worth, in dollars
 CR_worth_mc = [rss(lambda rho, beta, rho_0: (rho - rho_0) / beta, rho_mc[i], beta_mc[i], rho_mc[0]) for i in range(0, 4)]
@@ -62,10 +60,16 @@ print("\n")
 # Experimental results
 # Fission chamber counting rates
 counting_rates = [
-    m(0.6290, 0.0177), # all in
+    m(0.6290, 0.0177), # all in 
     m(2.5210, 0.0502), # shim
     m(0.8855, 0.0210), # reg
     m(1.4920, 0.0389), # trans
+]
+counting_rates = [
+    m(1.33917E+02, 0.00377e2), # all in 1.33917E+02 0.00377 
+    m(1.49739E+02, 0.00258e2), # shim 1.49739E+02 0.00258
+    m(1.40340E+02, 0.00322e2), # reg 1.40340E+02 0.00322 
+    m(1.45819E+02, 0.00269e2), # trans  1.45819E+02 0.00269 
 ]
 
 # We have to find the calibration factor
@@ -113,12 +117,65 @@ for j, alpha in enumerate(calib_factors):
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+ 
+raji_convertion_x = [6.539923954372626, 17.00380228136882, 27.832699619771866, 43.89353612167302]
+raji_convertion_y = [1.6954314720812182, 4.558375634517766, 7.786802030456853, 12.416243654822335]
+# linear relation between x and y create convertion factor
+raji_convertion = np.polyfit(raji_convertion_x, raji_convertion_y, 1) # m and q
+
+import csv
+# set current directory as working directory
+import os
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+# Open and read the CSV file
+geiger1964_x = []
+geiger1964_y = []
+with open("geiger1964.csv", "r") as file:
+    reader = csv.reader(file)
+    next(reader)  # Skip the header if needed
+    for row in reader:
+        x, y = map(float, row)  # Convert values to floats
+        geiger1964_x.append(x)
+        geiger1964_y.append(y)
+
+# for x, y in zip(geiger1964_x, geiger1964_y):
+#     print(f"{x:.2f} {y:.2f}")
+
+raju1964_x = []
+raju1964_y = []
+with open("raju1964.csv", "r") as file:
+    reader = csv.reader(file)
+    next(reader)  # Skip the header if needed
+    for row in reader:
+        x, y = map(float, row)  # Convert values to floats
+        raju1964_x.append(x)
+        raju1964_y.append(y)
+raju1964_x = np.array(raju1964_x) * raji_convertion[0] + raji_convertion[1]
+#normalize y data
+raju1964_y = np.array(raju1964_y) / np.max(raju1964_y)
+
+thompson1956_x = []
+thompson1956_y = []
+with open("thompson1956.csv", "r") as file:
+    reader = csv.reader(file)
+    next(reader)  # Skip the header if needed
+    for row in reader:
+        x, y = map(float, row)  # Convert values to floats
+        thompson1956_x.append(x)
+        thompson1956_y.append(y)
+#normalize y data
+#thompson1956_y = np.array(thompson1956_y) / np.max(thompson1956_y)
+
+
 # Energy values represent the upper bounds of the bins
 energy_bounds = np.array([0.1, 0.75, 1.25, 2.7, 3.7, 5.3, 5.8, 6.7, 8.3, 8.7, 11.7])
 # Corresponding weights (normalized counts or probabilities)
 y_values = np.array([0, 0, 0.29, 0.53, 0.75, 0.94, 0.77, 0.59, 0.40, 0.26, 0.09])
-y_values *= 0.63  # Adjust weights by scaling factor
-y_values[1] = 0.37  # Update based on the paper's statement
+# y_values *= 0.63  # Adjust weights by scaling factor
+# y_values[1] = 0.37  # Update based on the paper's statement
 
 # Calculate bin widths and bin centers
 bin_widths = np.diff(energy_bounds)
@@ -129,8 +186,18 @@ plt.bar(bin_centers, y_values[:-1], width=bin_widths, align='center', edgecolor=
 plt.xlabel('Energy [MeV]')
 plt.ylabel('Weight (Normalized)')
 plt.title('Energy Distribution')
-plt.show()
 
+
+#plot geiger data
+plt.scatter(geiger1964_x, geiger1964_y, label="Geiger 1964")
+
+#plot raju data
+#plt.scatter(raju1964_x, raju1964_y, label="Raju 1964")
+
+#plot thompson data
+plt.scatter(thompson1956_x, thompson1956_y, label="Thompson 1956")
+plt.legend()
+plt.show()
 # Calculate the average energy using the weights (y_values)
 # Weighted average considers bin centers and corresponding weights
 average_energy = np.sum(bin_centers * y_values[:-1]) / np.sum(y_values[:-1])
