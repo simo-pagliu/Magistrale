@@ -53,15 +53,20 @@ The TRIGA fuel elements are cylindrical rods with a height of $70 cm$ and a diam
 
 \begin{table}[H]
     \centering
+    \renewcommand{\arraystretch}{1.5} % Increase row height
+    \setlength{\tabcolsep}{10pt} % Adjust column spacing
     \begin{tabular}{|c|c|c|}
         \hline
-        \textbf{Fuel Type} & \textbf{Cladding Material} & \textbf{Uranium Enrichment} \\
+        \textbf{} & \textbf{101-type} & \textbf{103-type} \\
         \hline
-        Type 101 & Aluminum (Al 101) & 20\% \\
-        Type 103 & Stainless Steel (SS 103) & 20\% \\
+        \textbf{Cladding} & {Aluminium} & {304 SS} \\
+        \hline
+        \textbf{Zr:H Ratio} & {1:1} & {1:1.6} \\
+        \hline
+        \textbf{Other Features} & {2 disks of SmO$_3$} & {Zr Central Rod} \\
         \hline
     \end{tabular}
-    \caption{Fuel types and their characteristics in TRIGA reactors.}
+    \caption{Comparison of 101-type and 103-type fuel elements present in Pavia.}
     \label{tab:fuel_types}
 \end{table}
 
@@ -79,16 +84,20 @@ The position of the control rods is measured relative to full insertion, which c
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|}
+    \renewcommand{\arraystretch}{1.5} % Increase row height
+    \setlength{\tabcolsep}{10pt} % Adjust column spacing
+    \begin{tabular}{|c|c|c|c|c|}
         \hline
-        \textbf{Control Rod Type} & \textbf{Diameter (cm)} \\
+        \textbf{Rod} & \textbf{Material} & \textbf{Composition} & \textbf{CRW} \\
         \hline
-        Transient Rod & X.X \\  % Placeholder for actual diameter
-        Shim Rod & X.X \\
-        Regulating Rod & X.X \\
+        SHIM & B$_4$C & $15.8\% ^{10} B$ & 3 $\sim$ 3.5 \$ \\
+        \hline
+        REG & B$_4$C & $15.8\% ^{10} B$ & 1 $\sim$ 1.5 \$ \\
+        \hline
+        TRANSIENT & Borated Graphite & $72\%C$ + $5.35\% ^{10} B$ + $21.7\% ^{11} B$ & 2 ~ 2.5 \$ \\
         \hline
     \end{tabular}
-    \caption{Control rod types and their respective diameters in TRIGA reactors.}
+    \caption{Control Rods and their characteristics}
     \label{tab:control_rods}
 \end{table}
 
@@ -100,7 +109,7 @@ The theoretical and experimental framework of this study is based on the subcrit
 This behavior is possible due to the presence of an external neutron source, which introduces an additional term in the neutron population equation of the Point Kinetics model:
 
 \begin{equation}
-\frac{dN}{dt} = \frac{\rho - \beta}{\Lambda} N + \sum_{i=1}^{6} \lambda_i C_i + \mathbf{S}
+\frac{dn}{dt} = \frac{\rho - \beta}{\Lambda} n + \sum_{i=1}^{6} \lambda_i C_i + \mathbf{q}
 \end{equation}
 
 \subsection{Neutron Sources}
@@ -119,14 +128,19 @@ On the other hand, an external source can rely on primary sources, such as spont
 
 For this study, the neutron source is external and primary, produced through the ($\alpha, n$) reaction between Radium $^{226}\text{Ra}$ and Beryllium $^9\text{Be}$:
 
-\begin{equation}
-^{226}_{88}\text{Ra} \rightarrow ^{222}_{86}\text{Rn} + \alpha @ 4.784 \text{MeV} (94.5\%) \text{ (T}_{1/2} = 1600 \text{ years})    
-\end{equation}
+Radium undergoes \(\alpha\) decay with a half-life of \(\text{T}_{\frac{1}{2}} = 1600\) years:
 
 \begin{equation}
-\alpha + ^9_4\text{Be} \rightarrow ^{12}_6\text{C} + n \quad E_{max} = 13 \text{MeV}
+^{226}_{88}\text{Ra} \rightarrow ^{222}_{86}\text{Rn} + \alpha    
 \end{equation}
 
+The emitted \(\alpha\) particles, with an energy of \(4.784\) MeV (branching ratio: \(94.5\%\)), interact with beryllium to produce neutrons via the following reaction:
+
+\begin{equation}
+\alpha + ^9_4\text{Be} \rightarrow ^{12}_6\text{C} + n
+\end{equation}
+
+The resulting neutrons can reach a maximum energy of \(13\) MeV.
 
 
 Even in a subcritical state, the injected neutrons interact with the fuel, leading to a neutron population stabilization at a level higher than the source alone would provide.
@@ -175,13 +189,19 @@ This margin influences both the subcritical multiplication factor $M$ and the nu
 When considering time as the primary domain, the Point Kinetics equations must be solved, incorporating the external neutron source term:
 
 \begin{equation}
-\frac{dN}{dt} = \frac{\rho - \beta}{\Lambda} N + \sum_{i=1}^{6} \lambda_i C_i + S
+    \begin{cases}
+        \frac{dn}{dt} = \frac{\rho - \beta}{\Lambda} n + \sum\limits_{i=1}^{6} \lambda_i C_i + q 
+        = k \left( \frac{k-1}{k} + \rho - \beta \right) \frac{n}{l} + \sum\limits_{i=1}^{6} \lambda_i C_i + q \\[10pt]
+        
+        \frac{dC_i}{dt} = \frac{\beta_i}{\Lambda} n - \lambda_i C_i 
+        = k \frac{\beta_i}{l} n - \lambda_i C_i
+    \end{cases}
 \end{equation}
-
+    
 The steady-state neutron population can be derived as:
 
 \begin{equation}
-    N_{\infty} = \frac{S}{1 - k}
+    n_{\infty} = q \frac{l}{1 - k}
 \end{equation}
 Knowing the definiton of mean generation time and reactivity:
 \begin{equation}
@@ -193,13 +213,21 @@ Knowing the definiton of mean generation time and reactivity:
 \end{equation}
 The steady-state neutron population can be expressed as:
 \begin{equation}
-    N_{\infty} = \frac{S}{\rho}
+    n_{\infty} = - q\frac{\Lambda}{\rho}
 \end{equation}
 
-Using the Laplace Transform, the time-dependent solution for $ N(t)$ is obtained:
+Using the Laplace Transform, the time-dependent solution for $ n(t)$ is obtained:
 
 \begin{equation}
-n(t) = \left(\mathbf{A_0} + A_1 e^{s_1 t} + A_2 e^{s_2 t}\right) q
+n(t) = q \left(\mathbf{A_0} + A_1 e^{s_1 t} + A_2 e^{s_2 t}\right)
+\end{equation}
+The complete formulation is:
+\begin{equation}
+    n(t) = q \left( 
+        -\frac{\Lambda}{\rho_0} 
+        + \frac{\frac{\beta}{\rho_0}}{\frac{\lambda \rho_0}{\beta - \rho_0} + \frac{\beta - \rho_0}{\Lambda}} e^{\frac{\lambda \rho_0}{\beta - \rho_0} t} 
+        + \frac{\frac{\lambda \Lambda}{\beta - \rho_0} - 1}{\frac{\lambda \rho_0}{\beta - \rho_0} + \frac{\beta - \rho_0}{\Lambda}} e^{-\frac{\beta - \rho_0}{\Lambda} t}
+    \right)
 \end{equation}
 
 where $ s_1 $ and $ s_2 $ are the roots of the characteristic equation. The external source does not alter these exponential terms but introduces an integrator, leading to a \textbf{constant offset}.
@@ -248,26 +276,26 @@ The simulation was initialized using the following command: \texttt{set pop 1000
 
 The results were then normalized with: \texttt{set power 10} where power is in watts.
 
-The obtained results indicate an overestimation of the control rod worth, where $k_{\text{eff, implicit}} $ from the simulation was taken as the result. The discrepancy is shown in Table~\ref{tab:montecarlo_results}.
+The obtained results indicate an overestimation of the control rod worth, where $k_{\text{eff, implicit}} $ from the simulation was taken as the result. The discrepancy in reactivity $\left( \rho = \frac{k-1}{k} \right)$ is shown in Table~\ref{tab:montecarlo_results}.
 
-\begin{table}[H]
+\begin{table}[h]
     \centering
-    \begin{tabular}{|c|c|c|}
+    \begin{tabular}{|c|c|}
         \hline
-        \textbf{Method} & \textbf{CRW$_{\text{reg}}$} (in \$) & \textbf{Interval} \\
+        \textbf{Method} & \textbf{Result} \\
         \hline
-        Monte Carlo & $1.30 \pm 0.03$ & $(1.27, 1.33)$ \\
-        Experimental & $1.26$ & - \\
+        Montecarlo & $1.30 \pm 0.03\$$ \\
+        Experimental & $1.26\$$ \\
         \hline
     \end{tabular}
-    \caption{Comparison of control rod worth values from Monte Carlo simulation and experimental data.}
+    \caption{Control rod worth comparisons between Monte Carlo Criticality simulation and known experimental values, all values are in dollars $\left[ \$ \right]$.}
     \label{tab:montecarlo_results}
 \end{table}
 
 From these values, the overestimation can be quantified as:
 
 \begin{equation}
-\frac{\Delta CRW}{CRW_{\text{exp}}} = 3.34 \pm 2.55 \%
+\frac{\text{CRW}_{MC} - \text{CRW}_{\text{exp}}}{\text{CRW}_{\text{exp}}} = 3.34 \pm 2.55 \%
 \end{equation}
 
 which can be attributed to discrepancies between the model and the actual reactor core.
@@ -308,24 +336,24 @@ The following control rod configurations were simulated:
         \hline
         \textbf{Configuration} & \textbf{\( k_{\text{eff}} \)} \\
         \hline
-        All in & X.XXX \\
-        Regulating rod out & X.XXX \\
-        Shim rod out & X.XXX \\
-        Transient rod out & X.XXX \\
+        All in & $0.962708 \pm 0.00127$ \\
+        Regulating rod out & $0.986959 \pm 0.00036$ \\
+        Shim rod out & $0.974998 \pm 0.00069$ \\
+        Transient rod out & $0.980734 \pm 0.00069$ \\
         \hline
     \end{tabular}
     \caption{Simulated core configurations and resulting $ k_{\text{eff}} $ values.}
     \label{tab:keff_values}
 \end{table}
 
-From these values, the control rod worth was computed:
+From these values, the control rod worth can be calculated as:
 
 \begin{equation}
-\rho = \frac{k_{\text{eff}} - 1}{k_{\text{eff}}}
+\rho _i = \frac{k_{\text{eff}, i} - 1}{k_{\text{eff}, i}}
 \end{equation}
 
 \begin{equation}
-CRW = \rho_{\text{all in}} - \rho_{\text{rod out}}
+\text{CRW}_i = \rho_{i} - \rho_{\text{all in}} 
 \end{equation}
 
 \subsection{Comparison with Experimental Data}
@@ -339,18 +367,22 @@ The results from the Monte Carlo simulations exhibit a systematic overestimation
     \item Computational limits imposed on the simulation.
 \end{itemize}
 
-\begin{table}[H]
+\begin{table}[h]
     \centering
-    \begin{tabular}{|c|c|c|}
+    \begin{tabular}{|c||c|c|c||c|c|c||c|c|c|}
         \hline
-        \textbf{Configuration} & \textbf{CR Worth (\$)} & \textbf{Interval} \\
+        \multicolumn{1}{|c||}{} & \multicolumn{3}{c||}{\textbf{REG}} & \multicolumn{3}{c||}{\textbf{TRANS}} & \multicolumn{3}{c|}{\textbf{SHIM}} \\
         \hline
-        Shim Out & $3.38 \pm 0.21$ & $3.17 - 3.59$ \\
-        Reg Out & $1.73 \pm 0.21$ & $1.52 - 1.94$ \\
-        Trans Out & $2.53 \pm 0.22$ & $2.31 - 2.75$ \\
+        \multicolumn{1}{|c||}{} & Min & Result & Max & Min & Result & Max & Min & Result & Max \\
+        \hline
+        \textbf{MC} & $1.58$ & $1.79 \pm 0.21$ & $2.00$ 
+        & $2.41$ & $2.62 \pm 0.21$ & $2.83$ 
+        & $3.31$ & $3.50 \pm 0.19$ & $3.69$ \\
+        \hline
+        \textbf{Ref} & \multicolumn{3}{c||}{$1.26$} & \multicolumn{3}{c||}{$2.23$} & \multicolumn{3}{c|}{$3.22$} \\
         \hline
     \end{tabular}
-    \caption{Comparison of simulated control rod worth values.}
+    \caption{Control rod worth comparisons between Monte Carlo (MC) simulations and reference experimental values (Ref) provided by LENA, all values are in dollars $\left[ \$ \right]$.}
     \label{tab:cr_worth}
 \end{table}
 
@@ -389,35 +421,44 @@ However, due to the high uncertainty associated with small step extractions, thi
 At steady state, the counting rate is given by:
 
 \begin{equation}
-\dot{C}{\infty} = \alpha \phi_s M
+\dot{C}_{\infty} = \alpha \phi_s M
 \end{equation}
 
 where $ \alpha \phi_s $ is the calibration factor, which must be determined through comparison with a known reference condition. The relationship between two different counting rate measurements is expressed as:
 
 \begin{equation}
-\frac{\dot{C}{\infty,1}}{\dot{C}{\infty,2}} = \frac{M_1}{M_2} = \frac{1-k_2}{1-k_1} = \frac{\alpha \phi_s M_1}{\dot{C}{\infty,2}}
+\gamma = \frac{\dot{C}_{\infty,known}}{\dot{C}_{\infty,ref}} = \frac{M_{known}}{M_{ref}} = \frac{1-k_{ref}}{1-k_{known}}
 \end{equation}
 
 The calibration factor is computed by comparing the reference condition (all rods inserted, corresponding to a control rod worth of zero) with a known condition obtained from previous calibration experiments. The steps involved are:
 
-\begin{itemize}
-    \item $ \gamma = \frac{\text{cps}_{\text{known}}}{\text{cps}_{\text{ref}}} $
-    \item $ \rho_{\text{ref}} = $ \quad \text{(big formulas)}
-    \item $ k_{\text{ref}} = \frac{1}{1 - \rho_{\text{ref}}} $
-    \item $ M_{\text{ref}} = \frac{1}{1 - k_{\text{ref}}} $
-    \item $ \alpha \phi_s = \frac{\text{cps}_{\text{ref}}}{M_{\text{ref}}} $
-\end{itemize}
+
+\begin{align}
+    \gamma &= \frac{\dot{C}_{\text{known}}}{\dot{C}_{\text{ref}}} \notag \\
+    & \downarrow  \notag \\
+    \rho_{\text{ref}} &= - \frac{CRW_{\text{ref}} - 1}{2} - \frac{1}{2} \sqrt{\left( CRW_{\text{ref}} - 1\right)^2 + 4 CRW_{\text{ref}} \frac{\gamma}{\gamma - 1}} \notag \\
+    & \downarrow  \notag \\
+    k_{\text{ref}} &= \frac{1}{1 - \rho_{\text{ref}}} \notag \\
+    & \downarrow  \notag \\
+    M_{\text{ref}} &= \frac{1}{1 - k_{\text{ref}}} \notag \\
+    & \downarrow  \notag \\
+    \alpha \phi_s &= \frac{\dot{C}_{\text{ref}}}{M_{\text{ref}}}
+\end{align}
+
 This highlights the necessity of prior calibration for at least one control rod to obtain meaningful results.
 
 \subsection{Control Rod Worth Estimation}
 
 Once the steady-state counting rate is measured and the calibration factor is determined, the subcritical multiplication factor $ M $, the effective multiplication factor $ k $, and reactivity $ \rho $ can be computed as follows:
-\begin{itemize}
-    \item $ M(i) = \frac{\text{cps}(i)}{\alpha \phi_s} $
-    \item $ k(i) = 1 - \frac{1}{M(i)} $
-    \item $ \rho(i) = \frac{k(i) - 1}{k(i)} $
-    \item $ \text{CRW} \text{ [pcm]} = -\rho_{\text{ref}} + \rho(i) $
-\end{itemize}
+\begin{align}
+    M_i &= \frac{\dot{C}_i}{\alpha \phi_s} \notag \\
+    & \downarrow \notag \\
+    k_i &= 1 - \frac{1}{M_i} \notag \\
+    & \downarrow \notag \\
+    \rho_i &= \frac{k_i - 1}{k_i} \notag \\
+    & \downarrow \notag \\
+    \text{CRW} &=  \rho_i -\rho_{\text{ref}} \quad [\text{pcm}]
+\end{align}
 
 This methodology ensures a systematic approach for determining the reactivity worth of each control rod based on measured neutron counting rates.
 
@@ -432,13 +473,13 @@ This methodology ensures a systematic approach for determining the reactivity wo
 
 The experimental setup consists of the following components:
 
-\begin{enumerate}
+\begin{itemize}
     \item Reactor and reactor operator.
     \item Control rods and control panel.
-    \item Neutron source: Ra-Be (2 Ci, $1 \times 10^7$ n/s), placed in the F ring.
+    \item Neutron source: Radium-Beryllium, activity $2~Ci$, neutron emission rate: $10^7 \frac{n}{s}$, placed in the outermost ring (F).
     \item Fission chamber and its counting chain, operated in pulse mode. A timer is incorporated for setting the measurement time.
     \item Previous calibration data of the control rods.
-\end{enumerate}
+\end{itemize}
 
 
 \subsection{Procedure}
@@ -464,7 +505,7 @@ The experimental setup consists of the following components:
     Steady-state achievement is confirmed by monitoring power behavior.  
     A fixed measurement time of 100 seconds is used, with multiple measurements taken to improve statistical accuracy.
 
-    \item \textbf{Compute the relevant parameters ($M$, $\rho$, $k$) from the recorded data.} $M$, $k$, and finally $\rho$.
+    \item \textbf{Compute the relevant parameters from the recorded data.} $M$, $k$, and finally $\rho$.
 
     \item \textbf{Repeat Step 6 for successive extraction steps.}  
     Not required in this specific experiment, as only a single extraction step is considered.
@@ -479,35 +520,56 @@ Following the described procedure, experimental data were recorded for all possi
     \centering
     \begin{tabular}{|c|c|c|c|c|}
         \hline
-        \textbf{Configuration} & \textbf{Counts (100s)} & \textbf{Counting Rate (cps)} & \textbf{$M$} & \textbf{$\rho$} \\
+        \multirow{18}{*}{\rotatebox{90}{\textbf{Integral Counts}}} 
+        & All in & Reg out & Trans out & Shim out \\
+        \cline{2-5}
+        & $60$  & $76$  & $167$  & $261$  \\
+        & $71$  & $69$  & $123$  & $303$  \\
+        & $92$  & $102$ & $156$  & $211$  \\
+        & $59$  & $90$  & $122$  & $219$  \\
+        & $59$  & $87$  & $214$  & $228$  \\
+        & $77$  & $111$ & $119$  & $243$  \\
+        & $52$  & $67$  & $160$  & $332$  \\
+        & $65$  & $89$  & $164$  & $239$  \\
+        & $45$  & $96$  & $159$  & $244$  \\
+        & $68$  & $93$  & $108$  & $241$  \\
+        & $37$  & $80$  &       &  \\
+        & $52$  & $80$  &       &  \\
+        & $72$  & $85$  &       &  \\
+        & $64$  & $85$  &       &  \\
+        & $67$  & $91$  &       &  \\
+        & $68$  & $86$  &       &  \\
+        & $66$  & $101$ &       &  \\
+        & $66$  & $113$ &       &  \\
+        & $64$  & $80$  &       &  \\
+        & $54$  & $90$  &       &  \\
         \hline
-        All Rods Inserted & $X$ & $X$ & $X$ & $X$ \\
-        REG Rod Out & $X$ & $X$ & $X$ & $X$ \\
-        SHIM Rod Out & $X$ & $X$ & $X$ & $X$ \\
-        TRANS Rod Out & $X$ & $X$ & $X$ & $X$ \\
+        $\langle C \rangle \pm \sigma_{\langle C \rangle}$ & $62.9 \pm 1.8$  & $88.6 \pm 2.1$  & $149.2 \pm 3.9$  & $252.1 \pm 5.0$  \\
+        $\dot{C} \pm \sigma_{\dot{C}}$ & $0.63 \pm 0.02$  & $0.89 \pm 0.02$  & $1.49 \pm 0.04$  & $2.52 \pm 0.05$  \\
         \hline
     \end{tabular}
-    \caption{Raw experimental data and computed parameters for different control rod configurations.}
+    \caption{Counts, average counts, standard deviation, and counting rate for different control rod configurations. Data for TRANS and SHIM rod were taken by half of the groups during the data collection}
     \label{tab:results}
 \end{table}
 
-The raw data consists of $N$ integral neutron counts $C$, each measurement performed over a 100-second interval. The count rate $\dot{C}$ and its error were computed using the following formulas:
+
+The raw data consists of $N$ integral neutron counts $C$, each measurement performed over a 100-second interval $\left(\Delta t\right)$. The count rate $\dot{C}$ and its error were computed using the following formulas:
 
 \begin{equation}
-<C> = \frac{\sum{Counts}}{N}
-\end{equation}
-\begin{equation}
-\dot{C} = \frac{<C>}{100}
+    \langle C \rangle = \frac{\sum{C}}{N}
 \end{equation}
 
 \begin{equation}
-\sigma_{\dot{C}} = \sqrt{\frac{\dot{<C>}}{N}} \frac{1}{100}
+    \sigma_{\langle C \rangle} = \sqrt{\frac{\langle C \rangle}{N}}
 \end{equation}
 
+\begin{equation}
+\dot{C} = \frac{\langle C \rangle}{\Delta t}
+\end{equation}
 
-
-
-
+\begin{equation}
+\sigma_{\dot{C}} = \frac{\sigma_{\langle C \rangle}}{\Delta t}
+\end{equation}
 
 
 \section{Data Analysis}
@@ -522,16 +584,22 @@ The values computed by using the REG as a reference are reported in the followin
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|c|}
+    \begin{tabular}{|c|c|c|c|}
         \hline
-        \textbf{Control Rod} & \textbf{CRW [pcm]} & \textbf{CRW [\$]} \\
+        & \text{Reg} & \text{Trans} & \text{Shim} \\
         \hline
-        REG Rod & $X \pm \Delta X$ & $\frac{X}{\beta} \pm \frac{\Delta X}{\beta}$ \\
-        SHIM Rod & $X \pm \Delta X$ & $\frac{X}{\beta} \pm \frac{\Delta X}{\beta}$ \\
-        TRANS Rod & $X \pm \Delta X$ & $\frac{X}{\beta} \pm \frac{\Delta X}{\beta}$ \\
+        $\alpha \phi_s$ & \multicolumn{3}{c|}{$0.019 \pm 0.003$} \\
+        \hline
+        $M$ & $46.71 \pm 6.06$ & $78.71 \pm 10.25$ & $132.99 \pm 17.18$ \\
+        \hline
+        $K$ & $0.98 \pm 0.0028$ & $0.99 \pm 0.0017$ & $0.99 \pm 0.00097$ \\
+        \hline
+        $\rho$ & $-0.022 \pm 0.0029$ & $-0.013 \pm 0.0017$ & $-0.0076 \pm 0.00099$ \\
+        \hline
+        $CRW$ & $1.26 \pm 0.70$ & $2.49 \pm 0.62$ & $3.22 \pm 0.59$ \\
         \hline
     \end{tabular}
-    \caption{Estimated control rod worth (CRW) values in pcm and dollars.}
+    \caption{Table of calculated values for different control rods, using experimental calibration results.}
     \label{tab:crw_results}
 \end{table}
 
@@ -544,22 +612,22 @@ The same procedure can be applied using the previously obtained calibration of t
     \centering
     \begin{tabular}{|c|c|c|c|}
         \hline
-        \textbf{Reference Calibration} & \textbf{Control Rod} & \textbf{Calibration Factor $\alpha \phi_s$} & \textbf{CRW [\$]} \\
+        \textbf{Reference Calibration}& \textbf{Calibration Factor $\alpha \phi_s$} & \textbf{Control Rod}  & \textbf{CRW [\$]} \\
         \hline
         \multirow{3}{*}{REG Rod} 
-            & REG & $X \pm \Delta X$ & $Y \pm \Delta Y$ \\
-            & SHIM & $X \pm \Delta X$ & $Y \pm \Delta Y$ \\
-            & TRANS & $X \pm \Delta X$ & $Y \pm \Delta Y$ \\
-        \hline
-        \multirow{3}{*}{SHIM Rod} 
-            & REG & $X \pm \Delta X$ & $Y \pm \Delta Y$ \\
-            & SHIM & $X \pm \Delta X$ & $Y \pm \Delta Y$ \\
-            & TRANS & $X \pm \Delta X$ & $Y \pm \Delta Y$ \\
+            &                             & REG      & $3.22 ± 0.59$ \\
+            & $0.018957 \pm 0.002415$     & TRANS    & $2.49 ± 0.62$ \\
+            &                             & SHIM     & $3.22 ± 0.59$ \\
         \hline
         \multirow{3}{*}{TRANS Rod} 
-            & REG & $X \pm \Delta X$ & $Y \pm \Delta Y$ \\
-            & SHIM & $X \pm \Delta X$ & $Y \pm \Delta Y$ \\
-            & TRANS & $X \pm \Delta X$ & $Y \pm \Delta Y$ \\
+            &                             & REG      & $1.13 ± 0.39$ \\
+            & $0.018963 \pm 0.001155$     & TRANS    & $2.23 ± 0.35$ \\
+            &                             & SHIM     & $2.88 ± 0.33$ \\
+        \hline
+        \multirow{3}{*}{SHIM Rod} 
+            &                             & REG      & $1.26 ± 0.36$ \\
+            & $0.017027 \pm 0.001325$     & TRANS    & $2.50 ± 0.31$ \\
+            &                             & SHIM     & $3.22 ± 0.30$ \\
         \hline
     \end{tabular}
     \caption{Calibration factors and control rod worth (CRW) values for different reference calibrations.}
@@ -622,9 +690,28 @@ where $\sigma_f$ is the propagated uncertainty of a function $f$, and $\sigma_{x
 \subsubsection{Numerical Implementation}
 
 This error propagation methodology was implemented in Python, where the partial derivatives were computed numerically based on ~\cite{Moffat1988}. 
-The following Python snippet outlines the implementation:
+The implementation in Python can be found in the appendix~\ref{appendix:python_code}
 
-\newpage
+\section{Conclusions}
+This study provided valuable insights into control rod calibration in the TRIGA Mark II reactor, 
+demonstrating the effectiveness of the subcritical multiplication method while maintaining safe conditions. 
+
+Monte Carlo simulations showed a systematic overestimation of control rod worth, likely due to modeling approximations, 
+though experimental results remained consistent with theoretical expectations. 
+The choice of reference rod significantly influenced uncertainties, with the Shim rod yielding more precise measurements. 
+
+Future improvements should focus on refining Monte Carlo modeling approaches and enhancing experimental procedure to further reduce uncertainties.
+
+\section*{Acknowledgments}
+This report was prepared as part of the Experimental Reactor Kinetics course by Professor Stefano Lorenzi at Politecnico di Milano (2024/25)~\parencite{Lorenzi2024}.
+
+The authors thank the Serpent community for providing valuable resources~\parencite{SerpentWiki, SerpentForum}. 
+
+All code and auxiliary data analysis are publicly available on GitHub~\parencite{PagliucaGithub}.
+
+\appendix
+\section{Python Implementation for Error Propagation} \label{appendix:python_code}
+
 \begin{lstlisting}[language=Python]
     class Measurement:
     def __init__(self, value, uncertainty):
@@ -637,18 +724,6 @@ The following Python snippet outlines the implementation:
         return f"{self.value:.6g} ± {self.uncertainty:.6g}"
 
     def rss(func, *measurements):
-    """
-    Compute the result and uncertainty of a multivariable function 'func' using finite differences.
-
-    Parameters:
-        func: callable
-            Function whose uncertainty is to be propagated.
-        measurements: Measurements
-            Measurement objects (values and uncertainties).
-
-    Returns:
-        Measurement: Resulting value and propagated uncertainty.
-    """
     # Extract nominal values for function evaluation
     nominal_values = [m.value for m in measurements]
     value = func(*nominal_values)
@@ -681,21 +756,3 @@ The following Python snippet outlines the implementation:
     # Output: 0.193548 ± 0.0130073
 
 \end{lstlisting}
-
-
-\section{Conclusions}
-This study provided valuable insights into control rod calibration in the TRIGA Mark II reactor, 
-demonstrating the effectiveness of the subcritical multiplication method while maintaining safe conditions. 
-
-Monte Carlo simulations showed a systematic overestimation of control rod worth, likely due to modeling approximations, 
-though experimental results remained consistent with theoretical expectations. 
-The choice of reference rod significantly influenced uncertainties, with the Shim rod yielding more precise measurements. 
-
-Future improvements should focus on refining Monte Carlo modeling approaches and enhancing experimental procedure to further reduce uncertainties.
-
-\section*{Acknowledgments}
-This report was prepared as part of the Experimental Reactor Kinetics course by Professor Lorenzi at Politecnico di Milano (2024/25)~\parencite{Lorenzi2024}.
-
-The authors thank the Serpent community for providing valuable resources~\parencite{SerpentWiki, SerpentForum}. 
-
-All code and auxiliary data analysis are publicly available on GitHub~\parencite{PagliucaGithub}.
