@@ -29,10 +29,10 @@ known_CR_w = [
 # Montecarlo simulation results
 # Obtained by Serpent simulation
 k_mc = [
-    m(0.95950, 0.00148), # all in 0.95950 +/- 0.00148
-    m(0.99261, 0.00016), # shim 
-    m(0.97679, 0.00093), # reg 0.97679 +/- 0.00093 
-    m(0.97626, 0.00115)  # trans
+    m(9.62708E-01, 0.00127), # all in 9.62708E-01 0.00127
+    m(9.86959E-01, 0.00036), # shim 9.86959E-01 0.00036
+    m(9.74998E-01, 0.00069), # reg  9.74998E-01 0.00069
+    m(9.80734E-01, 0.00069)  # trans 9.80734E-01 0.00069
     ]
 
 # Beta values from the simulation
@@ -52,8 +52,19 @@ CR_worth_mc = [rss(lambda rho, beta, rho_0: (rho - rho_0) / beta, rho_mc[i], bet
 # Print results
 print("\033[93mMontecarlo results:\033[0m")
 for i in [0,1,2,3]:
-    print(f"{cond[i]} → CR worth = {CR_worth_mc[i]} $")
+    print(f"{cond[i]} → CR worth = {CR_worth_mc[i]} $, interval: {(CR_worth_mc[i].value - CR_worth_mc[i].uncertainty):.2f} ~ {(CR_worth_mc[i].value + CR_worth_mc[i].uncertainty):.2f} $")
 print("\n")
+
+Criticality_Reg_estimate = m(1.30212, 0.0321023)
+Overestimation = rss(lambda crit_est: (crit_est - 1.26) / 1.26, Criticality_Reg_estimate)
+print(f"Overestimation of k based on previous simulation in criticality condition: {Overestimation*100}% \n")
+
+print("\033[93mMontecarlo results + Correction:\033[0m")
+for i in [0,1,2,3]:
+    Corrected = rss(lambda CR_worth, Overestimation: CR_worth * (1-Overestimation), CR_worth_mc[i], Overestimation)
+    print(f"{cond[i]} → CR worth = {Corrected} $, interval: {(Corrected.value - Corrected.uncertainty):.2f} ~ {(Corrected.value + Corrected.uncertainty):.2f} $")
+print("\n")
+
 ########################################################################################
 
 ########################################################################################
@@ -65,12 +76,12 @@ counting_rates = [
     m(0.8855, 0.0210), # reg
     m(1.4920, 0.0389), # trans
 ]
-counting_rates = [
-    m(1.33917E+02, 0.00377e2), # all in 1.33917E+02 0.00377 
-    m(1.49739E+02, 0.00258e2), # shim 1.49739E+02 0.00258
-    m(1.40340E+02, 0.00322e2), # reg 1.40340E+02 0.00322 
-    m(1.45819E+02, 0.00269e2), # trans  1.45819E+02 0.00269 
-]
+# counting_rates = [
+#     m(6.76980E-01, 0.03490), # all in 6.76980E-01 0.03490 3.35404E+05 0.03347 
+#     m(1.85691E+00, 0.02714), # shim 1.85691E+00 0.02714 9.67210E+05 0.02897  
+#     m(1.00863E+00, 0.02821), # reg  1.00863E+00 0.02821  4.96718E+05 0.02730 
+#     m(1.19178E+00, 0.03302), # trans 1.19178E+00 0.03302 6.62469E+05 0.03332 
+# ]
 
 # We have to find the calibration factor
 calib_factors = []
@@ -95,8 +106,11 @@ for j, alpha in enumerate(calib_factors):
 
     for i in [1, 2, 3]:
         sub_crit_k = counting_rates[i] / alpha
+        print(f"Subcritical multiplication factor for {cond[i]}: {sub_crit_k}")
         k = rss(lambda m: (m - 1) / m, sub_crit_k)
+        print(f"K for {cond[i]}: {k}")
         rho_exp = rss(lambda k: (k - 1) / k, k)
+        print(f"Reactivity for {cond[i]}: {rho_exp}")
         CR_worth_exp = ((rho_exp - rho_exp_0) / beta_mc[i]) # MEH
         print(f"{cond[i]} → CR worth = {CR_worth_exp} $")
 ########################################################################################
