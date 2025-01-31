@@ -1,0 +1,65 @@
+\thispagestyle{plain}
+
+% Title with Titles Font (Anonymous Pro)
+{\titlesfont\fontsize{18}{28}\textbf{\color{cherenkovblue}{Control Rod Calibration in TRIGA Reactor Using Subcritical Multiplication Method \\ Experimental Validation and Monte Carlo Analysis}}}\\
+{\titlesfont\fontsize{10}{12}\color{cherenkovblue} Nuclear Engineering - Politecnico di Milano}\\
+
+\vspace{-10pt}
+
+% Author information with Main Font (Poppins)
+{\normalsize\textbf{Pagliuca Simone, Ronchi Riccardo}} \\
+{\footnotesize\textit{simone1.pagliuca@mail.polimi.it, riccardo3.ronchi@mail.polimi.it}} \\
+
+\vspace{10pt}
+
+% Course and Academic Year
+{\footnotesize\textbf{Course:} Experimental Reactor Kinetics}\\
+{\footnotesize\textbf{Academic year:} 2024/2025}
+
+% Horizontal rule
+\vspace{8pt}
+\centerline{\rule{1.0\textwidth}{0.4pt}}
+
+\vspace{10pt}
+
+% Abstract with Titles Font for Heading, Main Font for Body
+{\fontsize{8}{8}\textbf{\color{cherenkovblue} ABSTRACT:}} 
+{\normalsize
+The accurate calibration of control rods is essential for the safe and effective operation of nuclear reactors. 
+This study focuses on the subcritical method for control rod calibration in the TRIGA Mark II reactor at LENA, Pavia. 
+A Monte Carlo model was developed using the SERPENT code to estimate the control rod worth, which was then validated against experimental data. 
+The subcritical method, which relies on neutron source-driven subcritical multiplication, offers a safe and efficient approach to reactivity assessment. 
+
+Monte Carlo results exhibit a slight overestimation of control rod worth, which could be mitigated through improved modeling approaches. 
+
+Despite minor discrepancies, the experimental findings remain consistent with results obtained through alternative calibration methods.
+}
+
+\vspace{10pt}
+
+% Key-words box with Titles Font
+\begin{tcolorbox}[arc=0pt, boxrule=0pt, colback=cherenkovblue!60, width=\textwidth, colupper=white]
+    {\titlesfont\fontsize{10}{10}\textbf{Key-words:}} Control Rod Calibration, Subcritical Method, TRIGA Reactor, Monte Carlo Simulation
+\end{tcolorbox}
+
+\vspace{10pt}
+
+% Nomenclature Definitions
+\makenomenclature
+\renewcommand\nomgroup[1]{%
+\item[\bfseries
+\ifstrequal{#1}{A}{A Quantities}{%
+\ifstrequal{#1}{B}{B Quantities}{}}%
+]}
+
+% Two-column layout for the nomenclature
+\renewcommand{\nompreamble}{\begin{multicols}{2}}
+\renewcommand{\nompostamble}{\end{multicols}}
+
+% Define Nomenclature Entries
+\nomenclature[A, 01]{$x$}{X quantity}
+\nomenclature[B]{$y$}{Y quantity}
+
+% Render Nomenclature Without Section Break
+\vspace{-5pt} % Adjust spacing to fit table
+\printnomenclature
