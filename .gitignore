@@ -11,7 +11,6 @@ CFD for Nuclear Engineering/Lab_09-Natural Convection/cleanup-fluent-PC246-11056
 *.toc
 /CFD for Nuclear Engineering/Lab_10-Buoyancy/animation
 *.bat
-*.png
 *.ppm
 *.run.xlm
 Experimental Reactor Kinetics/__pycache__/framework.cpython-311.pyc
@@ -37,3 +36,5 @@ CFD for Nuclear Engineering/Project - Two Phase/03 - Simulation/data_vol_frac/vo
 *.nlo
 *.nls
 *.out
+/CFD for Nuclear Engineering/Lab_12-Bubbles/animation
+*.ilg
