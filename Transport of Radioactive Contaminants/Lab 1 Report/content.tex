@@ -4,6 +4,9 @@
 % Paragraph explaining the broader context of the experiment.
 
 \subsection{Objectives}
+We have to determine the breakthrough curve of a knwon step injection of a tracer substance in a column of porous medium.
+The tracer is a non-reactive solute, and the column is saturated with water.
+The experiment will help us understand the transport properties of the porous medium.
 % Paragraph listing the goals of the experiment.
 
 \section{Theoretical Background}
@@ -11,19 +14,106 @@
 
 \subsection{Relevant Equations and Models}
 % Describe models, assumptions, and simplifications used.
+Trasmittance index:
+\begin{equation}
+    T = \frac{I}{I_0} = 10^{-e C L}
+\end{equation}
+where:  
+\begin{itemize}
+    \item $T$ is the transmittance index
+    \item $I$ is the intensity of the light passing through the solution
+    \item $I_0$ is the intensity of the light passing through a reference sample (clean water)
+    \item $e$ is the absorption coefficient of the solute
+    \item $C$ is the concentration of the solute in the solution
+    \item $L$ is the length of the optical path through which light passes in the solution
+    \item $C$ is the concentration of the solute in the solution
+\end{itemize}
+
+We can then determine the absorbance
+\begin{equation}
+    A = \log_{10}\left(\frac{1}{T}\right) = e C L
+\end{equation}
+
+In practice the Reference sample is associated to an absorbance of $A=1$, 
+by observing the difference in ight intensity, knowing the optical path, we can determine 
+the relative concentration of the flowing solution:
+\begin{equation}
+    \frac{A}{A_{ref}} = \frac{C \slashed{eL}}{C_{ref} \slashed{eL}} = \frac{C}{C_{ref}}
+\end{equation}
 
 \section{Experimental Setup}
 
 \subsection{Materials and Instruments}
 % Description of tools, sensors, and materials used.
+The experimental setup consists of a small column designed for didactic purposes, 
+ensuring the experiment can be completed in a reasonable time. 
+The column is 19.5 cm high and 1 cm in diameter, filled with spherical quartz of known porosity. 
+Water flows through the system using a XXX pump, with the desired flow rate set directly on the pump. 
+However, the actual flow rate is reduced by the resistance of the pipes and the porous medium. 
+To determine the real flow rate, a scale is used to measure the water collected in a beaker placed at the spectrophotometer's exit.
+
+After exiting the column, the water flow passes through a spectrophotometer that measures its transmittance. 
+This value is then compared to the transmittance of a reference sample of clean water to obtain a relative measurement. 
+The flow is regulated by three valves, ensuring a continuous flow of either clean water or water mixed with a tracer,
+ with only one substance passing through the column at a time. For this experiment, a non-reactive tracer is used, 
+ specifically a solution of NaNO3 in water.
+
+The entire experimental setup and data gathering process is controlled using LabVIEW on a computer. 
+The spectrophotometer and the scale are connected through serial interfaces, 
+and the system is configured to take readings every second.
 
 \subsection{Procedure}
 % Step-by-step explanation of how the experiment was conducted.
+The procedure is programmed to run automatically using LabVIEW. 
+The experiment begins by flowing water through the system for a specified duration of X minutes. 
+Following this initial phase, a tracer solution is injected into the flow for 480 seconds. 
+After the tracer injection, the flow is switched back to water, and the cycle is set to repeat. 
+However, only one complete cycle needs to be observed for this experiment.
+
+During the experiment, the relative transmittance of the flowing solution is continuously monitored and compared to that of clean water.
+Additionally, the absorbance is calculated using the Lambert-Beer law within the software.
+
+\subsection{Preliminary Evaluation}
+To initiate the experiment, we needed to establish a flow rate that would allow us to observe the profile within a reasonable time frame. We estimated the breakthrough time of the profile using the pore velocity vpvp​, which can be calculated as:
+
+\begin{equation}
+v_p = \frac{Q}{An}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $v_p$ is the pore velocity in m/s
+    \item $Q$ is the unknown flow rate of the water in m3/s
+    \item $A$ is the known cross-sectional area of the column in m2
+    \item $n$ is the porosity of the medium (dimensionless)
+\end{itemize}
+
+The porosity $n$ can be determined using the mass of water in the column:
+
+\begin{equation}
+n = \frac{V_w}{V_{\text{total}}} = \frac{m_w/\rho_w}{V_{\text{total}}} = \frac{m_w}{\rho_w V_{\text{total}}}
+\end{equation}
+
+We selected a desired pore velocity $v_p$ such that the breakthrough would pass through the column (ignoring the pipes) in 5 minutes:
+
+\begin{equation}
+v_p = \frac{L}{t} = \frac{0.195}{300} = 0.00065 , \text{m/s}
+\end{equation}
+
+Using this pore velocity, we computed the required flow rate $Q$:
+
+\begin{equation}
+Q = v_p An = 0.00065 \cdot \pi \cdot (0.01)^2 \cdot n = 0.00065 \cdot \pi \cdot (0.01)^2 \cdot 0.4 = 8.16 \times 10^{-6} , \text{m}^3/\text{s}
+\end{equation}
+
+This is the actual flow rate we aimed to achieve. To account for the resistance of the system, 
+we set a higher flow rate on the pump, settling for $2.002 mL/min$.
 
 \section{Results}
 
 \subsection{Data Collection}
 % Raw or pre-processed data in tables or plots.
+We obtained a tabe with the reading istant by instant.
 \subsection{Data Processing}
 % Explain how the data was analyzed, equations used, error handling, etc.
 
