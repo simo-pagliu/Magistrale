@@ -1,0 +1,114 @@
+// WBS2: Full Breakdown
+digraph {
+	rankdir=TB size="10,12"
+	dpi=600
+	WBS2 [label="System Oriented WBS" fillcolor="#003366" fontcolor=white shape=box style=filled]
+	"Process System" [label="Process System" fillcolor="#005580" fontcolor=white shape=box style=filled]
+	WBS2 -> "Process System"
+	"Piping System" [label="Piping System" fillcolor="#005580" fontcolor=white shape=box style=filled]
+	WBS2 -> "Piping System"
+	"Structural System" [label="Structural System" fillcolor="#005580" fontcolor=white shape=box style=filled]
+	WBS2 -> "Structural System"
+	"Electrical & Control System" [label="Electrical & Control System" fillcolor="#005580" fontcolor=white shape=box style=filled]
+	WBS2 -> "Electrical & Control System"
+	Process_System_Engineering [label=Engineering fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Process System" -> Process_System_Engineering
+	Process_System_Engineering_0_Chemical_Process [label="Chemical Process" fillcolor="#e6f2ff" shape=box style=filled]
+	Process_System_Engineering -> Process_System_Engineering_0_Chemical_Process
+	Process_System_Engineering_1_Automation_Logic [label="Automation Logic" fillcolor="#e6f2ff" shape=box style=filled]
+	Process_System_Engineering -> Process_System_Engineering_1_Automation_Logic
+	Process_System_Engineering_2_Mechanical_Process [label="Mechanical Process" fillcolor="#e6f2ff" shape=box style=filled]
+	Process_System_Engineering -> Process_System_Engineering_2_Mechanical_Process
+	Process_System_Engineering_3_Flowcomputer_Logic [label="Flowcomputer Logic" fillcolor="#e6f2ff" shape=box style=filled]
+	Process_System_Engineering -> Process_System_Engineering_3_Flowcomputer_Logic
+	Process_System_Procurement [label=Procurement fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Process System" -> Process_System_Procurement
+	Process_System_Procurement_0_Filter [label=Filter fillcolor="#e6f2ff" shape=box style=filled]
+	Process_System_Procurement -> Process_System_Procurement_0_Filter
+	"Process_System_Procurement_1_Sterilizer/Mineralizer" [label="Sterilizer/Mineralizer" fillcolor="#e6f2ff" shape=box style=filled]
+	Process_System_Procurement -> "Process_System_Procurement_1_Sterilizer/Mineralizer"
+	Process_System_Procurement_2_Pump [label=Pump fillcolor="#e6f2ff" shape=box style=filled]
+	Process_System_Procurement -> Process_System_Procurement_2_Pump
+	Process_System_Installation [label=Installation fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Process System" -> Process_System_Installation
+	Process_System_Installation_0_Equipment [label=Equipment fillcolor="#e6f2ff" shape=box style=filled]
+	Process_System_Installation -> Process_System_Installation_0_Equipment
+	Process_System_Installation_1_Actuated_Valve_Setup [label="Actuated Valve Setup" fillcolor="#e6f2ff" shape=box style=filled]
+	Process_System_Installation -> Process_System_Installation_1_Actuated_Valve_Setup
+	Process_System_Installation_2_Tubing [label=Tubing fillcolor="#e6f2ff" shape=box style=filled]
+	Process_System_Installation -> Process_System_Installation_2_Tubing
+	Process_System_Testing [label=Testing fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Process System" -> Process_System_Testing
+	Process_System_Testing_0_Equipment_FAT [label="Equipment FAT" fillcolor="#e6f2ff" shape=box style=filled]
+	Process_System_Testing -> Process_System_Testing_0_Equipment_FAT
+	Piping_System_Engineering [label=Engineering fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Piping System" -> Piping_System_Engineering
+	Piping_System_Engineering_0_Technical_Drawing [label="Technical Drawing" fillcolor="#e6f2ff" shape=box style=filled]
+	Piping_System_Engineering -> Piping_System_Engineering_0_Technical_Drawing
+	Piping_System_Engineering_1_3D_Model [label="3D Model" fillcolor="#e6f2ff" shape=box style=filled]
+	Piping_System_Engineering -> Piping_System_Engineering_1_3D_Model
+	Piping_System_Procurement [label=Procurement fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Piping System" -> Piping_System_Procurement
+	Piping_System_Procurement_0_Bulk_Piping [label="Bulk Piping" fillcolor="#e6f2ff" shape=box style=filled]
+	Piping_System_Procurement -> Piping_System_Procurement_0_Bulk_Piping
+	Piping_System_Procurement_1_Valves [label=Valves fillcolor="#e6f2ff" shape=box style=filled]
+	Piping_System_Procurement -> Piping_System_Procurement_1_Valves
+	Piping_System_Fabrication [label=Fabrication fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Piping System" -> Piping_System_Fabrication
+	Piping_System_Fabrication_0_Piping_Prefabrication [label="Piping Prefabrication" fillcolor="#e6f2ff" shape=box style=filled]
+	Piping_System_Fabrication -> Piping_System_Fabrication_0_Piping_Prefabrication
+	Piping_System_Fabrication_1_Painting_Piping [label="Painting Piping" fillcolor="#e6f2ff" shape=box style=filled]
+	Piping_System_Fabrication -> Piping_System_Fabrication_1_Painting_Piping
+	Piping_System_Installation [label=Installation fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Piping System" -> Piping_System_Installation
+	Piping_System_Installation_0_Piping [label=Piping fillcolor="#e6f2ff" shape=box style=filled]
+	Piping_System_Installation -> Piping_System_Installation_0_Piping
+	Piping_System_Testing [label=Testing fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Piping System" -> Piping_System_Testing
+	Piping_System_Testing_0_Outside_Skid_FAT [label="Outside Skid FAT" fillcolor="#e6f2ff" shape=box style=filled]
+	Piping_System_Testing -> Piping_System_Testing_0_Outside_Skid_FAT
+	Structural_System_Engineering [label=Engineering fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Structural System" -> Structural_System_Engineering
+	Structural_System_Engineering_0_BOM [label=BOM fillcolor="#e6f2ff" shape=box style=filled]
+	Structural_System_Engineering -> Structural_System_Engineering_0_BOM
+	Structural_System_Fabrication [label=Fabrication fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Structural System" -> Structural_System_Fabrication
+	Structural_System_Fabrication_0_Steelworks [label=Steelworks fillcolor="#e6f2ff" shape=box style=filled]
+	Structural_System_Fabrication -> Structural_System_Fabrication_0_Steelworks
+	Structural_System_Fabrication_1_Structure_Prefabrication [label="Structure Prefabrication" fillcolor="#e6f2ff" shape=box style=filled]
+	Structural_System_Fabrication -> Structural_System_Fabrication_1_Structure_Prefabrication
+	Structural_System_Fabrication_2_Painting_Structure [label="Painting Structure" fillcolor="#e6f2ff" shape=box style=filled]
+	Structural_System_Fabrication -> Structural_System_Fabrication_2_Painting_Structure
+	Structural_System_Installation [label=Installation fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Structural System" -> Structural_System_Installation
+	Structural_System_Installation_0_Structure [label=Structure fillcolor="#e6f2ff" shape=box style=filled]
+	Structural_System_Installation -> Structural_System_Installation_0_Structure
+	Structural_System_Installation_1_Assembled_Skid [label="Assembled Skid" fillcolor="#e6f2ff" shape=box style=filled]
+	Structural_System_Installation -> Structural_System_Installation_1_Assembled_Skid
+	Structural_System_Testing [label=Testing fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Structural System" -> Structural_System_Testing
+	"Structural_System_Testing_0_Observer_(Third_Party)" [label="Observer (Third Party)" fillcolor="#e6f2ff" shape=box style=filled]
+	Structural_System_Testing -> "Structural_System_Testing_0_Observer_(Third_Party)"
+	"Electrical_&_Control_System_Engineering" [label=Engineering fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Electrical & Control System" -> "Electrical_&_Control_System_Engineering"
+	"Electrical_&_Control_System_Engineering_0_Electrical/Pneumatic" [label="Electrical/Pneumatic" fillcolor="#e6f2ff" shape=box style=filled]
+	"Electrical_&_Control_System_Engineering" -> "Electrical_&_Control_System_Engineering_0_Electrical/Pneumatic"
+	"Electrical_&_Control_System_Procurement" [label=Procurement fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Electrical & Control System" -> "Electrical_&_Control_System_Procurement"
+	"Electrical_&_Control_System_Procurement_0_Instruments" [label=Instruments fillcolor="#e6f2ff" shape=box style=filled]
+	"Electrical_&_Control_System_Procurement" -> "Electrical_&_Control_System_Procurement_0_Instruments"
+	"Electrical_&_Control_System_Procurement_1_Flow_computer" [label="Flow computer" fillcolor="#e6f2ff" shape=box style=filled]
+	"Electrical_&_Control_System_Procurement" -> "Electrical_&_Control_System_Procurement_1_Flow_computer"
+	"Electrical_&_Control_System_Procurement_2_Cables_&_Cabling" [label="Cables & Cabling" fillcolor="#e6f2ff" shape=box style=filled]
+	"Electrical_&_Control_System_Procurement" -> "Electrical_&_Control_System_Procurement_2_Cables_&_Cabling"
+	"Electrical_&_Control_System_Installation" [label=Installation fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Electrical & Control System" -> "Electrical_&_Control_System_Installation"
+	"Electrical_&_Control_System_Installation_0_Instruments" [label=Instruments fillcolor="#e6f2ff" shape=box style=filled]
+	"Electrical_&_Control_System_Installation" -> "Electrical_&_Control_System_Installation_0_Instruments"
+	"Electrical_&_Control_System_Installation_1_Electrical" [label=Electrical fillcolor="#e6f2ff" shape=box style=filled]
+	"Electrical_&_Control_System_Installation" -> "Electrical_&_Control_System_Installation_1_Electrical"
+	"Electrical_&_Control_System_Testing" [label=Testing fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	"Electrical & Control System" -> "Electrical_&_Control_System_Testing"
+	"Electrical_&_Control_System_Testing_0_Assembled_Skid_FAT" [label="Assembled Skid FAT" fillcolor="#e6f2ff" shape=box style=filled]
+	"Electrical_&_Control_System_Testing" -> "Electrical_&_Control_System_Testing_0_Assembled_Skid_FAT"
+}

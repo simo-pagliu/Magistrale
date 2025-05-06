@@ -1,0 +1,102 @@
+// WBS1: Full Breakdown
+digraph {
+	rankdir=TB size="10,12"
+	dpi=600
+	WBS1 [label="Phase Oriented WBS" fillcolor="#003366" fontcolor=white shape=box style=filled]
+	Engineering [label=Engineering fillcolor="#005580" fontcolor=white shape=box style=filled]
+	WBS1 -> Engineering
+	Procurement [label=Procurement fillcolor="#005580" fontcolor=white shape=box style=filled]
+	WBS1 -> Procurement
+	Construction [label=Construction fillcolor="#005580" fontcolor=white shape=box style=filled]
+	WBS1 -> Construction
+	Testing [label=Testing fillcolor="#005580" fontcolor=white shape=box style=filled]
+	WBS1 -> Testing
+	Engineering_Process [label=Process fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Engineering -> Engineering_Process
+	Engineering_Process_0_Chemical_Process [label="Chemical Process" fillcolor="#e6f2ff" shape=box style=filled]
+	Engineering_Process -> Engineering_Process_0_Chemical_Process
+	Engineering_Process_1_Automation_Logic [label="Automation Logic" fillcolor="#e6f2ff" shape=box style=filled]
+	Engineering_Process -> Engineering_Process_1_Automation_Logic
+	Engineering_Process_2_Mechanical_Process [label="Mechanical Process" fillcolor="#e6f2ff" shape=box style=filled]
+	Engineering_Process -> Engineering_Process_2_Mechanical_Process
+	Engineering_Mechanical [label=Mechanical fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Engineering -> Engineering_Mechanical
+	Engineering_Mechanical_0_BOM [label=BOM fillcolor="#e6f2ff" shape=box style=filled]
+	Engineering_Mechanical -> Engineering_Mechanical_0_BOM
+	Engineering_Mechanical_1_Technical_Drawing [label="Technical Drawing" fillcolor="#e6f2ff" shape=box style=filled]
+	Engineering_Mechanical -> Engineering_Mechanical_1_Technical_Drawing
+	Engineering_Mechanical_2_3D_Model [label="3D Model" fillcolor="#e6f2ff" shape=box style=filled]
+	Engineering_Mechanical -> Engineering_Mechanical_2_3D_Model
+	Engineering_Automation [label=Automation fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Engineering -> Engineering_Automation
+	Engineering_Automation_0_Flowcomputer_Logic [label="Flowcomputer Logic" fillcolor="#e6f2ff" shape=box style=filled]
+	Engineering_Automation -> Engineering_Automation_0_Flowcomputer_Logic
+	"Engineering_Automation_1_Electrical/Pneumatic" [label="Electrical/Pneumatic" fillcolor="#e6f2ff" shape=box style=filled]
+	Engineering_Automation -> "Engineering_Automation_1_Electrical/Pneumatic"
+	Procurement_Critical_Components [label="Critical Components" fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Procurement -> Procurement_Critical_Components
+	Procurement_Critical_Components_0_Filter [label=Filter fillcolor="#e6f2ff" shape=box style=filled]
+	Procurement_Critical_Components -> Procurement_Critical_Components_0_Filter
+	"Procurement_Critical_Components_1_Sterilizer/Mineralizer" [label="Sterilizer/Mineralizer" fillcolor="#e6f2ff" shape=box style=filled]
+	Procurement_Critical_Components -> "Procurement_Critical_Components_1_Sterilizer/Mineralizer"
+	Procurement_Critical_Components_2_Pump [label=Pump fillcolor="#e6f2ff" shape=box style=filled]
+	Procurement_Critical_Components -> Procurement_Critical_Components_2_Pump
+	Procurement_Accessories [label=Accessories fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Procurement -> Procurement_Accessories
+	Procurement_Accessories_0_Bulk_Piping [label="Bulk Piping" fillcolor="#e6f2ff" shape=box style=filled]
+	Procurement_Accessories -> Procurement_Accessories_0_Bulk_Piping
+	Procurement_Accessories_1_Valves [label=Valves fillcolor="#e6f2ff" shape=box style=filled]
+	Procurement_Accessories -> Procurement_Accessories_1_Valves
+	Procurement_Accessories_2_Flow_computer [label="Flow computer" fillcolor="#e6f2ff" shape=box style=filled]
+	Procurement_Accessories -> Procurement_Accessories_2_Flow_computer
+	Procurement_Accessories_3_Instruments [label=Instruments fillcolor="#e6f2ff" shape=box style=filled]
+	Procurement_Accessories -> Procurement_Accessories_3_Instruments
+	Construction_Mechanical_Prefabrication [label="Mechanical Prefabrication" fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Construction -> Construction_Mechanical_Prefabrication
+	Construction_Mechanical_Prefabrication_0_Steelworks [label=Steelworks fillcolor="#e6f2ff" shape=box style=filled]
+	Construction_Mechanical_Prefabrication -> Construction_Mechanical_Prefabrication_0_Steelworks
+	Construction_Mechanical_Prefabrication_1_Structure_Prefabrication [label="Structure Prefabrication" fillcolor="#e6f2ff" shape=box style=filled]
+	Construction_Mechanical_Prefabrication -> Construction_Mechanical_Prefabrication_1_Structure_Prefabrication
+	Construction_Mechanical_Prefabrication_2_Painting_Structure [label="Painting Structure" fillcolor="#e6f2ff" shape=box style=filled]
+	Construction_Mechanical_Prefabrication -> Construction_Mechanical_Prefabrication_2_Painting_Structure
+	Construction_Mechanical_Prefabrication_3_Piping_Prefabrication [label="Piping Prefabrication" fillcolor="#e6f2ff" shape=box style=filled]
+	Construction_Mechanical_Prefabrication -> Construction_Mechanical_Prefabrication_3_Piping_Prefabrication
+	Construction_Mechanical_Prefabrication_4_Painting_Piping [label="Painting Piping" fillcolor="#e6f2ff" shape=box style=filled]
+	Construction_Mechanical_Prefabrication -> Construction_Mechanical_Prefabrication_4_Painting_Piping
+	Construction_Mechanical_Erection [label="Mechanical Erection" fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Construction -> Construction_Mechanical_Erection
+	Construction_Mechanical_Erection_0_Piping [label=Piping fillcolor="#e6f2ff" shape=box style=filled]
+	Construction_Mechanical_Erection -> Construction_Mechanical_Erection_0_Piping
+	Construction_Mechanical_Erection_1_Equipment [label=Equipment fillcolor="#e6f2ff" shape=box style=filled]
+	Construction_Mechanical_Erection -> Construction_Mechanical_Erection_1_Equipment
+	Construction_Mechanical_Erection_2_Valves [label=Valves fillcolor="#e6f2ff" shape=box style=filled]
+	Construction_Mechanical_Erection -> Construction_Mechanical_Erection_2_Valves
+	"Construction_Electrical_&_Instrument_Installation" [label="Electrical & Instrument Installation" fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Construction -> "Construction_Electrical_&_Instrument_Installation"
+	"Construction_Electrical_&_Instrument_Installation_0_Instruments" [label=Instruments fillcolor="#e6f2ff" shape=box style=filled]
+	"Construction_Electrical_&_Instrument_Installation" -> "Construction_Electrical_&_Instrument_Installation_0_Instruments"
+	"Construction_Electrical_&_Instrument_Installation_1_Cables_&_Cabling" [label="Cables & Cabling" fillcolor="#e6f2ff" shape=box style=filled]
+	"Construction_Electrical_&_Instrument_Installation" -> "Construction_Electrical_&_Instrument_Installation_1_Cables_&_Cabling"
+	"Construction_Electrical_&_Instrument_Installation_2_Actuated_Valve_Setup" [label="Actuated Valve Setup" fillcolor="#e6f2ff" shape=box style=filled]
+	"Construction_Electrical_&_Instrument_Installation" -> "Construction_Electrical_&_Instrument_Installation_2_Actuated_Valve_Setup"
+	"Construction_Electrical_&_Instrument_Installation_3_Tubing" [label=Tubing fillcolor="#e6f2ff" shape=box style=filled]
+	"Construction_Electrical_&_Instrument_Installation" -> "Construction_Electrical_&_Instrument_Installation_3_Tubing"
+	Testing_FATs_Procedure [label="FATs Procedure" fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Testing -> Testing_FATs_Procedure
+	Testing_FATs_Procedure_0_Equipment_FAT [label="Equipment FAT" fillcolor="#e6f2ff" shape=box style=filled]
+	Testing_FATs_Procedure -> Testing_FATs_Procedure_0_Equipment_FAT
+	Testing_FATs_Procedure_1_Outside_Skid_FAT [label="Outside Skid FAT" fillcolor="#e6f2ff" shape=box style=filled]
+	Testing_FATs_Procedure -> Testing_FATs_Procedure_1_Outside_Skid_FAT
+	Testing_FATs_Procedure_2_Assembled_Skid_FAT [label="Assembled Skid FAT" fillcolor="#e6f2ff" shape=box style=filled]
+	Testing_FATs_Procedure -> Testing_FATs_Procedure_2_Assembled_Skid_FAT
+	"Testing_Skid_(15,200.00_€)" [label="Skid (15,200.00 €)" fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Testing -> "Testing_Skid_(15,200.00_€)"
+	"Testing_Skid_(15,200.00_€)_0_Structure" [label=Structure fillcolor="#e6f2ff" shape=box style=filled]
+	"Testing_Skid_(15,200.00_€)" -> "Testing_Skid_(15,200.00_€)_0_Structure"
+	"Testing_Skid_(15,200.00_€)_1_Piping" [label=Piping fillcolor="#e6f2ff" shape=box style=filled]
+	"Testing_Skid_(15,200.00_€)" -> "Testing_Skid_(15,200.00_€)_1_Piping"
+	"Testing_Skid_(15,200.00_€)_2_Observer_(Third_Party)" [label="Observer (Third Party)" fillcolor="#e6f2ff" shape=box style=filled]
+	"Testing_Skid_(15,200.00_€)" -> "Testing_Skid_(15,200.00_€)_2_Observer_(Third_Party)"
+	"Testing_Skid_(15,200.00_€)_3_Assembled_Skid" [label="Assembled Skid" fillcolor="#e6f2ff" shape=box style=filled]
+	"Testing_Skid_(15,200.00_€)" -> "Testing_Skid_(15,200.00_€)_3_Assembled_Skid"
+}
