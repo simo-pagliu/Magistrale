@@ -1,0 +1,102 @@
+// WBS1: Full Breakdown
+digraph {
+	rankdir=LR size="10,12"
+	dpi=600
+	WBS1 [label="Phase Oriented WBS" fillcolor="#003366" fontcolor=white shape=box style=filled]
+	Engineering [label=Engineering fillcolor="#005580" fontcolor=white shape=box style=filled]
+	WBS1 -> Engineering
+	Procurement [label=Procurement fillcolor="#005580" fontcolor=white shape=box style=filled]
+	WBS1 -> Procurement
+	Construction [label=Construction fillcolor="#005580" fontcolor=white shape=box style=filled]
+	WBS1 -> Construction
+	Testing [label=Testing fillcolor="#005580" fontcolor=white shape=box style=filled]
+	WBS1 -> Testing
+	Process [label=Process fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Engineering -> Process
+	"Chemical Process" [label="Chemical Process" fillcolor="#e6f2ff" shape=box style=filled]
+	Process -> "Chemical Process"
+	"Automation Logic" [label="Automation Logic" fillcolor="#e6f2ff" shape=box style=filled]
+	Process -> "Automation Logic"
+	"Mechanical Process" [label="Mechanical Process" fillcolor="#e6f2ff" shape=box style=filled]
+	Process -> "Mechanical Process"
+	Mechanical [label=Mechanical fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Engineering -> Mechanical
+	BOM [label=BOM fillcolor="#e6f2ff" shape=box style=filled]
+	Mechanical -> BOM
+	"Technical Drawing" [label="Technical Drawing" fillcolor="#e6f2ff" shape=box style=filled]
+	Mechanical -> "Technical Drawing"
+	"3D Model" [label="3D Model" fillcolor="#e6f2ff" shape=box style=filled]
+	Mechanical -> "3D Model"
+	Automation [label=Automation fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Engineering -> Automation
+	"Flowcomputer Logic" [label="Flowcomputer Logic" fillcolor="#e6f2ff" shape=box style=filled]
+	Automation -> "Flowcomputer Logic"
+	"Electrical/Pneumatic" [label="Electrical/Pneumatic" fillcolor="#e6f2ff" shape=box style=filled]
+	Automation -> "Electrical/Pneumatic"
+	"Critical Components" [label="Critical Components" fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Procurement -> "Critical Components"
+	Filter [label=Filter fillcolor="#e6f2ff" shape=box style=filled]
+	"Critical Components" -> Filter
+	"Sterilizer/Mineralizer" [label="Sterilizer/Mineralizer" fillcolor="#e6f2ff" shape=box style=filled]
+	"Critical Components" -> "Sterilizer/Mineralizer"
+	Pump [label=Pump fillcolor="#e6f2ff" shape=box style=filled]
+	"Critical Components" -> Pump
+	Accessories [label=Accessories fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Procurement -> Accessories
+	"Bulk Piping" [label="Bulk Piping" fillcolor="#e6f2ff" shape=box style=filled]
+	Accessories -> "Bulk Piping"
+	Valves [label=Valves fillcolor="#e6f2ff" shape=box style=filled]
+	Accessories -> Valves
+	"Flow computer" [label="Flow computer" fillcolor="#e6f2ff" shape=box style=filled]
+	Accessories -> "Flow computer"
+	Instruments [label=Instruments fillcolor="#e6f2ff" shape=box style=filled]
+	Accessories -> Instruments
+	"Mechanical Prefabrication" [label="Mechanical Prefabrication" fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Construction -> "Mechanical Prefabrication"
+	Steelworks [label=Steelworks fillcolor="#e6f2ff" shape=box style=filled]
+	"Mechanical Prefabrication" -> Steelworks
+	"Structure Prefabrication" [label="Structure Prefabrication" fillcolor="#e6f2ff" shape=box style=filled]
+	"Mechanical Prefabrication" -> "Structure Prefabrication"
+	"Painting Structure" [label="Painting Structure" fillcolor="#e6f2ff" shape=box style=filled]
+	"Mechanical Prefabrication" -> "Painting Structure"
+	"Piping Prefabrication" [label="Piping Prefabrication" fillcolor="#e6f2ff" shape=box style=filled]
+	"Mechanical Prefabrication" -> "Piping Prefabrication"
+	"Painting Piping" [label="Painting Piping" fillcolor="#e6f2ff" shape=box style=filled]
+	"Mechanical Prefabrication" -> "Painting Piping"
+	"Mechanical Erection" [label="Mechanical Erection" fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Construction -> "Mechanical Erection"
+	Piping [label=Piping fillcolor="#e6f2ff" shape=box style=filled]
+	"Mechanical Erection" -> Piping
+	Equipment [label=Equipment fillcolor="#e6f2ff" shape=box style=filled]
+	"Mechanical Erection" -> Equipment
+	Valves [label=Valves fillcolor="#e6f2ff" shape=box style=filled]
+	"Mechanical Erection" -> Valves
+	"Electrical & Instrument Installation" [label="Electrical & Instrument Installation" fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Construction -> "Electrical & Instrument Installation"
+	Instruments [label=Instruments fillcolor="#e6f2ff" shape=box style=filled]
+	"Electrical & Instrument Installation" -> Instruments
+	"Cables & Cabling" [label="Cables & Cabling" fillcolor="#e6f2ff" shape=box style=filled]
+	"Electrical & Instrument Installation" -> "Cables & Cabling"
+	"Actuated Valve Setup" [label="Actuated Valve Setup" fillcolor="#e6f2ff" shape=box style=filled]
+	"Electrical & Instrument Installation" -> "Actuated Valve Setup"
+	Tubing [label=Tubing fillcolor="#e6f2ff" shape=box style=filled]
+	"Electrical & Instrument Installation" -> Tubing
+	"FATs Procedure" [label="FATs Procedure" fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Testing -> "FATs Procedure"
+	"Equipment FAT" [label="Equipment FAT" fillcolor="#e6f2ff" shape=box style=filled]
+	"FATs Procedure" -> "Equipment FAT"
+	"Outside Skid FAT" [label="Outside Skid FAT" fillcolor="#e6f2ff" shape=box style=filled]
+	"FATs Procedure" -> "Outside Skid FAT"
+	"Assembled Skid FAT" [label="Assembled Skid FAT" fillcolor="#e6f2ff" shape=box style=filled]
+	"FATs Procedure" -> "Assembled Skid FAT"
+	Skid [label=Skid fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Testing -> Skid
+	Structure [label=Structure fillcolor="#e6f2ff" shape=box style=filled]
+	Skid -> Structure
+	Piping [label=Piping fillcolor="#e6f2ff" shape=box style=filled]
+	Skid -> Piping
+	"Observer (Third Party)" [label="Observer (Third Party)" fillcolor="#e6f2ff" shape=box style=filled]
+	Skid -> "Observer (Third Party)"
+	"Assembled Skid" [label="Assembled Skid" fillcolor="#e6f2ff" shape=box style=filled]
+	Skid -> "Assembled Skid"
+}

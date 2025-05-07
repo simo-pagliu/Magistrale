@@ -77,7 +77,7 @@ wbs_data = {
             'Outside Skid FAT',
             'Assembled Skid FAT'
         ],
-        'Skid (15,200.00 €)': [
+        'Skid': [
             'Structure',
             'Piping',
             'Observer (Third Party)',

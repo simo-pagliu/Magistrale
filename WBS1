@@ -89,14 +89,14 @@ digraph {
 	Testing_FATs_Procedure -> Testing_FATs_Procedure_1_Outside_Skid_FAT
 	Testing_FATs_Procedure_2_Assembled_Skid_FAT [label="Assembled Skid FAT" fillcolor="#e6f2ff" shape=box style=filled]
 	Testing_FATs_Procedure -> Testing_FATs_Procedure_2_Assembled_Skid_FAT
-	"Testing_Skid_(15,200.00_€)" [label="Skid (15,200.00 €)" fillcolor="#0073e6" fontcolor=white shape=box style=filled]
-	Testing -> "Testing_Skid_(15,200.00_€)"
-	"Testing_Skid_(15,200.00_€)_0_Structure" [label=Structure fillcolor="#e6f2ff" shape=box style=filled]
-	"Testing_Skid_(15,200.00_€)" -> "Testing_Skid_(15,200.00_€)_0_Structure"
-	"Testing_Skid_(15,200.00_€)_1_Piping" [label=Piping fillcolor="#e6f2ff" shape=box style=filled]
-	"Testing_Skid_(15,200.00_€)" -> "Testing_Skid_(15,200.00_€)_1_Piping"
-	"Testing_Skid_(15,200.00_€)_2_Observer_(Third_Party)" [label="Observer (Third Party)" fillcolor="#e6f2ff" shape=box style=filled]
-	"Testing_Skid_(15,200.00_€)" -> "Testing_Skid_(15,200.00_€)_2_Observer_(Third_Party)"
-	"Testing_Skid_(15,200.00_€)_3_Assembled_Skid" [label="Assembled Skid" fillcolor="#e6f2ff" shape=box style=filled]
-	"Testing_Skid_(15,200.00_€)" -> "Testing_Skid_(15,200.00_€)_3_Assembled_Skid"
+	Testing_Skid [label=Skid fillcolor="#0073e6" fontcolor=white shape=box style=filled]
+	Testing -> Testing_Skid
+	Testing_Skid_0_Structure [label=Structure fillcolor="#e6f2ff" shape=box style=filled]
+	Testing_Skid -> Testing_Skid_0_Structure
+	Testing_Skid_1_Piping [label=Piping fillcolor="#e6f2ff" shape=box style=filled]
+	Testing_Skid -> Testing_Skid_1_Piping
+	"Testing_Skid_2_Observer_(Third_Party)" [label="Observer (Third Party)" fillcolor="#e6f2ff" shape=box style=filled]
+	Testing_Skid -> "Testing_Skid_2_Observer_(Third_Party)"
+	Testing_Skid_3_Assembled_Skid [label="Assembled Skid" fillcolor="#e6f2ff" shape=box style=filled]
+	Testing_Skid -> Testing_Skid_3_Assembled_Skid
 }
