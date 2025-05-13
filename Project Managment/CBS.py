@@ -48,4 +48,4 @@ for item, cost in data['Internal Costs'].items():
         dot.edge('Internal Costs', item)
 
 # Save and render
-dot.render('cost_breakdown_structure', view=True)
+dot.render('./Project Managment/cost_breakdown_structure', view=True, cleanup=True)

@@ -115,4 +115,4 @@ for parent, sub_sections in wbs_data.items():
             dot.edge(sub_sec_id, item_id)
 
 # Save and render
-dot.render('WBS2', view=True)
+dot.render('./Project Managment/WBS2', view=True, cleanup=True)
