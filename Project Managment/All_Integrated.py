@@ -30,32 +30,51 @@ def init():
     return task_lookup, children
 
 def forward_pass(task_lookup, children):
+    # Compute how many parents each task has
     in_deg = {n: len(task_lookup[n]['parents']) for n in task_lookup}
-    q = deque(n for n,d in in_deg.items() if d==0)
+    q = deque(n for n, d in in_deg.items() if d == 0)
+
     while q:
-        n = q.popleft(); t = task_lookup[n]
+        n = q.popleft()
+        t = task_lookup[n]
         t['EF'] = t['ES'] + t['duration']
+
         for c in children[n]:
             ct = task_lookup[c]
+            # Update child's ES only after all parents are processed
             ct['ES'] = max(ct['ES'], t['EF'])
             in_deg[c] -= 1
-            if in_deg[c]==0: q.append(c)
+            if in_deg[c] == 0:
+                q.append(c)
+
 
 def backward_pass(task_lookup, children):
     proj = max(t['EF'] for t in tasks)
-    outd = {n: len(children[n]) for n in task_lookup}
-    q = deque(n for n,d in outd.items() if d==0)
+    
+    # initialize LF and LS for all tasks
+    for t in tasks:
+        t['LF'] = float('inf')
+        t['LS'] = float('inf')
+    
+    out_deg = {n: len(children[n]) for n in task_lookup}
+    q = deque(n for n, d in out_deg.items() if d == 0)
+
+    # terminal tasks get project finish time
     for n in q:
         t = task_lookup[n]
-        t['LF'] = proj; t['LS'] = proj - t['duration']
+        t['LF'] = proj
+        t['LS'] = proj - t['duration']
+    
     while q:
-        n = q.popleft(); t = task_lookup[n]
+        n = q.popleft()
+        t = task_lookup[n]
         for p in t['parents']:
             pt = task_lookup[p]
             pt['LF'] = min(pt['LF'], t['LS'])
             pt['LS'] = pt['LF'] - pt['duration']
-            outd[p] -= 1
-            if outd[p]==0: q.append(p)
+            out_deg[p] -= 1
+            if out_deg[p] == 0:
+                q.append(p)
 # ----------------------------------------------------------
 def network_diagram():
     dot = Digraph(comment='WBS1: Full Breakdown', format='png')
@@ -109,9 +128,9 @@ def gantt():
             row += 1
 
     # draw arrows from parent EF to child ES
-    for t in tasks:
-        for p in t['parents']:
-            dot.edge(p, t['name'], arrowhead='normal', tailport='e', headport='w')
+    # for t in tasks:
+        # for p in t['parents']:
+            # dot.edge(p, t['name'], arrowhead='normal', tailport='e', headport='w')
 
     dot.render('gantt_with_deps', view=True, cleanup=True)
 
@@ -159,6 +178,7 @@ df = pd.DataFrame([{
     **t['resources']
 } for t in tasks])
 
+df['Finish'] = df['Finish'].astype(int)
 time_range = list(range(0, max(df['Finish'])+1))
 res_types = list(tasks[0]['resources'].keys())
 profile = {r: [0]*len(time_range) for r in res_types}

@@ -9,16 +9,16 @@ dot.attr(dpi='600')
 data = {
     'External Costs': {
         'Materials': '21,500.00 €',
-        'External Engineering': '106,000.00 €',
+        'External Engineering': '105,977.00 €',
         'Supplier': '135,600.00 €',
-        'Total': '263,100.00 €'
+        'Total': '263,097.00 €'
     },
     'Internal Costs': {
         'Manpower': '26,800.00 €',
         'Internal Engineering': '7,280.00 €',
         'Total': '34,080.00 €'
     },
-    'Grand Total': '297,180.00 €'
+    'Grand Total': '297,177.00 €'
 }
 
 # Define colors

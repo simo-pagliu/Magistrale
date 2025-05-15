@@ -7,75 +7,1066 @@ section_colors = {
     'Construction': '#008000',
     'Testing': '#FFA500'
 }
+# Updated task list matching the network diagram, with unique names and correct durations,
+# parents adjusted to reflect the “PFD – Heat&Mass Balance” root, and all duplicates renamed.
+
 tasks = [
-    {'name': 'Filter Data Sheet', 'duration': 1, 'section': 'Engineering', 'parents': [], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Pump Data Sheet', 'duration': 1, 'section': 'Engineering', 'parents': ['Filter Data Sheet'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Sterilizer&mineralizer DS', 'duration': 1, 'section': 'Engineering', 'parents': ['Pump Data Sheet'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Valve Data Sheet', 'duration': 1, 'section': 'Engineering', 'parents': ['Sterilizer&mineralizer DS'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Instrument Data Sheet', 'duration': 1, 'section': 'Engineering', 'parents': ['Valve Data Sheet'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Logic Map', 'duration': 5, 'section': 'Engineering', 'parents': ['Instrument Data Sheet'], 'resources': {'Materials': 0.0, 'External Engineering': 20000.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Instruments List', 'duration': 2, 'section': 'Engineering', 'parents': ['Logic Map'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Pneumatic Calculation', 'duration': 3, 'section': 'Engineering', 'parents': ['Instruments List'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Piping Class', 'duration': 2, 'section': 'Engineering', 'parents': ['Pneumatic Calculation'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 1120.0}},
-    {'name': 'Painting Procedure', 'duration': 2, 'section': 'Engineering', 'parents': ['Piping Class'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 1120.0}},
-    {'name': 'Valve List', 'duration': 2, 'section': 'Engineering', 'parents': ['Painting Procedure'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 1120.0}},
-    {'name': 'P&ID', 'duration': 5, 'section': 'Engineering', 'parents': ['Valve List'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 2800.0}},
-    {'name': 'BOM BOP', 'duration': 2, 'section': 'Engineering', 'parents': ['P&ID'], 'resources': {'Materials': 0.0, 'External Engineering': 30000.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'General Arrangement', 'duration': 1, 'section': 'Engineering', 'parents': ['BOM BOP'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Isometric DWG', 'duration': 5, 'section': 'Engineering', 'parents': ['General Arrangement'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Structures DWG', 'duration': 3, 'section': 'Engineering', 'parents': ['Isometric DWG'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': '3D Model', 'duration': 20, 'section': 'Engineering', 'parents': ['Structures DWG'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Control Panel Logic', 'duration': 25, 'section': 'Engineering', 'parents': ['3D Model'], 'resources': {'Materials': 0.0, 'External Engineering': 16000.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Control Systems', 'duration': 10, 'section': 'Engineering', 'parents': ['Control Panel Logic'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Electrical Hook-Up', 'duration': 25, 'section': 'Engineering', 'parents': ['Control Systems'], 'resources': {'Materials': 0.0, 'External Engineering': 25000.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Wiring Diagram', 'duration': 10, 'section': 'Engineering', 'parents': ['Electrical Hook-Up'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Pneumatic Hook-up', 'duration': 10, 'section': 'Engineering', 'parents': ['Wiring Diagram'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Filter', 'duration': 140, 'section': 'Procurement', 'parents': ['Pneumatic Hook-up'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 6000.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Sterilizer&mineralizer', 'duration': 150, 'section': 'Procurement', 'parents': ['Filter'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 7000.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Pump', 'duration': 150, 'section': 'Procurement', 'parents': ['Sterilizer&mineralizer'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 8000.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Fitting', 'duration': 30, 'section': 'Procurement', 'parents': ['Pump'], 'resources': {'Materials': 10000.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Flanges', 'duration': 40, 'section': 'Procurement', 'parents': ['Fitting'], 'resources': {'Materials': 4000.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Gaskets', 'duration': 25, 'section': 'Procurement', 'parents': ['Flanges'], 'resources': {'Materials': 1500.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Stud&Nuts', 'duration': 15, 'section': 'Procurement', 'parents': ['Gaskets'], 'resources': {'Materials': 1000.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Manual Valves', 'duration': 90, 'section': 'Procurement', 'parents': ['Stud&Nuts'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 3000.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Actuated Valves', 'duration': 120, 'section': 'Procurement', 'parents': ['Manual Valves'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 10000.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'ESD valves', 'duration': 130, 'section': 'Procurement', 'parents': ['Actuated Valves'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 8000.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Flow Computer', 'duration': 170, 'section': 'Procurement', 'parents': ['ESD valves'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 12000.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'P/T Gauges', 'duration': 25, 'section': 'Procurement', 'parents': ['Flow Computer'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 900.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'P/T Transimitters', 'duration': 60, 'section': 'Procurement', 'parents': ['P/T Gauges'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 4000.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Level Transmitter', 'duration': 90, 'section': 'Procurement', 'parents': ['P/T Transimitters'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 8000.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Flow Orifices', 'duration': 40, 'section': 'Procurement', 'parents': ['Level Transmitter'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 1300.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'JBs', 'duration': 25, 'section': 'Procurement', 'parents': ['Flow Orifices'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 500.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Steelworks&support Material', 'duration': 20, 'section': 'Procurement', 'parents': ['JBs'], 'resources': {'Materials': 5000.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Structures Prefabbrication', 'duration': 5, 'section': 'Construction', 'parents': ['Steelworks&support Material'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 2000.0, 'Internal Engineering': 0.0}},
-    {'name': 'Painting Structures', 'duration': 10, 'section': 'Construction', 'parents': ['Structures Prefabbrication'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 7000.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Piping Prefabbrication', 'duration': 35, 'section': 'Construction', 'parents': ['Painting Structures'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 14000.0, 'Internal Engineering': 0.0}},
-    {'name': 'Pickling', 'duration': 5, 'section': 'Construction', 'parents': ['Piping Prefabbrication'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 3000.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Painting Piping', 'duration': 15, 'section': 'Construction', 'parents': ['Pickling'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 21000.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Equipment', 'duration': 1, 'section': 'Construction', 'parents': ['Painting Piping'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 400.0, 'Internal Engineering': 0.0}},
-    {'name': 'Piping', 'duration': 5, 'section': 'Construction', 'parents': ['Equipment'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 2000.0, 'Internal Engineering': 0.0}},
-    {'name': 'Valves', 'duration': 5, 'section': 'Construction', 'parents': ['Piping'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 2000.0, 'Internal Engineering': 0.0}},
-    {'name': 'instruments', 'duration': 5, 'section': 'Construction', 'parents': ['Valves'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 27000.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'JBs', 'duration': 2, 'section': 'Construction', 'parents': ['instruments'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'cables & cabletray', 'duration': 10, 'section': 'Construction', 'parents': ['JBs'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Actuated Valve Setup', 'duration': 2, 'section': 'Construction', 'parents': ['cables & cabletray'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'tubing', 'duration': 10, 'section': 'Construction', 'parents': ['Actuated Valve Setup'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Pump', 'duration': 0, 'section': 'Testing', 'parents': ['tubing'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 200.0, 'Internal Engineering': 0.0}},
-    {'name': 'Sterilizer&Mineralizer', 'duration': 0, 'section': 'Testing', 'parents': ['Pump'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 200.0, 'Internal Engineering': 0.0}},
-    {'name': 'Filter', 'duration': 0, 'section': 'Testing', 'parents': ['Sterilizer&Mineralizer'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 200.0, 'Internal Engineering': 0.0}},
-    {'name': 'Contol Panel', 'duration': 0, 'section': 'Testing', 'parents': ['Filter'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 200.0, 'Internal Engineering': 0.0}},
-    {'name': 'Assembled Skid', 'duration': 1, 'section': 'Testing', 'parents': ['Contol Panel'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 400.0, 'Internal Engineering': 0.0}},
-    {'name': 'NDT on Weldings', 'duration': 1, 'section': 'Testing', 'parents': ['Assembled Skid'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 300.0, 'Internal Manpower': 400.0, 'Internal Engineering': 0.0}},
-    {'name': 'Dimensional Check', 'duration': 0, 'section': 'Testing', 'parents': ['NDT on Weldings'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 200.0, 'Internal Engineering': 0.0}},
-    {'name': 'Painting Check', 'duration': 0, 'section': 'Testing', 'parents': ['Dimensional Check'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 200.0, 'Internal Engineering': 0.0}},
-    {'name': 'NDT on Weldings', 'duration': 1, 'section': 'Testing', 'parents': ['Painting Check'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 600.0, 'Internal Manpower': 400.0, 'Internal Engineering': 0.0}},
-    {'name': 'Dimensional Check', 'duration': 0, 'section': 'Testing', 'parents': ['NDT on Weldings'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 200.0, 'Internal Engineering': 0.0}},
-    {'name': 'HydroStatic Pressure TEst', 'duration': 3, 'section': 'Testing', 'parents': ['Dimensional Check'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 1200.0, 'Internal Engineering': 0.0}},
-    {'name': 'Painting Check', 'duration': 1, 'section': 'Testing', 'parents': ['HydroStatic Pressure TEst'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 400.0, 'Internal Engineering': 0.0}},
-    {'name': 'Observer (Third Party)', 'duration': 3, 'section': 'Testing', 'parents': ['Painting Check'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 8000.0, 'Internal Manpower': 0.0, 'Internal Engineering': 0.0}},
-    {'name': 'Dimensional Check', 'duration': 0, 'section': 'Testing', 'parents': ['Observer (Third Party)'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 200.0, 'Internal Engineering': 0.0}},
-    {'name': 'IECEx Detailed Test', 'duration': 3, 'section': 'Testing', 'parents': ['Dimensional Check'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 1200.0, 'Internal Engineering': 0.0}},
-    {'name': 'Automation Test', 'duration': 1, 'section': 'Testing', 'parents': ['IECEx Detailed Test'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 400.0, 'Internal Engineering': 0.0}},
-    {'name': 'Final Tests', 'duration': 1, 'section': 'Testing', 'parents': ['Automation Test'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 400.0, 'Internal Engineering': 0.0}},
-    {'name': 'Documentation Pack', 'duration': 2, 'section': 'Testing', 'parents': ['Final Tests'], 'resources': {'Materials': 0.0, 'External Engineering': 0.0, 'Supplier': 0.0, 'Internal Manpower': 0.0, 'Internal Engineering': 1120.0}},
+  {
+    "name": "PFD - Heat&Mass Balance",
+    "duration": 13.0,
+    "section": "Engineering",
+    "parents": [],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 2500.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Filter Data Sheet",
+    "duration": 1.0,
+    "section": "Engineering",
+    "parents": [
+      "PFD - Heat&Mass Balance"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 2500.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Pump Data Sheet",
+    "duration": 1.0,
+    "section": "Engineering",
+    "parents": [
+      "PFD - Heat&Mass Balance"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 2500.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Sterilizer&mineralizer DS",
+    "duration": 1.0,
+    "section": "Engineering",
+    "parents": [
+      "PFD - Heat&Mass Balance"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 2500.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Valve Data Sheet",
+    "duration": 1.0,
+    "section": "Engineering",
+    "parents": [
+      "PFD - Heat&Mass Balance"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 2500.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Instrument Data Sheet",
+    "duration": 1.0,
+    "section": "Engineering",
+    "parents": [
+      "PFD - Heat&Mass Balance"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 2500.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Logic Map",
+    "duration": 5.0,
+    "section": "Engineering",
+    "parents": [
+      "PFD - Heat&Mass Balance",
+      "P&ID"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 6666.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Instruments List",
+    "duration": 2.0,
+    "section": "Engineering",
+    "parents": [
+      "Logic Map"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 6666.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Pneumatic Calculation",
+    "duration": 3.0,
+    "section": "Engineering",
+    "parents": [
+      "Instruments List"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 6666.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Piping Class",
+    "duration": 2.0,
+    "section": "Engineering",
+    "parents": [
+      "Pneumatic Calculation"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 1120.0
+    }
+  },
+  {
+    "name": "Painting Procedure",
+    "duration": 2.0,
+    "section": "Engineering",
+    "parents": [
+      "PFD - Heat&Mass Balance"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 1120.0
+    }
+  },
+  {
+    "name": "Valve List",
+    "duration": 2.0,
+    "section": "Engineering",
+    "parents": [
+      "P&ID"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 1120.0
+    }
+  },
+  {
+    "name": "P&ID",
+    "duration": 5.0,
+    "section": "Engineering",
+    "parents": [
+      "PFD - Heat&Mass Balance"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 2800.0
+    }
+  },
+  {
+    "name": "BOM BOP",
+    "duration": 2.0,
+    "section": "Engineering",
+    "parents": [
+      "3D Model"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 6000.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "General Arrangement",
+    "duration": 1.0,
+    "section": "Engineering",
+    "parents": [
+      "BOM BOP"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 6000.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Isometric DWG",
+    "duration": 5.0,
+    "section": "Engineering",
+    "parents": [],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 6000.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Structures DWG",
+    "duration": 3.0,
+    "section": "Engineering",
+    "parents": [],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 6000.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "3D Model",
+    "duration": 20.0,
+    "section": "Engineering",
+    "parents": [
+      "P&ID"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 6000.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Control Panel Logic",
+    "duration": 25.0,
+    "section": "Engineering",
+    "parents": [
+      "Logic Map"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 8000.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Control Systems",
+    "duration": 10.0,
+    "section": "Engineering",
+    "parents": [
+      "Logic Map"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 8000.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Electrical Hook-Up",
+    "duration": 25.0,
+    "section": "Engineering",
+    "parents": [
+      "Control Systems"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 8333.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Wiring Diagram",
+    "duration": 10.0,
+    "section": "Engineering",
+    "parents": [
+      "Control Panel Logic"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 8333.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Pneumatic Hook-Up",
+    "duration": 10.0,
+    "section": "Engineering",
+    "parents": [
+      "Wiring Diagram"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 8333.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Filter",
+    "duration": 140.0,
+    "section": "Procurement",
+    "parents": [
+      "Pneumatic Hook-Up"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 6000.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Sterilizer&mineralizer",
+    "duration": 150.0,
+    "section": "Procurement",
+    "parents": [
+      "Filter"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 7000.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Pump",
+    "duration": 150.0,
+    "section": "Procurement",
+    "parents": [
+      "Sterilizer&mineralizer"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 8000.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Fitting",
+    "duration": 30.0,
+    "section": "Procurement",
+    "parents": [
+      "Pump"
+    ],
+    "resources": {
+      "Materials": 10000.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Flanges",
+    "duration": 40.0,
+    "section": "Procurement",
+    "parents": [
+      "Fitting"
+    ],
+    "resources": {
+      "Materials": 4000.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Gaskets",
+    "duration": 25.0,
+    "section": "Procurement",
+    "parents": [
+      "Flanges"
+    ],
+    "resources": {
+      "Materials": 1500.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Stud&Nuts",
+    "duration": 15.0,
+    "section": "Procurement",
+    "parents": [
+      "Gaskets"
+    ],
+    "resources": {
+      "Materials": 1000.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Manual Valves",
+    "duration": 90.0,
+    "section": "Procurement",
+    "parents": [
+      "Stud&Nuts"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 3000.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Actuated Valves",
+    "duration": 120.0,
+    "section": "Procurement",
+    "parents": [
+      "Manual Valves"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 10000.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "ESD valves",
+    "duration": 130.0,
+    "section": "Procurement",
+    "parents": [
+      "Actuated Valves"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 8000.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Flow Computer",
+    "duration": 170.0,
+    "section": "Procurement",
+    "parents": [
+      "Control Panel Logic",
+      "P&ID"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 12000.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "P/T Gauges",
+    "duration": 25.0,
+    "section": "Procurement",
+    "parents": [
+      "Flow Computer"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 900.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "P/T Transmitters",
+    "duration": 60,
+    "section": "Procurement",
+    "parents": [
+      "P/T Gauges"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 4000.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Level Transmitter",
+    "duration": 90.0,
+    "section": "Procurement",
+    "parents": [
+      "P/T Transmitters"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 8000.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Flow Orifices",
+    "duration": 40.0,
+    "section": "Procurement",
+    "parents": [
+      "Level Transmitter"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 1300.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "JBs Procurement",
+    "duration": 25.0,
+    "section": "Procurement",
+    "parents": [
+      "Flow Orifices"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 500.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Steelworks&support Material",
+    "duration": 20.0,
+    "section": "Procurement",
+    "parents": [
+      "JBs Procurement"
+    ],
+    "resources": {
+      "Materials": 5000.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Structures Prefabbrication",
+    "duration": 5.0,
+    "section": "Construction",
+    "parents": [
+      "Steelworks&support Material"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 2000.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Painting Structures",
+    "duration": 10.0,
+    "section": "Construction",
+    "parents": [
+      "Structures Prefabbrication"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 7000.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Piping Prefabbrication",
+    "duration": 35.0,
+    "section": "Construction",
+    "parents": [
+      "Painting Structures"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 14000.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Pickling",
+    "duration": 5.0,
+    "section": "Construction",
+    "parents": [
+      "Piping Prefabbrication"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 3000.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Painting Piping",
+    "duration": 15.0,
+    "section": "Construction",
+    "parents": [
+      "Painting Procedure"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 21000.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Equipment",
+    "duration": 1.0,
+    "section": "Construction",
+    "parents": [
+      "Painting Piping"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 400.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Piping",
+    "duration": 5.0,
+    "section": "Construction",
+    "parents": [
+      "Equipment"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 2000.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Valves",
+    "duration": 5.0,
+    "section": "Construction",
+    "parents": [
+      "Piping"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 2000.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Instruments Installation",
+    "duration": 5.0,
+    "section": "Construction",
+    "parents": [
+      "Valves"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 5400.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "JBs Installation",
+    "duration": 2.0,
+    "section": "Construction",
+    "parents": [
+      "Instruments Installation"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 5400.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Cable & Cabletray Installation",
+    "duration": 10.0,
+    "section": "Construction",
+    "parents": [
+      "JBs Installation"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 5400.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Actuated Valve Setup",
+    "duration": 2.0,
+    "section": "Construction",
+    "parents": [
+      "Cable & Cabletray Installation"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 5400.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Tubing",
+    "duration": 10,
+    "section": "Construction",
+    "parents": [
+      "Actuated Valve Setup"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Pump Test",
+    "duration": 0.5,
+    "section": "Testing",
+    "parents": [
+      "Tubing"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 200.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Sterilizer&mineralizer Test",
+    "duration": 0.5,
+    "section": "Testing",
+    "parents": [
+      "Pump Test"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 200.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Filter Test",
+    "duration": 0.5,
+    "section": "Testing",
+    "parents": [
+      "Sterilizer&mineralizer Test"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 200.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Control Panel Test",
+    "duration": 0.5,
+    "section": "Testing",
+    "parents": [
+      "Filter Test"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 200.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Assembled Skid",
+    "duration": 1.0,
+    "section": "Testing",
+    "parents": [
+      "Control Panel Test"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 400.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "NDT on Weldings (Structure)",
+    "duration": 1.0,
+    "section": "Testing",
+    "parents": [
+      "Assembled Skid"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 100.0,
+      "Internal Manpower": 400.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Dimensional Check (Structure)",
+    "duration": 0.5,
+    "section": "Testing",
+    "parents": [
+      "NDT on Weldings (Structure)"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 100.0,
+      "Internal Manpower": 200.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Painting Check (Structure)",
+    "duration": 0.5,
+    "section": "Testing",
+    "parents": [
+      "Dimensional Check (Structure)"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 100.0,
+      "Internal Manpower": 200.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "NDT on Weldings (Piping)",
+    "duration": 1.0,
+    "section": "Testing",
+    "parents": [
+      "Painting Check (Structure)"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 200.0,
+      "Internal Manpower": 400.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Dimensional Check (Piping)",
+    "duration": 0.5,
+    "section": "Testing",
+    "parents": [
+      "NDT on Weldings (Piping)"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 200.0,
+      "Internal Manpower": 200.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Hydrostatic Pressure Test",
+    "duration": 3.0,
+    "section": "Testing",
+    "parents": [],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 200.0,
+      "Internal Manpower": 1200.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Painting Check (Piping)",
+    "duration": 1.0,
+    "section": "Testing",
+    "parents": [
+      "Hydrostatic Pressure Test"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 400.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Observer (Third Party)",
+    "duration": 3.0,
+    "section": "Testing",
+    "parents": [
+      "Painting Check (Piping)"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 8000.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Dimensional Check (Observer)",
+    "duration": 0.5,
+    "section": "Testing",
+    "parents": [
+      "Observer (Third Party)"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 200.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "IECEx Detailed Test",
+    "duration": 3.0,
+    "section": "Testing",
+    "parents": [
+      "Automation Test",
+      "Control Systems"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 1200.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Automation Test",
+    "duration": 1.0,
+    "section": "Testing",
+    "parents": [],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 400.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Final Tests",
+    "duration": 1.0,
+    "section": "Testing",
+    "parents": [
+      "Automation Test"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 400.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
+    "name": "Documentation Pack",
+    "duration": 2.0,
+    "section": "Testing",
+    "parents": [
+      "Final Tests"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 1120.0
+    }
+  }
 ]
