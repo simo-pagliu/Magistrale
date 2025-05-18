@@ -25,6 +25,21 @@ tasks = [
     }
   },
   {
+    "name": "Filter Procurement",
+    "duration": 1.0,
+    "section": "Procurement",
+    "parents": [
+      "Filter Data Sheet"
+    ],
+    "resources": {
+      "Materials": 0.0,
+      "External Engineering": 0.0,
+      "Supplier": 0.0,
+      "Internal Manpower": 0.0,
+      "Internal Engineering": 0.0
+    }
+  },
+  {
     "name": "Filter Data Sheet",
     "duration": 1.0,
     "section": "Engineering",
@@ -120,7 +135,7 @@ tasks = [
     "duration": 2.0,
     "section": "Engineering",
     "parents": [
-      "Logic Map"
+      "P&ID"
     ],
     "resources": {
       "Materials": 0.0,
@@ -195,7 +210,8 @@ tasks = [
     "duration": 5.0,
     "section": "Engineering",
     "parents": [
-      "PFD - Heat&Mass Balance"
+      "PFD - Heat&Mass Balance",
+      "Piping Class"
     ],
     "resources": {
       "Materials": 0.0,
@@ -1070,3 +1086,36 @@ tasks = [
     }
   }
 ]
+
+# load_tasks_from_csv.py
+
+import pandas as pd
+
+# Load the enriched CSV (assumed to be exported already)
+df = pd.read_csv("final_task_comparison.csv")  # update with actual path if needed
+
+# Fill NaNs with defaults
+df.fillna({'Translated Dependencies': ''}, inplace=True)
+df.fillna(0, inplace=True)
+
+# Build the tasks list
+tasks = []
+for _, row in df.iterrows():
+    task = {
+        "name": row["Exported Task Name"],
+        "duration": max(1, round(float(row["duration"]))),  # round and ensure min 1
+        "section": row.get("Unnamed: 1", ""),  # or a default
+        "parents": [p.strip() for p in row["Translated Dependencies"].split(",") if p.strip()],
+        "resources": {
+            "Materials": float(row.get("materials cost", 0)),
+            "External Engineering": float(row.get("ext engineering", 0)),
+            "Supplier": float(row.get("supplier", 0)),
+            "Internal Manpower": float(row.get("manpower", 0)),
+            "Internal Engineering": float(row.get("internal engineerign", 0)),
+        }
+    }
+    tasks.append(task)
+
+# Now `tasks` is ready for export or use
+print(f"Loaded {len(tasks)} tasks from CSV.")
+

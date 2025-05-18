@@ -1,0 +1,65 @@
+name,parents,duration,Materials ,External Engineering ,Supplier ,Internal Manpower,Internal Engineering ,section
+PFD - Heat&Mass Balance,,13.0,0.0,2500.0,0.0,0.0,0.0,Engineering
+Filter Data Sheet,PFD - Heat&Mass Balance,1.0,0.0,2500.0,0.0,0.0,0.0,Engineering
+Pump Data Sheet,PFD - Heat&Mass Balance,1.0,0.0,2500.0,0.0,0.0,0.0,Engineering
+Sterilizer&mineralizer DS,PFD - Heat&Mass Balance,1.0,0.0,2500.0,0.0,0.0,0.0,Engineering
+Valve Data Sheet,"PFD - Heat&Mass Balance, Valve List",1.0,0.0,2500.0,0.0,0.0,0.0,Engineering
+Instrument Data Sheet,"PFD - Heat&Mass Balance, Instruments List",1.0,0.0,2500.0,0.0,0.0,0.0,Engineering
+Logic Map,"PFD - Heat&Mass Balance, P&ID",5.0,0.0,6666.0,0.0,0.0,0.0,Engineering
+Instruments List,P&ID,2.0,0.0,6666.0,0.0,0.0,0.0,Engineering
+Pneumatic Calculation,Instruments List,3.0,0.0,6666.0,0.0,0.0,0.0,Engineering
+Piping Class,PFD - Heat&Mass Balance,2.0,0.0,0.0,0.0,0.0,1120.0,Engineering
+Painting Procedure,PFD - Heat&Mass Balance,2.0,0.0,0.0,0.0,0.0,1120.0,Engineering
+Valve List,P&ID,2.0,0.0,0.0,0.0,0.0,1120.0,Engineering
+P&ID,"PFD - Heat&Mass Balance, Piping Class",5.0,0.0,0.0,0.0,0.0,2800.0,Engineering
+BOM BOP,3D Model,2.0,0.0,6000.0,0.0,0.0,0.0,Engineering
+General Arrangement,3D Model,1.0,0.0,6000.0,0.0,0.0,0.0,Engineering
+Isometric DWG,"General Arrangement, Piping Class",5.0,0.0,6000.0,0.0,0.0,0.0,Engineering
+Structures DWG,General Arrangement,3.0,0.0,6000.0,0.0,0.0,0.0,Engineering
+3D Model,P&ID,20.0,0.0,6000.0,0.0,0.0,0.0,Engineering
+Control Panel Logic,"Logic Map, Logic Map",25.0,0.0,8000.0,0.0,0.0,0.0,Engineering
+Control Systems,Logic Map,10.0,0.0,8000.0,0.0,0.0,0.0,Engineering
+Electrical Hook-Up,Control Panel Logic,25.0,0.0,8333.0,0.0,0.0,0.0,Engineering
+Wiring Diagram,Control Panel Logic,10.0,0.0,8333.0,0.0,0.0,0.0,Engineering
+Pneumatic Hook-Up,Pneumatic Calculation,,,,,,,Engineering
+Filter Procurement,Filter Data Sheet,,,,,,,Procurement
+Sterilizer&mineralizer,Sterilizer&mineralizer DS,,,,,,,Procurement
+Pump Procurement,Pump Data Sheet,,,,,,,Procurement
+Manual Valves,"Valve Data Sheet, Valve List",90.0,0.0,0.0,3000.0,0.0,0.0,Procurement
+Actuated Valves,"Valve Data Sheet, Valve List",120.0,0.0,0.0,10000.0,0.0,0.0,Procurement
+ESD valves,"Valve Data Sheet, Valve List",130.0,0.0,0.0,8000.0,0.0,0.0,Procurement
+Flow Computer,Instrument Data Sheet,170.0,0.0,0.0,12000.0,0.0,0.0,Procurement
+P/T Gauges,Instrument Data Sheet,25.0,0.0,0.0,900.0,0.0,0.0,Procurement
+P/T Transmitters,Instrument Data Sheet,,,,,,,Procurement
+Level Transmitter,Instrument Data Sheet,90.0,0.0,0.0,8000.0,0.0,0.0,Procurement
+Flow Orifices,Instrument Data Sheet,,,,,,,Procurement
+JBs Procurement,Instrument Data Sheet,,,,,,,Procurement
+Bulk Piping Procurement,Instrument Data Sheet,,,,,,,Procurement
+Steelworks&support Material,BOM BOP,20.0,5000.0,0.0,0.0,0.0,0.0,Procurement
+Structures Prefabbrication,"Structures DWG, Steelworks&support Material",5.0,0.0,0.0,0.0,2000.0,0.0,Construction
+Painting Structures,"Painting Procedure, Dimensional Check (Observer)",10.0,0.0,0.0,7000.0,0.0,0.0,Construction
+Piping Prefabbrication,"Isometric DWG, Bulk Piping Procurement",35.0,0.0,0.0,,14000.0,0.0,Construction
+Pickling,Hydrostatic Pressure Test,5.0,0.0,0.0,3000.0,0.0,0.0,Construction
+Painting Piping,"Painting Procedure, Pickling",15.0,0.0,0.0,21000.0,0.0,0.0,Construction
+Equipment,"Pneumatic Hook-Up, Painting Check (Structure), ESD valves",1.0,0.0,0.0,0.0,400.0,0.0,Construction
+Piping,"Pneumatic Hook-Up, Painting Check (Structure), ESD valves",5.0,0.0,0.0,0.0,2000.0,0.0,Construction
+Valves,"Pneumatic Hook-Up, Painting Check (Structure), ESD valves",5.0,0.0,0.0,0.0,2000.0,0.0,Construction
+Instruments Installation,"Electrical Hook-Up, Valves,  JBs Procurement, Pneumatic Hook-Up, Control Panel Test, Flow Computer",,,,,,,Construction
+JBs Installation,Wiring Diagram,,,,,,,Construction
+Cable & Cabletray Installation,Wiring Diagram,,,,,,,Construction
+Tubing,,,,,,,,Construction
+Pump Test,,,,,,,,Testing
+Sterilizer&mineralizer Test,,,,,,,,Testing
+Filter Test,,,,,,,,Testing
+Control Panel Test,,,,,,,,Testing
+Assembled Skid,,1.0,0.0,0.0,0.0,400.0,0.0,Testing
+NDT on Weldings (Structure),Structures Prefabbrication,,,,,,,Testing
+Painting Check (Structure),Painting Structures,1.0,0.0,0.0,100.0,200.0,0.0,Testing
+NDT on Weldings (Piping),Piping Prefabbrication,,,,,,,Testing
+Hydrostatic Pressure Test,Dimensional Check (Observer),,,,,,,Testing
+Painting Check (Piping),Painting Piping,,,,,,,Testing
+Dimensional Check (Observer),"NDT on Weldings (Piping), NDT on Weldings (Structure), Dimensional Check (Observer)",,,,,,,Testing
+IECEx Detailed Test,"Control Systems, Electrical Hook-Up, Instruments Installation, Automation Test, Tubing, Dimensional Check (Observer), JBs Installation, Cable & Cabletray Installation",3.0,0.0,0.0,0.0,1200.0,0.0,Testing
+Automation Test,,1.0,0.0,0.0,0.0,400.0,0.0,Testing
+Final Tests,"Automation Test, Assembled Skid",1.0,0.0,0.0,0.0,400.0,0.0,Testing
+Documentation Pack,Final Tests,,,,,,,Testing

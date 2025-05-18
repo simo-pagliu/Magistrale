@@ -1,8 +1,64 @@
 from graphviz import Digraph
 from collections import defaultdict, deque
 import pandas as pd
-from input import tasks, section_colors # Import data
 import matplotlib.pyplot as plt
+import pandas as pd
+
+section_colors = {
+    'Engineering': '#005580',
+    'Procurement': '#0073e6',
+    'Construction': '#008000',
+    'Testing': '#FFA500'
+}
+import pandas as pd
+
+# Load the Excel file
+df = pd.read_excel("CBS.xlsx")
+
+start_row = 4
+end_row = 74
+
+# --- Define column mappings (update these based on the actual header names) ---
+column_map = {
+    "name": "Unnamed: 8",
+    "duration": "Unnamed: 9",
+    "section": "Unnamed: 1",
+    "parents": "Unnamed: 11", 
+    "Materials": "Unnamed: 13",
+    "External Engineering": "Unnamed: 14",
+    "Supplier": "Unnamed: 15",
+    "Internal Manpower": "Unnamed: 16",
+    "Internal Engineering": "Unnamed: 17"
+}
+
+# Filter the dataframe to the target rows
+df = df.iloc[start_row:end_row].copy()
+
+# Fill NaNs with appropriate defaults
+df.fillna({column_map["parents"]: ''}, inplace=True)
+df.fillna(0, inplace=True)
+
+# Build the tasks list
+tasks = []
+for _, row in df.iterrows():
+    task = {
+        "name": str(row[column_map["name"]]).strip(),
+        "duration": max(1, round(float(row[column_map["duration"]]))),
+        "section": str(row[column_map["section"]]).strip(),
+        "parents": [p.strip() for p in str(row[column_map["parents"]]).split(",") if p.strip()],
+        "resources": {
+            "Materials": float(row.get(column_map["Materials"], 0)),
+            "External Engineering": float(row.get(column_map["External Engineering"], 0)),
+            "Supplier": float(row.get(column_map["Supplier"], 0)),
+            "Internal Manpower": float(row.get(column_map["Internal Manpower"], 0)),
+            "Internal Engineering": float(row.get(column_map["Internal Engineering"], 0)),
+        }
+    }
+    tasks.append(task)
+
+# Output result
+print(f"Loaded {len(tasks)} tasks from Excel.")
+
 # ----------------------------------------------------------
 # This creates:
 # 1. A network diagram of the project
@@ -42,7 +98,7 @@ def forward_pass(task_lookup, children):
         for c in children[n]:
             ct = task_lookup[c]
             # Update child's ES only after all parents are processed
-            ct['ES'] = max(ct['ES'], t['EF'])
+            ct['ES'] = max(ct['ES'], t['EF']+1)
             in_deg[c] -= 1
             if in_deg[c] == 0:
                 q.append(c)
