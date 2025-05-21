@@ -126,7 +126,7 @@ def backward_pass(task_lookup, children):
         t = task_lookup[n]
         for p in t['parents']:
             pt = task_lookup[p]
-            pt['LF'] = min(pt['LF'], t['LS'])
+            pt['LF'] = min(pt['LF'], t['LS']-1)
             pt['LS'] = pt['LF'] - pt['duration']
             out_deg[p] -= 1
             if out_deg[p] == 0:
@@ -170,8 +170,8 @@ def gantt():
     row = 0
     for day in sorted(by_start):
         for t in by_start[day]:
-            w        = (t['EF'] - t['ES']) * X_SCALE
-            x_center = t['ES'] * X_SCALE + w/2
+            w        = (t['EF'] - t['ES'] + 1) * X_SCALE
+            x_center = (t['ES']) * X_SCALE + w/2
             y_center = -row * Y_SCALE
             dot.node(
                 t['name'],
@@ -208,14 +208,17 @@ def resource_profile():
     plt.savefig('resource_profile.png', dpi=300)
 
 def s_curve():
+    import numpy as np
     # Compute cumulative resource for each type
     cumulative_profile = {r: [0]*len(time_range) for r in res_types}
     for r in res_types:
         cumulative_profile[r] = [sum(profile[r][:i+1]) for i in range(len(profile[r]))]
+    tot = sum(np.array(cumulative_profile[r]) for r in res_types)
     # Plot S-Curve
     fig, ax = plt.subplots(figsize=(10,4))
     for r in res_types:
         ax.plot(time_range, cumulative_profile[r], label=r)
+    ax.plot(time_range, tot, label='Total', color='black', linestyle='--')
     ax.set_xlabel('Time')
     ax.set_ylabel('Cumulative Usage')
     ax.set_title('S-Curve')
