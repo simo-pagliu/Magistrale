@@ -48,7 +48,8 @@ wbs_data = {
             'Bulk Piping',
             'Valves',
             'Flow computer',
-            'Instruments'
+            'Instruments',
+            "Steelworks"
         ]
     },
     'Construction': {
@@ -80,7 +81,6 @@ wbs_data = {
         'Skid': [
             'Structure',
             'Piping',
-            'Observer (Third Party)',
             'Assembled Skid'
         ]
     }

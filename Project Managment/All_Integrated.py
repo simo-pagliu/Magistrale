@@ -10,10 +10,12 @@ section_colors = {
     'Construction': '#008000',
     'Testing': '#FFA500'
 }
+late = False
+# ----------------------------------------------------------
 import pandas as pd
 
 # Load the Excel file
-df = pd.read_excel("CBS.xlsx")
+df = pd.read_excel("./Project Managment/CBS.xlsx")
 
 start_row = 4
 end_row = 74
@@ -26,9 +28,10 @@ column_map = {
     "parents": "Unnamed: 11", 
     "Materials": "Unnamed: 13",
     "External Engineering": "Unnamed: 14",
-    "Supplier": "Unnamed: 15",
-    "Internal Manpower": "Unnamed: 16",
-    "Internal Engineering": "Unnamed: 17"
+    "Regulatory Body": "Unnamed: 15",
+    "Supplier": "Unnamed: 16",
+    "Internal Manpower": "Unnamed: 17",
+    "Internal Engineering": "Unnamed: 18"
 }
 
 # Filter the dataframe to the target rows
@@ -49,6 +52,7 @@ for _, row in df.iterrows():
         "resources": {
             "Materials": float(row.get(column_map["Materials"], 0)),
             "External Engineering": float(row.get(column_map["External Engineering"], 0)),
+            "Regulatory Body": float(row.get(column_map["Regulatory Body"], 0)),
             "Supplier": float(row.get(column_map["Supplier"], 0)),
             "Internal Manpower": float(row.get(column_map["Internal Manpower"], 0)),
             "Internal Engineering": float(row.get(column_map["Internal Engineering"], 0)),
@@ -156,9 +160,11 @@ def network_diagram():
     dot.render('network_diagram', view=True, cleanup=True)
 
 def gantt():
+    import math
     ROW_HEIGHT = 0.5
     X_SCALE = 0.5
     Y_SCALE = 0.5
+    GRID_INTERVAL = 7  # every X units
     dot = Digraph('G', engine='neato', format='png')
     dot.attr(overlap='true', splines='ortho', bgcolor='white')
     dot.attr('node', shape='box', fixedsize='true', height=str(ROW_HEIGHT), margin='0', pin='true')
@@ -171,7 +177,10 @@ def gantt():
     for day in sorted(by_start):
         for t in by_start[day]:
             w        = (t['EF'] - t['ES'] + 1) * X_SCALE
-            x_center = (t['ES']) * X_SCALE + w/2
+            if late == True:
+                x_center = (t['LS']) * X_SCALE + w / 2
+            else:
+                x_center = (t['ES']) * X_SCALE + w / 2
             y_center = -row * Y_SCALE
             dot.node(
                 t['name'],
@@ -183,18 +192,49 @@ def gantt():
             )
             row += 1
 
-    # draw arrows from parent EF to child ES
-    # for t in tasks:
-        # for p in t['parents']:
-            # dot.edge(p, t['name'], arrowhead='normal', tailport='e', headport='w')
+    # Add background vertical dashed lines (tall thin nodes)
+    max_day = max(t['EF'] for t in tasks)
+    num_rows = row
+    total_height = num_rows * Y_SCALE
+    for x in range(0, max_day + GRID_INTERVAL, GRID_INTERVAL):
+        x_center = x * X_SCALE
+        grid_id = f'grid_{x}'
+        dot.node(
+            grid_id,
+            label='',
+            pos=f"{x_center},{-total_height / 2}!",
+            width='0.01',
+            height=str(total_height),
+            style='dashed',
+            color='gray',
+            shape='box',
+            fillcolor='white'  # prevent coloring
+        )
 
     dot.render('gantt_with_deps', view=True, cleanup=True)
 
 def resource_profile():
     for _, row in df.iterrows():
         for r in res_types:
-            for ti in range(int(row['Start']), int(row['Finish'])):
-                profile[r][ti] += row[r]
+            if r == 'Internal Engineering' or r == 'Internal Manpower':
+                # Get task duration and distribute resources over time
+                duration = int(row['Finish']) - int(row['Start'])
+                for ti in range(int(row['Start']), int(row['Finish'])):
+                    profile[r][ti] += row[r] / duration
+            else:
+                # In this case you pay at the end if the cost is low, otherwise you pay half at the beginning and half at the end
+                if row[r] > 10000:
+                    profile[r][int(row['Start'])] += row[r] / 2
+                    profile[r][int(row['Finish'])] += row[r] / 2
+                else:
+                    profile[r][int(row['Finish'])] += row[r]
+
+            # "Materials": float(row.get(column_map["Materials"], 0)),
+            # "External Engineering": float(row.get(column_map["External Engineering"], 0)),
+            # "Regulatory Body": float(row.get(column_map["Regulatory Body"], 0)),
+            # "Supplier": float(row.get(column_map["Supplier"], 0)),
+            # "Internal Manpower": float(row.get(column_map["Internal Manpower"], 0)),
+            # "Internal Engineering": float(row.get(column_map["Internal Engineering"], 0)),
 
     # Plot & save
     fig, ax = plt.subplots(figsize=(10,4))
@@ -230,12 +270,20 @@ def s_curve():
 task_lookup, children = init()
 forward_pass(task_lookup, children)
 backward_pass(task_lookup, children)
-df = pd.DataFrame([{
+if late: # Late start and finish
+    df = pd.DataFrame([{
     'Task': t['name'],
-    'Start': t['ES'],
-    'Finish': t['EF'],
+    'Start': t['LS'],
+    'Finish': t['LF'],
     **t['resources']
 } for t in tasks])
+else: # Early start and finish
+    df = pd.DataFrame([{
+        'Task': t['name'],
+        'Start': t['ES'],
+        'Finish': t['EF'],
+        **t['resources']
+    } for t in tasks])
 
 df['Finish'] = df['Finish'].astype(int)
 time_range = list(range(0, max(df['Finish'])+1))
