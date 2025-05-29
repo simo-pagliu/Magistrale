@@ -35,8 +35,8 @@ column_map = {
 }
 
 # Print the column names for debugging
-print("Column names in the DataFrame:")
-print(df.columns.tolist())
+# print("Column names in the DataFrame:")
+# print(df.columns.tolist())
 
 # Filter the dataframe to the target rows
 df = df.iloc[start_row:end_row].copy()
@@ -60,12 +60,13 @@ for _, row in df.iterrows():
             "Supplier": float(row.get(column_map["Supplier"], 0)),
             "Internal Manpower": float(row.get(column_map["Internal Manpower"], 0)),
             "Internal Engineering": float(row.get(column_map["Internal Engineering"], 0)),
-        }
+        },
+        "code": f"{str(row[column_map['section']]).strip()[0]}{len(tasks) + 1}",
     }
     tasks.append(task)
 
 # Output result
-print(f"Loaded {len(tasks)} tasks from Excel.")
+num_tasks = len(tasks)
 
 # ----------------------------------------------------------
 # This creates:
@@ -146,7 +147,7 @@ def network_diagram():
     dot.attr(rankdir='LR', dpi='600')
 
     for t in tasks:
-        label_name = t['name'].replace('&', '&amp;')
+        label_name = f"[{t['code']}] {t['name'].replace('&', '&amp;')}"
         slack = t['LS'] - t['ES']
         label = f'''<<table border="1" cellborder="0" cellspacing="0">
         <tr><td>{t['ES']}</td><td></td><td></td><td>{t['EF']}</td></tr>
@@ -164,42 +165,23 @@ def network_diagram():
     dot.render('network_diagram', view=True, cleanup=True)
 
 def gantt():
-    import math
-    ROW_HEIGHT = 0.5
-    X_SCALE = 0.5
-    Y_SCALE = 0.5
+    ROW_HEIGHT = 0.25
+    X_SCALE = 0.25
+    Y_SCALE = 0.25
     GRID_INTERVAL = 7  # every X units
     dot = Digraph('G', engine='neato', format='png')
     dot.attr(overlap='true', splines='ortho', bgcolor='white')
-    dot.attr('node', shape='box', fixedsize='true', height=str(ROW_HEIGHT), margin='0', pin='true')
+    dot.attr('node', shape='box', fixedsize='true', height=str(ROW_HEIGHT), margin='0', pin='true', dpi='1200')
 
     # bucket by ES and assign rows in ES order
     by_start = defaultdict(list)
     for t in tasks:
         by_start[t['ES']].append(t)
     row = 0
-    for day in sorted(by_start):
-        for t in by_start[day]:
-            w        = (t['EF'] - t['ES'] + 1) * X_SCALE
-            if late == True:
-                x_center = (t['LS']) * X_SCALE + w / 2
-            else:
-                x_center = (t['ES']) * X_SCALE + w / 2
-            y_center = -row * Y_SCALE
-            dot.node(
-                t['name'],
-                label=t['name'],
-                pos=f"{x_center},{y_center}!",
-                width=str(w),
-                fillcolor=section_colors[t['section']],
-                style='filled'
-            )
-            row += 1
 
     # Add background vertical dashed lines (tall thin nodes)
     max_day = max(t['EF'] for t in tasks)
-    num_rows = row
-    total_height = num_rows * Y_SCALE
+    total_height = (num_tasks + 4) * Y_SCALE
     for x in range(0, max_day + GRID_INTERVAL, GRID_INTERVAL):
         x_center = x * X_SCALE
         grid_id = f'grid_{x}'
@@ -214,6 +196,25 @@ def gantt():
             shape='box',
             fillcolor='white'  # prevent coloring
         )
+
+    for day in sorted(by_start):
+        for t in by_start[day]:
+            w        = (t['EF'] - t['ES'] + 1) * X_SCALE
+            if late == True:
+                x_center = (t['LS']) * X_SCALE + w / 2
+            else:
+                x_center = (t['ES']) * X_SCALE + w / 2
+            y_center = -row * Y_SCALE
+            dot.node(
+                t['name'],
+                label=t['code'],
+                pos=f"{x_center},{y_center}!",
+                width=str(w),
+                fillcolor=section_colors[t['section']],
+                style='filled'
+            )
+            row += 1
+
 
     dot.render('gantt_with_deps', view=True, cleanup=True)
 
