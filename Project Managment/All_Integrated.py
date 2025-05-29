@@ -1,8 +1,8 @@
 from graphviz import Digraph
 from collections import defaultdict, deque
-import pandas as pd
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
 section_colors = {
     'Engineering': '#005580',
@@ -26,13 +26,17 @@ column_map = {
     "duration": "Unnamed: 9",
     "section": "Unnamed: 1",
     "parents": "Unnamed: 11", 
-    "Materials": "Unnamed: 13",
+    "Materials": 299577,
     "External Engineering": "Unnamed: 14",
     "Regulatory Body": "Unnamed: 15",
     "Supplier": "Unnamed: 16",
     "Internal Manpower": "Unnamed: 17",
     "Internal Engineering": "Unnamed: 18"
 }
+
+# Print the column names for debugging
+print("Column names in the DataFrame:")
+print(df.columns.tolist())
 
 # Filter the dataframe to the target rows
 df = df.iloc[start_row:end_row].copy()
@@ -228,7 +232,7 @@ def resource_profile():
                     profile[r][int(row['Finish'])] += row[r] / 2
                 else:
                     profile[r][int(row['Finish'])] += row[r]
-
+            # print(f"Resource {r}: {sum(profile[r])}") 
             # "Materials": float(row.get(column_map["Materials"], 0)),
             # "External Engineering": float(row.get(column_map["External Engineering"], 0)),
             # "Regulatory Body": float(row.get(column_map["Regulatory Body"], 0)),
@@ -248,7 +252,6 @@ def resource_profile():
     plt.savefig('resource_profile.png', dpi=300)
 
 def s_curve():
-    import numpy as np
     # Compute cumulative resource for each type
     cumulative_profile = {r: [0]*len(time_range) for r in res_types}
     for r in res_types:
@@ -265,6 +268,29 @@ def s_curve():
     ax.legend()
     plt.tight_layout()
     plt.savefig('s_curve.png', dpi=300)
+
+def cash_flow():
+    cumulative_profile = {r: [0]*len(time_range) for r in res_types}
+    for r in res_types:
+        cumulative_profile[r] = [sum(profile[r][:i+1]) for i in range(len(profile[r]))]
+    cash_outflow = sum(np.array(cumulative_profile[r]) for r in res_types)
+    total_cost = cash_outflow[-1]
+    requested_payment = total_cost * (1 + 0.3)
+    cash_inflow = np.zeros(len(time_range))
+    cash_inflow[0:] += requested_payment * 0.2  # At the beginning
+    cash_inflow[round(len(time_range)/2):] += requested_payment * 0.4  # Second payment
+    cash_inflow[-1] += requested_payment * 0.4  # Final payment at the end
+    cash_flow = cash_inflow - cash_outflow
+    # Plot cash flow
+    fig, ax = plt.subplots(figsize=(10,4))
+    ax.plot(time_range, cash_flow, label='Cash Flow', color='blue')
+    ax.axhline(0, color='black', linestyle='--', linewidth=0.5)
+    ax.set_xlabel('Time')
+    ax.set_ylabel('Cash Flow')
+    ax.set_title('Cash Flow Over Time')
+    ax.legend()
+    plt.tight_layout()
+    plt.savefig('cash_flow.png', dpi=300)
 
 # ----------------------------------------------------------
 task_lookup, children = init()
@@ -294,3 +320,5 @@ network_diagram()
 gantt()
 resource_profile()
 s_curve()
+cash_flow()
+# ----------------------------------------------------------
