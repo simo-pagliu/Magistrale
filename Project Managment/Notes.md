@@ -258,13 +258,16 @@ From a managerial perspective, the close-out process includes:
 
 Only after formal acceptance and administrative closure will the project be considered fully concluded. This approach ensures transparency, traceability, and organizational learning for future projects.
 
-## Lessons Learned and Conclusions
-The project underscored the value of traditional project management methods, particularly the importance of a well-defined Work Breakdown Structure (WBS) before scheduling and cost estimation. Different WBS perspectives enhanced clarity and revealed gaps, while accurate assumptions were vital for effective planning.
-
-Incorporating Agile principles, such as brief sync meetings and incremental reviews, improved team adaptability within a structured framework. This hybrid approach was beneficial for achieving a cohesive final output.
-
+## Conclusions
+The project underscored the value of traditional project management methods, particularly the importance of a well-defined Work Breakdown Structure (WBS) before scheduling and cost estimation. Different WBS perspectives enhanced clarity and revealed errors, while accurate assumptions were vital for effective planning.
 The project demonstrated the application of traditional techniques in a semi-real industrial scenario, resulting in a coherent and executable plan. Using multiple WBS structures and detailed breakdowns provided a comprehensive project view, improving control and traceability.
 
-Beyond technical deliverables, the project allowed reflection on planning decisions and financial implications, showing the benefits of combining formal planning tools with Agile methods.
 
-Overall, the project confirmed that planning methodologies are most valuable when combined with critical thinking and clear communication. The lessons learned will guide future project management efforts.
+### Agile methodology in PW development
+Although the overall organization of the project itself followed a traditional Waterfall approach, appropriate for representing the complete lifecycle of an industrial system, Agile working methods were adopted within the students' team during the development phase. 
+With fixed delivery deadlines and clearly defined resources (e.g., our personal effort, availability and time), Agile principles were applied by adapting the scope and content of the deliverables to fit these constraints. Key Agile practices included frequent team meetings that served as iterative checkpoints, allowing to incrementally build the final report.
+At each stage, progress was reviewed, errors were identified and corrected, and the approach was adjusted accordingly. 
+This incremental and adaptive process enhanced both the quality of our deliverables and our ability to collaborate effectively under time constraints, closely mirroring the behavior of Agile frameworks.
+
+
+
