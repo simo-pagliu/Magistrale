@@ -139,22 +139,29 @@ The allocation strategy distinguishes between:
 
 ### Scheduling definition
 Using the defined network of dependencies, a full forward and backward pass was executed to determine the early start (ES), early finish (EF), late start (LS), and late finish (LF) for each activity, thereby identifying the critical path and available float.
+
 Refer to the attachments for the complete network diagram.
+
+INSERIRE REFERENCE QUI
 
 ### Analysis and Possible optimizations
 Two scheduling strategies were compared:
 - **Early Start Plan** 
 - **Late Start Plan**
 
+Accordingly, two different GANTT charts were developed and compared in terms of time management effectiveness and financial exposure issues.
+
 The early start approach revealed a high financial and resource exposure during the initial and middle stages of the project. However, it also highlighted significant free float in non-critical activities, offering flexibility to optimize the allocation of resources and delay certain purchases or efforts without impacting the final delivery date.
 
-On the other hand, the late start approach reveals that we have enough free float to significantly impact the financial exposure by delaying it towards the end of the project.
+On the other hand, the late start approach reveals the availability of enough free float to significantly impact the financial exposure, by shifitng it towards the end of the project.
 
-We recon, in a real case, we would optimize tasks to delay some of them, most likely internal tasks, to reduce early exposure.
+In a real-case scenario, effective optimization of task scheduling would be essential. The delay of specific tasks, particularly internal ones, would likely reduce early financial exposure.
 
-We computed the gantt chart for the two extre cases of all early start and all late starts, these can be found in the attachments.
+The GANTT charts for the two analyzed cases can be found in the attachments.
 
-Here follow a comparison of resource and s-curves fro early and late
+INSERIRE REFERENCE QUI 
+
+Here follow a comparison of resource and s-curves for the two scenarios: 
 
 IMAGES DA METTERE IN DUE COLONNE UNA PER EARLY E L'ALTRA PER LATE
 
