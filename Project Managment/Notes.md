@@ -211,25 +211,30 @@ Risk monitoring would be conducted periodically throughout execution, with the p
 
 ## Progress Evaluation
 
-Progress evaluation in this project is designed to ensure timely monitoring, early detection of deviations, and proactive corrective actions. The structure of the plan supports tracking at the Work Package (WP) level, with progress assessed based on both physical completion and resource consumption.
+Progress evaluation is designed to ensure timely monitoring, early detection of deviations, and proactive corrective actions. The structure of the plan supports tracking at the Work Package (WP) level, with progress assessed based on both physical completion and resource consumption.
 
-Key metrics identified for progress tracking include:
+Key metrics that can be employed for progress tracking include:
 
-    Percentage of completion per WP, updated based on deliverables or milestone achievement
+ 1.   Percentage of completion per WP, updated based on:
+    - QUI INSERIRE I TIPI DI PROGRESS EVALUATION SCELTI PER OGNI TIPO DI WP CON COMMENTI SUL MOTIVO (milestone, 0/100, 50/50, level of effort, ...).
 
-    Planned vs. Actual Timeline Comparison, using Gantt chart overlays
+ 2.   Planned vs. Actual Timeline Comparison, using Gantt chart overlays
 
-    Earned Value Analysis (EVA) indicators such as:
+ 3.   Earned Value Analysis (EVA) indicators such as:
 
-        EV (Earned Value): value of work completed to date
+        SPI / CPI: schedule and cost performance indices.
 
-        PV (Planned Value): baseline expectation at that time
+        CV (Cost Variance): 
 
-        AC (Actual Cost): real cost incurred to date
+        SV (Schedule Variance): 
 
-        SPI / CPI: schedule and cost performance indices
+        EAC (Estimate at Completion): 
+      
+        ETC (Estimate to Complete):
 
-In addition, control points were defined at the end of major project phases (e.g., end of engineering, procurement, mechanical erection), enabling formal milestone reviews and progress validation.
+        TCPI (To Complete Cost Performance Index):
+
+In addition, "control checkpoints" were defined at the end of major project phases (e.g., end of engineering, procurement, mechanical erection), enabling formal milestone reviews and progress validation.
 
 The early identification of float in the schedule also offers flexibility: in case of delays in non-critical tasks, corrective actions can be prioritized without impacting the overall project duration.
 
