@@ -35,6 +35,7 @@ The scope includes engineering, procurement, assembly, FAT with third-party cert
 Out of scope are post-deployment activities, such as on-site integration, operational training, and long-term maintenance, which are assumed to be managed in a separate phase by the client.
 
 The scope was defined through a detailed decomposition using three alternative Work Breakdown Structures:
+
     - **WBS1: Phase-Oriented**  
         Organizes activities sequentially by project phases: Engineering, Procurement, Construction, and Testing.
     - **WBS2: System-Oriented**  
