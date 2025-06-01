@@ -28,7 +28,11 @@ INSERIRE REFERENCE AL DOCUMENTO QUI
 
 ## Scope Definition and WBSs
 
-The scope of the project covers the complete lifecycle of an industrial system, from initial process engineering through procurement, construction, and testing of the final assembly. The objective is to provide a fully functional and validated skid-based system, ready for integration within a larger plant environment.
+The scope of the project covers the complete lifecycle of an industrial system, from initial process engineering through procurement, construction, and testing of the final assembly. 
+The final objective is the end-to-end delivery of a reverse osmosis desalination skid for offshore use, designed to provide 20 m³/day of potable water for 90 personnel, in compliance with WHO and IECEx standards. 
+
+The scope includes engineering, procurement, assembly, FAT with third-party certification, and full documentation delivery.
+Out of scope are post-deployment activities, such as on-site integration, operational training, and long-term maintenance, which are assumed to be managed in a separate phase by the client.
 
 The scope was defined through a detailed decomposition using three alternative Work Breakdown Structures:
     - **WBS1: Phase-Oriented**  
@@ -46,15 +50,12 @@ All three WBS can be found in the attachments.
 
 INSERIRE REFERENCE QUI
 
+The project includes approximately 70 interconnected activities, each linked by defined precedencies.
 Each Work Package (WP) includes:
     - **Estimated duration and required resources**  
         Each work package specifies the expected time frame for completion and details the human, material, and financial resources necessary for execution.
     - **Logical dependencies enabling scheduling and critical path identification**  
         Predecessor and successor relationships are defined for each work package, supporting the development of the project schedule and identification of the critical path.
-
-The project includes approximately 70 interconnected activities, each linked by defined precedencies.
-
-Out of scope are post-deployment activities, such as on-site integration, operational training, and long-term maintenance, which are assumed to be managed in a separate phase by the client.
 
 ## Organizational Breakdown Structure (OBS)
 
