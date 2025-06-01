@@ -66,7 +66,7 @@ By aligning the WBS with the OBS, we ensured that all deliverables have a design
 
 The OBS is included in the attachments as well.
 
-INSERIRE REFERENCE QUI 
+INSERIRE IMMAGINE OBS E REFERENCE QUI 
 
 ## Work Package Description
 
