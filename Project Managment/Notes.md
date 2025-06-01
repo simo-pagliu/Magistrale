@@ -114,8 +114,8 @@ The project’s cost estimation was conducted by aggregating resource-based cost
 These were estimated either as lump-sum values (e.g., for procurement items and subcontracted services) or time-phased allocations (e.g., for internal labor and engineering hours).
 
 Here the cost structure is represented:
-![Cost Structure](./cost_breakdown_structure.png)
-*Figure: Cost Structure of the project.*
+
+*Figure: Cost Structure of the project.* (RIMETTERE NUOVA IMMAGINE, ABBIAMO AGGIUNTO QUALCOSA).
 
 The total projected cost of the project amounts to approximately €297,177, broken down into:
 - **External Costs:** €264,097.00 (approximately 89%), covering materials, external engineering, and supplier-provided items.
