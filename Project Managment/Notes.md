@@ -13,11 +13,13 @@ Although the working framework was based on a Waterfall model, the project itsel
 
 ## Project Charter
 
-The Project Charter was developed at the conclusion of the planning phase, rather than at the outset. This choice was intentional: by first completing the full breakdown of tasks, structure, scheduling, and resource analysis, the scope and objectives of the project became clearer and more grounded in the actual complexity of the work. Defining the charter retrospectively allowed for a more accurate and comprehensive summary of the project’s rationale, boundaries, and key deliverables.
+The Project Charter was developed at the conclusion of the planning phase, rather than at the beginning. This choice was intentional: by first completing the full breakdown of tasks, structure, scheduling, and resource analysis, the scope and objectives of the project became clearer and more grounded in the actual complexity of the work. Defining the charter retrospectively allowed for a more accurate and comprehensive summary of the project’s boundaries and key deliverables.
 
-This approach also ensured alignment between the strategic goals and the operational details identified throughout the planning process. The finalized charter consolidates the refined understanding of stakeholders, constraints, and success criteria, effectively bridging theoretical planning tools with the practical needs of project execution.
+This approach also ensured alignment between the strategic goals and the operational details identified throughout the planning process. The finalized charter consolidates the refined understanding of stakeholders, constraints and success criteria, effectively bridging theoretical planning tools with the practical needs of project execution.
 
 The complete project charter can be found in the attachments.
+
+INSERIRE REFERENCE AL DOCUMENTO QUI
 
 ## Scope Definition and WBSs
 
