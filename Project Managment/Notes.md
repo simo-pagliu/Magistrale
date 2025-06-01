@@ -117,7 +117,7 @@ Here the cost structure is represented:
 
 *Figure: Cost Structure of the project.* (RIMETTERE NUOVA IMMAGINE, ABBIAMO AGGIUNTO QUALCOSA).
 
-The total projected cost of the project amounts to approximately €297,177, broken down into:
+The total projected cost of the project amounts to approximately €299,577.00, broken down into:
 - **External Costs:** €264,097.00 (approximately 89%), covering materials, external engineering, and supplier-provided items.
 - **Internal Costs:** €35,480.00 (approximately 11%), covering internal manpower and internal engineering.
 
