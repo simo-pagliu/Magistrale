@@ -23,7 +23,7 @@ INSERIRE REFERENCE AL DOCUMENTO QUI
 
 ## Scope Definition and WBSs
 
-The scope of the project encompasses the complete lifecycle of an industrial system, from initial process engineering through procurement, construction, and testing of the final assembly. The objective is to provide a fully functional and validated skid-based system, ready for integration within a larger plant environment.
+The scope of the project covers the complete lifecycle of an industrial system, from initial process engineering through procurement, construction, and testing of the final assembly. The objective is to provide a fully functional and validated skid-based system, ready for integration within a larger plant environment.
 
 The scope was defined through a detailed decomposition using three alternative Work Breakdown Structures:
     - **WBS1: Phase-Oriented**  
@@ -31,11 +31,13 @@ The scope was defined through a detailed decomposition using three alternative W
     - **WBS2: System-Oriented**  
         Structures the work according to functional systems: Process, Piping, Structural, and Electrical & Control.
     - **WBS3: Location-Oriented**  
-        Breaks down the project by physical modules: Skid Frame, Piping Module, Equipment Zone, and Control Panel.
+        Breaks down the project by physical modules: Skid Frame, Piping Module, Process Equipment Zone, and Control & Instrumentation Panel.
 
-While the WBS2 was deemed more professional, we opted to use the WBS1 for the sake of simplicity given that this was our first approach to the topic.
+Although WBS2 was regarded as more professional, WBS1 was selected to enable a simpler and more linear execution of the project, taking into account the team’s relatively limited experience in this area.
 
 All three WBS can be found in the attachments.
+
+INSERIRE REFERENCE QUI
 
 Each Work Package (WP) includes:
     - **Estimated duration and required resources**  
