@@ -244,12 +244,12 @@ Close-out begins with a comprehensive review of completed deliverables against t
 Documentation is a critical part of the close-out phase. A complete Documentation Pack is prepared, including design files, test reports, certificates, and any as-built documentation. This package supports future maintenance, regulatory compliance, and operational readiness.
 
 From a managerial perspective, the close-out process includes:
-- Final resource and cost reconciliation
-- Compilation and archiving of lessons learned documentation
-- Formal closure of procurement contracts and outstanding obligations
-- Internal debriefs with all functional units to capture feedback and improvement opportunities
-- Preparation and handover of the complete project documentation pack to the client
-- Administrative closure and release of project resources
+- Final resource and cost alignment.
+- Compilation and archiving of lessons learned documentation, including questionnaires, etc.
+- Formal closure of procurement contracts and outstanding obligations.
+- Internal reviews with all functional units to capture feedback and improvement opportunities.
+- Preparation and handover of the complete project documentation pack to the client.
+- Administrative closure and release of project resources.
 
 Only after formal acceptance and administrative closure will the project be considered fully concluded. This approach ensures transparency, traceability, and organizational learning for future projects.
 
