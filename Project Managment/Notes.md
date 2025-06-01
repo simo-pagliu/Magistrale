@@ -51,17 +51,20 @@ Out of scope are post-deployment activities, such as on-site integration, operat
 
 ## Organizational Breakdown Structure (OBS)
 
-The Organizational Breakdown Structure (OBS) was developed to define the distribution of responsibilities across functional domains and to ensure accountability throughout all phases of the project. It complements the Work Breakdown Structure by mapping each work package or group of activities to the organizational units responsible for their execution.
+The Organizational Breakdown Structure (OBS) was developed to define the distribution of responsibilities and to ensure accountability throughout all the phases of the project. It complements the Work Breakdown Structure by mapping each work package or group of activities to the organizational units responsible for their execution.
 
-Out of the project stakeholders we identified in the project charter the following were left out of the OBS:
+Out of the project stakeholders we identified in the project charter, the following were left out of the OBS:
 - Sponsor: while finances the project, is not involved in its development.
-- Customer Representative: it communicates with the project manager but doesn't have a formal hierarchical position.
-- Certifying Body: it contributes to the project but is not part of the organization.
+- Customer Representative: communicates with the project manager but doesn't have a formal hierarchical position.
+- Certifying Body: contributes to the project but is not part of the organization.
 
 Each WBS element was cross-referenced with the OBS to clarify ownership and facilitate delegation of responsibilities. This linkage supports not only planning but also later phases of project control, risk management, and change handling.
 
 By aligning the WBS with the OBS, we ensured that all deliverables have a designated owner and that no scope elements are left unassigned—an essential condition for effective execution in a complex, multidisciplinary project environment.
 
+The OBS is included in the attachments as well.
+
+INSERIRE REFERENCE QUI 
 
 ## Work Package Description
 
