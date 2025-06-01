@@ -166,23 +166,26 @@ Here follow a comparison of resource and s-curves for the two scenarios:
 IMAGES DA METTERE IN DUE COLONNE UNA PER EARLY E L'ALTRA PER LATE
 
 ## Cash Flow and Project Balance
-As previously stated, we considered internal costs to be allocated continuosly in time while external resource are payed in lump sums, more specifically:
-- If the cost is lower then 7500, we pay it all at the delivery
-- if the cost is higher then 7500, we pay 50% upfront and 50% at delivery
-To mitigate financial strain, we might consider modifying the supplier payment structure from the 50%-50% split (upfront and at delivery) to a more back-loaded scheme (e.g., 30% upfront, 70% at delivery). This adjustment could significantly reduce early cash outflows while maintaining supplier commitment.
+As previously stated, internal costs are allocated continuosly in time while external resource are paid in lump sums, more specifically:
+- If the cost is lower then 7,500.00 €, the cost is allocated at the delivery.
+- if the cost is higher then 7,500.00 €, 50% of the sum is paid upfront and 50% at delivery.
 
-A detailed cash flow analysis was carried out to assess the financial feasibility and sustainability of the project across its duration. We assume the following payment scheme:
-- 20% at the beginning of the project
-- 40% at the midterm, most likely following a review of the progress with the client
-- 40% at the end of the project 
-The resulting Cashflow:
+To mitigate financial strain, the modification of the supplier payment structure from the 50%-50% split (upfront and at delivery) to a more back-loaded scheme (e.g., 30% upfront, 70% at delivery) can be considered. 
+This adjustment could significantly reduce early cash outflows while maintaining supplier commitment.
+
+A detailed cash flow analysis was carried out to assess the financial feasibility and sustainability of the project across its duration. The following payment scheme for the project's delivery is assumed:
+- 20% at the beginning of the project.
+- 40% at the midterm, most likely following a review of the progress with the client.
+- 40% at the end of the project.
+
+The resulting cashflow is hereby represented:
 
 IMMAGINE NEL CASO LATE E EARLY START UNO A FIANCO ALL?ALTRO
 
-We observed that, no matter the percentages of the payments, our project would benefit from more regular payments, we identified possible milestones at which we could request a payment:
-- Production of 3D model and drawing that we could show to the client for approval before starting to order components
-- Logic map definition and feedback from the client before committing to the control system and the order of the flow computer
-- Structure assembly completion, before painting and instrumentation installation to ensure adequacy of the skid with the client.
+The analysis of the cashflow showed that the project would benefit from a more regular payment structure. Therefore, a set of potential milestones was identified to support a more consistent payment schedule:
+- Production of 3D model and drawing, that could be shown to the client for approval before components' ordering.
+- Logic map definition and feedback from the client, before committing to the control system and ordering the flow computer.
+- Structure assembly completion (to ensure adequacy of the skid with the client), before painting and instrumentation installation.
 
 ### Project Balance
 WHAT
