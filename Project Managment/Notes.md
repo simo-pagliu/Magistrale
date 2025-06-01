@@ -2,13 +2,14 @@
 PIUTTOSTO CORTO DA FARE: Dire solo quello che abbiamo fatto chissene fotte della teoria.
 ## Executive Summary
 
-This report presents the comprehensive planning and management of an industrial project developed in the context of the “Industrial Project Management A” course. The project was executed using traditional (waterfall) project management methodologies, with the goal of delivering a detailed and integrated plan that covers all phases from engineering design to final testing.
+This report presents the comprehensive planning and management of an industrial project, developed in the context of the “Industrial Project Management A” course. The project was executed using traditional (Waterfall) project management methodologies, with the goal of delivering a detailed and integrated plan that covers all phases from engineering design to final testing.
 
-The work encompasses a structured breakdown of the project through Work Breakdown Structure (WBS). Activities were defined with explicit precedence relationships in the Network diagram, enabling the construction of a coherent Gantt chart used to identify the critical path and project float.
+The work includes a structured breakdown of the project through Work Breakdown Structure (WBS). Activities were defined with explicit precedence relationships, enabling the development of a coherent time management analysis.
 
-A full resource and cost breakdown analysis was conducted using real-world assumptions and project constraints. The CBS and associated charts such as the resource usage profile and S-curve allowed for evaluating cumulative effort, financial exposure, and potential optimization strategies. Furthermore, the project included the definition of a cash flow plan, identifying funding needs and timing of expenses, which proved critical in assessing the sustainability of early-start vs. late-start approaches.
+A full resource and cost breakdown analysis was conducted using real-world assumptions and project constraints. The cost estimation allowed for evaluating cumulative effort, financial exposure, and potential optimization strategies. Furthermore, the project included the definition of a cash flow plan, identifying funding needs and timing of expenses, which proved critical in assessing the sustainability of different organizational approaches.
 
-The planning also addressed risk management, with a preliminary identification of key risks and mitigation strategies, and outlined a close-out strategy to ensure proper project handover. Although the primary structure followed a waterfall approach, agile elements were adopted during the group collaboration phase to iteratively refine the deliverables and adapt to team availability and feedback.
+The planning also addressed risk management, with a preliminary identification of key risks and mitigation strategies, and progress evaluation strategies. 
+Although the working framework was based on a Waterfall model, the project itself was intended to be developed using an Agile methodology. Consequently, Agile practices were applied during the group collaboration phase.
 
 ## Project Charter
 
