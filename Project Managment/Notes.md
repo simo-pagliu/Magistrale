@@ -83,8 +83,8 @@ Each work package (WP) in the project represents a self-contained unit of work w
 The purpose of this section is to present a standardized overview of selected work packages that cover the major functional and temporal segments of the project. This degree of detail ensures clarity in execution, aids progress tracking, and allows efficient allocation of both human and material resources.
 
 The following template has been adopted for the WP description:
-WP Name: [Insert Work Package Title AND CODE]
 
+    WP Name: [Insert Work Package Title AND CODE]
     Description:
     [Brief explanation of the objective and scope of the WP]
 
