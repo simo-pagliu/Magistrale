@@ -107,7 +107,7 @@ INSERIRE REFERENCE QUI
 The project’s cost estimation was conducted by aggregating resource-based costs at the work package level, using data defined in the Work Breakdown Structure and refined through the Cost Breakdown Structure (CBS). Each task was associated with one or more resource categories, including:
 - Materials
 - External Engineering
-- Supplier-provided Components
+- Supplier-provided 
 - Internal Manpower
 - Internal Engineering
 
@@ -118,14 +118,16 @@ Here the cost structure is represented:
 *Figure: Cost Structure of the project.*
 
 The total projected cost of the project amounts to approximately €297,177, broken down into:
-- **External Costs:** €263,097 (approximately 89%), covering materials, external engineering, and supplier-provided items.
-- **Internal Costs:** €34,080 (approximately 11%), covering internal manpower and internal engineering.
+- **External Costs:** €264,097.00 (approximately 89%), covering materials, external engineering, and supplier-provided items.
+- **Internal Costs:** €35,480.00 (approximately 11%), covering internal manpower and internal engineering.
 
 This distribution reflects the industrial nature of the project, where most of the value is embedded in externally sourced equipment and services.
 
-The CBS structure helped validate consistency between WBS items and cost drivers, enabling cross-checks between time scheduling, deliverables, and financial expectations. Costs were also used as inputs for resource profiling, cash flow planning, and the S-curve analysis to ensure alignment across planning layers.
+The CBS helped validate consistency between WBS items and cost drivers, enabling cross-checks between time scheduling, deliverables, and financial expectations. Costs were also used as inputs for resource profiling, cash flow planning, and the S-curve analysis to ensure alignment across planning layers.
 
 For the detailed cost breakdown refer to the excel file attached.
+
+INSERIRE REFERENCE QUI 
 
 ## Resource, Scheduling and Time Management
 ### Resource definition
