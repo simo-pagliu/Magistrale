@@ -53,6 +53,7 @@ INSERIRE REFERENCE QUI
 
 The project includes approximately 70 interconnected activities, each linked by defined precedencies.
 Each Work Package (WP) includes:
+
     - **Estimated duration and required resources**  
         Each work package specifies the expected time frame for completion and details the human, material, and financial resources necessary for execution.
     - **Logical dependencies enabling scheduling and critical path identification**  
