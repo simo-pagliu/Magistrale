@@ -180,7 +180,7 @@ A detailed cash flow analysis was carried out to assess the financial feasibilit
 
 The resulting cashflow is hereby represented:
 
-IMMAGINE NEL CASO LATE E EARLY START UNO A FIANCO ALL?ALTRO
+IMMAGINE NEL CASO LATE E EARLY START UNO A FIANCO ALL'ALTRO
 
 The analysis of the cashflow showed that the project would benefit from a more regular payment structure. Therefore, a set of potential milestones was identified to support a more consistent payment schedule:
 - Production of 3D model and drawing, that could be shown to the client for approval before components' ordering.
@@ -192,20 +192,29 @@ WHAT
 
 ## Risk Management
 
-Risk management in this project was approached as a proactive process aimed at identifying, evaluating, and mitigating potential threats that could impact the project’s objectives in terms of time, cost, quality, or scope.
+The risk management for the project was conducted using a structured, quantitative approach. The core of the method relied on the calculation of a Project Classification Index (IC), which integrates three key impact areas: Economic (IE), Strategic (IS), and Risk (IR). Each of these dimensions was assessed in terms of impact, with the final index computed as:
+IC = (IE × PIE) + (IS × PIS) + (IR × PIR).
 
-Risks were categorized into four main areas:
-- **Technical risks:** errors in engineering deliverables, design rework
-- **Procurement risks:** supplier delays, component unavailability
-- **Construction risks:** site conditions, labor productivity issues
-- **Managerial risks:** coordination failures, scope creep
+The risk identification and evaluation phases produced a categorization into four main areas:
+- **TR - Technical risks:** errors in engineering deliverables, design rework.
+- **PR - Procurement risks:** supplier delays, component unavailability.
+- **CR - Construction risks:** site conditions, labor productivity issues.
+- **MR - Managerial risks:** coordination failures, scope creep.
 
-Each identified risk was evaluated based on its probability of occurrence and potential impact, allowing prioritization through a basic qualitative risk matrix. For example:
+&&& RICORDARSI DI METTERE IL CODICE DELLA RISK AREA NELLA TABELLA PER I RISK ITEM NELL'EXCEL &&&
 
-| **Risk**                                    | **Impact** | **Probability** | **Mitigation Strategy**                                               |
-|---------------------------------------------|:----------:|:---------------:|-----------------------------------------------------------------------|
-| Supplier delay of critical components       | High       | Medium          | Define early procurement milestones and backup suppliers               |
-| Engineering rework due to incomplete inputs | Medium     | Medium          | Internal peer reviews and phased document releases                     |
+Each identified risk was evaluated based on its probability of occurrence and potential impact, along with the possibile mitigation strategies and their respective cost.
+The complete risk register is available in the attached file.
+
+INSERIRE REFERENCE QUI E UN ESEMPIO DELLA TABELLA NELL'EXCEL
+
+This comprehensive analysis allowed for a precise and informed mitigation plan organization and contingency management.
+The elected action for each risk item is either:
+- Avoid: change the project plan to eliminate the threat.
+- Transfer: shift the negative impact to a third party. Usually involves the payment of a risk premium.
+- Mitigate: reduce the probability of the adverse event. Usually has a cost.
+
+Contingency amounts, distributed across the relevant Work Breakdown Elements (WBEs), were determined under the assumption that any risk item with a probability of occurrence greater than 70% would require full impact allocation as contingency.
 
 Risk monitoring would be conducted periodically throughout execution, with the possibility of introducing corrective actions or updated contingency plans when necessary. This ensures that risk management remains a continuous and adaptive process.
 
