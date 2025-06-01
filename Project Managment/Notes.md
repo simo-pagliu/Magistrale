@@ -1,5 +1,5 @@
-# Traditional Project Work
-PIUTTOSTO CORTO DA FARE: Dire solo quello che abbiamo fatto chissene fotte della teoria.
+# Traditional Project Management PW Assignment: Offshore Desalination Skid (DESAL-90P)
+
 ## Executive Summary
 
 This report presents the comprehensive planning and management of an industrial project, developed in the context of the “Industrial Project Management A” course. The project was executed using traditional (Waterfall) project management methodologies, with the goal of delivering a detailed and integrated plan that covers all phases from engineering design to final testing.
