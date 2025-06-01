@@ -4,11 +4,16 @@
 
 This report presents the comprehensive planning and management of an industrial project, developed in the context of the “Industrial Project Management A” course. The project was executed using traditional (Waterfall) project management methodologies, with the goal of delivering a detailed and integrated plan that covers all phases from engineering design to final testing.
 
+The project is titled: Offshore Desalination Skid (DESAL-90P) and involves the end-to-end delivery of a reverse osmosis desalination skid for offshore use.
+
 The work includes a structured breakdown of the project through Work Breakdown Structure (WBS). Activities were defined with explicit precedence relationships, enabling the development of a coherent time management analysis.
 
-A full resource and cost breakdown analysis was conducted using real-world assumptions and project constraints. The cost estimation allowed for evaluating cumulative effort, financial exposure, and potential optimization strategies. Furthermore, the project included the definition of a cash flow plan, identifying funding needs and timing of expenses, which proved critical in assessing the sustainability of different organizational approaches.
+A full resource and cost breakdown analysis was conducted using real-world assumptions and project constraints. The cost estimation allowed for evaluating cumulative effort, financial exposure, and potential optimization strategies.
 
-The planning also addressed risk management, with a preliminary identification of key risks and mitigation strategies, and progress evaluation strategies. 
+Furthermore, the project included the definition of a cash flow plan, identifying funding needs and timing of expenses, which proved critical in assessing the sustainability of different organizational approaches.
+
+The planning also addressed risk management, with a preliminary identification of key risks and mitigation strategies, and progress evaluation strategies.
+
 Although the working framework was based on a Waterfall model, the project itself was intended to be developed using an Agile methodology. Consequently, Agile practices were applied during the group collaboration phase.
 
 ## Project Charter
