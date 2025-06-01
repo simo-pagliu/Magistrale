@@ -35,6 +35,8 @@ The scope was defined through a detailed decomposition using three alternative W
 
 Although WBS2 was regarded as more professional, WBS1 was selected to enable a simpler and more linear execution of the project, taking into account the team’s relatively limited experience in this area.
 
+RIPORTARE QUI IMMAGINE DEL WBS1 SCELTO
+
 All three WBS can be found in the attachments.
 
 INSERIRE REFERENCE QUI
@@ -70,10 +72,10 @@ INSERIRE REFERENCE QUI
 
 Each work package (WP) in the project represents a self-contained unit of work with clearly defined deliverables, responsible parties, resource allocations, and dependencies. The WP structure was derived from the WBS and refined to ensure completeness and traceability in both scheduling and cost estimation.
 
-The purpose of this section is to present a standardized overview of selected work packages that cover the major functional and temporal segments of the project. This level of granularity ensures clarity in execution, aids progress tracking, and allows efficient allocation of both human and material resources.
+The purpose of this section is to present a standardized overview of selected work packages that cover the major functional and temporal segments of the project. This degree of detail ensures clarity in execution, aids progress tracking, and allows efficient allocation of both human and material resources.
 
-The following template has been adopted for each WP description:
-WP Name: [Insert Work Package Title]
+The following template has been adopted for the WP description:
+WP Name: [Insert Work Package Title AND CODE]
 
     Description:
     [Brief explanation of the objective and scope of the WP]
@@ -94,6 +96,11 @@ WP Name: [Insert Work Package Title]
     Risks / Notes:
     [Any known issues, constraints, or risk considerations]
 
+INSERIRE QUI LE WP DESCRIPTIONS COMPLETE DI ALCUNE ATTIVITA' CHIAVE DEL PROGETTO (A SCELTA DI DAVIDE) CON QUESTO TEMPLATE, DIREI 4/5.
+
+The short description for each WP can be found in the CBS attachment.
+
+INSERIRE REFERENCE QUI
 
 ## Cost Estimation
 
