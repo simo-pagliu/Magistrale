@@ -5,17 +5,16 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{titlesec}
+\usepackage{pdflscape}  % Put this in the preamble
 \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \title{Traditional Project Management PW Assignment: Offshore Desalination Skid (DESAL-90P)}
 \author{}
-\date{}
+\date{a.a 2024/2025}
 
 \begin{document}
 
 \maketitle
-
-\section{Traditional Project Management PW Assignment: Offshore Desalination Skid (DESAL-90P)}
 
 \section{Executive Summary}
 
@@ -61,14 +60,18 @@ The scope was defined through a detailed decomposition using three alternative W
               Breaks down the project by physical modules: Skid Frame, Piping Module, Process Equipment Zone, and Control and Instrumentation Panel.
 \end{itemize}
 Although WBS2 was regarded as more professional, WBS1 was selected to enable a simpler and more linear execution of the project, taking into account the team’s relatively limited experience in this area.
-
-\begin{figure}[H]
-        \centering
-        \includegraphics[width=0.95\textwidth]{../WBS_1.png}
-        \caption{Selected Phase-Oriented Work Breakdown Structure (WBS1) for the project.}
-        \label{fig:wbs1}
-\end{figure}
 All three WBS can be found in the attachments.
+
+\begin{figure}[p]
+    \centering
+    \rotatebox{90}{%
+        \includegraphics[width=\textheight,keepaspectratio]{../WBS1.png}
+    }
+    \caption{Selected Phase-Oriented Work Breakdown Structure (WBS1) for the project.}
+    \label{fig:wbs1}
+\end{figure}
+
+
 
 INSERIRE REFERENCE QUI
 
@@ -94,9 +97,9 @@ Out of the project stakeholders we identified in the project charter, the follow
 
 Each WBS element was cross-referenced with the OBS to clarify ownership and facilitate delegation of responsibilities. This linkage supports not only planning but also later phases of project control, risk management, and change handling.
 
-By aligning the WBS with the OBS ~\ref{fig:obs}, we ensured that all deliverables have a designated owner and that no scope elements are left unassigned—an essential condition for effective execution in a complex, multidisciplinary project environment.
+By aligning the WBS with the OBS ~\ref{fig:obs}, we ensured that all deliverables have a designated owner and that no scope elements are left unassigned, an essential condition for effective execution in a complex multidisciplinary project environment.
 
-The OBS is included in the attachments as well.
+The crossing between OBS and WBS is included in the attachments.
 
 \begin{figure}[H]
         \centering
@@ -104,6 +107,7 @@ The OBS is included in the attachments as well.
         \caption{Organizational Breakdown Structure (OBS) for the project.}
         \label{fig:obs}
 \end{figure}
+
 
 \section{Work Package Description}
 
@@ -136,6 +140,84 @@ Risks / Notes:
 [Any known issues, constraints, or risk considerations]
 
 INSERIRE QUI LE WP DESCRIPTIONS COMPLETE DI ALCUNE ATTIVITA' CHIAVE DEL PROGETTO (A SCELTA DI DAVIDE) CON QUESTO TEMPLATE, DIREI 4/5.
+
+WP Name: PFD - Heat and Mass Balance
+Description:
+Defines process flow and thermodynamic balances of the system.
+
+Estimated Duration: 13 working days
+
+Resources Involved:
+\begin{itemize}
+        \item External Engineering: 2,500.00€ for engineering services
+\end{itemize}
+
+Dependencies:
+No Predecessor
+
+Responsible Unit (OBS): Engineering Department
+
+Risks / Notes:
+Being the first WP from which the project can start, any delay is highly influential.
+
+WP Name: 3D Model
+Description:
+Full 3D representation of skid layout and components.
+
+Estimated Duration: 20 working days
+
+Resources Involved:
+\begin{itemize}
+        \item External Engineering: 6,000.00€ for engineering services
+\end{itemize}
+
+Dependencies:
+P\ and ID
+
+Responsible Unit (OBS): Engineering Department
+
+Risks / Notes:
+From this Work Package, many important construction-related documents will be made available upon completion. Moreover, it depends on the engineering and procurement of equipment for the size, weight and spatial constraints related to installation and maintenance; therefore, delays in supplier management could disrupt the proper flow of the project.
+
+WP Name: Structures Prefabrication
+Description:
+Assembly of structural steel components.
+
+Estimated Duration: 5 working days
+
+Resources Involved:
+\begin{itemize}
+        \item  Internal Manpower : 4 people @ 50€/hr (for this project)
+\end{itemize}
+
+Dependencies:
+Structures DWG; Steelworks and support Material Procurement
+
+Responsible Unit (OBS): WorkShop
+
+Risks / Notes:
+This Work Package marks the beginning of the construction phase and may also serve as the milestone for the second client invoicing.
+
+WP Name: Final Tests	
+Description:
+Full system validation and compliance tests.
+
+Estimated Duration: 1 working day
+
+Resources Involved:
+\begin{itemize}
+        \item  Internal Manpower : 4 people @ 50€/hr (for this project)
+        \item  Third Party : 3,000€ for Certifying Services
+        
+\end{itemize}
+
+Dependencies:
+Automation Tests; Assembled Skid FAT
+
+Responsible Unit (OBS): WorkShop
+
+Risks / Notes:
+This Work Package marks the end of the project and includes the possibility of delivering the package. Following this, the actual pickup of the skid and the delivery of the Documentation Pack may trigger the final client invoicing.
 
 The short description for each WP can be found in the CBS attachment.
 
