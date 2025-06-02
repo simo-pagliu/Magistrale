@@ -2,6 +2,7 @@ from graphviz import Digraph
 
 # Create the graph
 dot = Digraph(comment='WBS2: Full Breakdown', format='png')
+dot.attr(splines='true', nodesep='0.1', ranksep='0.2')  # tighter layout
 dot.attr(rankdir='TB', size='10,12')
 dot.attr(dpi='600')
 
@@ -108,11 +109,17 @@ for parent, sub_sections in wbs_data.items():
         dot.node(sub_sec_id, sub_sec, shape='box', style='filled', fillcolor='#0073e6', fontcolor='white')
         dot.edge(parent, sub_sec_id)
         
+        prev_item_id = None
         for i, item in enumerate(children):
-            # Unique ID per item (in case of duplicate labels)
             item_id = f"{sub_sec_id}_{i}_{item}".replace(" ", "_")
             dot.node(item_id, item, shape='box', style='filled', fillcolor='#e6f2ff')
-            dot.edge(sub_sec_id, item_id)
+            
+            if i == 0:
+                dot.edge(sub_sec_id, item_id)  # connect parent to first
+            else:
+                dot.edge(prev_item_id, item_id, style='invis')  # chain invisibly to stack vertically
+
+            prev_item_id = item_id
 
 # Save and render
 dot.render('./Project Managment/WBS2', view=True, cleanup=True)
