@@ -10,7 +10,7 @@ section_colors = {
     'Construction': '#008000',
     'Testing': '#FFA500'
 }
-late = False
+late = True
 # ----------------------------------------------------------
 import pandas as pd
 
@@ -215,8 +215,10 @@ def gantt():
             )
             row += 1
 
-
-    dot.render('gantt_with_deps', view=True, cleanup=True)
+    if late:
+        dot.render('gantt_L', view=True, cleanup=True)
+    else:
+        dot.render('gantt_E', view=True, cleanup=True)
 
 def resource_profile():
     for _, row in df.iterrows():
@@ -250,7 +252,10 @@ def resource_profile():
     ax.set_title('Resource Profile')
     ax.legend()
     plt.tight_layout()
-    plt.savefig('resource_profile.png', dpi=300)
+    if late:
+        plt.savefig('resource_profile_L.png', dpi=300)
+    else:
+        plt.savefig('resource_profile_E.png', dpi=300)
 
 def s_curve():
     # Compute cumulative resource for each type
@@ -268,7 +273,10 @@ def s_curve():
     ax.set_title('S-Curve')
     ax.legend()
     plt.tight_layout()
-    plt.savefig('s_curve.png', dpi=300)
+    if late:
+        plt.savefig('s_curve_L.png', dpi=300)
+    else:
+        plt.savefig('s_curve_E.png', dpi=300)
 
 def cash_flow():
     cumulative_profile = {r: [0]*len(time_range) for r in res_types}
@@ -291,7 +299,10 @@ def cash_flow():
     ax.set_title('Cash Flow Over Time')
     ax.legend()
     plt.tight_layout()
-    plt.savefig('cash_flow.png', dpi=300)
+    if late:
+        plt.savefig('cash_flow_L.png', dpi=300)
+    else:
+        plt.savefig('cash_flow_E.png', dpi=300)
 
 # ----------------------------------------------------------
 task_lookup, children = init()
