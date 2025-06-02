@@ -142,6 +142,7 @@ def backward_pass(task_lookup, children):
                 q.append(p)
 # ----------------------------------------------------------
 def network_diagram():
+    ii = 0
     dot = Digraph(comment='WBS1: Full Breakdown', format='png')
     # Set up attributes for the graph
     dot.attr(rankdir='LR', dpi='600')
@@ -160,6 +161,9 @@ def network_diagram():
     for t in tasks:
         for p in t['parents']:
             edge_color = 'red' if (task_lookup[p]['LS']-task_lookup[p]['ES']==0 and t['LS']-t['ES']==0) else 'black'
+            # Get first letter of section
+            section_initial = task_lookup[p]['section'][0].upper()
+            ii += 1
             dot.edge(p, t['name'], color=edge_color)
 
     dot.render('network_diagram', view=True, cleanup=True)
@@ -247,8 +251,8 @@ def resource_profile():
     fig, ax = plt.subplots(figsize=(10,4))
     for r in res_types:
         ax.plot(time_range, profile[r], label=r)
-    ax.set_xlabel('Time')
-    ax.set_ylabel('Usage')
+    ax.set_xlabel('Weeks')
+    ax.set_ylabel('Cost [€]')
     ax.set_title('Resource Profile')
     ax.legend()
     plt.tight_layout()
@@ -268,8 +272,8 @@ def s_curve():
     for r in res_types:
         ax.plot(time_range, cumulative_profile[r], label=r)
     ax.plot(time_range, tot, label='Total', color='black', linestyle='--')
-    ax.set_xlabel('Time')
-    ax.set_ylabel('Cumulative Usage')
+    ax.set_xlabel('Weeks')
+    ax.set_ylabel('Cumulative Cost [€]')
     ax.set_title('S-Curve')
     ax.legend()
     plt.tight_layout()
@@ -294,8 +298,8 @@ def cash_flow():
     fig, ax = plt.subplots(figsize=(10,4))
     ax.plot(time_range, cash_flow, label='Cash Flow', color='blue')
     ax.axhline(0, color='black', linestyle='--', linewidth=0.5)
-    ax.set_xlabel('Time')
-    ax.set_ylabel('Cash Flow')
+    ax.set_xlabel('Weeks')
+    ax.set_ylabel('Cash Flow [€]')
     ax.set_title('Cash Flow Over Time')
     ax.legend()
     plt.tight_layout()
