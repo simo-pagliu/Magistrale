@@ -4,9 +4,7 @@ The Project Charter was developed at the conclusion of the planning phase, rathe
 
 This approach also ensured alignment between the strategic goals and the operational details identified throughout the planning process. The finalized charter consolidates the refined understanding of stakeholders, constraints and success criteria, effectively bridging theoretical planning tools with the practical needs of project execution.
 
-The complete project charter can be found in the attachments.
-
-INSERIRE REFERENCE AL DOCUMENTO QUI
+The complete project charter can be found in the attachments \cite{ProjectCharter}.
 
 \section{Scope Definition and WBSs}
 
@@ -25,10 +23,17 @@ The scope was defined through a detailed decomposition using three alternative W
     \item \textbf{WBS3: Location-Oriented}
           Breaks down the project by physical modules: Skid Frame, Piping Module, Process Equipment Zone, and Control and Instrumentation Panel.
 \end{itemize}
-Although WBS2 was regarded as more professional, WBS1 was selected to enable a simpler and more linear execution of the project, taking into account the team’s relatively limited experience in this area.
-All three WBS can be found in the attachments.
+Although WBS2 \cite{WBSAlternative1} was regarded as more professional, WBS1 was selected to enable a simpler and more linear execution of the project, taking into account the team’s relatively limited experience in this area.
+Also the third WBS \cite{WBSAlternative2} was not selected as deemed more appropriate for a project mostly based on construction.
 
-INSERIRE REFERENCE QUI
+\begin{figure}[p]
+    \centering
+    \rotatebox{90}{%
+        \includegraphics[width=0.95\textheight,keepaspectratio]{../WBS1.png}
+    }
+    \caption{Phase-Oriented Work Breakdown Structure (WBS1) for the project.}
+    \label{fig:wbs1}
+\end{figure}
 
 The project includes approximately 70 interconnected activities, each linked by defined precedencies.
 Each Work Package (WP) includes:
@@ -41,7 +46,7 @@ Each Work Package (WP) includes:
 
 \section{Organizational Breakdown Structure (OBS)}
 
-The Organizational Breakdown Structure (OBS) was developed to define the distribution of responsibilities and to ensure accountability throughout all the phases of the project. It complements the Work Breakdown Structure by mapping each work package or group of activities to the organizational units responsible for their execution.
+The Organizational Breakdown Structure (OBS) \cite{OBS} was developed to define the distribution of responsibilities and to ensure accountability throughout all the phases of the project. It complements the Work Breakdown Structure by mapping each work package or group of activities to the organizational units responsible for their execution.
 
 Out of the project stakeholders we identified in the project charter, the following were left out of the OBS:
 \begin{itemize}
@@ -50,19 +55,17 @@ Out of the project stakeholders we identified in the project charter, the follow
     \item Certifying Body: contributes to the project but is not part of the organization.
 \end{itemize}
 
-Each WBS element was cross-referenced with the OBS to clarify ownership and facilitate delegation of responsibilities. This linkage supports not only planning but also later phases of project control, risk management, and change handling.
+Each WBS element was cross-referenced with the OBS to clarify ownership and facilitate delegation of responsibilities \cite{OBSCrossWBS}. This linkage supports not only planning but also later phases of project control, risk management, and change handling.
 
-By aligning the WBS with the OBS ~\ref{fig:obs}, we ensured that all deliverables have a designated owner and that no scope elements are left unassigned, an essential condition for effective execution in a complex multidisciplinary project environment.
-
-The crossing between OBS and WBS is included in the attachments.
+By aligning the WBS with the OBS, we ensured that all deliverables have a designated owner and that no scope elements are left unassigned, an essential condition for effective execution in a complex multidisciplinary project environment.
 
 \begin{figure}[p]
     \centering
     \rotatebox{90}{%
-        \includegraphics[width=0.95\textheight,keepaspectratio]{../WBS1.png}
+        \includegraphics[width=0.95\textheight,keepaspectratio]{../OBS.png}
     }
-    \caption{Selected Phase-Oriented Work Breakdown Structure (WBS1) for the project.}
-    \label{fig:wbs1}
+    \caption{Organizational Breakdown Structure (OBS) for the project.}
+    \label{fig:obs}
 \end{figure}
 
 \section{Work Package Description}
@@ -71,31 +74,7 @@ Each work package (WP) in the project represents a self-contained unit of work w
 
 The purpose of this section is to present a standardized overview of selected work packages that cover the major functional and temporal segments of the project. This degree of detail ensures clarity in execution, aids progress tracking, and allows efficient allocation of both human and material resources.
 
-The following template has been adopted for the WP description:
-
-WP Name: [Insert Work Package Title AND CODE]
-Description:
-[Brief explanation of the objective and scope of the WP]
-
-Estimated Duration: [e.g., 10 working days]
-
-Resources Involved:
-\begin{itemize}
-    \item External Engineering: [e.g., 2 engineers for 10 days]
-    \item Internal Engineering: [e.g., 1 engineer for 10 days]
-    \item Materials: [e.g., EUR xxx for materials]
-    \item Supplier: [e.g., EUR xxx for supplier services]
-\end{itemize}
-
-Dependencies:
-[List of predecessor WPs or milestones]
-
-Responsible Unit (OBS): [e.g., Engineering Department]
-
-Risks / Notes:
-[Any known issues, constraints, or risk considerations]
-
-WP Name: PFD - Heat and Mass Balance
+\begin{tcolorbox}[boxstyle2, title=PFD - Heat and Mass Balance]
 Description:
 Defines process flow and thermodynamic balances of the system.
 
@@ -103,7 +82,7 @@ Estimated Duration: 13 working days
 
 Resources Involved:
 \begin{itemize}
-    \item External Engineering: 2,500.00EUR  for engineering services
+    \item External Engineering: €2,500.00 for engineering services
 \end{itemize}
 
 Dependencies:
@@ -113,8 +92,9 @@ Responsible Unit (OBS): Technical Manager
 
 Risks / Notes:
 As the initial Work Package, any delay at this stage will have a cascading impact on all downstream engineering and procurement activities.
+\end{tcolorbox}
 
-WP Name: 3D Model
+\begin{tcolorbox}[boxstyle2, title=3D Model]
 Description:
 Full 3D representation of skid layout and components.
 
@@ -122,18 +102,19 @@ Estimated Duration: 20 working days
 
 Resources Involved:
 \begin{itemize}
-    \item External Engineering: 6,000.00EUR  for engineering services
+    \item External Engineering: €6,000.00 for engineering services
 \end{itemize}
 
 Dependencies:
-P\ and ID
+P\&ID
 
 Responsible Unit (OBS): Technical Manager
 
 Risks / Notes:
 This WP enables the issuance of key construction documents. It relies on accurate input from equipment engineering and procurement, particularly regarding dimensions, weights, and service access requirements. Supplier delays may compromise the model’s accuracy and disrupt project flow.
+\end{tcolorbox}
 
-WP Name: Pump Procurement
+\begin{tcolorbox}[boxstyle2, title=Pump Procurement]
 Description:
 Purchasing of pump equipment.
 
@@ -141,7 +122,7 @@ Estimated Duration: 150 working days
 
 Resources Involved:
 \begin{itemize}
-    \item  Supplier 7.000,00EUR 
+    \item  Supplier €7,000.00
 \end{itemize}
 
 Dependencies:
@@ -155,8 +136,9 @@ Inaccurate or incomplete specifications can lead to mismatched selections and re
 The long supplier lead time (150 working days) makes schedule adherence critical.
 Early engagement with the vendor is essential to manage documentation, certifications, and delivery logistics.
 Coordination with the 3D design team is required to ensure spatial compatibility with the skid layout and utilities.
+\end{tcolorbox}
 
-WP Name: Structures Prefabrication
+\begin{tcolorbox}[boxstyle2, title=Structures Prefabrication]
 Description:
 Assembly of structural steel components.
 
@@ -164,18 +146,20 @@ Estimated Duration: 5 working days
 
 Resources Involved:
 \begin{itemize}
-    \item  Internal Manpower : 4 people @ 50EUR /hr (for this project)
+    \item  Internal Manpower : 4 people at €50 per hour (for this project)
 \end{itemize}
 
 Dependencies:
-Structures DWG; Steelworks\ and support Material Procurement
+Structures DWG; Steelworks \& support Material Procurement
 
 Responsible Unit (OBS): WorkShop Manager
 
 Risks / Notes:
 This Work Package initiates the construction phase and may serve as a milestone for the second client invoicing. Timely availability of drawings and steel materials is critical to avoid disruption of workshop activities.
 
-WP Name: Final Tests
+\end{tcolorbox}
+
+\begin{tcolorbox}[boxstyle2, title=Final Tests]
 Description:
 Full system validation and compliance tests.
 
@@ -183,8 +167,8 @@ Estimated Duration: 1 working day
 
 Resources Involved:
 \begin{itemize}
-    \item  Internal Manpower : 4 people @ 50EUR /hr (for this project)
-    \item  Third Party : 3,000EUR  for Certifying Services
+    \item  Internal Manpower : 4 people at 50€/hr (for this project)
+    \item  Third Party : €3,000 for Certifying Services
 
 \end{itemize}
 
@@ -195,10 +179,9 @@ Responsible Unit (OBS): QC Manager
 
 Risks / Notes:
 This Work Package closes the project and includes the opportunity for formal delivery. The successful execution of tests and handover of the Documentation Pack may trigger the final invoicing to the client.
+\end{tcolorbox}
 
-The short description for each WP can be found in the CBS attachment.
-
-INSERIRE REFERENCE QUI
+The short description for each WP can be found in the CBS-WBS cross-reference table in the attachments \cite{CostEstimation}.
 
 \section{Cost Estimation}
 
@@ -214,8 +197,6 @@ The project’s cost estimation was conducted by aggregating resource-based cost
 
 These were estimated either as lump-sum values (e.g., for procurement items and subcontracted services) or time-phased allocations (e.g., for internal labor and engineering hours).
 
-Here the cost structure is represented:
-
 \begin{figure}[p]
     \centering
     \rotatebox{90}{%
@@ -225,20 +206,20 @@ Here the cost structure is represented:
     \label{fig:CS}
 \end{figure}
 
-The total projected cost of the project amounts to approximately EUR 299,577.00, broken down into:
+The overall cost structure divided in main categories is presented in Figure \ref{fig:CS}.
+
+The total projected cost of the project amounts to approximately €299,577.00s, broken down into:
 \begin{itemize}
-    \item \textbf{Total Cost:} EUR 299,577.00
-    \item \textbf{External Costs:} EUR 264,097.00 (approximately 89\%), covering materials, external engineering, and supplier-provided items.
-    \item \textbf{Internal Costs:} EUR 35,480.00 (approximately 11\%), covering internal manpower and internal engineering.
+    \item \textbf{Total Cost:} €299,577.00
+    \item \textbf{External Costs:} €264,097.00 (approximately 89\%), covering materials, external engineering, and supplier-provided items.
+    \item \textbf{Internal Costs:} €35,480.00 (approximately 11\%), covering internal manpower and internal engineering.
 \end{itemize}
 
 This distribution reflects the industrial nature of the project, where most of the value is embedded in externally sourced equipment and services.
 
 The CBS helped validate consistency between WBS items and cost drivers, enabling cross-checks between time scheduling, deliverables, and financial expectations. Costs were also used as inputs for resource profiling, cash flow planning, and the S-curve analysis to ensure alignment across planning layers.
 
-For the detailed cost breakdown refer to the excel file attached.
-
-INSERIRE REFERENCE QUI
+For the detailed cost breakdown refer to the excel file attached \cite{CostEstimation}.
 
 \section{Resource, Scheduling and Time Management}
 \subsection{Resource definition}
@@ -253,9 +234,7 @@ The allocation strategy distinguishes between:
 \subsection{Scheduling definition}
 Using the defined network of dependencies, a full forward and backward pass was executed to determine the early start (ES), early finish (EF), late start (LS), and late finish (LF) for each activity, thereby identifying the critical path and available float.
 
-Refer to the attachments for the complete network diagram.
-
-INSERIRE REFERENCE QUI
+Refer to the attachments for the complete network diagram \cite{NetworkDiagram}.
 
 \subsection{Analysis and Possible optimizations}
 Two scheduling strategies were compared:
@@ -266,17 +245,11 @@ Two scheduling strategies were compared:
 
 Accordingly, two different GANTT charts were developed and compared in terms of time management effectiveness and financial exposure issues.
 
-The early start approach revealed a high financial and resource exposure during the initial and middle stages of the project. However, it also highlighted significant free float in non-critical activities, offering flexibility to optimize the allocation of resources and delay certain purchases or efforts without impacting the final delivery date.
+The early start approach \cite{GanttChart1} revealed a high financial and resource exposure during the initial and middle stages of the project. However, it also highlighted significant free float in non-critical activities, offering flexibility to optimize the allocation of resources and delay certain purchases or efforts without impacting the final delivery date.
 
-On the other hand, the late start approach reveals the availability of enough free float to significantly impact the financial exposure, by shifting it towards the end of the project.
+On the other hand, the late start approach \cite{GanttChart2} reveals the availability of enough free float to significantly impact the financial exposure, by shifting it towards the end of the project.
 
 In a real-case scenario, effective optimization of task scheduling would be essential. The delay of specific tasks, particularly internal ones, would likely reduce early financial exposure.
-
-The GANTT charts for the two analyzed cases can be found in the attachments.
-
-INSERIRE REFERENCE QUI
-
-Here follow a comparison of resource and s-curves for the two scenarios:
 
 \begin{figure}[p]
     \begin{minipage}{\textwidth}
@@ -309,12 +282,13 @@ Here follow a comparison of resource and s-curves for the two scenarios:
     \end{minipage}
 \end{figure}
 
+We can also observe how the two approaches impact the resource profile and S-curve of the project, as shown in Figures \ref{fig:resource_profile_early}, \ref{fig:resource_profile_late}, \ref{fig:scurve_early}, and \ref{fig:scurve_late}. Also available in the attachments \cite{ResourceProfile1, ResourceProfile2, SCurve1, SCurve2}.
 
 \section{Cash Flow and Project Balance}
 As previously stated, internal costs are allocated continuosly in time while external resource are paid in lump sums, more specifically:
 \begin{itemize}
-    \item If the cost is lower then 7,500.00 EUR , the cost is allocated at the delivery.
-    \item if the cost is higher then 7,500.00 EUR , 50\% of the sum is paid upfront and 50\% at delivery.
+    \item If the cost is lower then €7,500.00 , the cost is allocated at the delivery.
+    \item if the cost is higher then €7,500.00 , 50\% of the sum is paid upfront and 50\% at delivery.
 \end{itemize}
 
 To mitigate financial strain, the modification of the supplier payment structure from the 50\%-50\% split (upfront and at delivery) to a more back-loaded scheme (e.g., 30\% upfront, 70\% at delivery) can be considered.
@@ -327,21 +301,21 @@ A detailed cash flow analysis was carried out to assess the financial feasibilit
     \item 40\% at the end of the project.
 \end{itemize}
 
-The resulting cashflow is hereby represented:
-
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
-    \includegraphics[width=\textwidth]{../cash_flow_E.png}
+    \includegraphics[width=0.95\textwidth]{../cash_flow_E.png}
     \caption{Cash Flow - Early Start Scenario}
     \label{fig:cashflow_early}
 
 \end{figure}
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
-    \includegraphics[width=\textwidth]{../cash_flow_L.png}
+    \includegraphics[width=0.95\textwidth]{../cash_flow_L.png}
     \caption{Cash Flow - Late Start Scenario}
     \label{fig:cashflow_late}
 \end{figure}
+
+The resulting cashflow is hereby represented in Figures \ref{fig:cashflow_early} and \ref{fig:cashflow_late} for the early start and late start scenarios, respectively. Also available in the attachments \cite{CashFlow1, CashFlow2}.
 
 The analysis of the cashflow showed that the project would benefit from a more regular payment structure. Therefore, a set of potential milestones was identified to support a more consistent payment schedule:
 \begin{itemize}
@@ -356,7 +330,7 @@ WHAT
 \section{Risk Management}
 
 The risk management for the project was conducted using a structured, quantitative approach. The core of the method relied on the calculation of a Project Classification Index (IC), which integrates three key impact areas: Economic (IE), Strategic (IS), and Risk (IR). Each of these dimensions was assessed in terms of impact, with the final index computed as:
-IC = (IE × PIE) + (IS × PIS) + (IR × PIR).
+$IC = (IE \cdot PIE) + (IS \cdot PIS) + (IR \cdot PIR)$.
 
 The risk identification and evaluation phases produced a categorization into four main areas:
 \begin{itemize}
@@ -366,12 +340,8 @@ The risk identification and evaluation phases produced a categorization into fou
     \item \textbf{MR - Managerial risks:} coordination failures, scope creep.
 \end{itemize}
 
-andandand RICORDARSI DI METTERE IL CODICE DELLA RISK AREA NELLA TABELLA PER I RISK ITEM NELL'EXCEL
-
 Each identified risk was evaluated based on its probability of occurrence and potential impact, along with the possibile mitigation strategies and their respective cost.
-The complete risk register is available in the attached file.
-
-INSERIRE REFERENCE QUI E UN ESEMPIO DELLA TABELLA NELL'EXCEL
+The complete risk register is available in the attached file \cite{RiskRegister}.
 
 This comprehensive analysis allowed for a precise and informed mitigation plan organization and contingency management.
 The elected action for each risk item is either:
@@ -388,7 +358,7 @@ Risk monitoring would be conducted periodically throughout execution, with the p
 \section{Progress Evaluation}
 Progress evaluation has been designed to monitor the development of the project and detect deviations in a timely manner so that corrective actions can be adopted. One of the chosen methods for progress evaluation is the Earned Value Analysis (EVA) method, which is used to assess the performance of the project in terms of cost and schedule. To achieve this, the progress of each Work Package (WP) must be tracked and compared with the planned progress. Different methods can be used for different types of WP:
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \begin{tabular}{|p{10em}|p{10em}|p{20em}|}
 \hline
@@ -413,47 +383,49 @@ Earned Value Analysis (EVA) has been deemed the most suitable method. Below is a
 
 Assume the project is at Day 100, and the following hypothetical data has been collected:
 
-\begin{table}[h]
-\centering
-\begin{tabular}{|p{10em}|p{10em}|}
-\hline
-\textbf{Metric} & \textbf{Value} \\
-\hline
-Planned Value (PV) & EUR 120,000 \\
-\hline
-Earned Value (EV) & EUR 100,000 \\
-\hline
-Actual Cost (AC) & EUR 110,000 \\
-\hline
-Budget at Completion (BAC) & EUR 299,577 \\
-\hline
-\end{tabular}
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Metric} & \textbf{Value} \\
+    \hline
+    Planned Value (PV)        & \texteuro{120\,000} \\
+    Earned Value (EV)         & \texteuro{100\,000} \\
+    Actual Cost (AC)          & \texteuro{110\,000} \\
+    Budget at Completion (BAC)& \texteuro{299\,577} \\
+    \hline
+  \end{tabular}
 \end{table}
 
 From these values, the EVA indicators have been calculated as follows:
 
-\begin{table}[h]
-\centering
-\begin{tabular}{|p{10em}|p{10em}|p{10em}|}
-\hline
-\textbf{Indicator} & \textbf{Calculation} & \textbf{Interpretation} \\
-\hline
-SPI & $ \frac{100,000}{120,000} = 0.83 $ & Project is behind schedule. \\
-\hline
-CPI & $ \frac{100,000}{110,000} = 0.91 $ & Project is over budget. \\
-\hline
-CV & $ 100,000 - 110,000 = -$EUR 10,000 & \\
-\hline
-SV & $ 100,000 - 120,000 = -$EUR 20,000 & \\
-\hline
-EAC & $ \frac{299,577}{0.91} \approx $EUR 329,215 & \\
-\hline
-ETC & $ 329,215 - 110,000 = $EUR 219,215 & \\
-\hline
-TCPI & $ \frac{299,577 - 100,000}{299,577 - 110,000} \approx 1.05 $ & \\
-\hline
-\end{tabular}
+\def\arraystretch{1.5}
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Indicator} & \textbf{Calculation}\\
+    \hline
+    SPI   & $\frac{100000}{120000} = 0.83$ \\
+    \hline
+    CPI   & $\frac{100000}{110000} = 0.91$ \\
+    \hline
+    CV    & $100000 - 110000 = -10000$ \\
+    \hline
+    SV    & $100000 - 120000 = -20000$ \\
+    \hline
+    EAC   & $\frac{299577}{0.91} \sim 329215$ \\
+    \hline
+    ETC   & $329215 - 110000 = 219215$ \\
+    \hline
+    TCPI  & $\frac{299577 - 100000}{299577 - 110000}  \sim 1.05$ \\
+    \hline
+  \end{tabular}
+  \caption{EVA indicators at Day~100}
 \end{table}
+
+
+We can observe that the SPI is below 1, indicating that the project is behind schedule, while the CPI is also below 1, suggesting that the project is over budget. The negative CV and SV confirm these findings.
 
 \section{Close-Out}
 
