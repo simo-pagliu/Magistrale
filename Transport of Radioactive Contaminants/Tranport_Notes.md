@@ -129,5 +129,6 @@ where:
 Here the procedure was quite straight forward. Notable is the fact that we use the spectrophotometer in a different way to get absolute measurments. To do so we have to use a standard solution of phenol at known concentration to compare it with an unkown one. To get a good result we select the exact wavelength we want to measure to the emission peak of phenol.
 
 ### Lab 3
-In this experiment we prepared equal carbon and phenol solution but then measured the phenol at different times, the result obtained is analogous the previous one.
+In this experiment we prepared equal carbon and phenol solution but then measured the phenol at different times, the result obtained is analogous the previous one.  
+The data anlysis is the same as the one of LAB2 but instead of observing $F_{abs}$ over $m_{carbon}$ we observed it over time.
 ![Plot for Lab3](LAB3_graph.png)
