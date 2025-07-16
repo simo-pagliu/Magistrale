@@ -182,8 +182,41 @@ That is beacuse due to the sorption processes the transport of the contaminant i
 > if we add the retardation effect changes the velocity $v_p \rightarrow \frac{v_p}{R}$.
 
 ## Non equilibrium model
-descrivo la seconda equazione come adsorprion rate meno desoprion rate, equazioen che deve valere sempre anche all'equilibriio e da questo posso ricavre un rapporto tra i due rate, così riduco di una equazone il problema.
+In non equilibrium the rate of adsorption and desorprtion are not equal, therefore we can write:
+$$
+\rho \cancel{V} \frac{dF_{abs}}{dt} = \dot{D} F_{abs} \rho  \cancel{V} - \dot{A} C n \cancel{V}
+$$
+Desorption (from solid to solution) rate by the mass of solid minus the adsorption (solution to solid) rate by the mass of solution.  
+In steady state the time derivative is zero and the two rates balance out.  
+This means that in non equilibrium conditions we have 2 more unkowns. To simplify the problem we can assume that the ratio between adsorptin and desorption at steady state is the same also at non equilibrium conditions.  
+
+$$
+\text{Non equilibrium: } \rho \frac{dF_{abs}}{dt} = \dot{D} F_{abs} \rho_{solid} - \dot{A} C n  \\
+\text{Equilibrium: } 0 = \dot{D} F_{abs} \rho - \dot{A} C n 
+$$
+We can substitute an isotherm in the equilibrium case, we assume a linear model for semplicity $F_{abs} = K_1 C$.    
+$$
+\dot{D} K_1 \cancel{C} \rho = \dot{A} \cancel{C} n
+$$
+So that we can express one of the rates in terms of the other and substitute in the first one.  
+$$
+\dot{D} = \frac{\dot{A} n}{K_1 \rho} \\
+\rho \frac{dF_{abs}}{dt} = \frac{\dot{A} n}{K_1 \rho} F_{abs} \rho - \dot{A} C n
+$$
+So that the second equation the only unkown is $\dot{A}$, as $F_{abs}$ can be measured in by kinetics experiments as we did in LAB 3.
 
 ## Two Region Model
-Spiega la questione delle due regioni, nella regione immobile il fluido è stagante lo scambio con la regione mobile avviene per gradiente di concentrazione (diffusione pura)
-scrivici le due equazioni perchè sì
+The two region model is used when we can identify two behaviours in the system:
+- Mobile region: where water can flow (the case we have talked until now)  
+- Immobile region: water is still, contaminant can move here from the mobile region only by molecular diffusion
+
+Such a configuration can be found in cracked rocks: the main crack allows water to flow but then microscopic cracks on the main crack surface behave as immobile regions.
+
+We are interested in the behaviour of the mobile region to determine contaminant transport, so to model this we simply add a second equation that considers the amount of contaminant that migrates to the immobile region (in 1D):
+$$
+\frac{dC_m}{dt} = -v_p n_m \frac{dC_m}{dx} + D n_m \frac{d^2C_m}{dx^2} - \alpha (C_m - C_i) \\
+\; \\
+\frac{dC_i}{dt} = \alpha (C_m - C_i)
+$$
+Where $\alpha$ is the diffusive exchange coefficient that models the diffusiondue to concentration gradient between the two regions.  
+If we want to add sorption to both we simply multiply the LHS by the respective retardation factor $R_m$ and $R_i$.
