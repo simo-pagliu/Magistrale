@@ -49,10 +49,13 @@ Here the procedure was quite straight forward. Notable is the fact that we use t
 ### Lab 3 - Kinetics
 In this experiment we prepared equal carbon and phenol solution but then measured the phenol at different times, the result obtained is analogous the previous one.  
 The data anlysis is the same as the one of LAB2 but instead of observing $F_{abs}$ over $m_{carbon}$ we observed it over time.  
-In this case we should observe the behaviour in time, therefore we could use it for the non equilibrium condition. As seen in class we can express the sorption term as adsorption and desorption rate, which are both unknown. With such an experiment we can determine the ratio between the two, which is equal to the equilibrium state relationship, this way we get rid of one unkown.  
 
-> In this experiment we didn't do any post lab activity.
+In this case we should observe the behaviour in time, therefore we could use it for the non equilibrium condition. 
+As seen in class we can express the sorption term as adsorption and desorption rate, which are both unknown. 
+With such an experiment we can determine the ratio between the two, which is equal to the equilibrium state relationship, this way we get rid of one unkown.  
 
-We can see that it might fit to a power law but in reality it should reach an asyntom when the equilibrium is reached. As the equilibrium is reached we can safely use the *equilibrium isotherms*
+> In this experiment we didn't do any post lab activity. I made something but was not verified with the teacher.
+
+We fit it to a function that could show an asyntom when the equilibrium is reached, kind of complicated with our data since it looks like that the equilibrium is just going to be reached towards the end of the experiment, more data would help us identify the equilibrium time. As the equilibrium is reached we can safely use the *equilibrium isotherms*
 
 ![Plot for Lab3](LAB3_graph.png)
