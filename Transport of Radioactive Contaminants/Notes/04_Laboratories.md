@@ -1,8 +1,7 @@
-
-## Laboratories
+# Laboratories
 > In this section I'm going to brefily sum up the activity and report crucial points just for review purposes. To actually study the content of the laboratories refer to the Jupiter Notebook in which we detailed and commented the whole process.
 
-### Lab 1 - Transport
+## Lab 1 - Transport
 For this experiment we wanted to observe the transport of a contaminant. The contaminant was NaOH in water. We used the spectrophotometer to measure the concentration in time compared to the one of a water sample. The measurment is actually that of trasmitted light, which we then correlate to the concentration of the contaminant. The other experiments used this same equipment in different operating modes to get absoulte values instead of relative.
 
 For this experiment we pumped the contaminated solution through a column of porus media, observed the resulting profile and then compared it to the solution of the Adsportion-Dispersion Equation obtained by numerical resolution (using `COTRA`).
@@ -29,7 +28,7 @@ p = \frac{v_{dary}}{v_{pore}}
 $$
 Which was $-7.9%$ then the average of the three a priori methods we used before.
 
-### Lab 2 - Adsorption
+## Lab 2 - Adsorption
 We added varying quantities of active carbon into equal phenol solutions to then measure how much of the phenol was absorbed, this is the resulting plot with a fit to a power curve. This curve is basically the equilibrium isotherm, while in class we have seen it as $F_{abs}$ vs $C$, we instead varied the mass of solid matrix but the behaviour is equivalent.  
 
 The results are expressed in mass of phenol absorbed per mass of carbon [g/g]:
@@ -46,7 +45,7 @@ where:
 
 Here the procedure was quite straight forward. Notable is the fact that we use the spectrophotometer in a different way to get absolute measurments. To do so we have to use a standard solution of phenol at known concentration to compare it with an unkown one. To get a good result we select the exact wavelength we want to measure to the emission peak of phenol.
 
-### Lab 3 - Kinetics
+## Lab 3 - Kinetics
 In this experiment we prepared equal carbon and phenol solution but then measured the phenol at different times, the result obtained is analogous the previous one.  
 The data anlysis is the same as the one of LAB2 but instead of observing $F_{abs}$ over $m_{carbon}$ we observed it over time.  
 
